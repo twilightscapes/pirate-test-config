@@ -2,20 +2,36 @@
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import FormattedDate from "../FormattedDate.astro";
+import YouTubeEmbed from '../YouTubeEmbed.astro';
 
 interface Props {
     content: CollectionEntry<"post">;
+    youtube?: string;
 }
 
 const {
     content: { data },
+    youtube,
 } = Astro.props;
 
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
     month: "long",
 };
 ---
-{data.coverImage && data.coverImage.src ? (
+{youtube ? (
+    <div class="aspect-h-9 aspect-w-16 mb-6">
+        {/* <YouTubeEmbed url={youtube} title={data.title} /> */}
+        <YouTubeEmbed 
+        title={data.youtube.title}
+    url={data.youtube.url}
+    controls={data.youtube.controls}
+    mute={data.youtube.mute}
+    loop={data.youtube.loop}
+    start={data.youtube.start}
+    end={data.youtube.end}
+/>
+    </div>
+) : data.coverImage && data.coverImage.src ? (
     <div class="aspect-h-9 aspect-w-16 mb-6">
         <Image
             alt={data.coverImage.alt || ""}
@@ -27,10 +43,8 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
             height={450}
         />
     </div>
-) 
-: ( 
-	""
-)}
+) : null}
+
 
 
 

@@ -1,0 +1,56 @@
+---
+interface Props {
+  url: string;
+  title: string;
+  controls?: boolean;
+  mute?: boolean;
+  loop?: boolean;
+  start?: number;
+  end?: number;
+}
+
+const { url, title, controls = true, mute = false, loop = false, start = 0, end = 0 } = Astro.props;function getYouTubeId(url: string): string | null {
+  if (!url) return null;
+  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+  const match = url?.match(regex);
+  return match ? match[1] : null;
+}
+const videoId = getYouTubeId(url);
+console.log("URL:", url);
+console.log("Video ID:", videoId);
+
+const params = new URLSearchParams({
+  autoplay: '1',
+  controls: controls ? '1' : '0',
+  mute: mute ? '1' : '0',
+  loop: loop ? '1' : '0',
+  start: start.toString(),
+});
+
+if (end > 0) {
+  params.append('end', end.toString());
+}
+
+const embedUrl = `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+---
+
+{videoId ? (
+  <iframe
+    src={embedUrl}
+    title={title}
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+    width="100%"
+    height="auto"
+    style="aspect-ratio: 16/9;"
+  ></iframe>
+) : (
+  <div>
+    <p>Debug Info:</p>
+    <p>URL received: {url || 'No URL provided'}</p>
+    <p>Extracted Video ID: {videoId || 'No ID extracted'}</p>
+  </div>
+)}
+
+

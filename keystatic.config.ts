@@ -38,10 +38,21 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
           itemLabel: (props) => props.value,
         }),
         ogImage: fields.text({ label: 'OG Image' }),
+        
+        youtube: fields.object({
+          url: fields.text({ 
+            label: 'YouTube Video URL',
+            description: 'Enter the full YouTube video URL'
+          }),
+          controls: fields.checkbox({ label: 'Show Controls', defaultValue: true }),
+          mute: fields.checkbox({ label: 'Mute Video', defaultValue: false }),
+          loop: fields.checkbox({ label: 'Loop Video', defaultValue: false }),
+          start: fields.number({ label: 'Start Time (seconds)', defaultValue: 0 }),
+          end: fields.number({ label: 'End Time (seconds)', defaultValue: 0 }),
+        }),  
+
       },
-    }),
-    pages: collection({
-      label: 'Pages',
+    }),    pages: collection({      label: 'Pages',
       path: 'src/content/pages/*',
       slugField: 'title',
       format: { contentField: 'content' },

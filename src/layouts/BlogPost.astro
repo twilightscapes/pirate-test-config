@@ -1,27 +1,28 @@
 ---
 import type { CollectionEntry } from "astro:content";
-// import { ViewTransitions } from "astro:transitions";
 import BlogHero from "@/components/blog/Hero.astro";
 import TOC from "@/components/blog/TOC.astro";
-// import WebMentions from "@/components/blog/webmentions/index.astro";
-
 import BaseLayout from "./Base.astro";
 import GoBack from "../components/GoBack";
+// import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 
 interface Props {
-	post: CollectionEntry<"post">;
+	post: CollectionEntry<"post"> & { data: { youtube?: string } };
 }
 
 const { post } = Astro.props;
 const {
-	data: { description, ogImage, publishDate, title, updatedDate },
+	data: { description, ogImage, publishDate, title, updatedDate, youtube },
 	slug,
 } = post;
+
+
+
+
 const socialImage = ogImage ?? `/og-image/${slug}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings } = await post.render();
 ---
-
 <!-- <ViewTransitions /> -->
 <BaseLayout meta={{ articleDate, description, ogImage: socialImage, title }}>
 <GoBack client:load />
@@ -29,7 +30,7 @@ const { headings } = await post.render();
 		{!!headings.length && <TOC headings={headings} />}
 		
 			<article class="" data-pagefind-body>
-				<div id="blog-hero" style="width:100vw; z-index: 2;"><BlogHero content={post} /></div>
+				<div id="blog-hero" style="width:100vw; z-index: 2;"><BlogHero content={post} youtube={youtube} /></div>
 				{/* Render dynamic elements */}
 	
 				{!!headings.length && <TOC headings={headings} />}
@@ -43,6 +44,8 @@ const { headings } = await post.render();
 							</Fragment>
 						)
 					} -->
+	
+	
 					<slot />
 				</div>
 			</article>

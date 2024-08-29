@@ -28,7 +28,14 @@ const post = defineCollection({
             .optional()
             .transform((str) => (str ? new Date(str) : undefined)),
         ogImage: z.string().optional(),
-    }),
+              youtube: z.object({
+                url: z.string(),
+                controls: z.boolean().optional(),
+                mute: z.boolean().optional(),
+                loop: z.boolean().optional(),
+                start: z.number().optional(),
+                end: z.number().optional()
+              }).optional(),    }),
     type: "content",
 });
 
@@ -63,3 +70,12 @@ const home = defineCollection({
   }),
 });
 export const collections = { post, faqs, testimonials, home }
+
+youtube: z.object({
+  url: z.string(),
+  controls: z.boolean().optional(),
+  mute: z.boolean().optional(),
+  loop: z.boolean().optional(),
+  start: z.number().optional(),
+  end: z.number().optional()
+}).optional()
