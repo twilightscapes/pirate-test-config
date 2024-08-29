@@ -1,0 +1,136 @@
+// import ColorPickerComponent from './src/components/ColorPickerComponent';
+import { config, fields, collection, singleton } from '@keystatic/core';export default config({
+  storage: {
+    kind: 'local',
+  },
+  cloud: {
+    project: 'dog-poopers/dogpoopers',
+  },
+  ui: {
+    brand: { name: 'Dog Poopers' },
+  },
+  collections: {
+    posts: collection({
+      label: 'Posts',
+      entryLayout: 'content',
+      slugField: 'title',
+      path: 'src/content/post/*/',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.slug({ name: { label: 'Title' } }),
+        description: fields.text({ label: 'Description', validation: { length: { min: 50, max: 160 } } }),
+        content: fields.markdoc({ label: 'Content' }),
+        draft: fields.checkbox({ label: 'Draft', defaultValue: false }),
+        publishDate: fields.datetime({ label: 'Publish Date' }),
+        updatedDate: fields.datetime({ label: 'Updated Date' }),
+        coverImage: fields.object({
+          src: fields.image({
+            label: 'Image file',
+            directory: 'public/images/posts',
+            publicPath: '/images/posts',
+          }),
+          alt: fields.text({ 
+            label: 'Alt Text',
+            }),
+        }),
+        tags: fields.array(fields.text({ label: 'Tag' }), {
+          label: 'Tags',
+          itemLabel: (props) => props.value,
+        }),
+        ogImage: fields.text({ label: 'OG Image' }),
+      },
+    }),
+    pages: collection({
+      label: 'Pages',
+      path: 'src/content/pages/*',
+      slugField: 'title',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.text({ label: 'Title' }),
+        description: fields.text({ label: 'Description' }),
+        content: fields.document({
+          label: 'Content',
+          formatting: true,
+          dividers: true,
+          links: true,
+          images: true,
+        }),
+      },
+    }),
+    faqs: collection({
+      label: 'FAQs',
+      path: 'src/content/faqs/*',
+      slugField: 'id',
+      schema: {
+        id: fields.text({ label: 'ID' }),
+        question: fields.text({ label: 'Question' }),
+        answer: fields.text({ label: 'Answer', multiline: true }),
+        order: fields.number({ label: 'Order' }),
+      },
+    }),
+    testimonials: collection({
+      label: 'Testimonials',
+      path: 'src/content/testimonials/*',
+      slugField: 'id',
+      schema: {
+        id: fields.text({ label: 'ID' }),
+        name: fields.text({ label: 'Name' }),
+        location: fields.text({ label: 'Location' }),
+        quote: fields.text({ label: 'Quote', multiline: true }),
+        image: fields.image({
+          label: 'Image',
+          directory: 'public/images/testimonials',
+          publicPath: '/images/testimonials',
+        }),
+        order: fields.number({ label: 'Order' }),
+      },
+    })
+  },
+  singletons: {
+    siteSettings: singleton({
+      label: 'Site Settings',
+      path: 'src/content/siteSettings/main',
+      schema: {
+        showHeader: fields.checkbox({ label: 'Show Header', defaultValue: true }),
+        showLogo: fields.checkbox({ label: 'Show Logo', defaultValue: true }),
+        showTheme: fields.checkbox({ label: 'Show Theme', defaultValue: true }),
+        showSwitch: fields.checkbox({ label: 'Show Switch', defaultValue: true }),
+        showSearch: fields.checkbox({ label: 'Show Search', defaultValue: true }),
+        showPosts: fields.checkbox({ label: 'Show Posts', defaultValue: true }),
+        showTestimonials: fields.checkbox({ label: 'Show Testimonials', defaultValue: true }),
+        showFAQ: fields.checkbox({ label: 'Show FAQs', defaultValue: true }),
+        // Add the color field here
+        // colorField: fields.text({
+        //   label: 'Color',
+        //   defaultValue: '#000000',
+        //   customComponent: ColorPickerComponent,
+        // }),
+      },
+    }),    otherSettings: singleton({
+      label: 'Other Settings',
+      path: 'src/content/otherSettings/main',
+      schema: {
+        exampleSetting: fields.text({ label: 'Example Setting' }),
+        anotherSetting: fields.checkbox({ label: 'Another Setting', defaultValue: false }),
+      },
+    }),
+    home: singleton({
+      label: 'Home Page',
+      path: 'src/content/homepage/',
+      schema: {
+        title: fields.text({ label: 'Title' }),
+        tagline: fields.text({ label: 'Tagline' }),
+        phone: fields.text({ label: 'Phone' }),
+        subheading: fields.text({ label: 'Sub Heading' }),
+        subcontent: fields.text({ label: 'Sub Content' }),
+        subcta: fields.text({ label: 'CTA' }),
+        faqtitle: fields.text({ label: 'Faq Title' }),
+        testimonialtitle: fields.text({ label: 'Testimonials Title' }),
+        postsectiontitle: fields.text({ label: 'Posts Section Title' }),
+        description: fields.text({ label: 'Description', multiline: true }),
+      },
+    }),
+  },
+});
+
+
