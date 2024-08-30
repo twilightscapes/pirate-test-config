@@ -5,7 +5,7 @@ import PageLayout from "@/layouts/Base.astro";
 // import { Image } from "astro:assets";
 import Faqs from "@/components/Faqs.astro";
 import Testimonials from '../components/Testimonials.astro';
-
+import Feature from "@/components/Feature.astro";
 const MAX_POSTS = 3;
 const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
@@ -15,7 +15,7 @@ import { getEntry } from 'astro:content';
 const homeContent = await getEntry('homepage', 'index');
 
 const siteSettings = await getEntry('siteSettings', 'main');
-const { showFAQ, showTestimonials, showPosts } = siteSettings.data;
+const { showFAQ, showTestimonials, showPosts, showBio, showFeature } = siteSettings.data;
 
 ---
 
@@ -28,59 +28,50 @@ const { showFAQ, showTestimonials, showPosts } = siteSettings.data;
 
 <PageLayout meta={{ title: homeContent.data.title }}>
 
-	
-<section class="scroll-area1 panel" id="profile" style={{ display:'', height:'', minHeight:'', position:'relative', overflow:'hidden', margin:'0 auto 0 auto', padding:'3vh 0 20px 0', width:'100vw', borderRadius:'var(--theme-ui-colors-borderRadius)', }}>
-			<article style={{ margin:'0 0 0 0'}}>
-		  
-		  
-		  <div id="profiletop" class="flexbutt" style={{display:'', gap:'10px', justifyContent:'center', alignItems:"center", margin:'0 0',
-			padding:'0 2% 0 2%', position:'relative', color: ''}}>
-		  
-		  
-		  
-		  
-			<div class="nameblock flexcheek" style={{position:'', top:'0', marginTop: '', padding: '0 0 0 0', maxHeight: '', fontSize: 'clamp(1rem, 1.4vw, 3.2rem)',  }}>
-		  
-		  
-			<div class=" mob print" style={{ position:'sticky', top:'0', fontSize: 'clamp(1rem, 1.5vw, 3.2rem)', textAlign:'' }}>
 
-				<h1 class="title" style={{ fontSize: 'clamp(1.4rem, 2.5vw, 3rem)', fontStyle:'normal', textWrap:'balance', textAlign:'center', lineHeight:'1.2', color:'inherit' }}>{homeContent.data.title}</h1>
-		  
-				<h2 class="tagline1" style={{ fontSize: 'clamp(1.2rem, 2.3vw, 1.8rem)', textWrap:'', textAlign:'center', lineHeight:'1', textShadow:'none' }}>
-					{homeContent.data.tagline}
-				</h2>
-				
-				<div style={{ fontSize: 'clamp(1.2rem, 2vw, 2.8rem)', textAlign:'left',textWrap:'',padding: '0 1rem 0 1rem' }} class="description">
-					<p>{homeContent.data.description}</p>
-			</div>
-			  </div>
-		  
-		  
-			
-			</div>
-		  
-<div class="flexcheek mob2 print" style={{position:'', top:'0', minWidth:'500px', overflow:'', marginBottom:'', paddingTop:'0'}}>
-	
-		  
-		  <h2 class="title" style={{textAlign:'center', fontSize: 'clamp(1.3rem, 2.4vw, 3rem)', fontStyle:'normal', margin:'0 0 3vh 0', color:'inherit'}}><a href={"tel:" + homeContent.data.phone}>Call {homeContent.data.phone}</a></h2>
-		  
-		  
-		  
-		  <div class="" style={{position:'', top:'', marginTop: '', width:'100%', margin:'0 auto', maxHeight: '', fontSize: 'clamp(1/2.7rem, 1.3vw, 2rem)', textAlign:'center',  color:'' }}>
-			  <h3 class="font" style={{textAlign:'center', fontFamily:'',fontSize: 'clamp(1.2rem, 2vw, 2.4rem)'}}>{homeContent.data.subheading}</h3>
-			</div>
-		  <div style={{background:'rgba(8, 44, 20, 0.4)', backdropFilter:'blur(12px)', marginTop:'2vh', padding:'1vh 5%', color:'#fff', borderRadius:'var(--theme-ui-colors-borderRadius)', justifyContent:'center', textAlign:'center', fontSize:'clamp(1rem, 1.8vw, 3.2rem)', width:'90%', margin:'0 auto'}}>
-			
-			<p>{homeContent.data.subcontent}</p>
-			
-			<button class="special font">
-	<div class="fancy"></div>
-	<a class="font" href="contact" title="Contact Us" aria-label="Contact Us" style="text-decoration: none; border:none; box-shadow: none;"><span class="butttext font">{homeContent.data.subcta}</span></a>
-	</button>
-		</div>
-		  
+
+	{typeof showFeature !== 'undefined' && showFeature && (
+<section class="scroll-area1 panel" id="feature" style={{ display: '', height: '', minHeight: '', position: 'relative', overflow: 'hidden', margin: '0 auto 0 auto', padding: '0 0 20px 0', width: '100vw', borderRadius: 'var(--theme-ui-colors-borderRadius)' }}>
+
+	<Feature content={homeContent.data} />
 </section>
+)}
 
+
+
+
+	{typeof showBio !== 'undefined' && showBio && (
+		<section class="scroll-area1 panel" id="profile" style={{ display: '', height: '', minHeight: '', position: 'relative', overflow: 'hidden', margin: '0 auto 0 auto', padding: '3vh 0 20px 0', width: '100vw', borderRadius: 'var(--theme-ui-colors-borderRadius)' }}>
+			<article style={{ margin: '0 0 0 0' }}>
+				<div id="profiletop" class="flexbutt" style={{ display: '', gap: '10px', justifyContent: 'center', alignItems: "center", margin: '0 0', padding: '0 2% 0 2%', position: 'relative', color: '' }}>
+					<div class="nameblock flexcheek" style={{ position: '', top: '0', marginTop: '', padding: '0 0 0 0', maxHeight: '', fontSize: 'clamp(1rem, 1.4vw, 3.2rem)' }}>
+						<div class="mob print" style={{ position: 'sticky', top: '0', fontSize: 'clamp(1rem, 1.5vw, 3.2rem)', textAlign: '' }}>
+							<h1 class="title" style={{ fontSize: 'clamp(1.4rem, 2.5vw, 3rem)', fontStyle: 'normal', textWrap: 'balance', textAlign: 'center', lineHeight: '1.2', color: 'inherit' }}>{homeContent.data.title}</h1>
+							<h2 class="tagline1" style={{ fontSize: 'clamp(1.2rem, 2.3vw, 1.8rem)', textWrap: '', textAlign: 'center', lineHeight: '1', textShadow: 'none' }}>
+								{homeContent.data.tagline}
+							</h2>
+							<div style={{ fontSize: 'clamp(1.2rem, 2vw, 2.8rem)', textAlign: 'left', textWrap: '', padding: '0 1rem 0 1rem' }} class="description">
+								<p>{homeContent.data.description}</p>
+							</div>
+						</div>
+					</div>
+					<div class="flexcheek mob2 print" style={{ position: '', top: '0', minWidth: '500px', overflow: '', marginBottom: '', paddingTop: '0' }}>
+						<h2 class="title" style={{ textAlign: 'center', fontSize: 'clamp(1.3rem, 2.4vw, 3rem)', fontStyle: 'normal', margin: '0 0 3vh 0', color: 'inherit' }}><a href={"tel:" + homeContent.data.phone}>Call {homeContent.data.phone}</a></h2>
+						<div class="" style={{ position: '', top: '', marginTop: '', width: '100%', margin: '0 auto', maxHeight: '', fontSize: 'clamp(1/2.7rem, 1.3vw, 2rem)', textAlign: 'center', color: '' }}>
+							<h3 class="font" style={{ textAlign: 'center', fontFamily: '', fontSize: 'clamp(1.2rem, 2vw, 2.4rem)' }}>{homeContent.data.subheading}</h3>
+						</div>
+						<div style={{ background: 'rgba(8, 44, 20, 0.4)', backdropFilter: 'blur(12px)', marginTop: '2vh', padding: '1vh 5%', color: '#fff', borderRadius: 'var(--theme-ui-colors-borderRadius)', justifyContent: 'center', textAlign: 'center', fontSize: 'clamp(1rem, 1.8vw, 3.2rem)', width: '90%', margin: '0 auto' }}>
+							<p>{homeContent.data.subcontent}</p>
+							<button class="special font">
+								<div class="fancy"></div>
+								<a class="font" href="contact" title="Contact Us" aria-label="Contact Us" style={{ textDecoration: 'none', border: 'none', boxShadow: 'none' }}><span class="butttext font">{homeContent.data.subcta}</span></a>
+							</button>
+						</div>
+					</div>
+				</div>
+			</article>
+		</section>
+	)}
 	  
 	  
 

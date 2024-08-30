@@ -61,10 +61,27 @@ export default defineConfig({
   prefetch: true,
   site: "https://dogpoopers.com",
   vite: {
-    optimizeDeps: {
-      exclude: ["@resvg/resvg-js"]
+    server: {
+      fs: {
+        strict: false,
+      },
     },
-	plugins: [rawFonts([".ttf", ".woff"])],
+    build: {
+      assetsInlineLimit: 0,
+    },
+    plugins: [
+      {
+        name: 'ignore-public-warning',
+        enforce: 'pre',
+        configResolved(config) {
+          config.logger.warn = (msg, options) => {
+            if (!msg.includes('Files in the public directory are served at the root path.')) {
+              console.warn(msg, options);
+            }
+          };
+        },
+      },
+    ],
   },
   adapter: netlify()
 });

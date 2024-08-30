@@ -12,6 +12,12 @@ interface Props {
 	meta: SiteMeta;
 }
 
+
+import { getEntry } from 'astro:content';
+const siteSettings = await getEntry('siteSettings', 'main');
+const { showFAQ, showTestimonials, showPosts, showBio, showFeature, showFooter } = siteSettings.data;
+
+
 const {
 	meta: { articleDate, description = siteConfig.description, ogImage, title },
 } = Astro.props;
@@ -32,6 +38,9 @@ const {
 			<main id="main">
 				<slot />
 		</main>
+
+		{typeof showFooter !== 'undefined' && showFooter && (
 		<Footer />
+		)}
 	</body>
 </html>

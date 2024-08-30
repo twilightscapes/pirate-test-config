@@ -96,7 +96,7 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
           image: fields.image({
             label: 'Image',
             directory: 'public/images/testimonials',
-            publicPath: '/images/testimonials',
+            publicPath: 'public/images/testimonials',
           }),
           order: fields.number({ label: 'Order' }),
         },
@@ -112,10 +112,20 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
           showTheme: fields.checkbox({ label: 'Show Theme', defaultValue: true }),
           showSwitch: fields.checkbox({ label: 'Show Switch', defaultValue: true }),
           showSearch: fields.checkbox({ label: 'Show Search', defaultValue: true }),
+          showFeature: fields.checkbox({ label: 'Show Feature', defaultValue: true }),
+          showBio: fields.checkbox({ label: 'Show Bio', defaultValue: true }),
           showPosts: fields.checkbox({ label: 'Show Posts', defaultValue: true }),
           showTestimonials: fields.checkbox({ label: 'Show Testimonials', defaultValue: true }),
           showFAQ: fields.checkbox({ label: 'Show FAQs', defaultValue: true }),
+
+          showFooter: fields.checkbox({ label: 'Show Footer', defaultValue: true }),
+
           siteFont: fields.text({ label: 'Site Font', defaultValue: 'Bowlby One', description: 'Enter the name of any Google Font' }),
+          logoImage: fields.image({
+            label: 'Logo Image',
+            directory: 'public/images/logo',
+            publicPath: 'public/images/logo',
+          }),
         },
       }),
       otherSettings: singleton({
@@ -140,7 +150,28 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
           testimonialtitle: fields.text({ label: 'Testimonials Title' }),
           postsectiontitle: fields.text({ label: 'Posts Section Title' }),
           description: fields.text({ label: 'Description', multiline: true }),
+          featureImage: fields.object({
+            src: fields.image({
+              label: 'Feature Image',
+              directory: 'public/images/homepage',
+              publicPath: '/images/homepage',
+            }),
+            alt: fields.text({ 
+              label: 'Alt Text',
+            }),
+          }),
+
+          youtube: fields.object({
+            url: fields.text({ 
+              label: 'YouTube Video URL',
+              description: 'Enter the full YouTube video URL'
+            }),
+            controls: fields.checkbox({ label: 'Show Controls', defaultValue: true }),
+            mute: fields.checkbox({ label: 'Mute Video', defaultValue: false }),
+            loop: fields.checkbox({ label: 'Loop Video', defaultValue: false }),
+            start: fields.number({ label: 'Start Time (seconds)', defaultValue: 0 }),
+            end: fields.number({ label: 'End Time (seconds)' }),
+          }),
         },
-      }),
-    },
+      }),    },
   });

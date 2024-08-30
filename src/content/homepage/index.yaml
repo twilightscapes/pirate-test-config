@@ -1,16 +1,32 @@
-title: Pet Waste Removal Service Mississippi Gulf Coast
-tagline: We pick up the poop!
+title: Hoist Your Flag!
+tagline: YOU... ARE THE CAPTAIN NOW!
 phone: (601) 385-1781
-subheading: Serving all of South Mississippi
-subcontent: Interested in the Dog Poopers business?
-subcta: Contact Us Today 💩
-faqtitle: Frequently Asked Questions
-testimonialtitle: Our Happy Customers
-postsectiontitle: Our Latest News
+subheading: BECOME A PIRATE!
+subcontent: The fleet is launching now
+subcta: Get Your Ship Now!
+faqtitle: Questions About Pirate
+testimonialtitle: Our Happy Pirates
+postsectiontitle: Our Latest Plunders
 description: >-
+  Pirate is your Personal Web App (PWA) and it works on any device - NO App
+  Store needed.
 
-  Our professional dog waste removal service makes your life easier, your yard
-  cleaner, and you and your dogs happier!
 
-  Dog Poopers arrive in branded vehicles and uniforms, removing unsightly and
-  unhealthy dog waste from your yard on a weekly basis.
+  A new social media, Pirate is a decentralized network of other Pirate users &
+  you control the algorithm!
+
+
+  Watch ad-free video, edit your page, profile, and publish content with FULL
+  ownership and copyright.
+
+
+  Pirate is Open-Source and it operates forever, with no contracts, commitments
+  or costs of any kind.
+featureImage:
+  src: /images/homepage/featureImage/src.webp
+  alt: This is alternate text
+youtube:
+  controls: false
+  mute: false
+  loop: false
+  start: 0

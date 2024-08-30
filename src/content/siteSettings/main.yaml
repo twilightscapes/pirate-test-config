@@ -3,7 +3,11 @@ showLogo: true
 showTheme: true
 showSwitch: true
 showSearch: false
+showFeature: false
+showBio: true
 showPosts: true
-showTestimonials: true
-showFAQ: true
+showTestimonials: false
+showFAQ: false
+showFooter: false
 siteFont: Bowlby One
+logoImage: public/images/logo/logoImage.png

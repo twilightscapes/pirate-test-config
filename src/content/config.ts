@@ -71,6 +71,31 @@ const home = defineCollection({
     title: z.string(),
     tagline: z.string(),
     description: z.string(),
+    phone: z.string(),
+    subheading: z.string(),
+    subcontent: z.string(),
+    subcta: z.string(),
+    faqtitle: z.string(),
+    testimonialtitle: z.string(),
+    postsectiontitle: z.string(),
+  }),
+});
+
+const siteSettings = defineCollection({
+  type: 'data',
+  schema: z.object({
+    showHeader: z.string(),
+    showLogo: z.string(),
+    showTheme: z.string(),
+    showSwitch: z.string(),
+    showSearch: z.string(),
+    showFeature: z.string(),
+    showBio: z.string(),
+    showPosts: z.string(),
+    showTestimonials: z.string(),
+    showFaq: z.string(),
+    siteFont: z.string(),
+    logoImage: z.string(),
   }),
 });
 
