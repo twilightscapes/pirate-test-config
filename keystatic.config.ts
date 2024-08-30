@@ -115,7 +115,7 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
           showPosts: fields.checkbox({ label: 'Show Posts', defaultValue: true }),
           showTestimonials: fields.checkbox({ label: 'Show Testimonials', defaultValue: true }),
           showFAQ: fields.checkbox({ label: 'Show FAQs', defaultValue: true }),
-          siteFont: fields.text({ label: 'Site Font' }),
+          siteFont: fields.text({ label: 'Site Font', defaultValue: 'Bowlby One', description: 'Enter the name of any Google Font' }),
         },
       }),
       otherSettings: singleton({
