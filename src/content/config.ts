@@ -1,44 +1,49 @@
 import { defineCollection, z } from "astro:content";
 
 function removeDupsAndLowerCase(array: string[]) {
-    if (!array.length) return array;
-    const lowercaseItems = array.map((str) => str.toLowerCase());
-    const distinctItems = new Set(lowercaseItems);
-    return Array.from(distinctItems);
+  if (!array.length) return array;
+  const lowercaseItems = array.map((str) => str.toLowerCase());
+  const distinctItems = new Set(lowercaseItems);
+  return Array.from(distinctItems);
 }
 
-const post = defineCollection({
-    schema: ({ image }) => z.object({
-        title: z.string(),
-        description: z.string().min(50).max(160),
-        publishDate: z
-            .string()
-            .or(z.date())
-            .transform((val) => new Date(val)),
-        coverImage: z
-            .object({
-                src: z.string().optional(),
-                alt: z.string().default(""), // Make alt required, default to empty string
-            })
-            .optional(),
-        tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
-        draft: z.boolean().default(false),
-        updatedDate: z
-            .string()
-            .optional()
-            .transform((str) => (str ? new Date(str) : undefined)),
-        ogImage: z.string().optional(),
-              youtube: z.object({
-                url: z.string(),
-                controls: z.boolean().optional(),
-                mute: z.boolean().optional(),
-                loop: z.boolean().optional(),
-                start: z.number().optional(),
-                end: z.number().optional()
-              }).optional(),    }),
-    type: "content",
+const postSchema = z.object({
+  title: z.string(),
+  description: z.string().min(50).max(160),
+  publishDate: z
+    .string()
+    .or(z.date())
+    .transform((val) => new Date(val)),
+  coverImage: z
+    .object({
+      src: z.string().optional(),
+      alt: z.string().default(""),
+    })
+    .optional(),
+  tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
+  draft: z.boolean().default(false),
+  updatedDate: z
+    .string()
+    .optional()
+    .transform((str) => (str ? new Date(str) : undefined)),
+  ogImage: z.string().optional(),
+  youtube: z.object({
+    discriminant: z.boolean(),
+    value: z.object({
+      url: z.string(),
+      controls: z.boolean().optional(),
+      mute: z.boolean().optional(),
+      loop: z.boolean().optional(),
+      start: z.number().optional(),
+      end: z.number().optional()
+    }).optional()
+  }).optional(),
 });
 
+const post = defineCollection({
+  schema: postSchema,
+  type: "content",
+});
 
 const faqs = defineCollection({
   type: 'data',
@@ -48,7 +53,6 @@ const faqs = defineCollection({
     question: z.string(),
   }),
 });
-
 
 const testimonials = defineCollection({
   type: 'data',
@@ -69,13 +73,7 @@ const home = defineCollection({
     description: z.string(),
   }),
 });
-export const collections = { post, faqs, testimonials, home }
 
-youtube: z.object({
-  url: z.string(),
-  controls: z.boolean().optional(),
-  mute: z.boolean().optional(),
-  loop: z.boolean().optional(),
-  start: z.number().optional(),
-  end: z.number().optional()
-}).optional()
+
+
+export const collections = { post, faqs, testimonials, home };

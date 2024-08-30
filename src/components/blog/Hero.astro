@@ -6,48 +6,41 @@ import YouTubeEmbed from '../YouTubeEmbed.astro';
 
 interface Props {
     content: CollectionEntry<"post">;
-    youtube?: string;
 }
 
 const {
     content: { data },
-    youtube,
 } = Astro.props;
 
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
     month: "long",
 };
 ---
-{youtube ? (
-
-        <YouTubeEmbed 
-        title={data.youtube.title}
-    url={data.youtube.url}
-    controls={data.youtube.controls}
-    mute={data.youtube.mute}
-    loop={data.youtube.loop}
-    start={data.youtube.start}
-    end={data.youtube.end}
-/>
-
-) : data.coverImage && data.coverImage.src ? (
+{
+  (data.youtube && data.youtube.discriminant && data.youtube.value && data.youtube.value.url) ? (
+    <YouTubeEmbed 
+      title={data.title}
+      url={data.youtube.value.url}
+      controls={data.youtube.value.controls ?? false}
+      mute={data.youtube.value.mute ?? false}
+      loop={data.youtube.value.loop ?? false}
+      start={data.youtube.value.start ?? 0}
+      end={data.youtube.value.end ?? undefined}
+    />
+  ) : data.coverImage && data.coverImage.src ? (
     <div class="aspect-h-9 aspect-w-16 mb-6">
-        <Image
-            alt={data.coverImage.alt || ""}
-            class="object-contain"
-            fetchpriority="high"
-            loading="eager"
-            src={data.coverImage.src}
-            width={800}
-            height={450}
-        />
+      <Image
+        alt={data.coverImage.alt || ""}
+        class="object-contain"
+        fetchpriority="high"
+        loading="eager"
+        src={data.coverImage.src}
+        width={800}
+        height={450}
+      />
     </div>
-) : null}
-
-
-
-
-<div class="container">
+  ) : null
+}<!-- Rest of the Hero component remains the same -->
     {data.draft ? <span class="text-base text-red-500">(Draft)</span> : null}
     <h1 class="title mb-3 sm:mb-1" style="padding-left:5%;">
         {data.title}

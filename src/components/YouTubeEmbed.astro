@@ -9,15 +9,16 @@ interface Props {
   end?: number;
 }
 
-const { url, title, controls = true, mute = false, loop = false, start = 0, end = 0 } = Astro.props;function getYouTubeId(url: string): string | null {
+const { url = '', title = 'YouTube video', controls = true, mute = false, loop = false, start = 0, end = 0 } = Astro.props;
+
+function getYouTubeId(url: string): string | null {
   if (!url) return null;
   const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
-  const match = url?.match(regex);
+  const match = url.match(regex);
   return match ? match[1] : null;
 }
+
 const videoId = getYouTubeId(url);
-console.log("URL:", url);
-console.log("Video ID:", videoId);
 
 const params = new URLSearchParams({
   autoplay: '1',
@@ -31,7 +32,7 @@ if (end > 0) {
   params.append('end', end.toString());
 }
 
-const embedUrl = `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}?${params.toString()}` : '';
 ---
 
 {videoId ? (
@@ -47,10 +48,6 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}?${params.toString()}`
   ></iframe>
 ) : (
   <div>
-    <p>Debug Info:</p>
-    <p>URL received: {url || 'No URL provided'}</p>
-    <p>Extracted Video ID: {videoId || 'No ID extracted'}</p>
+    <p>No valid YouTube URL provided.</p>
   </div>
 )}
-
-

@@ -44,7 +44,7 @@
 		"satori-html": "^0.3.2",
 		"set-function-length": "^1.2.2",
 		"sharp": "^0.33.5",
-		"stripe": "^16.8.0"
+		"stripe": "^16.9.0"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.5.10",
