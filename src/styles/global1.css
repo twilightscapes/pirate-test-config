@@ -7,8 +7,8 @@ body{z-index: 0; overscroll-behavior:none; min-height:100dvh; max-width: 100dvw;
 ::-webkit-scrollbar,::-webkit-scrollbar-button{height:0px;width:0px}
 
 :root{--button-alternate-color:#e3272d;--button-color:#e5c3d3;--font-family:-apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,Ubuntu,roboto,noto,segoe ui,arial,sans-serif;--font-family-mono:Menlo,Consolas,Monaco,Liberation Mono,Lucida Console,monospace;--font-size-small:12px;--grid-gap:30px;--home-link-color:#d4d4d4;--home-link-hover-color:var(--primary-color);--input-focus-border:#83aaac;--label-text:#777;--nav-link-hover-bg:#111;--post-link-color:#0f070b;--text-color-meta:rgba(0,0,0,.5), height:100vh;}
-
-#menu,.menu,.font,.full-width-image:after,.h1,.h2,.h3,.h4,.header .menu-icon:before,.slider:before,.intro:after,.intro:before,.scrolldown,h1,h2,h3,h4,input.special{font-family: "Bowlby One", sans-serif;}
+/* 
+#menu,.menu,.font,.full-width-image:after,.h1,.h2,.h3,.h4,.header .menu-icon:before,.slider:before,.intro:after,.intro:before,.scrolldown,h1,h2,h3,h4,input.special{font-family: "Bowlby One", sans-serif;} */
 
 /* :root[data-theme="light"] #menu,.menu,.font,.full-width-image:after,.h1,.h2,.h3,.h4,.header .menu-icon:before,.slider:before,.intro:after,.intro:before,.scrolldown,h1,h2,h3,h4,input.special{color:#26543c !important;} */
 

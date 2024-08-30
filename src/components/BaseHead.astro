@@ -2,10 +2,13 @@
 import type { SiteMeta } from "@/types";
 
 import { siteConfig } from "@/site-config";
-
+import { getEntry } from 'astro:content';
 import "../styles/global.css";
 import "../styles/global1.css";
 type Props = SiteMeta;
+
+const siteSettings = await getEntry('siteSettings', 'main');
+const { siteFont } = siteSettings.data;
 
 const { articleDate, description, ogImage, title } = Astro.props;
 
@@ -88,13 +91,14 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.webp", Astro.ur
 <link rel="preconnect" href="https://fonts.gstatic.com" cross-origin="anonymous" />
 
 <link
-	href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap"
+	href={`https://fonts.googleapis.com/css2?family=${siteFont}&display=swap`}
 	rel="stylesheet"
 	cross-origin="anonymous"
-	referrer-policy="unsafe-url"
+	referrer-policy="no-referrer"
 />
-<style>
-#menu,.menu,.font,.full-width-image:after,.h1,.h2,.h3,.h4,.header .menu-icon:before,.slider:before,.intro:after,.intro:before,.scrolldown,h1,h2,h3,h4,input.special{font-family: "Bowlby One", sans-serif;}
+<style set:html={`
+  #menu,.menu,.font,.full-width-image:after,.h1,.h2,.h3,.h4,.header .menu-icon:before,.slider:before,.intro:after,.intro:before,.scrolldown,h1,h2,h3,h4,input.special{font-family: ${siteFont}, sans-serif;}
+`}>
 </style>
 
 <meta content={Astro.generator} name="generator" />
