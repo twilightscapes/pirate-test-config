@@ -11,5 +11,5 @@ showFAQ: true
 showFooter: true
 siteFont: Bowlby One
 logoImage: /images/logo/logoImage.png
-lightBg: '#ff0000'
-darkBg: '#000'
+lightBg: hsl(146, 23%, 82%)
+darkBg: hsl(150, 91%, 27%)
