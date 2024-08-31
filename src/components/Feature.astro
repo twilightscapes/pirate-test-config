@@ -41,7 +41,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
       end={content.youtube.end}
     />
   ) : content.featureImage && content.featureImage.src ? (
-    <div class="aspect-h-9 aspect-w-16 mb-6">
+    <div class="aspect-h-9 aspect-w-16 mb-6" style="align-content:start;">
       <Image
         alt={content.featureImage.alt || ""}
         class="object-contain"
