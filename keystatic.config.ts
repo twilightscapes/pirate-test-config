@@ -122,7 +122,7 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
           logoImage: fields.image({
             label: 'Logo Image',
             directory: 'public/images/logo',
-            publicPath: 'public/images/logo',
+            publicPath: '/images/logo',
           }),
           lightBg: fields.text({ label: 'Light Background Color' }),
           darkBg: fields.text({ label: 'Dark Background Color' }),
