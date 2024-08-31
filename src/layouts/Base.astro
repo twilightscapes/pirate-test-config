@@ -11,16 +11,17 @@ import DynamicTheme from '../components/DynamicTheme.astro';
 
 interface Props {
 	meta: SiteMeta;
+	title: string;
+	description: string;
+	articleDate: string;
+	ogImage:string;
 }
 
 import { getEntry } from 'astro:content';
 const siteSettings = await getEntry('siteSettings', 'main');
 const { showFooter } = siteSettings.data;
 
-const {
-	meta: { articleDate, description = siteConfig.description, ogImage, title },
-} = Astro.props;
----
+const { title, description = siteConfig.description, articleDate, ogImage } = Astro.props;---
 	<html lang={siteConfig.lang}>
 		<head>
 			<DynamicTheme />

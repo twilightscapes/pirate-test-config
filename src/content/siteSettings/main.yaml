@@ -3,10 +3,10 @@ showLogo: true
 showTheme: true
 showSwitch: true
 showSearch: false
-showFeature: true
+showFeature: false
 showBio: true
-showPosts: true
-showTestimonials: true
+showPosts: false
+showTestimonials: false
 showFAQ: true
 showFooter: true
 siteFont: Bowlby One

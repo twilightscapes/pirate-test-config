@@ -26,7 +26,16 @@ const { showFAQ, showTestimonials, showPosts, showBio, showFeature } = siteSetti
 
 
 
-<PageLayout meta={{ title: homeContent.data.title }}>
+
+
+	<PageLayout
+  meta={{ 
+    title: homeContent.data.title,
+    description: homeContent.data.description,
+    articleDate: new Date().toISOString(),
+    ogImage: homeContent.data.ogImage || "/path/to/default-og-image.jpg"
+  }}
+>
 
 
 
@@ -76,7 +85,7 @@ const { showFAQ, showTestimonials, showPosts, showBio, showFeature } = siteSetti
 	  
 
 
-{typeof showFAQ !== 'undefined' && showFAQ && (
+{showFAQ && (
 <section style="width:100%; max-width:1200px; margin:0 auto;">
 	
 		<h2 id="costs" class="letter glow" style={{fontSize:'clamp(1.4rem,2.6vw,3rem)', textAlign:'center', color:'#ddd', fontStyle:'normal', marginBottom:'4vh'}}>{homeContent.data.faqtitle}</h2>

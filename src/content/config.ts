@@ -84,21 +84,20 @@ const home = defineCollection({
 const siteSettings = defineCollection({
   type: 'data',
   schema: z.object({
-    showHeader: z.string(),
-    showLogo: z.string(),
-    showTheme: z.string(),
-    showSwitch: z.string(),
-    showSearch: z.string(),
-    showFeature: z.string(),
-    showBio: z.string(),
-    showPosts: z.string(),
-    showTestimonials: z.string(),
-    showFaq: z.string(),
+    showHeader: z.boolean(),
+    showLogo: z.boolean(),
+    showTheme: z.boolean(),
+    showSwitch: z.boolean(),
+    showSearch: z.boolean(),
+    showFeature: z.boolean(),
+    showBio: z.boolean(),
+    showPosts: z.boolean(),
+    showTestimonials: z.boolean(),
+    showFAQ: z.boolean().optional(),
     siteFont: z.string(),
     logoImage: z.string(),
   }),
 });
 
 
-
-export const collections = { post, faqs, testimonials, home };
+export const collections = { post, faqs, testimonials, home, siteSettings };
