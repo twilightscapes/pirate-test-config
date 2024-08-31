@@ -96,8 +96,9 @@ const siteSettings = defineCollection({
     showFAQ: z.boolean().optional(),
     siteFont: z.string(),
     logoImage: z.string(),
+    lightBg: z.string(),
+    darkBg: z.string(),
   }),
 });
-
 
 export const collections = { post, faqs, testimonials, home, siteSettings };

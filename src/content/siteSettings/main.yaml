@@ -12,4 +12,4 @@ showFooter: true
 siteFont: Bowlby One
 logoImage: /images/logo/logoImage.png
 lightBg: '#ff0000'
-darkBg: '#222'
+darkBg: '#000'

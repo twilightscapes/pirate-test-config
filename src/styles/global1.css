@@ -20,8 +20,8 @@ body{z-index: 0; overscroll-behavior:none; min-height:100dvh; max-width: 100dvw;
   --nav-link-hover-bg: #111;
   --post-link-color: #0f070b;
   --text-color-meta: rgba(0,0,0,.5);
-  --theme-bg-light: var(--lightBg, #ffffff); /* Fallback to white if not set */
-  --theme-bg-dark: var(--darkBg, #000000); /* Fallback to black if not set */
+  --theme-bg-light: var(--lightBg, #ffffff); 
+  --theme-bg-dark: var(--darkBg, #000000); 
 }
 
 body {
