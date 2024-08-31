@@ -24,7 +24,7 @@ export const siteConfig: SiteConfig = {
 	// Meta property used to construct the meta title property, found in src/components/BaseHead.astro L:11
 	title: "Dog Poopers",
 	webmentions: {
-		// Webmention.io API endpoint. Get your own here: https://webmention.io/, and follow this blog post: https://astro-cactus.chriswilliams.dev/posts/webmentions/
+		// Webmention.io API endpoint. Get your own here: https://webmention.io/, and follow this blog post: https://astro-pirate.chriswilliams.dev/posts/webmentions/
 		link: "",
 	},
 };
@@ -62,7 +62,7 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 	},
 	themeCssSelector(theme, { styleVariants }) {
 		// If one dark and one light theme are available
-		// generate theme CSS selectors compatible with cactus-theme dark mode switch
+		// generate theme CSS selectors compatible with pirate-theme dark mode switch
 		if (styleVariants.length >= 2) {
 			const baseTheme = styleVariants[0]?.theme;
 			const altTheme = styleVariants.find((v) => v.theme.type !== baseTheme?.type)?.theme;
