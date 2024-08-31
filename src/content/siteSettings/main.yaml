@@ -3,12 +3,12 @@ showLogo: true
 showTheme: true
 showSwitch: true
 showSearch: false
-showFeature: false
+showFeature: true
 showBio: true
 showPosts: true
-showTestimonials: false
-showFAQ: false
-showFooter: false
+showTestimonials: true
+showFAQ: true
+showFooter: true
 siteFont: Bowlby One
 logoImage: public/images/logo/logoImage.png
 lightBg: '#ccc'
