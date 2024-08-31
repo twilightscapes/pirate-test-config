@@ -157,7 +157,7 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
               publicPath: '/images/homepage',
             }),
             alt: fields.text({ 
-              label: 'Alt Text',
+              label: 'Featured Image Alt Text',
             }),
           }),
 

@@ -15,7 +15,7 @@ const { showHeader, showLogo, showTheme, showSearch, showSwitch, logoImage } = s
     {showLogo && logoImage && (
       <a href="/" aria-current={url.pathname === "/" ? "page" : false}>
         <img 
-          src={logoImage}
+          src={`/${logoImage}`}
           alt="Site Logo"
           class="cornerlogo"
           style={{
@@ -32,8 +32,7 @@ const { showHeader, showLogo, showTheme, showSearch, showSwitch, logoImage } = s
       </a>
     )}
 
-    <ul class="topmenu" style={{
-      fontSize: "clamp(.6rem, 1.6vw, 1.8rem)",
+    <ul class="topmenu" style={{      fontSize: "clamp(.6rem, 1.6vw, 1.8rem)",
       textAlign: "center",
       display: "flex",
       justifyContent: "space-around",
