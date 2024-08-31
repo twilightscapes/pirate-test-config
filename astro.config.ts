@@ -68,7 +68,10 @@ export default defineConfig({
     },
     build: {
       assetsInlineLimit: 0,
+      chunkSizeWarningLimit: 50000, // Set this to an appropriate value in KB
+
     },
+    
     plugins: [
       {
         name: 'ignore-public-warning',
