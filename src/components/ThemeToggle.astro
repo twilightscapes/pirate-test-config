@@ -74,17 +74,14 @@
 			button.addEventListener(
 				"click",
 				() => {
-					// invert theme
+					const newTheme = rootInDarkMode() ? "light" : "dark";
 					let themeChangeEvent = new CustomEvent("theme-change", {
 						detail: {
-							theme: rootInDarkMode() ? "light" : "dark",
+							theme: newTheme,
 						},
 					});
-					// dispatch event -> ThemeProvider.astro
 					document.dispatchEvent(themeChangeEvent);
-
-					// set the aria-checked attribute
-					button.setAttribute("aria-checked", String(rootInDarkMode()));
+					button.setAttribute("aria-checked", String(!rootInDarkMode()));
 				},
 				{ signal }
 			);

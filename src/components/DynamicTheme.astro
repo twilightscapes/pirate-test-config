@@ -1,0 +1,10 @@
+---
+import { getEntry } from 'astro:content';
+
+const siteSettings = await getEntry('siteSettings', 'main');
+---
+
+<script define:vars={{ lightBg: siteSettings.data.lightBg, darkBg: siteSettings.data.darkBg }}>
+  document.documentElement.style.setProperty('--lightBg', lightBg);
+  document.documentElement.style.setProperty('--darkBg', darkBg);
+</script>

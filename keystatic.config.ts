@@ -117,18 +117,17 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
           showPosts: fields.checkbox({ label: 'Show Posts', defaultValue: true }),
           showTestimonials: fields.checkbox({ label: 'Show Testimonials', defaultValue: true }),
           showFAQ: fields.checkbox({ label: 'Show FAQs', defaultValue: true }),
-
           showFooter: fields.checkbox({ label: 'Show Footer', defaultValue: true }),
-
           siteFont: fields.text({ label: 'Site Font', defaultValue: 'Bowlby One', description: 'Enter the name of any Google Font' }),
           logoImage: fields.image({
             label: 'Logo Image',
             directory: 'public/images/logo',
             publicPath: 'public/images/logo',
           }),
+          lightBg: fields.text({ label: 'Light Background Color' }),
+          darkBg: fields.text({ label: 'Dark Background Color' }),
         },
-      }),
-      otherSettings: singleton({
+      }),      otherSettings: singleton({
         label: 'Other Settings',
         path: 'src/content/otherSettings/main',
         schema: {
@@ -160,6 +159,8 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
               label: 'Featured Image Alt Text',
             }),
           }),
+
+          
 
           youtube: fields.object({
             url: fields.text({ 

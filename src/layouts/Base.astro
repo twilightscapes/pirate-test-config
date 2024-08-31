@@ -1,46 +1,46 @@
 ---
 import type { SiteMeta } from "@/types";
-// import { ViewTransitions } from "astro:transitions";
 import BaseHead from "@/components/BaseHead.astro";
 import SkipLink from "@/components/SkipLink.astro";
 import ThemeProvider from "@/components/ThemeProvider.astro";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import { siteConfig } from "@/site-config";
+import DynamicTheme from '../components/DynamicTheme.astro';
+
 
 interface Props {
 	meta: SiteMeta;
 }
 
-
 import { getEntry } from 'astro:content';
 const siteSettings = await getEntry('siteSettings', 'main');
-const { showFAQ, showTestimonials, showPosts, showBio, showFeature, showFooter } = siteSettings.data;
-
+const { showFooter } = siteSettings.data;
 
 const {
 	meta: { articleDate, description = siteConfig.description, ogImage, title },
 } = Astro.props;
 ---
+	<html lang={siteConfig.lang}>
+		<head>
+			<DynamicTheme />
+			<ThemeProvider />
+			<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
+		</head>
+		<body>
+			<SkipLink />
+			<Header />
+	
+				<main id="main">
+					<slot />
+			</main>
 
-<html lang={siteConfig.lang}>
-	<head>
-		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
-		<!-- <ViewTransitions /> -->
-	</head>
-	<body>
-		<ThemeProvider />
-		<SkipLink />
-		<Header />
-		
-		<!-- <main id="main" transition:animate="slide">
-			<slot  transition:animate="slide" /> -->
-			<main id="main">
-				<slot />
-		</main>
-
-		{typeof showFooter !== 'undefined' && showFooter && (
-		<Footer />
-		)}
-	</body>
-</html>
+			{typeof showFooter !== 'undefined' && showFooter && (
+			<Footer />
+			)}
+		</body>
+	</html>
+<script>
+  console.log('Light BG:', getComputedStyle(document.documentElement).getPropertyValue('--lightBg'));
+  console.log('Dark BG:', getComputedStyle(document.documentElement).getPropertyValue('--darkBg'));
+</script>
