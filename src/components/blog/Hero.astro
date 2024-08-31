@@ -28,7 +28,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
       end={data.youtube.value.end ?? undefined}
     />
   ) : data.coverImage && data.coverImage.src ? (
-    <div class="aspect-h-9 aspect-w-16 mb-6">
+
       <Image
         alt={data.coverImage.alt || ""}
         class="object-contain"
@@ -38,7 +38,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
         width={800}
         height={450}
       />
-    </div>
+
   ) : null
 }<!-- Rest of the Hero component remains the same -->
     {data.draft ? <span class="text-base text-red-500">(Draft)</span> : null}
