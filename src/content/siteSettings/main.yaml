@@ -10,6 +10,6 @@ showTestimonials: true
 showFAQ: true
 showFooter: true
 siteFont: Bowlby One
-logoImage: /images/logo/logoImage.png
+logoImage: /images/logo/logoImage.webp
 lightBg: hsl(146, 23%, 82%)
 darkBg: hsl(150, 91%, 27%)
