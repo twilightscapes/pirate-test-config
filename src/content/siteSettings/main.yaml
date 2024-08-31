@@ -2,11 +2,11 @@ showHeader: true
 showLogo: true
 showTheme: true
 showSwitch: true
-showSearch: false
-showFeature: false
+showSearch: true
+showFeature: true
 showBio: true
-showPosts: false
-showTestimonials: false
+showPosts: true
+showTestimonials: true
 showFAQ: true
 showFooter: true
 siteFont: Bowlby One

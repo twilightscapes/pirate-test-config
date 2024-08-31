@@ -21,7 +21,9 @@ import { getEntry } from 'astro:content';
 const siteSettings = await getEntry('siteSettings', 'main');
 const { showFooter } = siteSettings.data;
 
-const { title, description = siteConfig.description, articleDate, ogImage } = Astro.props;---
+const { title, description = siteConfig.description, articleDate, ogImage } = Astro.props;
+
+---
 	<html lang={siteConfig.lang}>
 		<head>
 			<DynamicTheme />
@@ -36,7 +38,7 @@ const { title, description = siteConfig.description, articleDate, ogImage } = As
 					<slot />
 			</main>
 
-			{typeof showFooter !== 'undefined' && showFooter && (
+			{ showFooter && (
 			<Footer />
 			)}
 		</body>
