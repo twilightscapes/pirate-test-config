@@ -585,8 +585,10 @@ a:visited {
 .sidebarMenuInner li{border-bottom:1px solid hsla(0,0%,100%,.1);color:var(--theme-ui-colors-headerColorText);font-weight:700;list-style:none;padding:5px 20px}
 
 .missioncontrol li{border-bottom:0px solid hsla(0,0%,100%,.1);}
+.missioncontrol svg{filter:drop-shadow(1px 1px 0px #222);}
+.topmenu a {text-shadow:1px 1px 0px #222;}
 
-.sidebarMenuInner li a{cursor:pointer;font-weight:700;text-decoration:none}
+.sidebarMenuInner li a{cursor:pointer;font-weight:700;text-decoration:none;}
 .sidebarMenuInner li span{display:block;font-size:14px}
 
 .splitRow{align-items:center;flex-direction:column}
