@@ -1,11 +1,15 @@
+
 // import ColorPickerComponent from './src/components/ColorPickerComponent';
-import { config, fields, collection, singleton } from '@keystatic/core';export default config({
-    storage: {
-      kind: 'local',
-    },
-    cloud: {
-      project: 'pirate/pirateweb',
-    },
+import { config, fields, collection, singleton, type Config } from '@keystatic/core';
+
+export default config({
+    storage: (() => {
+      const kind = (import.meta.env.PUBLIC_KEYSTATIC_STORAGE_KIND as 'local' | 'github' | 'cloud') || 'local';
+      return { kind } as Config['storage'];
+    })(),
+    cloud: import.meta.env.PUBLIC_KEYSTATIC_PROJECT_ID
+      ? { project: import.meta.env.PUBLIC_KEYSTATIC_PROJECT_ID }
+      : undefined,
     ui: {
       brand: { name: 'Pirate' },
     },
@@ -114,7 +118,7 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
           logoImage: fields.image({
             label: 'Logo Image',
             description: 'Image used across the site - can use any format',
-            directory: 'public/images/logo',
+            directory: '/images/logo',
             publicPath: '/images/logo',
           }),
           divider: fields.empty(),
