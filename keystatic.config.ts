@@ -4,10 +4,10 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
       kind: 'local',
     },
     cloud: {
-      project: 'dog-poopers/dogpoopers',
+      project: 'pirate/pirateweb',
     },
     ui: {
-      brand: { name: 'Dog Poopers' },
+      brand: { name: 'Pirate' },
     },
     collections: {
       posts: collection({
@@ -100,7 +100,7 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
           image: fields.image({
             label: 'Image',
             directory: 'public/images/testimonials',
-            publicPath: 'public/images/testimonials',
+            publicPath: '/images/testimonials',
           }),
           order: fields.number({ label: 'Order' }),
         },

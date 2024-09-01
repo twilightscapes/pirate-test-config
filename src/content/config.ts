@@ -30,7 +30,7 @@ const postSchema = z.object({
   youtube: z.object({
     discriminant: z.boolean(),
     value: z.object({
-      url: z.string(),
+      url: z.string().optional(),
       controls: z.boolean().optional(),
       mute: z.boolean().optional(),
       loop: z.boolean().optional(),
@@ -48,20 +48,20 @@ const post = defineCollection({
 const faqs = defineCollection({
   type: 'data',
   schema: z.object({
-    answer: z.string(),
-    order: z.number(),
-    question: z.string(),
+    answer: z.string().optional(),
+    order: z.number().optional(),
+    question: z.string().optional(),
   }),
 });
 
 const testimonials = defineCollection({
   type: 'data',
   schema: z.object({
-    name: z.string(),
-    location: z.string(),
-    quote: z.string(),
-    image: z.string(),
-    order: z.number(),
+    name: z.string().optional(),
+    location: z.string().optional(),
+    quote: z.string().optional(),
+    image: z.string().optional(),
+    order: z.number().optional(),
   }),
 });
 
@@ -69,15 +69,15 @@ const home = defineCollection({
   type: 'data',
   schema: z.object({
     title: z.string(),
-    tagline: z.string(),
+    tagline: z.string().optional(),
     description: z.string(),
-    phone: z.string(),
-    subheading: z.string(),
-    subcontent: z.string(),
-    subcta: z.string(),
-    faqtitle: z.string(),
-    testimonialtitle: z.string(),
-    postsectiontitle: z.string(),
+    phone: z.string().optional(),
+    subheading: z.string().optional(),
+    subcontent: z.string().optional(),
+    subcta: z.string().optional(),
+    faqtitle: z.string().optional(),
+    testimonialtitle: z.string().optional(),
+    postsectiontitle: z.string().optional(),
   }),
 });
 

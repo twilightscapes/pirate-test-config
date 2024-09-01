@@ -10,29 +10,34 @@ const sortedTestimonials = testimonials.sort((a, b) => (a.data?.order ?? 0) - (b
   {sortedTestimonials.map((testimonial) => (
     <div class="quotecard">
       <div style={{display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', minWidth:'380px'}}>
-              <Image
-                src={testimonial.data.image}
-                loading="lazy"
-                alt={`${testimonial.data.name} Image`}
-                width={140}
-                height={140}
-                style={{
-                  maxHeight: '140px',
-                  position: 'relative',
-                  border: '1px solid !important',
-                  objectFit: 'contain',
-                  margin: '0 auto'
-                }}
-              />
+        {testimonial.data.image && (
+          <Image
+            src={testimonial.data.image}
+            loading="lazy"
+            alt={`${testimonial.data.name ?? 'Testimonial'} Image`}
+            width={140}
+            height={140}
+            style={{
+              maxHeight: '140px',
+              position: 'relative',
+              border: '1px solid !important',
+              objectFit: 'contain',
+              margin: '0 auto'
+            }}
+          />
+        )}
         <br />
-        {testimonial.data.name}
-        <blockquote style={{width:'100%', minWidth:'', position:'relative', fontsize:'clamp(.8rem, 1vw, 1.5rem)', marginLeft:''}}>
-          {testimonial.data.quote}
-          <span>- {testimonial.data.location}</span>
-        </blockquote>
+        {testimonial.data.name && <div>{testimonial.data.name}</div>}
+        {testimonial.data.quote && (
+          <blockquote style={{width:'100%', minWidth:'', position:'relative', fontsize:'clamp(.8rem, 1vw, 1.5rem)', marginLeft:''}}>
+            {testimonial.data.quote}
+            {testimonial.data.location && <span>- {testimonial.data.location}</span>}
+          </blockquote>
+        )}
       </div>
     </div>
   ))}
-  </div>
+</div>
 
+<script src="../components/scrollListener.js"></script>
 <script src="../components/scrollListener.js"></script>

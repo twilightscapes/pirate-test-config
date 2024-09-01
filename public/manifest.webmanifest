@@ -1,7 +1,7 @@
 {
-	"name": "Poopr",
-	"short_name": "Poopr",
-	"description": "Pet Waste Removal",
+	"name": "Pirate",
+	"short_name": "Pirate",
+	"description": "PIRATE - social media for the people by the people",
 	"icons": [
 		{
 			"src": "/192x192.png",
@@ -14,8 +14,8 @@
 			"type": "image/png"
 		}
 	],
-	"start_url": "/map/",
-	"background_color": "#15683e",
-	"theme_color": "#15683e",
+	"start_url": "/",
+	"background_color": "#000",
+	"theme_color": "#000",
 	"display": "standalone"
 }

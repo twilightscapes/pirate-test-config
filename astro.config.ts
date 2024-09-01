@@ -27,12 +27,12 @@ export default defineConfig({
     registerType: 'autoUpdate',
     includeAssets: ['favicon.svg', 'robots.txt'],
     manifest: {
-      name: 'Dog Poopers',
-      short_name: 'Dog Poopers',
-      description: 'We Pick Up The Poop!',
-      theme_color: '#15683e',
-      start_url: '/map',
-      background_color: '#15683e',
+      name: 'Pirate',
+      short_name: 'Pirate',
+      description: 'PIRATE - social media for the people by the people',
+      theme_color: '#000',
+      start_url: '/',
+      background_color: '#000',
       display: 'standalone',
       icons: [{
         src: '192x192.png',
@@ -59,7 +59,7 @@ export default defineConfig({
   },
   output: 'hybrid',
   prefetch: true,
-  site: "https://dogpoopers.com",
+  site: "https://astropirate.netlify.app",
   vite: {
     server: {
       fs: {
