@@ -7,7 +7,7 @@ import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import { siteConfig } from "@/site-config";
 import DynamicTheme from '../components/DynamicTheme.astro';
-
+import BackToTop from '../components/BackToTop.astro';
 
 interface Props {
 	meta: SiteMeta;
@@ -22,28 +22,28 @@ const siteSettings = await getEntry('siteSettings', 'main');
 const { showFooter } = siteSettings.data;
 
 const { title, description = siteConfig.description, articleDate, ogImage } = Astro.props;
-
----
-	<html lang={siteConfig.lang}>
-		<head>
-			<DynamicTheme />
-			<ThemeProvider />
-			<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
-		</head>
-		<body>
-			<SkipLink />
-			<Header />
+	---
+		<html lang={siteConfig.lang}>
+			<head>
+				<DynamicTheme />
+				<ThemeProvider />
+				<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
+			</head>
+			<body>
+				<SkipLink />
+				<Header />
 	
-				<main id="main">
-					<slot />
-			</main>
+					<main id="main">
+						<slot />
+				</main>
 
-			{ showFooter && (
-			<Footer />
-			)}
-		</body>
-	</html>
-<script>
-  console.log('Light BG:', getComputedStyle(document.documentElement).getPropertyValue('--lightBg'));
-  console.log('Dark BG:', getComputedStyle(document.documentElement).getPropertyValue('--darkBg'));
-</script>
+				{ showFooter && (
+				<Footer />
+				)}
+				<BackToTop />
+
+
+
+
+			</body>
+		</html>

@@ -28,14 +28,11 @@ body {
   font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,Ubuntu,roboto,noto,segoe ui,arial,sans-serif;
   --font-family-mono: Menlo,Consolas,Monaco,Liberation Mono,Lucida Console,monospace;
   line-height: 1.5;
-  background: var(--theme-bg-light); /* Default to light theme */
+  /* background: var(--theme-bg-light);  */
 }
 
-[data-theme="dark"] body {
-  background: var(--theme-bg-dark);
-}
-/* :root[data-theme="light"] h3{color:hsl(142, 30%, 21%) !important;} */
-/* :root[data-theme="light"] #menu,.menu,.font,.full-width-image:after,.h1,.h2,.h3,.h4,.header .menu-icon:before,.slider:before,.intro:after,.intro:before,.scrolldown,h1,h2,h3,h4,input.special{color:hsl(144, 24%, 88%)} */
+
+
 	body, html {
   overflow-y: auto;
 }

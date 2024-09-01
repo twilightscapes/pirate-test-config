@@ -9,7 +9,6 @@ const url = new URL(Astro.request.url);
 const siteSettings = await getEntry('siteSettings', 'main');
 const { showHeader, showLogo, showTheme, showSearch, showSwitch, logoImage } = siteSettings.data;
 ---
-
 {showHeader && (
   <div id="menu" class="menu header">
     {showLogo && logoImage && (
@@ -70,4 +69,47 @@ const { showHeader, showLogo, showTheme, showSearch, showSwitch, logoImage } = s
       {showTheme && <ThemeToggle />}
     </div>
   </div>
+
+
 )}
+  
+  <button id="back-to-top" style="
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  z-index: 1000;
+">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const backToTopButton = document.getElementById('back-to-top');
+    
+      if (backToTopButton) {
+        window.addEventListener('scroll', () => {
+          if (window.pageYOffset > 100) {
+            backToTopButton.style.display = 'block';
+          } else {
+            backToTopButton.style.display = 'none';
+          }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+    });
+  </script>

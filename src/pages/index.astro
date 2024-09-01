@@ -19,21 +19,11 @@ const { showFAQ, showTestimonials, showPosts, showBio, showFeature } = siteSetti
 
 ---
 
-
-
-
-<script src="@/components/scrollListener.js"></script>
-
-
-
-
-
 	<PageLayout
   meta={{ 
     title: homeContent.data.title,
     description: homeContent.data.description,
     articleDate: new Date().toISOString(),
-    ogImage: homeContent.data.ogImage || "/path/to/default-og-image.jpg"
   }}
 >
 
@@ -161,37 +151,17 @@ const { showFAQ, showTestimonials, showPosts, showBio, showFeature } = siteSetti
 
 
 
-
-
-
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-	  var links = document.querySelectorAll('.scroll-to-top');
-	  links.forEach(function(link) {
-		link.addEventListener('click', function() {
-		  // Change text to "connecting..."
-		  link.textContent = 'connecting...';
-  
-		  // Delay before scrolling to the top
-		  setTimeout(function() {
-			window.scrollTo(0, 0);
-  
-			// Delay after scrolling to revert text back to original
-			setTimeout(function() {
-			  link.textContent = 'Get Started now';
-			}, 1000); // Adjust the delay (in milliseconds) as needed
-		  }, 0); // Delay to ensure other actions complete
-		});
-	  });
-	});
-  </script>
-  
-  
-  
-  
-
-
 </PageLayout>
+
+
+
+  
+  
+  
+  
+
+
+
 
 
 
