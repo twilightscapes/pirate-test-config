@@ -476,7 +476,33 @@ blockquote span {display:block; bottom:0; right:0; padding:1rem 0; text-align:ri
 
 p{margin-bottom:1rem}
 
-a[href^="tel:"]:before{-webkit-text-decoration:0 solid green;border-bottom:0;content:"📱";margin-right:10px;text-decoration:0 solid green}
+a[href^="tel:"]:before{-webkit-text-decoration:0px solid var(--theme-accent2); border-bottom:0;content:"📱";margin-right:10px;text-decoration:0px solid var(--theme-accent2)}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--theme-link);
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--theme-link);
+  opacity: 0.8;
+}
+
+a:focus {
+  outline: 0px solid var(--theme-link);
+  outline-offset: 0px;
+}
+
+a:visited {
+  color: var(--theme-link #6c757d);
+}
+
 
 .tags {
   display: flex;

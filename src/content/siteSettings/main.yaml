@@ -21,5 +21,5 @@ lightHeader: rgba(0, 0, 0, 0.3)
 darkHeader: rgba(0, 0, 0, 0.6)
 lightText: '#333'
 darkText: '#fff'
-lightLink: yellow
-darkLink: blue
+lightLink: green
+darkLink: white
