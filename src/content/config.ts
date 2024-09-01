@@ -101,6 +101,13 @@ const siteSettings = defineCollection({
     darkBg: z.string().optional(),
     lightAccent: z.string().optional(),
     darkAccent: z.string().optional(),
+    lightAccent2: z.string().optional(),
+    darkAccent2: z.string().optional(),
+    lightHeader: z.string().optional(),
+    darkHeader: z.string().optional(),
+    lightLink: z.string().optional(),
+    darkLink: z.string().optional(),
+    lightText: z.string().optional(),
+    darkText: z.string().optional(),
   }),
-});
-export const collections = { post, faqs, testimonials, home, siteSettings };
+});export const collections = { post, faqs, testimonials, home, siteSettings };

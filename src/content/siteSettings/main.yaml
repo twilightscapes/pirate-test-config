@@ -1,15 +1,25 @@
+logoImage: /images/logo/logoImage.webp
 showHeader: true
 showLogo: true
 showTheme: true
 showSwitch: true
 showSearch: true
+showFooter: true
 showFeature: true
 showBio: true
 showPosts: true
 showTestimonials: true
 showFAQ: true
-showFooter: true
 siteFont: Bowlby One
-logoImage: /images/logo/logoImage.webp
 lightBg: hsl(146, 23%, 82%)
+lightAccent: rgba(0, 0, 0, 0.3)
+lightAccent2: hsl(150, 91%, 27%)
 darkBg: hsl(150, 91%, 27%)
+darkAccent: rgba(0, 0, 0, 0.3)
+darkAccent2: hsl(150, 91%, 27%)
+lightHeader: rgba(0, 0, 0, 0.3)
+darkHeader: rgba(0, 0, 0, 0.6)
+lightText: '#333'
+darkText: '#fff'
+lightLink: yellow
+darkLink: blue

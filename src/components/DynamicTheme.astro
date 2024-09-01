@@ -3,10 +3,20 @@ import { getEntry } from 'astro:content';
 const siteSettings = await getEntry('siteSettings', 'main');
 ---
 
-
-<script define:vars={{ lightBg: siteSettings.data.lightBg, darkBg: siteSettings.data.darkBg, lightAccent: siteSettings.data.lightAccent, darkAccent: siteSettings.data.darkAccent }}>
+<script define:vars={{ lightBg: siteSettings.data.lightBg, darkBg: siteSettings.data.darkBg, lightAccent: siteSettings.data.lightAccent, darkAccent: siteSettings.data.darkAccent, lightAccent2: siteSettings.data.lightAccent2, darkAccent2: siteSettings.data.darkAccent2, lightHeader: siteSettings.data.lightHeader, darkHeader: siteSettings.data.darkHeader, lightLink: siteSettings.data.lightLink, darkLink: siteSettings.data.darkLink, lightText: siteSettings.data.lightText, darkText: siteSettings.data.darkText }}>
   document.documentElement.style.setProperty('--lightBg', lightBg);
   document.documentElement.style.setProperty('--darkBg', darkBg);
   document.documentElement.style.setProperty('--lightAccent', lightAccent);
   document.documentElement.style.setProperty('--darkAccent', darkAccent);
+  document.documentElement.style.setProperty('--lightAccent2', lightAccent2);
+  document.documentElement.style.setProperty('--darkAccent2', darkAccent2);
+  document.documentElement.style.setProperty('--lightHeader', lightHeader);
+  document.documentElement.style.setProperty('--darkHeader', darkHeader);
+  document.documentElement.style.setProperty('--lightLink', lightLink);
+  document.documentElement.style.setProperty('--darkLink', darkLink);
+  document.documentElement.style.setProperty('--lightText', lightText);
+  document.documentElement.style.setProperty('--darkText', darkText);
 </script>
+
+
+

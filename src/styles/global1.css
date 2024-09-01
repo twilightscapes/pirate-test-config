@@ -23,13 +23,19 @@ body{z-index: 0; overscroll-behavior:none; min-height:100dvh; max-width: 100dvw;
   --theme-bg-light: var(--lightBg, #ffffff); 
   --theme-bg-dark: var(--darkBg, #000000); 
   --theme-accent: var(--lightAccent, #ff0000);
-  --theme-accent-dark: var(--darkAccent, #ff00d9);
-}
-body {
+  --theme-accent2: var(--lightAccent2, blue);
+  --theme-header-light: var(--lightHeader, #c25e5e);
+  --theme-header-dark: var(--darkHeader, #c4ffc4);
+  --theme-link-light: var(--lightLink, #4a6e6e);
+  --theme-link-dark: var(--darkLink, #d292b0);
+  --theme-text-light: var(--lightText, #383838);
+  --theme-text-dark: var(--darkText, #ebf1ed);
+}body {
   font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,Ubuntu,roboto,noto,segoe ui,arial,sans-serif;
   --font-family-mono: Menlo,Consolas,Monaco,Liberation Mono,Lucida Console,monospace;
   line-height: 1.5;
   /* background: var(--theme-bg-light);  */
+  color: var(--theme-text);
 }
 
 
@@ -60,7 +66,7 @@ body.install #menu{display: none !important;}
   align-items:center;
   justify-content: center;
   padding: .5vh .5vw;
-  background: var(--theme-accent);
+  background: var(--theme-accent2);
   color:#ddd;
   border-Radius:9px;
 }
@@ -71,7 +77,7 @@ body.install #menu{display: none !important;}
 
 
 .button {
-  background-color:var(--theme-accent);
+  background-color:var(--theme-accent2);
   color: #ffffff;
   border: none;
   padding: 1vh 1.5vw;
@@ -86,7 +92,7 @@ body.install #menu{display: none !important;}
   transition: opacity 0.5s ease-in;
 }
 .button:hover{
-  background-color:#12b83c;
+  background-color:var(--theme-accent2);
   color: #ffffff;
 }
 
@@ -98,14 +104,14 @@ body.install #menu{display: none !important;}
 }
 .special{
   --rotate: 0deg;
-  --green: var(--theme-accent);
+  --green: var(--theme-accent2);
   --radius: 5px;
   color: #ffffff;
   position: relative;
   margin:1vh auto;
   padding: 1.5vh 2vw ;
   border-radius: var(--radius);
-  background: var(--green);
+  background: var(--theme-accent2);
   cursor: pointer;
   display: block;
   transition: opacity 0.5s ease-in;
@@ -135,13 +141,13 @@ body.install #menu{display: none !important;}
   border-radius: var(--radius);
 }
 .special:hover .fancy::before{
-  background: conic-gradient(from var(--rotate), transparent 8%, rgb(9, 255, 1) 20%, transparent 10%);
+  background: conic-gradient(from var(--rotate), transparent 8%, var(--theme-accent2) 20%, transparent 10%);
 }
 .special:hover .fancy::after{background:rgba(8, 64, 23, 0.575); inset: 2px;}
 
 .special .fancy::after {
   content: "";
-  background:var(--green);
+  background:var(--theme-accent2);
   position: absolute;
   inset: 2px;
   border-radius: var(--radius);
@@ -205,7 +211,7 @@ body.homepage #gobacker{display:none;}
   background: none;
 }
 
-.post-card img{border-radius:var(--theme-ui-colors-borderRadius); color:rgb(34, 62, 43)}
+.post-card img{border-radius:var(--theme-ui-colors-borderRadius); color:var(--theme-accent)}
 
 
 .post-card1 h2{border:0 solid red;font-size:clamp(1rem, 1.2vw, 1.4rem);width:100%}
@@ -316,7 +322,6 @@ body.homepage #gobacker{display:none;}
   .post-card1 {
     text-align: center;
     scroll-snap-align: center;
-    color:hsl(146, 23%, 82%), hsl(147, 61%, 26%),hsl(120, 11%, 93%);
   }
 
 
@@ -460,7 +465,7 @@ blockquote:before{content:open-quote;margin-left:-.25em;quotes:"“" "”" "‘"
 blockquote span {display:block; bottom:0; right:0; padding:1rem 0; text-align:right;}
 
 
-.glow { color: inherit; font-weight: 700; font-style: italic; border-radius:0.675em; text-align: center;  transition: all 0.2s ease-in-out; text-shadow: .3vw .2vh .2vw #444, 0 3px .3vw rgb(8, 202, 44),0px 2px .3vw rgb(240, 240, 240),0 2px rgb(39, 227, 102, .4),0 2px .3vw rgb(39, 227, 99),0 0 .3vw rgb(39, 227, 80),0 0 .2vw rgb(39, 227, 86),0 0 .3vw rgb(39, 227, 77);
+.glow { color: inherit; font-weight: 700; font-style: italic; border-radius:0.675em; text-align: center;  transition: all 0.2s ease-in-out; text-shadow: .3vw .2vh .2vw #444, 0 3px .3vw var(--theme-accent2),0px 2px .3vw rgb(240, 240, 240),0 2px var(--theme-accent2),0 2px .3vw var(--theme-accent2),0 0 .3vw var(--theme-accent2),0 0 .2vw var(--theme-accent2),0 0 .3vw var(--theme-accent2);
 } 
 
 
@@ -584,7 +589,7 @@ input[type=checkbox]:checked~#sidebarMenu{transform:translateX(100%)}
   border:none;
   border-bottom:1px solid #222;
   border-radius: 0;
-  background:var(--theme-accent);
+  background:var(--theme-header);
   color:#fff;
   backdrop-filter:blur(54px) ;
   -webkit-backdrop-filter: blur(54px);

@@ -58,7 +58,7 @@ const { showFAQ, showTestimonials, showPosts, showBio, showFeature } = siteSetti
 						<div class="" style={{ position: '', top: '', marginTop: '', width: '100%', margin: '0 auto', maxHeight: '', fontSize: 'clamp(1/2.7rem, 1.3vw, 2rem)', textAlign: 'center', color: '' }}>
 							<h3 class="font" style={{ textAlign: 'center', fontFamily: '', fontSize: 'clamp(1.2rem, 2vw, 2.4rem)' }}>{homeContent.data.subheading}</h3>
 						</div>
-						<div style={{ background: 'rgba(8, 44, 20, 0.4)', backdropFilter: 'blur(12px)', marginTop: '2vh', padding: '1vh 5%', color: '#fff', borderRadius: 'var(--theme-ui-colors-borderRadius)', justifyContent: 'center', textAlign: 'center', fontSize: 'clamp(1rem, 1.8vw, 3.2rem)', width: '90%', margin: '0 auto' }}>
+						<div style={{ background: 'var(--theme-accent)', backdropFilter: 'blur(12px)', marginTop: '2vh', padding: '1vh 5%', color: '#fff', borderRadius: 'var(--theme-ui-colors-borderRadius)', justifyContent: 'center', textAlign: 'center', fontSize: 'clamp(1rem, 1.8vw, 3.2rem)', width: '90%', margin: '0 auto' }}>
 							<p>{homeContent.data.subcontent}</p>
 							<button class="special font">
 								<div class="fancy"></div>
@@ -86,7 +86,7 @@ const { showFAQ, showTestimonials, showPosts, showBio, showFeature } = siteSetti
 
 {typeof showTestimonials !== 'undefined' && showTestimonials && (
 <section class="testimonials-section">
-	<div class="nameblock flexcheek headline" style={{position:'', top:'', marginTop: '', width:'100%', padding: '1vh 2vh', margin:'0 auto 5vh auto', maxHeight: '', fontSize: 'clamp(1.3rem, 3.5vw, 3.2rem)', textAlign:'center', textShadow: '0 2px 3px #000', background:'rgba(8, 44, 20, 0.3)', backdropFilter:'blur(12px)', color:'#fff' }}>
+	<div class="nameblock flexcheek headline" style={{position:'', top:'', marginTop: '', width:'100%', padding: '1vh 2vh', margin:'0 auto 5vh auto', maxHeight: '', fontSize: 'clamp(1.3rem, 3.5vw, 3.2rem)', textAlign:'center', textShadow: '0 2px 3px #000', background:'var(--theme-accent)', backdropFilter:'blur(12px)', color:'#fff' }}>
 	  <h2 class="glow">{homeContent.data.testimonialtitle}</h2>
 	</div>
 	<Testimonials />
@@ -98,7 +98,7 @@ const { showFAQ, showTestimonials, showPosts, showBio, showFeature } = siteSetti
 
 {typeof showPosts !== 'undefined' && showPosts && (
 <section class="scroll-container" style={{display:''}}>
-	<div class="nameblock flexcheek headline" style={{width:'100%', padding: '1vh 2vh', margin:'5vh auto', maxHeight: '', fontSize:'clamp(1.4rem,3.9vw,4rem)', textAlign:'center', position:'relative', top:'', textShadow: '0 2px 3px #000', background:'rgba(8, 44, 20, 0.3)', backdropFilter:'blur(12px)', color:'#fff' }}>
+	<div class="nameblock flexcheek headline" style={{width:'100%', padding: '1vh 2vh', margin:'5vh auto', maxHeight: '', fontSize:'clamp(1.4rem,3.9vw,4rem)', textAlign:'center', position:'relative', top:'', textShadow: '0 2px 3px #000', background:'var(--theme-accent)', backdropFilter:'blur(12px)', color:'#fff' }}>
 		<h2 class="glow">{homeContent.data.postsectiontitle}</h2>
 	  </div>
 			<div class="contentpanel horizontal-scroll panels">
