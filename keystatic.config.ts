@@ -107,27 +107,38 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
         label: 'Site Settings',
         path: 'src/content/siteSettings/main',
         schema: {
-          showHeader: fields.checkbox({ label: 'Show Header', defaultValue: true }),
-          showLogo: fields.checkbox({ label: 'Show Logo', defaultValue: true }),
-          showTheme: fields.checkbox({ label: 'Show Theme', defaultValue: true }),
-          showSwitch: fields.checkbox({ label: 'Show Switch', defaultValue: true }),
-          showSearch: fields.checkbox({ label: 'Show Search', defaultValue: true }),
-          showFeature: fields.checkbox({ label: 'Show Feature', defaultValue: true }),
-          showBio: fields.checkbox({ label: 'Show Bio', defaultValue: true }),
-          showPosts: fields.checkbox({ label: 'Show Posts', defaultValue: true }),
-          showTestimonials: fields.checkbox({ label: 'Show Testimonials', defaultValue: true }),
-          showFAQ: fields.checkbox({ label: 'Show FAQs', defaultValue: true }),
-          showFooter: fields.checkbox({ label: 'Show Footer', defaultValue: true }),
-          siteFont: fields.text({ label: 'Site Font', defaultValue: 'Bowlby One', description: 'Enter the name of any Google Font' }),
+          showHeader: fields.checkbox({ label: 'Show Header', description: 'Hide/Show the main site header', defaultValue: true }),
+          showLogo: fields.checkbox({ label: 'Show Logo', description: 'Hide/Show the logo in the header', defaultValue: true }),
+          showTheme: fields.checkbox({ label: 'Show Theme', description: 'Hide/Show the theme selector', defaultValue: true }),
+          showSwitch: fields.checkbox({ label: 'Show Switch', description: 'Hide/Show the layout selector', defaultValue: true }),
+          showSearch: fields.checkbox({ label: 'Show Search', description: 'Hide/Show the search in the header', defaultValue: true }),
+          showFooter: fields.checkbox({ label: 'Show Footer', description: 'Hide/Show the Footer', defaultValue: true }),
+          divider: fields.empty(),
+        
+          showFeature: fields.checkbox({ label: 'Show Feature', description: 'Hide/Show the Feature section on home page', defaultValue: true }),
+          showBio: fields.checkbox({ label: 'Show Bio', description: 'Hide/Show the Bio section on the home page', defaultValue: true }),
+          showPosts: fields.checkbox({ label: 'Show Posts', description: 'Hide/Show the Posts section on the home page', defaultValue: true }),
+          showTestimonials: fields.checkbox({ label: 'Show Testimonials', description: 'Hide/Show the Testimonials section on the home page', defaultValue: true }),
+          showFAQ: fields.checkbox({ label: 'Show FAQs', description: 'Hide/Show the FAQ section on the home page', defaultValue: true }),
+          divider2: fields.empty(),
+
           logoImage: fields.image({
             label: 'Logo Image',
             directory: 'public/images/logo',
             publicPath: '/images/logo',
           }),
-          lightBg: fields.text({ label: 'Light Background Color' }),
-          darkBg: fields.text({ label: 'Dark Background Color' }),
+
+          divider3: fields.empty(),
+
+          siteFont: fields.text({ label: 'Site Font', defaultValue: 'Bowlby One', description: 'Enter the name of any Google Font' }),
+          
+          lightBg: fields.text({ label: 'Light Background Color', description: '(light) Page Background - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
+          lightAccent: fields.text({ label: 'Light Accent Color', description: '(light) Accent - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
+          darkBg: fields.text({ label: 'Dark Background Color', description: '(dark) Page Background - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
+          darkAccent: fields.text({ label: 'Dark Accent Color', description: '(dark) Accent Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
         },
-      }),      otherSettings: singleton({
+      }),
+      otherSettings: singleton({
         label: 'Other Settings',
         path: 'src/content/otherSettings/main',
         schema: {
@@ -159,9 +170,6 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
               label: 'Featured Image Alt Text',
             }),
           }),
-
-          
-
           youtube: fields.object({
             url: fields.text({ 
               label: 'YouTube Video URL',
@@ -172,7 +180,8 @@ import { config, fields, collection, singleton } from '@keystatic/core';export d
             loop: fields.checkbox({ label: 'Loop Video', defaultValue: false }),
             start: fields.number({ label: 'Start Time (seconds)', defaultValue: 0 }),
             end: fields.number({ label: 'End Time (seconds)' }),
+            divider: fields.empty(),
           }),
         },
-      }),    },
-  });
+      }),
+    },  });

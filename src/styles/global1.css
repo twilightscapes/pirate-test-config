@@ -22,8 +22,9 @@ body{z-index: 0; overscroll-behavior:none; min-height:100dvh; max-width: 100dvw;
   --text-color-meta: rgba(0,0,0,.5);
   --theme-bg-light: var(--lightBg, #ffffff); 
   --theme-bg-dark: var(--darkBg, #000000); 
+  --theme-accent: var(--lightAccent, #ff0000);
+  --theme-accent-dark: var(--darkAccent, #ff00d9);
 }
-
 body {
   font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,Ubuntu,roboto,noto,segoe ui,arial,sans-serif;
   --font-family-mono: Menlo,Consolas,Monaco,Liberation Mono,Lucida Console,monospace;
@@ -59,7 +60,7 @@ body.install #menu{display: none !important;}
   align-items:center;
   justify-content: center;
   padding: .5vh .5vw;
-  background: #068445;
+  background: var(--theme-accent);
   color:#ddd;
   border-Radius:9px;
 }
@@ -70,7 +71,7 @@ body.install #menu{display: none !important;}
 
 
 .button {
-  background-color:#06a154;
+  background-color:var(--theme-accent);
   color: #ffffff;
   border: none;
   padding: 1vh 1.5vw;
@@ -97,7 +98,7 @@ body.install #menu{display: none !important;}
 }
 .special{
   --rotate: 0deg;
-  --green: #06a154;
+  --green: var(--theme-accent);
   --radius: 5px;
   color: #ffffff;
   position: relative;
@@ -160,7 +161,7 @@ body.install #menu{display: none !important;}
 
 
 .major {
-  background-color:#06a154;
+  background-color:var(--theme-accent);
   color: #ffffff;
   border: none;
   padding: 1vh .5vw !important;
@@ -583,7 +584,7 @@ input[type=checkbox]:checked~#sidebarMenu{transform:translateX(100%)}
   border:none;
   border-bottom:1px solid #222;
   border-radius: 0;
-  background:hsla(138, 52%, 29%, .8);
+  background:var(--theme-accent);
   color:#fff;
   backdrop-filter:blur(54px) ;
   -webkit-backdrop-filter: blur(54px);

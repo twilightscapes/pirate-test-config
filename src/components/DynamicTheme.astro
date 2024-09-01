@@ -1,10 +1,12 @@
 ---
 import { getEntry } from 'astro:content';
-
 const siteSettings = await getEntry('siteSettings', 'main');
 ---
 
-<script define:vars={{ lightBg: siteSettings.data.lightBg, darkBg: siteSettings.data.darkBg }}>
+
+<script define:vars={{ lightBg: siteSettings.data.lightBg, darkBg: siteSettings.data.darkBg, lightAccent: siteSettings.data.lightAccent, darkAccent: siteSettings.data.darkAccent }}>
   document.documentElement.style.setProperty('--lightBg', lightBg);
   document.documentElement.style.setProperty('--darkBg', darkBg);
+  document.documentElement.style.setProperty('--lightAccent', lightAccent);
+  document.documentElement.style.setProperty('--darkAccent', darkAccent);
 </script>
