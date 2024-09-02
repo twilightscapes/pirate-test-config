@@ -30,6 +30,8 @@ body{z-index: 0; overscroll-behavior:none; min-height:100dvh; max-width: 100dvw;
   --theme-link-dark: var(--darkLink, #d292b0);
   --theme-text-light: var(--lightText, #383838);
   --theme-text-dark: var(--darkText, #ebf1ed);
+  --theme-ui-colors-borderRadius: var(--borderRadius);
+  
 }body {
   font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,Ubuntu,roboto,noto,segoe ui,arial,sans-serif;
   --font-family-mono: Menlo,Consolas,Monaco,Liberation Mono,Lucida Console,monospace;
@@ -68,7 +70,7 @@ body.install #menu{display: none !important;}
   padding: .5vh .5vw;
   background: var(--theme-accent2);
   color:#ddd;
-  border-Radius:9px;
+  border-radius:var(--theme-ui-colors-borderRadius);
 }
 
 
@@ -84,7 +86,7 @@ body.install #menu{display: none !important;}
   font-size:clamp(1.1rem, 1vw, 1.4rem);
   font-weight: bold;
   text-shadow: 0px 1px 2px #111;
-  border-radius: 5px;
+  border-radius:var(--theme-ui-colors-borderRadius);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -213,7 +215,7 @@ body.homepage #gobacker{display:none;}
   background: none;
 }
 
-.post-card img{border-radius:var(--theme-ui-colors-borderRadius); color:var(--theme-accent)}
+.post-card1 img{border-radius:var(--theme-ui-colors-borderRadius); color:var(--theme-accent)}
 
 
 .post-card1 h2{border:0 solid red;font-size:clamp(1rem, 1.2vw, 1.4rem);width:100%}
@@ -335,6 +337,7 @@ body.homepage #gobacker{display:none;}
     display: grid;
     place-content: start;
     color:var(--theme-ui-colors-headerColorText);
+    border-radius:var(--theme-ui-colors-borderRadius);
     justify-content: center;
     flex: 0 0 33.3333%;transition:transform .2s;
   }

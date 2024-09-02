@@ -12,6 +12,7 @@
 		--theme-accent: var(--lightAccent, #b57a33);
 		--theme-accent2: var(--lightAccent2, #4d5a52);
 		--theme-header: var(--lightHeader, #c25e5e);
+		
 	}
 
 	:root[data-theme="dark"] {
