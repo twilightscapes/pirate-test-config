@@ -178,6 +178,41 @@ export default config({
           darkLink: fields.text({ label: 'Dark Link Color', description: '(dark) Link Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
         },
       }),
+
+      pwaSettings: singleton({
+        label: 'PWA Settings',
+        path: 'src/content/pwaSettings/',
+        schema: {
+          name: fields.text({ label: 'App Name' }),
+          shortName: fields.text({ label: 'Short Name' }),
+          description: fields.text({ label: 'Description' }),
+          themeColor: fields.text({ label: 'Theme Color' }),
+          backgroundColor: fields.text({ label: 'Background Color' }),
+          startUrl: fields.text({ label: 'Start URL' }),
+          display: fields.select({
+            label: 'Display Mode',
+            options: [
+              { label: 'Standalone', value: 'standalone' },
+              { label: 'Fullscreen', value: 'fullscreen' },
+              { label: 'Minimal UI', value: 'minimal-ui' },
+              { label: 'Browser', value: 'browser' }
+            ],
+            defaultValue: 'standalone'
+          }),
+          icon192: fields.image({
+            label: '192x192 Icon',
+            directory: 'public/images/pwa',
+            publicPath: '/images/pwa'
+          }),
+          icon512: fields.image({
+            label: '512x512 Icon',
+            directory: 'public/images/pwa',
+            publicPath: '/images/pwa'
+          })
+        }
+      }),
+
+      
       home: singleton({
         label: 'Home Page',
         path: 'src/content/homepage/',

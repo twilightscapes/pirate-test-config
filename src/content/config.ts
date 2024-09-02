@@ -114,4 +114,21 @@ const siteSettings = defineCollection({
     darkText: z.string().optional(),
     defaultView: z.enum(['grid', 'swipe']).optional(),
   }),
-});export const collections = { post, faqs, testimonials, home, siteSettings };
+});
+
+const pwaSettings = defineCollection({
+  type: 'data',
+  schema: z.object({
+    name: z.string(),
+    shortName: z.string(),
+    description: z.string(),
+    themeColor: z.string(),
+    backgroundColor: z.string(),
+    startUrl: z.string(),
+    display: z.enum(['standalone', 'fullscreen', 'minimal-ui', 'browser']),
+    icon192: z.string(),
+    icon512: z.string()
+  })
+});
+
+export const collections = { post, faqs, testimonials, home, siteSettings, pwaSettings };

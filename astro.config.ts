@@ -13,33 +13,42 @@ import { remarkReadingTime } from "./src/utils/remark-reading-time";
 import AstroPWA from '@vite-pwa/astro';
 import markdoc from "@astrojs/markdoc";
 import keystatic from '@keystatic/astro';
-
 import netlify from "@astrojs/netlify";
 
-// https://astro.build/config
+import yaml from 'js-yaml';
+
+const pwaSettingsFile = import.meta.glob('./src/content/pwaSettings/index.yaml', { query: '?raw', import: 'default', eager: true });
+const pwaConfigYaml = Object.values(pwaSettingsFile)[0];
+const pwaConfig = yaml.load(pwaConfigYaml) as Record<string, any>;
+if (typeof pwaConfigYaml !== 'string') {
+  throw new Error('pwaConfigYaml must be a string');
+}
+
 export default defineConfig({
   image: {
     domains: ["webmention.io"]
   },
   integrations: [expressiveCode(expressiveCodeOptions), icon(), tailwind({
     applyBaseStyles: false
-  }), sitemap(), mdx(), react(), keystatic(), AstroPWA({
+  }), sitemap(), mdx(), react(), keystatic(), 
+  
+  AstroPWA({
     registerType: 'autoUpdate',
-    includeAssets: ['robots.txt', 'images/siteImages/manifest-icon-192.maskable.png', 'images/siteImages/manifest-icon-512.maskable.png'],
+    includeAssets: ['robots.txt'],
     manifest: {
-      name: 'Pirate',
-      short_name: 'Pirate',
-      description: 'PIRATE - social media for the people by the people',
-      theme_color: '#000',
-      start_url: '/boom',
-      background_color: '#000',
-      display: 'standalone',
+      name: pwaConfig.name,
+      short_name: pwaConfig.shortName,
+      description: pwaConfig.description,
+      theme_color: pwaConfig.themeColor,
+      start_url: pwaConfig.startUrl,
+      background_color: pwaConfig.backgroundColor,
+      display: pwaConfig.display,
       icons: [{
-        src: '/images/siteImages/manifest-icon-192.maskable.png',
+        src: pwaConfig.icon192,
         sizes: '192x192',
         type: 'image/png'
       }, {
-        src: '/images/siteImages/manifest-icon-512.maskable.png',
+        src: pwaConfig.icon512,
         sizes: '512x512',
         type: 'image/png'
       }]
@@ -47,8 +56,11 @@ export default defineConfig({
     workbox: {
       maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
     }
-  }), markdoc()],
-  markdown: {    rehypePlugins: [[rehypeExternalLinks, {
+  }), 
+  
+  markdoc()],
+  markdown: {
+    rehypePlugins: [[rehypeExternalLinks, {
       rel: ["nofollow", "noopener", "noreferrer"],
       target: "_blank"
     }]],
@@ -70,27 +82,24 @@ export default defineConfig({
     },
     build: {
       assetsInlineLimit: 0,
-      chunkSizeWarningLimit: 50000, // Set this to an appropriate value in KB
-
+      chunkSizeWarningLimit: 50000,
     },
-    
     plugins: [rawFonts([".ttf", ".woff"])],
   },
   adapter: netlify()
 });
 
 function rawFonts(ext: string[]) {
-	return {
-		name: "vite-plugin-raw-fonts",
-		// @ts-expect-error:next-line
-		transform(_, id) {
-			if (ext.some((e) => id.endsWith(e))) {
-				const buffer = fs.readFileSync(id);
-				return {
-					code: `export default ${JSON.stringify(buffer)}`,
-					map: null,
-				};
-			}
-		},
-	};
+  return {
+    name: "vite-plugin-raw-fonts",
+    transform(_, id) {
+      if (ext.some((e) => id.endsWith(e))) {
+        const buffer = fs.readFileSync(id);
+        return {
+          code: `export default ${JSON.stringify(buffer)}`,
+          map: null,
+        };
+      }
+    },
+  };
 }
