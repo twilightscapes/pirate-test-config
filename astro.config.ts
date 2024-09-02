@@ -31,15 +31,15 @@ export default defineConfig({
       short_name: 'Pirate',
       description: 'PIRATE - social media for the people by the people',
       theme_color: '#000',
-      start_url: '/',
+      start_url: '/boom',
       background_color: '#000',
       display: 'standalone',
       icons: [{
-        src: 'public/images/siteImages/manifest-icon-192.maskable.png',
+        src: '/images/siteImages/manifest-icon-192.maskable.png',
         sizes: '192x192',
         type: 'image/png'
       }, {
-        src: 'public/images/siteImages/manifest-icon-512.maskable.png',
+        src: '/images/siteImages/manifest-icon-512.maskable.png',
         sizes: '512x512',
         type: 'image/png'
       }]
