@@ -8,14 +8,14 @@ showFooter: true
 showFeature: true
 showBio: true
 showPosts: true
-showTestimonials: true
-showFAQ: true
+showTestimonials: false
+showFAQ: false
 defaultView: grid
 showTitles: true
 showDates: false
 MAX_POSTS: 3
 siteFont: Audiowide
-borderRadius: '10px'
+borderRadius: 10px
 lightBg: '#ddd'
 lightAccent: rgba(0, 0, 0, 0.3)
 lightAccent2: '#000'
