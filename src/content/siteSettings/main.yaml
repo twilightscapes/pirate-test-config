@@ -12,6 +12,7 @@ showTestimonials: false
 showFAQ: true
 defaultView: grid
 showTitles: false
+showDates: false
 siteFont: Audiowide
 lightBg: '#ddd'
 lightAccent: rgba(0, 0, 0, 0.3)
