@@ -80,7 +80,7 @@ body.install #menu{display: none !important;}
 
 .button {
   background-color:var(--theme-accent2);
-  color: #ffffff;
+  /* color: #ffffff; */
   border: none;
   padding: 1vh 1.5vw;
   font-size:clamp(1.1rem, 1vw, 1.4rem);
@@ -95,7 +95,7 @@ body.install #menu{display: none !important;}
 }
 .button:hover{
   background-color:var(--theme-accent2);
-  color: #ffffff;
+  /* color: #ffffff; */
   /* filter:brightness(.79); */
 }
 
@@ -109,7 +109,7 @@ body.install #menu{display: none !important;}
   --rotate: 0deg;
   --green: var(--theme-accent2);
   --radius: 5px;
-  color: #ffffff;
+  color: inherit !important;
   position: relative;
   margin:1vh auto;
   padding: 1.5vh 2vw ;
@@ -157,7 +157,7 @@ body.install #menu{display: none !important;}
   border-radius: var(--radius);
 }
 
-.butttext{position: relative; z-index: 1;text-decoration: none; border:none; box-shadow: none; color:#fff;}
+.butttext{position: relative; z-index: 1;text-decoration: none; border:none; box-shadow: none; }
 
 @keyframes rotate {
   to {
