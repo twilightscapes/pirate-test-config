@@ -14,8 +14,10 @@ export default config({
     kind: 'cloud',
   },
   cloud: {
-    project: process.env.KEYSTATIC_PROJECT_ID || 'pirate/pirate'
-  },  
+    project: import.meta.env.KEYSTATIC_PROJECT_ID || 'pirate/pirate'
+    // project: 'pirate/astropirate',
+  },
+  
   ui: {
     brand: { name: 'Pirate' },
   },
