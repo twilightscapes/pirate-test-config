@@ -3,14 +3,20 @@
 import { config, fields, collection, singleton, type Config } from '@keystatic/core';
 
 export default config({
-    storage: (() => {
-      const kind = (import.meta.env.PUBLIC_KEYSTATIC_STORAGE_KIND as 'cloud' | 'github' | 'cloud') || 'cloud';
-      return { kind } as Config['storage'];
-    })(),
-    cloud: import.meta.env.PUBLIC_KEYSTATIC_PROJECT_ID
-      ? { project: import.meta.env.PUBLIC_KEYSTATIC_PROJECT_ID }
-      : undefined,
-    ui: {
+  storage: {
+    kind: 'cloud',
+  },
+  cloud: {
+    project: 'pirate/astropirate',
+  },
+    // storage: (() => {
+    //   const kind = (import.meta.env.KEYSTATIC_STORAGE_KIND as 'local');
+    //   return { kind } as Config['storage'];
+    // })(),
+    // cloud: import.meta.env.KEYSTATIC_PROJECT_ID
+    //   ? { project: import.meta.env.KEYSTATIC_PROJECT_ID }
+    //   : undefined,
+     ui: {
       brand: { name: 'Pirate' },
     },
     collections: {
