@@ -20,7 +20,7 @@ lightAccent: rgba(0, 0, 0, 0.3)
 lightAccent2: '#000'
 darkBg: '#222'
 darkAccent: rgba(0, 0, 0, 0.3)
-darkAccent2: white
+darkAccent2: '#ccc'
 lightHeader: rgba(0, 0, 0, 0.9)
 darkHeader: rgba(0, 0, 0, 0.9)
 lightText: '#555'
