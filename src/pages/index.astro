@@ -15,11 +15,9 @@ import { getEntry } from 'astro:content';
 const homeContent = await getEntry('homepage', 'index');
 
 const siteSettings = await getEntry('siteSettings', 'main');
-const { showFAQ, showTestimonials, showPosts, showBio, showFeature } = siteSettings.data;
-
+const { showFAQ, showTestimonials, showPosts, showBio, showFeature, defaultView } = siteSettings.data;
 
 ---
-
 	<PageLayout
   meta={{ 
     title: homeContent.data.title,
@@ -102,8 +100,8 @@ const { showFAQ, showTestimonials, showPosts, showBio, showFeature } = siteSetti
 	<div class="nameblock flexcheek headline" style={{width:'100%', padding: '1vh 2vh', margin:'5vh auto', maxHeight: '', fontSize:'clamp(1.4rem,3.9vw,4rem)', textAlign:'center', position:'relative', top:'', textShadow: '0 2px 3px #000', background:'var(--theme-accent)', backdropFilter:'blur(12px)', color:'#fff' }}>
 		<h2 class="glow">{homeContent.data.postsectiontitle}</h2>
 	  </div>
-			<div class="contentpanel horizontal-scroll panels">
-			<div class="contentpanel grid-container panels" transition:animate="slide">
+			
+			<div class={`contentpanel ${defaultView === 'swipe' ? 'slider panels horizontal-slider' : 'grid-container'}`} transition:animate="slide">
 				<div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
 
 				{allPostsByDate.map((p) => <PostPreview post={p} withDesc />)}
@@ -144,7 +142,7 @@ const { showFAQ, showTestimonials, showPosts, showBio, showFeature } = siteSetti
 					</div>
 				</div>
 				
-			</div>
+			
 			</div>
 		</section>
 )}

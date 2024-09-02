@@ -133,31 +133,43 @@ export default config({
           showPosts: fields.checkbox({ label: 'Show Posts', description: 'Hide/Show the Posts section on the home page', defaultValue: true }),
           showTestimonials: fields.checkbox({ label: 'Show Testimonials', description: 'Hide/Show the Testimonials section on the home page', defaultValue: true }),
           showFAQ: fields.checkbox({ label: 'Show FAQs', description: 'Hide/Show the FAQ section on the home page', defaultValue: true }),
+
+          divider3: fields.empty(),
+
+
+          defaultView: fields.select({
+            label: 'Default View (sets whether to show grid mode or swipe mode by default',
+            options: [
+              { label: 'Grid', value: 'grid' },
+              { label: 'Swipe', value: 'swipe' },
+            ],
+            defaultValue: 'grid',
+          }),
           
 
 
 
-          divider3: fields.empty(),
+          divider4: fields.empty(),
 
           siteFont: fields.text({ label: 'Site Font', defaultValue: 'Bowlby One', description: 'Enter the name of any Google Font' }),
-          divider4: fields.empty(),
+          divider5: fields.empty(),
           lightBg: fields.text({ label: 'Light Background Color', description: '(light) Page Background - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
           lightAccent: fields.text({ label: 'Light Accent Color', description: '(light) Accent - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
           lightAccent2: fields.text({ label: 'Light Accent2 Color', description: '(light) Accent2 - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
-          divider5: fields.empty(),
+          divider6: fields.empty(),
           darkBg: fields.text({ label: 'Dark Background Color', description: '(dark) Page Background - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
           darkAccent: fields.text({ label: 'Dark Accent Color', description: '(dark) Accent Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
           darkAccent2: fields.text({ label: 'Dark Accent2 Color', description: '(dark) Accent Color2 - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
-          divider6: fields.empty(),
+          divider7: fields.empty(),
 
           lightHeader: fields.text({ label: 'Light Header Color', description: '(light) Header Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
 
           darkHeader: fields.text({ label: 'Dark Quote Color', description: '(dark) Quote Color2 - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
 
-          divider7: fields.empty(),
+          divider8: fields.empty(),
           lightText: fields.text({ label: 'Light Text Color', description: '(light) Text Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
           darkText: fields.text({ label: 'Dark Text Color', description: '(dark) Text Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
-          divider8: fields.empty(),
+          divider9: fields.empty(),
           lightLink: fields.text({ label: 'Light Link Color', description: '(light) Link Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
           darkLink: fields.text({ label: 'Dark Link Color', description: '(dark) Link Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
         },

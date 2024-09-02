@@ -7,8 +7,10 @@ import { getEntry } from 'astro:content';
 
 const url = new URL(Astro.request.url);
 const siteSettings = await getEntry('siteSettings', 'main');
-const { showHeader, showLogo, showTheme, showSearch, showSwitch, logoImage } = siteSettings.data;
+const { showHeader, showLogo, showTheme, showSearch, showSwitch, logoImage, defaultView } = siteSettings.data;
 ---
+
+
 {showHeader && (
   <div id="menu" class="menu header">
     {showLogo && logoImage && (
@@ -67,9 +69,11 @@ const { showHeader, showLogo, showTheme, showSearch, showSwitch, logoImage } = s
       padding: "0 10px 0 0",
     }}>
       {showSearch && <Search />}
-      {showSwitch && <Switch client:load />}
+      {/* {showSwitch && <Switch client:load />} */}
+      {showSwitch && <Switch client:load defaultView={defaultView} />}
       {showTheme && <ThemeToggle />}
     </div>
+    
   </div>
 
 

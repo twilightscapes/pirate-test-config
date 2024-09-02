@@ -80,7 +80,6 @@ const home = defineCollection({
     postsectiontitle: z.string().optional(),
   }),
 });
-
 const siteSettings = defineCollection({
   type: 'data',
   schema: z.object({
@@ -109,5 +108,6 @@ const siteSettings = defineCollection({
     darkLink: z.string().optional(),
     lightText: z.string().optional(),
     darkText: z.string().optional(),
+    defaultView: z.enum(['grid', 'swipe']).optional(),
   }),
 });export const collections = { post, faqs, testimonials, home, siteSettings };
