@@ -43,10 +43,12 @@ export default defineConfig({
         sizes: '512x512',
         type: 'image/png'
       }]
+    },
+    workbox: {
+      maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
     }
   }), markdoc()],
-  markdown: {
-    rehypePlugins: [[rehypeExternalLinks, {
+  markdown: {    rehypePlugins: [[rehypeExternalLinks, {
       rel: ["nofollow", "noopener", "noreferrer"],
       target: "_blank"
     }]],
