@@ -18,8 +18,7 @@ import netlify from "@astrojs/netlify";
 import yaml from 'js-yaml';
 
 const pwaSettingsFile = import.meta.glob('./src/content/pwaSettings/index.yaml', { query: '?raw', import: 'default', eager: true });
-const pwaConfigYaml = Object.values(pwaSettingsFile)[0];
-const pwaConfig = yaml.load(pwaConfigYaml) as Record<string, any>;
+const pwaConfigYaml = Object.values(pwaSettingsFile)[0] as string;const pwaConfig = yaml.load(pwaConfigYaml) as Record<string, any>;
 if (typeof pwaConfigYaml !== 'string') {
   throw new Error('pwaConfigYaml must be a string');
 }
@@ -92,7 +91,7 @@ export default defineConfig({
 function rawFonts(ext: string[]) {
   return {
     name: "vite-plugin-raw-fonts",
-    transform(_, id) {
+    transform(code: string, id: string) {
       if (ext.some((e) => id.endsWith(e))) {
         const buffer = fs.readFileSync(id);
         return {
