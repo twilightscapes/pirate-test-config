@@ -72,9 +72,7 @@ export default defineConfig({
 
     },
     
-    plugins: [
-
-    ],
+    plugins: [rawFonts([".ttf", ".woff"])],
   },
   adapter: netlify()
 });
