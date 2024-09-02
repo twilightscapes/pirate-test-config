@@ -2,23 +2,25 @@
 // import ColorPickerComponent from './src/components/ColorPickerComponent';
 import { config, fields, collection, singleton, type Config } from '@keystatic/core';
 
+
+console.log('Using Keystatic project ID:', import.meta.env.KEYSTATIC_PROJECT_ID || 'fallback value');
+
 export default config({
+  // storage: (() => {
+  //   const kind = (import.meta.env.KEYSTATIC_STORAGE_KIND as 'local' | 'github' | 'cloud') || 'local';
+  //   return { kind } as Config['storage'];
+  // })(),
   storage: {
     kind: 'cloud',
   },
   cloud: {
-    project: 'pirate/astropirate',
+    project: import.meta.env.KEYSTATIC_PROJECT_ID 
+    // project: 'pirate/astropirate',
   },
-    // storage: (() => {
-    //   const kind = (import.meta.env.KEYSTATIC_STORAGE_KIND as 'local');
-    //   return { kind } as Config['storage'];
-    // })(),
-    // cloud: import.meta.env.KEYSTATIC_PROJECT_ID
-    //   ? { project: import.meta.env.KEYSTATIC_PROJECT_ID }
-    //   : undefined,
-     ui: {
-      brand: { name: 'Pirate' },
-    },
+  
+  ui: {
+    brand: { name: 'Pirate' },
+  },
     collections: {
       posts: collection({
         label: 'Posts',

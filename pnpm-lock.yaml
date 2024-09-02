@@ -101,6 +101,9 @@ importers:
       stripe:
         specifier: ^16.9.0
         version: 16.9.0
+      vite:
+        specifier: ^5.4.2
+        version: 5.4.2(@types/node@22.5.2)(terser@5.31.6)
     devDependencies:
       '@astrojs/check':
         specifier: ^0.5.10

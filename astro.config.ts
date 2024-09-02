@@ -5,6 +5,7 @@ import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
+import { loadEnv } from 'vite';
 import fs from "fs";
 import rehypeExternalLinks from "rehype-external-links";
 import remarkUnwrapImages from "remark-unwrap-images";
@@ -15,6 +16,7 @@ import markdoc from "@astrojs/markdoc";
 import keystatic from '@keystatic/astro';
 
 import netlify from "@astrojs/netlify";
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -61,18 +63,23 @@ export default defineConfig({
   prefetch: true,
   site: "https://astropirate.netlify.app",
   vite: {
-    server: {
-      fs: {
-        strict: false,
-      },
+    ssr: {
+      noExternal: ['@keystatic/core'],
     },
-    build: {
-      assetsInlineLimit: 0,
-      chunkSizeWarningLimit: 50000, // Set this to an appropriate value in KB
-
-    },
-    
     plugins: [
+      {
+        name: 'load-env',
+        config(_, { mode }) {
+          Object.assign(process.env, loadEnv(mode, process.cwd(), ''));
+        },
+      },
+      {
+        name: 'keystatic-environment',
+        configResolved(config) {
+          const env = config.env;
+          env.KEYSTATIC_PROJECT_ID = process.env.KEYSTATIC_PROJECT_ID;
+        },
+      },
       {
         name: 'ignore-public-warning',
         enforce: 'pre',
@@ -85,11 +92,18 @@ export default defineConfig({
         },
       },
     ],
+    server: {
+      fs: {
+        strict: false,
+      },
+    },
+    build: {
+      assetsInlineLimit: 0,
+      chunkSizeWarningLimit: 50000,
+    },
   },
   adapter: netlify()
-});
-
-function rawFonts(ext: string[]) {
+});function rawFonts(ext: string[]) {
 	return {
 		name: "vite-plugin-raw-fonts",
 		// @ts-expect-error:next-line
