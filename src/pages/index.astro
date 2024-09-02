@@ -6,7 +6,11 @@ import PageLayout from "@/layouts/Base.astro";
 import Faqs from "@/components/Faqs.astro";
 import Testimonials from '../components/Testimonials.astro';
 import Feature from "@/components/Feature.astro";
-const MAX_POSTS = 3;
+
+const siteSettings = await getEntry('siteSettings', 'main');
+const { showFAQ, showTestimonials, showPosts, showBio, showFeature, defaultView, showTitles, showDates, MAX_POSTS } = siteSettings.data;
+
+// const MAX_POSTS = 3;
 const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 
@@ -14,8 +18,7 @@ import { getEntry } from 'astro:content';
 
 const homeContent = await getEntry('homepage', 'index');
 
-const siteSettings = await getEntry('siteSettings', 'main');
-const { showFAQ, showTestimonials, showPosts, showBio, showFeature, defaultView, showTitles, showDates } = siteSettings.data;
+
 
 ---
 	<PageLayout

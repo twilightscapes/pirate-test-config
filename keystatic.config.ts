@@ -147,7 +147,7 @@ export default config({
           }),
           showTitles: fields.checkbox({ label: 'Show Post Titles', description: 'Hide/Show the post titles', defaultValue: false }),
           showDates: fields.checkbox({ label: 'Show Dates', description: 'Hide/Show the post dates', defaultValue: true }),
-
+          MAX_POSTS: fields.number({ label: 'Number of posts to display on home page', defaultValue: 3 }),
 
 
           divider4: fields.empty(),
