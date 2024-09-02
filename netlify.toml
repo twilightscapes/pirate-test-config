@@ -1,4 +1,5 @@
 [build]
+  command = "source .env && astro build"
   command = "pnpm build"
   publish = "dist"
   functions = "netlify/functions"

@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
@@ -78,7 +80,6 @@ export default defineConfig({
         configResolved(config) {
           const env = config.env;
           env.KEYSTATIC_PROJECT_ID = process.env.KEYSTATIC_PROJECT_ID;
-          console.log('Build-time KEYSTATIC_PROJECT_ID:', process.env.KEYSTATIC_PROJECT_ID);
         },
       },
       {
