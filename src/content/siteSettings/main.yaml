@@ -8,7 +8,7 @@ showFooter: true
 showFeature: true
 showBio: true
 showPosts: true
-showTestimonials: true
+showTestimonials: false
 showFAQ: true
 siteFont: Audiowide
 lightBg: '#ddd'
