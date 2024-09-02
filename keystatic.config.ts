@@ -15,7 +15,7 @@ export default config({
   },
   cloud: {
     project: import.meta.env.KEYSTATIC_PROJECT_ID 
-    // project: 'pirate/astropirate',
+    // project: 'pirate/pirate',
   },
   
   ui: {
