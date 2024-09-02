@@ -10,6 +10,10 @@ type Props = SiteMeta;
 const siteSettings = await getEntry('siteSettings', 'main');
 const { siteFont } = siteSettings.data;
 
+const pwaSettings = await getEntry('pwaSettings', 'index');
+// const { icon192 } = pwaSettings.data;
+
+
 const { articleDate, description, ogImage, title } = Astro.props;
 
 const titleSeparator = "•";
@@ -25,8 +29,8 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.webp", Astro.ur
 
 {/* Icons / Favicon */}
 <!-- <link href="/favicon.ico?ver=new1" rel="icon" sizes="any" /> -->
-<link href="/public/images/logo/logoImage.svg" rel="icon" type="image/svg+xml" />
-<link href="/public/images/siteImages/manifest-icon-512.maskable.png" rel="apple-touch-icon" />
+<link href={siteSettings.data.logoImage} rel="icon" type="image/svg+xml" />
+<link href={pwaSettings.data.icon192} rel="apple-touch-icon" />
 <link href="/manifest.webmanifest" rel="manifest" />
 <link href={canonicalURL} rel="canonical" />
 
@@ -40,7 +44,7 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.webp", Astro.ur
 <meta name="robots" content="noindex, nofollow" />
 
 {/* Theme Colour */}
-<meta content="#15683e" name="theme-color" />
+<meta content={pwaSettings.data.themeColor} name="theme-color" />
 
 {/* Open Graph / Facebook */}
 <meta content={articleDate ? "article" : "website"} property="og:type" />
