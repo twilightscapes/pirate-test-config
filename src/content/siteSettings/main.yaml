@@ -10,7 +10,7 @@ showBio: true
 showPosts: true
 showTestimonials: false
 showFAQ: true
-defaultView: swipe
+defaultView: grid
 siteFont: Audiowide
 lightBg: '#ddd'
 lightAccent: rgba(0, 0, 0, 0.3)
