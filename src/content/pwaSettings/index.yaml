@@ -1,0 +1,9 @@
+name: PIRATE
+shortName: PIRATE
+description: This ia my PWA app for pirate
+themeColor: '#000'
+backgroundColor: '#000'
+startUrl: whoopy
+display: standalone
+icon192: /images/pwa/icon192.svg
+icon512: /images/pwa/icon512.svg
