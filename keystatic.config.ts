@@ -164,14 +164,6 @@ export default config({
           darkLink: fields.text({ label: 'Dark Link Color', description: '(dark) Link Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
         },
       }),
-      otherSettings: singleton({
-        label: 'Other Settings',
-        path: 'src/content/otherSettings/main',
-        schema: {
-          exampleSetting: fields.text({ label: 'Example Setting' }),
-          anotherSetting: fields.checkbox({ label: 'Another Setting', defaultValue: false }),
-        },
-      }),
       home: singleton({
         label: 'Home Page',
         path: 'src/content/homepage/',
