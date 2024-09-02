@@ -145,7 +145,8 @@ export default config({
             ],
             defaultValue: 'grid',
           }),
-          
+          showTitles: fields.checkbox({ label: 'Show Post Titles', description: 'Hide/Show the post titles', defaultValue: false }),
+          showDates: fields.checkbox({ label: 'Show Dates', description: 'Hide/Show the post dates', defaultValue: true }),
 
 
 

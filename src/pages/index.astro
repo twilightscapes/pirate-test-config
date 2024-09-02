@@ -15,7 +15,7 @@ import { getEntry } from 'astro:content';
 const homeContent = await getEntry('homepage', 'index');
 
 const siteSettings = await getEntry('siteSettings', 'main');
-const { showFAQ, showTestimonials, showPosts, showBio, showFeature, defaultView } = siteSettings.data;
+const { showFAQ, showTestimonials, showPosts, showBio, showFeature, defaultView, showTitles, showDates } = siteSettings.data;
 
 ---
 	<PageLayout

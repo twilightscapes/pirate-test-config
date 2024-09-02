@@ -4,6 +4,10 @@ import { Image } from "astro:assets";
 import FormattedDate from "../FormattedDate.astro";
 import YouTubeEmbed from '../YouTubeEmbed.astro';
 
+import { getEntry } from 'astro:content';
+const siteSettings = await getEntry('siteSettings', 'main');
+const { showTitles, showDates } = siteSettings.data;
+
 interface Props {
     content: CollectionEntry<"post">;
 }
@@ -42,9 +46,14 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
   ) : null
 }<!-- Rest of the Hero component remains the same -->
     {data.draft ? <span class="text-base text-red-500">(Draft)</span> : null}
+    
+{typeof showTitles !== 'undefined' && showTitles && (
     <h1 class="title mb-3 sm:mb-1" style="padding-left:5%;">
         {data.title}
     </h1>
+)}
+
+{typeof showDates !== 'undefined' && showDates && (
     <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
         <p class="font-semibold">
             <FormattedDate date={data.publishDate} dateTimeOptions={dateTimeOptions} />
@@ -59,6 +68,8 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
             </span>
         )}
     </div>
+)}
+
     {data.tags && data.tags.length > 0 && (
         <div class="mt-3">
             <svg
