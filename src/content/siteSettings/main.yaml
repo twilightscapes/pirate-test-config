@@ -13,6 +13,7 @@ showFAQ: true
 defaultView: grid
 showTitles: true
 showDates: false
+MAX_POSTS: 3
 siteFont: Audiowide
 lightBg: '#ddd'
 lightAccent: rgba(0, 0, 0, 0.3)
