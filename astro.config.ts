@@ -59,32 +59,12 @@ export default defineConfig({
   },
   output: 'hybrid',
   prefetch: true,
-  site: "https://astropirate.netlify.app",
+  site: "https://dogpoopers.com",
   vite: {
-    server: {
-      fs: {
-        strict: false,
-      },
+    optimizeDeps: {
+      exclude: ["@resvg/resvg-js"]
     },
-    build: {
-      assetsInlineLimit: 0,
-      chunkSizeWarningLimit: 50000, // Set this to an appropriate value in KB
-
-    },
-    
-    plugins: [
-      {
-        name: 'ignore-public-warning',
-        enforce: 'pre',
-        configResolved(config) {
-          config.logger.warn = (msg, options) => {
-            if (!msg.includes('Files in the public directory are served at the root path.')) {
-              console.warn(msg, options);
-            }
-          };
-        },
-      },
-    ],
+	plugins: [rawFonts([".ttf", ".woff"])],
   },
   adapter: netlify()
 });
