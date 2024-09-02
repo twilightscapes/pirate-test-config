@@ -59,12 +59,22 @@ export default defineConfig({
   },
   output: 'hybrid',
   prefetch: true,
-  site: "https://dogpoopers.com",
+  site: "https://astropirate.netlify.app",
   vite: {
-    optimizeDeps: {
-      exclude: ["@resvg/resvg-js"]
+    server: {
+      fs: {
+        strict: false,
+      },
     },
-	plugins: [rawFonts([".ttf", ".woff"])],
+    build: {
+      assetsInlineLimit: 0,
+      chunkSizeWarningLimit: 50000, // Set this to an appropriate value in KB
+
+    },
+    
+    plugins: [
+
+    ],
   },
   adapter: netlify()
 });

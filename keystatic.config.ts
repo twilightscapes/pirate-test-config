@@ -1,5 +1,4 @@
 
-// import ColorPickerComponent from './src/components/ColorPickerComponent';
 import { config, fields, collection, singleton, type Config } from '@keystatic/core';
 
 export default config({
