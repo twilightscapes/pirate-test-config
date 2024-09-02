@@ -4,7 +4,7 @@ import { config, fields, collection, singleton, type Config } from '@keystatic/c
 
 export default config({
     storage: (() => {
-      const kind = (import.meta.env.PUBLIC_KEYSTATIC_STORAGE_KIND as 'local' | 'github' | 'cloud') || 'local';
+      const kind = (import.meta.env.PUBLIC_KEYSTATIC_STORAGE_KIND as 'local' | 'github' | 'cloud') || 'gitgub';
       return { kind } as Config['storage'];
     })(),
     cloud: import.meta.env.PUBLIC_KEYSTATIC_PROJECT_ID
