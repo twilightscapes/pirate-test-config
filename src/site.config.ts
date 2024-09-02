@@ -24,7 +24,7 @@ export const siteConfig: SiteConfig = {
 	// Meta property used to construct the meta title property, found in src/components/BaseHead.astro L:11
 	title: "Pirate",
 	webmentions: {
-		// Webmention.io API endpoint. Get your own here: https://webmention.io/, and follow this blog post: https://astro-pirate.chriswilliams.dev/posts/webmentions/
+		// Webmention.io API endpoint. Get your own here: https://webmention.io/, and follow this blog post: https://astro-pirate.netlify.app/posts/webmentions/
 		link: "",
 	},
 };
