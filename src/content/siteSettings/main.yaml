@@ -15,6 +15,7 @@ showTitles: true
 showDates: false
 MAX_POSTS: 3
 siteFont: Audiowide
+borderRadius: 0
 lightBg: '#ddd'
 lightAccent: rgba(0, 0, 0, 0.3)
 lightAccent2: '#000'
