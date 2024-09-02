@@ -8,7 +8,7 @@ showFooter: true
 showFeature: true
 showBio: true
 showPosts: true
-showTestimonials: false
+showTestimonials: true
 showFAQ: true
 defaultView: grid
 showTitles: true
