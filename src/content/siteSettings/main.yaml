@@ -3,7 +3,7 @@ showHeader: true
 showLogo: true
 showTheme: true
 showSwitch: true
-showSearch: true
+showSearch: false
 showFooter: true
 showFeature: true
 showBio: true
