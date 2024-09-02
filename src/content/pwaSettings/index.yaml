@@ -5,5 +5,5 @@ themeColor: '#000'
 backgroundColor: '#000'
 startUrl: whoopy
 display: standalone
-icon192: /images/pwa/icon192.svg
-icon512: /images/pwa/icon512.svg
+icon192: public/images/pwa/icon192.svg
+icon512: public/images/pwa/icon512.svg
