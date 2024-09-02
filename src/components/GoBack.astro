@@ -1,0 +1,37 @@
+---
+import { BiLeftArrow } from "react-icons/bi";
+---
+
+<script>
+  const goBackButton = document.getElementById('gobacker');
+  if (goBackButton) {
+    goBackButton.addEventListener('click', () => {
+      history.back();
+    });
+
+    // Check if we can go back
+    if (window.history.length > 1) {
+      goBackButton.style.display = 'inline-flex';
+    } else {
+      goBackButton.style.display = 'none';
+    }
+  }
+</script>
+</script>
+
+<button
+  id="gobacker"
+  class="back button"
+  style="display: none;"
+>
+  <span class="icon -left" style="padding-right: 0;">
+    <BiLeftArrow />
+  </span>
+  Back
+</button>
+
+<style>
+  .back.button {
+    /* Add your button styles here */
+  }
+</style>

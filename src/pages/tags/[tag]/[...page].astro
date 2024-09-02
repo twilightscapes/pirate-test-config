@@ -7,7 +7,7 @@ import PostPreview from "@/components/blog/PostPreview.astro";
 import { getAllPosts, getUniqueTags, sortMDByDate } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 
-import GoBack from "../../../components/GoBack";
+import GoBack from "@/components/GoBack.astro";
 
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
@@ -53,7 +53,7 @@ const paginationProps = {
 ---
 
 <PageLayout meta={meta}>
-	<GoBack client:load />
+	<GoBack  />
 <div class="container" style="padding:0 4%">
 
 	<h1 class="title flex items-center" style="padding:0vh 1vw 2vh 1vw; margin:0;">

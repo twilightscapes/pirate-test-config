@@ -46,7 +46,7 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.5.10",
-		"@iconify-json/mdi": "^1.1.68",
+		"@iconify-json/mdi": "^1.2.0",
 		"@pagefind/default-ui": "^1.1.0",
 		"@tailwindcss/aspect-ratio": "^0.4.2",
 		"@tailwindcss/typography": "^0.5.15",
@@ -68,7 +68,7 @@
 		"eslint-plugin-typescript-sort-keys": "^3.2.0",
 		"mdast-util-to-string": "^4.0.0",
 		"pagefind": "^1.1.0",
-		"postcss": "^8.4.41",
+		"postcss": "^8.4.43",
 		"postcss-html": "^1.7.0",
 		"postcss-import": "^16.1.0",
 		"prettier": "^3.3.3",
