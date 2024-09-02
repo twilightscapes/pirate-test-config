@@ -22,7 +22,7 @@ featureImage:
   src: /images/homepage/featureImage/src.webp
   alt: This is alternate text
 youtube:
-  controls: false
-  mute: false
+  controls: true
+  mute: true
   loop: false
   start: 0

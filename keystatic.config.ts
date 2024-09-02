@@ -118,7 +118,7 @@ export default config({
           logoImage: fields.image({
             label: 'Logo Image',
             description: 'Image used across the site - can use any format',
-            directory: '/images/logo',
+            directory: 'public/images/logo',
             publicPath: '/images/logo',
           }),
           divider: fields.empty(),

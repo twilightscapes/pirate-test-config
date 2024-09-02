@@ -10,15 +10,15 @@ showBio: true
 showPosts: true
 showTestimonials: true
 showFAQ: true
-siteFont: Bowlby One
-lightBg: hsl(146, 23%, 82%)
+siteFont: Audiowide
+lightBg: '#ddd'
 lightAccent: rgba(0, 0, 0, 0.3)
 lightAccent2: hsl(150, 91%, 27%)
-darkBg: hsl(150, 91%, 27%)
+darkBg: '#222'
 darkAccent: rgba(0, 0, 0, 0.3)
 darkAccent2: hsl(150, 91%, 27%)
-lightHeader: rgba(0, 0, 0, 0.3)
-darkHeader: rgba(0, 0, 0, 0.6)
+lightHeader: rgba(0, 0, 0, 0.9)
+darkHeader: rgba(0, 0, 0, 0.9)
 lightText: '#333'
 darkText: '#fff'
 lightLink: green

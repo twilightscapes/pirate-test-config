@@ -30,7 +30,7 @@ const { headings } = await post.render();
 		{!!headings.length && <TOC headings={headings} />}
 		
 			<article class="" data-pagefind-body>
-				<div id="blog-hero" style="width:100vw; z-index: 2;"><BlogHero content={post} youtube={youtube} /></div>
+				<div id="blog-hero" style="width:100vw; z-index: 2;"><BlogHero content={post} /></div>
 				{/* Render dynamic elements */}
 	
 				{!!headings.length && <TOC headings={headings} />}

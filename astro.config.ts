@@ -25,7 +25,7 @@ export default defineConfig({
     applyBaseStyles: false
   }), sitemap(), mdx(), react(), keystatic(), AstroPWA({
     registerType: 'autoUpdate',
-    includeAssets: ['favicon.svg', 'robots.txt'],
+    includeAssets: ['robots.txt', 'images/siteImages/manifest-icon-192.maskable.png', 'images/siteImages/manifest-icon-512.maskable.png'],
     manifest: {
       name: 'Pirate',
       short_name: 'Pirate',
@@ -35,11 +35,11 @@ export default defineConfig({
       background_color: '#000',
       display: 'standalone',
       icons: [{
-        src: '192x192.png',
+        src: 'public/images/siteImages/manifest-icon-192.maskable.png',
         sizes: '192x192',
         type: 'image/png'
       }, {
-        src: '512x512.png',
+        src: 'public/images/siteImages/manifest-icon-512.maskable.png',
         sizes: '512x512',
         type: 'image/png'
       }]
