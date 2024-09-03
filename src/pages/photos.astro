@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import PageLayout from "@/layouts/Base.astro";
+import GalleryLightbox from '../components/GalleryLightbox';
+
+const images = await Astro.glob('/public/images/**/*.{jpg,jpeg,png,gif,webp,avif}');
+
+// Extract unique directories from image paths
+const directories = [...new Set(images.map(img => {
+  const pathParts = img.default.src.split('/');
+  return pathParts[pathParts.indexOf('images') + 1];
+}))];
+
+const meta = {
+  description: "Image Gallery",
+  title: "Image Gallery",
+  ogImage: "",
+  articleDate: ""
+};
+---
+
+<PageLayout meta={meta}>
+  <select id="directorySelect">
+    <option value="all">All Images</option>
+    {directories.map((dir) => (
+      <option value={dir}>{dir}</option>
+    ))}
+  </select>
+
+  <div class="contentpanel grid-container panels" style="margin-top:2vh">
+    {images.map((image) => {
+      const directory = image.default.src.split('/')[image.default.src.split('/').indexOf('images') + 1];
+      return (
+        <div class="post-card1" data-directory={directory}>
+          <Image 
+            src={image.default} 
+            alt={image.default.src.split('/').pop().split('.')[0]}
+            width={300}
+            height={300}
+          />
+          <div class="image-caption">
+            {image.default.src.split('/').pop().split('.')[0]}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  <GalleryLightbox client:only="react" images={images.map(img => ({
+    src: img.default.src,
+    alt: img.default.src.split('/').pop().split('.')[0],
+    title: img.default.src.split('/').pop().split('.')[0]
+  }))} />
+</PageLayout>
+
+<style>
+  .post-card1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .image-caption {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+  }
+</style>
+
+<script>
+  const directorySelect = document.getElementById('directorySelect');
+  const galleryContainer = document.querySelector('.contentpanel');
+
+  directorySelect.addEventListener('change', (event) => {
+    const selectedDir = event.target.value;
+    const images = galleryContainer.querySelectorAll('.post-card1');
+    
+    images.forEach((image) => {
+      const imageDir = image.dataset.directory;
+      if (selectedDir === 'all' || imageDir === selectedDir) {
+        image.style.display = 'block';
+      } else {
+        image.style.display = 'none';
+      }
+    });
+  });
+</script>

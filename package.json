@@ -44,7 +44,8 @@
 		"rehype-external-links": "^3.0.0",
 		"set-function-length": "^1.2.2",
 		"sharp": "^0.33.5",
-		"stripe": "^16.9.0"
+		"stripe": "^16.9.0",
+		"yet-another-react-lightbox": "^3.21.4"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.5.10",
@@ -63,7 +64,7 @@
 		"eslint-import-resolver-typescript": "^3.6.3",
 		"eslint-plugin-astro": "^0.34.0",
 		"eslint-plugin-deprecation": "^2.0.0",
-		"eslint-plugin-import": "^2.29.1",
+		"eslint-plugin-import": "^2.30.0",
 		"eslint-plugin-jsx-a11y": "^6.9.0",
 		"eslint-plugin-markdown": "^4.0.1",
 		"eslint-plugin-perfectionist": "^2.11.0",
