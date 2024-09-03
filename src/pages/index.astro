@@ -109,27 +109,7 @@ const homeContent = await getEntry('homepage', 'index');
 
 				{allPostsByDate.map((p) => <PostPreview post={p} withDesc />)}
 
-				<div
-					style={{
-						textAlign: "center",
-						display: "grid",
-						placeContent: "center",
-						padding: "1vh 1vw",
-						width: "100%",
-						position: "relative",
-						top: "0",
-						borderRadius: "12px",
-						transition: "all .3s ease-in-out",
-					}}
-				>
-					<div
-						class="panel"
-						style={{
-							maxWidth: "500px",
-							color: "#ddd",
-							borderRadius: "5px",
-						}}
-					>
+
 						<a
 							class="button"
 							href="/posts/"
@@ -137,13 +117,12 @@ const homeContent = await getEntry('homepage', 'index');
 								textDecoration: "none",
 								color: "#fff",
 								textAlign: "center",
-								display:"none",
+								display:"block",
 							}}
 						>
 							View More
 						</a>
-					</div>
-				</div>
+			
 				
 			
 			</div>
