@@ -134,9 +134,9 @@ const pwaSettings = defineCollection({
 const menuItems = defineCollection({
   type: 'data',
   schema: z.object({
-    title: z.string(),
-    path: z.string(),
-    order: z.number().optional(),
+    title: z.string().optional(),
+    path: z.string().optional(),
+    order: z.number().optional()
   }),
 });
 
