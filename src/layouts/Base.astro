@@ -11,41 +11,33 @@ import BackToTop from '../components/BackToTop.astro';
 
 interface Props {
 	meta: SiteMeta;
-	title: string;
-	description: string;
-	articleDate: string;
-	ogImage:string;
 }
 
 import { getEntry } from 'astro:content';
 const siteSettings = await getEntry('siteSettings', 'main');
 const { showFooter } = siteSettings.data;
 
-const { title, description = siteConfig.description, articleDate, ogImage } = Astro.props;
-	---
-		<html lang={siteConfig.lang}>
-			<head>
-				<DynamicTheme />
-				<ThemeProvider />
-				<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
-			</head>
-			<body>
-				<SkipLink />
-				<Header />
-	
-					<main id="main">
-						<slot />
-				</main>
+const { meta } = Astro.props;
+const { title, description = siteConfig.description, articleDate, ogImage } = meta;
+---
+<html lang={siteConfig.lang}>
+	<head>
+		<DynamicTheme />
+		<ThemeProvider />
+		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
+	</head>
+	<body>
+		<SkipLink />
+		<Header />
 
-				{ showFooter && (
-				<Footer />
-				)}
-				<BackToTop />
+		<main id="main">
+			<slot />
+		</main>
 
-
-
-
-			</body>
-			
-		</html>
-		<script src="../components/scrollListener.js"></script>
+		{ showFooter && (
+		<Footer />
+		)}
+		<BackToTop />
+	</body>
+</html>
+<script src="../components/scrollListener.js"></script>
