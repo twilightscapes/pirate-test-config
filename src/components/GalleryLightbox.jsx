@@ -5,7 +5,7 @@ import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 
-export default function GalleryLightbox({ images }) {
+export default function GalleryLightbox({ images, showCaptions }) {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
@@ -48,7 +48,7 @@ export default function GalleryLightbox({ images }) {
       captionFontStyle: 'inherit',
       captionFontWeight: 'inherit',
       captionTextTransform: 'inherit',
-      showCaption: true
+      showCaption: showCaptions
     },
     thumbnails: {
       showThumbnails: true,
@@ -96,7 +96,7 @@ export default function GalleryLightbox({ images }) {
               alt={slide.alt || ''}
               style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             />
-            {slide.title && (
+            {showCaptions && slide.title && (
               <div style={{
                 position: 'absolute',
                 bottom: 0,

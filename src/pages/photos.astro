@@ -2,6 +2,11 @@
 import { Image } from 'astro:assets';
 import PageLayout from "@/layouts/Base.astro";
 import GalleryLightbox from '../components/GalleryLightbox';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const photoSettings = await reader.singletons.photoSettings.read();
 
 const imageFiles = import.meta.glob('/public/images/photos/**/*.{jpg,jpeg,png,gif,webp,avif}', { eager: true });
 
@@ -22,7 +27,8 @@ const sortedDirectories = directories
 // Prepare the final list of directories
 const finalDirectories = ['Favorites', ...sortedDirectories, 'all'];
 
-const defaultDirectory = directories.find(dir => dir.toLowerCase() === 'favorites') || finalDirectories[0];
+const defaultDirectory = photoSettings?.defaultDirectory || 'Favorites';
+const showCaptions = photoSettings?.showCaptions ?? true;
 
 const meta = {
   description: "Image Gallery",
@@ -41,7 +47,7 @@ const meta = {
     ))}
   </select>
 
-  <div class="contentpanel grid-container panels" style="margin-top:5vh">
+  <div class="contentpanel grid-container panels" style="margin-top:6vh">
     <div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }} />
     {images.map((image) => (
       <div class="post-card1" data-directory={image.directory}>
@@ -51,9 +57,11 @@ const meta = {
           width={800}
           height={500}
         />
-        <div class="image-caption panel">
-          <h2>{image.title}</h2>
-        </div>
+        {showCaptions && (
+          <div class="image-caption panel">
+            <h2>{image.title}</h2>
+          </div>
+        )}
       </div>
     ))}
   </div>
@@ -63,7 +71,7 @@ const meta = {
 
 <style>
 
-#directorySelect{position:fixed; top: 70px; left:0; right:0; max-width: 300px; margin:0 auto;}
+#directorySelect{position:fixed; top: 65px; left:0; right:0; max-width: 300px; margin:0 auto; padding:1vh 1vw;}
 
   .post-card1 {
     display: flex;
