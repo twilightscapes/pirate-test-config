@@ -6,6 +6,7 @@ import PageLayout from "@/layouts/Base.astro";
 const meta = {
 	description: "Contact Us",
 	title: "Contact Us",
+  ogImage: ""
 };
 import "../styles/global1.css";
 ---
@@ -25,17 +26,17 @@ input {
     background:#000;
     border: 1px solid #1f3829 !important;
     color:#fff;
-      padding:.4vh 2vw !important; height:30px !important; outline:1px solid #12b83c; border-radius: 5px; background:rgba(28, 23, 23, 0.8);
+      padding:.4vh 2vw !important; height:30px !important; outline:1px solid var(--theme-accent2); border-radius: 5px; background:rgba(28, 23, 23, 0.8);
   }
   input, textarea{background-color: rgba(0, 0, 0, 0.8); color:#ddd; padding:.3vh .5vw; width:100%;}
 
 input::placeholder,textarea::placeholder{color:rgb(253, 255, 253); font-size:clamp(.8rem,1.5vw,2.2rem) !important;}
 
 
-textarea{ height:30vh; padding:.4vh 2vw !important; outline:1px solid #12b83c; border-radius: 5px; background:rgba(28, 23, 23, 0.8);}
+textarea{ height:30vh; padding:.4vh 2vw !important; outline:1px solid var(--theme-accent2); border-radius: 5px; background:rgba(28, 23, 23, 0.8);}
 
 .stripe-button {
-  background-color:#06a154;
+  background-color:var(--theme-accent2);
   color: #fff;
   border: none;
   padding: 10px 3vw;
@@ -54,8 +55,7 @@ textarea{ height:30vh; padding:.4vh 2vw !important; outline:1px solid #12b83c; b
 
 
 
-
-<PageLayout title={meta.title} description={meta.description}>
+<PageLayout meta={meta}>
   <GoBack  />
 
   <br /><br />
@@ -107,5 +107,4 @@ textarea{ height:30vh; padding:.4vh 2vw !important; outline:1px solid #12b83c; b
       </div> 
     </form>
   </div>
-</PageLayout>
 </PageLayout>
