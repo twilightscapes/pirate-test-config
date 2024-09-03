@@ -42,15 +42,23 @@ const meta = {
 
 
 {showGallerySelector && (
-<select id="directorySelect">
+
+<div class="cattags" style={{ maxWidth: '', margin: '0px auto 0 auto', display: 'flex', placeSelf: 'center', gap: '0', color: '' }}>
+      
+      
+
+        
+<select id="directorySelect" style={{ background: '#222', border: '1px solid #000', borderRadius: '3px', padding: '8px', boxShadow: '0px 0px 0px 1px #000', opacity:'.9', color:'#fff' }}>
   {finalDirectories.map((dir) => (
     <option value={dir} selected={dir === defaultDirectory}>
       {dir === 'all' ? 'All Images' : dir}
     </option>
   ))}
 </select>
+
+</div>
 )}
-<div class="contentpanel grid-container panels" style="">
+<div class="contentpanel grid-container panels" style="padding-top:7vh">
   <div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }} />
   {images.map((image) => (
     <div class="post-card1" data-directory={image.directory}>
@@ -80,6 +88,7 @@ const meta = {
   top: 65px;
   left: 0;
   right: 0;
+z-index: 2;
   max-width: 300px;
   margin: 0 auto;
   padding: 1vh 1vw;
@@ -103,33 +112,38 @@ const meta = {
 <script>
 const directorySelect = document.getElementById('directorySelect');
 const galleryContainer = document.querySelector('.contentpanel');
-
-// Function to smooth scroll to the top of the page
 function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
+  const target = document.querySelector('.contentpanel');
+  if (target.classList.contains('horizontal-slider')) {
+    target.scrollTo({ left: 0, behavior: 'smooth' });
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  
+  // Force scroll to top
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }, 100);
 }
-
-// Function to filter images based on selected directory
 function filterImages(selectedDir) {
   const images = galleryContainer.querySelectorAll('.post-card1');
   
   images.forEach((image) => {
     const imageDir = image.dataset.directory;
     if (selectedDir === 'all' || selectedDir === 'Favorites' || imageDir === selectedDir) {
-      image.style.display = 'block';
+      (image as HTMLElement).style.display = 'block';
     } else {
-      image.style.display = 'none';
+      (image as HTMLElement).style.display = 'none';
     }
   });
 }
 
-// Event listener for select list change
-directorySelect.addEventListener('change', (event) => {
-  filterImages(event.target.value);
-  scrollToTop(); // Smooth scroll to top when select list changes
+directorySelect?.addEventListener('change', (event) => {
+  filterImages((event.target as HTMLSelectElement).value);
+  scrollToTop();
+  console.log('Gallery changed, scrolling to top');
 });
 
 // Filter images based on the default directory on page load
