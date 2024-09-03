@@ -3,7 +3,7 @@ import { config, fields, collection, singleton, type Config } from '@keystatic/c
 
 export default config({
   storage: {
-    kind: 'cloud',
+    kind: 'local',
   },
   cloud: {
     project: 'pirate/pirate',

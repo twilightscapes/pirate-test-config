@@ -11,7 +11,7 @@ showPosts: true
 showTestimonials: true
 showFAQ: true
 defaultView: grid
-showTitles: true
+showTitles: false
 showDates: true
 MAX_POSTS: 3
 siteFont: Audiowide

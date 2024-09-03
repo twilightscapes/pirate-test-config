@@ -13,7 +13,16 @@ const images = Object.entries(imageFiles).map(([path, file]) => ({
 }));
 
 const directories = [...new Set(images.map(img => img.directory))].sort();
-const defaultDirectory = directories.find(dir => dir.toLowerCase() === 'favorites') || 'all';
+
+// Sort directories alphabetically, excluding 'Favorites' and 'all'
+const sortedDirectories = directories
+  .filter(dir => dir.toLowerCase() !== 'favorites' && dir.toLowerCase() !== 'all')
+  .sort((a, b) => a.localeCompare(b));
+
+// Prepare the final list of directories
+const finalDirectories = ['Favorites', ...sortedDirectories, 'all'];
+
+const defaultDirectory = directories.find(dir => dir.toLowerCase() === 'favorites') || finalDirectories[0];
 
 const meta = {
   description: "Image Gallery",
@@ -25,13 +34,15 @@ const meta = {
 
 <PageLayout meta={meta}>
   <select id="directorySelect">
-    <option value="all">All Images</option>
-    {directories.map((dir) => (
-      <option value={dir} selected={dir === defaultDirectory}>{dir}</option>
+    {finalDirectories.map((dir) => (
+      <option value={dir} selected={dir === defaultDirectory}>
+        {dir === 'all' ? 'All Images' : dir}
+      </option>
     ))}
   </select>
 
   <div class="contentpanel grid-container panels" style="margin-top:5vh">
+    <div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }} />
     {images.map((image) => (
       <div class="post-card1" data-directory={image.directory}>
         <Image 
@@ -66,7 +77,6 @@ const meta = {
     color: #666;
   }
 </style>
-
 <script>
   const directorySelect = document.getElementById('directorySelect');
   const galleryContainer = document.querySelector('.contentpanel');
@@ -76,7 +86,7 @@ const meta = {
     
     images.forEach((image) => {
       const imageDir = image.dataset.directory;
-      if (selectedDir === 'all' || imageDir === selectedDir) {
+      if (selectedDir === 'all' || selectedDir === 'Favorites' || imageDir === selectedDir) {
         image.style.display = 'block';
       } else {
         image.style.display = 'none';
