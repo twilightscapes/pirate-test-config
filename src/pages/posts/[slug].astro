@@ -1,27 +1,23 @@
 ---
-import type { GetStaticPaths } from "astro";
-import { type CollectionEntry, getCollection } from "astro:content";
-import PageLayout from "@/layouts/Base.astro";
-import { generateMeta } from "@/utils";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+
+import PostLayout from "@/layouts/BlogPost.astro";
+import { getAllPosts } from "@/data/post";
 
 export const getStaticPaths = (async () => {
-	const posts = await getCollection("post");
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: { post },
+	const blogEntries = await getAllPosts();
+	return blogEntries.map((entry) => ({
+		params: { slug: entry.slug },
+		props: { entry },
 	}));
 }) satisfies GetStaticPaths;
 
-type Props = {
-	post: CollectionEntry<"post">;
-};
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { post } = Astro.props;
-const { Content } = await post.render();
-
-const meta = generateMeta(post.data);
+const { entry } = Astro.props;
+const { Content } = await entry.render();
 ---
 
-<PageLayout meta={meta}>
+<PostLayout post={entry}>
 	<Content />
-</PageLayout>
+</PostLayout>
