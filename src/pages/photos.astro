@@ -1,111 +1,41 @@
 ---
-import { Image } from 'astro:assets';
+import GoBack from "@/components/GoBack.astro";
+// import { Image } from "astro:assets";
+
 import PageLayout from "@/layouts/Base.astro";
-import GalleryLightbox from '../components/GalleryLightbox';
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../keystatic.config';
-
-const reader = createReader(process.cwd(), keystaticConfig);
-const photoSettings = await reader.singletons.photoSettings.read();
-
-const imageFiles = import.meta.glob('/public/images/photos/**/*.{jpg,jpeg,png,gif,webp,avif}', { eager: true });
-
-const images = Object.entries(imageFiles).map(([path, file]) => ({
-  src: path.replace('/public', ''),
-  alt: path.split('/').pop()?.split('.')[0],
-  title: path.split('/').pop()?.split('.')[0],
-  directory: path.split('/').slice(-2, -1)[0]
-}));
-
-const directories = [...new Set(images.map(img => img.directory))].sort();
-
-// Sort directories alphabetically, excluding 'Favorites' and 'all'
-const sortedDirectories = directories
-  .filter(dir => dir.toLowerCase() !== 'favorites' && dir.toLowerCase() !== 'all')
-  .sort((a, b) => a.localeCompare(b));
-
-// Prepare the final list of directories
-const finalDirectories = ['Favorites', ...sortedDirectories, 'all'];
-
-const defaultDirectory = photoSettings?.defaultDirectory || 'Favorites';
-const showCaptions = photoSettings?.showCaptions ?? true;
-
 const meta = {
-  description: "Image Gallery",
-  title: "Image Gallery",
-  ogImage: "",
-  articleDate: ""
+	description: "Photos",
+	title: "Photos",
+  ogImage: ""
+  
 };
+import PhotoSection from "@/components/PhotoGallery.astro"
+// import { getEntry } from 'astro:content';
+// const siteSettings = await getEntry('siteSettings', 'main');
+// const { showHomeGallery } = siteSettings.data;
+
 ---
-
-<PageLayout meta={meta}>
-  <select id="directorySelect">
-    {finalDirectories.map((dir) => (
-      <option value={dir} selected={dir === defaultDirectory}>
-        {dir === 'all' ? 'All Images' : dir}
-      </option>
-    ))}
-  </select>
-
-  <div class="contentpanel grid-container panels" style="margin-top:6vh">
-    <div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }} />
-    {images.map((image) => (
-      <div class="post-card1" data-directory={image.directory}>
-        <Image 
-          src={image.src} 
-          alt=""
-          width={800}
-          height={500}
-        />
-        {showCaptions && (
-          <div class="image-caption panel">
-            <h2>{image.title}</h2>
-          </div>
-        )}
-      </div>
-    ))}
-  </div>
-
-  <GalleryLightbox client:only="react" images={images} />
-</PageLayout>
 
 <style>
 
-#directorySelect{position:fixed; top: 65px; left:0; right:0; max-width: 300px; margin:0 auto; padding:1vh 1vw;}
 
-  .post-card1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .image-caption {
-    margin-top: 8px;
-    text-align: center;
-    font-size: 14px;
-    color: #666;
-  }
+
+
+
 </style>
-<script>
-  const directorySelect = document.getElementById('directorySelect');
-  const galleryContainer = document.querySelector('.contentpanel');
 
-  function filterImages(selectedDir) {
-    const images = galleryContainer.querySelectorAll('.post-card1');
-    
-    images.forEach((image) => {
-      const imageDir = image.dataset.directory;
-      if (selectedDir === 'all' || selectedDir === 'Favorites' || imageDir === selectedDir) {
-        image.style.display = 'block';
-      } else {
-        image.style.display = 'none';
-      }
-    });
-  }
 
-  directorySelect.addEventListener('change', (event) => {
-    filterImages(event.target.value);
-  });
 
-  // Filter images based on the default directory on page load
-  filterImages(directorySelect.value);
-</script>
+<PageLayout meta={meta}>
+  <GoBack  />
+
+
+  
+
+
+
+  <PhotoSection />
+
+
+  
+</PageLayout>
