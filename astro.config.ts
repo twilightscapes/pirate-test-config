@@ -35,7 +35,6 @@ export default defineConfig({
     registerType: 'autoUpdate',
     includeAssets: ['robots.txt'],
     manifest: {
-      id:pwaConfig.startUrl,
       name: pwaConfig.name,
       short_name: pwaConfig.shortName,
       description: pwaConfig.description,
