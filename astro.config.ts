@@ -33,7 +33,7 @@ export default defineConfig({
   
   AstroPWA({
     registerType: 'autoUpdate',
-    includeAssets: ['robots.txt'],
+    includeAssets: ['robots.txt', 'manifest.webmanifest'],
     manifest: {
       name: pwaConfig.name,
       short_name: pwaConfig.shortName,
