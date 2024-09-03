@@ -275,15 +275,17 @@ export default config({
         }),
       },
     }),
-    photoUpload: singleton({
-      label: 'Photo Upload',
-      path: 'src/content/photoUpload/',
-      schema: {
-        photo: fields.image({
-          label: 'Upload Photo',
-          directory: 'public/images/photos',
-          publicPath: '/images/photos',
-        }),
-      },
-    }),  },
+    // photoUpload: singleton({
+    //   label: 'Photo Upload',
+    //   path: 'src/content/photoUpload/',
+    //   schema: {
+    //     photo: fields.image({
+    //       label: 'Upload Photo',
+    //       directory: 'public/images/photos',
+    //       publicPath: '/images/photos',
+    //     }),
+    //   },
+    // }),  
+  
+  },
 });
