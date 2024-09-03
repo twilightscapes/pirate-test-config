@@ -3,7 +3,7 @@ import { config, fields, collection, singleton, type Config } from '@keystatic/c
 
 export default config({
   storage: {
-    kind: 'local',
+    kind: 'cloud',
   },
   cloud: {
     project: 'pirate/pirate',
@@ -194,7 +194,7 @@ export default config({
         schema: {
 
           siteUrl: fields.text({ label: 'Site Url', description: 'The address to your website' }),
-          
+
           name: fields.text({ label: 'App Name' }),
           shortName: fields.text({ label: 'Short Name' }),
           description: fields.text({ label: 'Description' }),
