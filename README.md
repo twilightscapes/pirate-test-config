@@ -156,7 +156,7 @@ By default the site will be built (see [Commands](#commands) section above) to a
 
 ## Acknowledgment
 
-This theme was inspired by [Hexo Theme Cactus](https://github.com/probberechts/hexo-theme-cactus)
+This theme was inspired by [Astro Cactus](https://github.com/chrismwilliams/astro-theme-cactus/)
 
 ## 🙏 Thank you
 
