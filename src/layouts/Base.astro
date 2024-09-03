@@ -7,7 +7,7 @@ import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import { siteConfig } from "@/site-config";
 import DynamicTheme from '../components/DynamicTheme.astro';
-import BackToTop from '../components/BackToTop.astro';
+
 
 interface Props {
 	meta: SiteMeta;
@@ -40,7 +40,7 @@ const { title, description = siteConfig.description, articleDate, ogImage } = As
 				{ showFooter && (
 				<Footer />
 				)}
-				<BackToTop />
+			
 
 
 

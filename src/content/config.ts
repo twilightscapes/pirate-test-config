@@ -96,6 +96,7 @@ const siteSettings = defineCollection({
     showFooter: z.boolean().optional(),
     showTitles: z.boolean().optional(),
     showDates: z.boolean().optional(),
+    showHomeGallery: z.boolean().optional(),
     MAX_POSTS: z.number().optional(),
     borderRadius: z.string().optional(),
     siteFont: z.string().optional(),

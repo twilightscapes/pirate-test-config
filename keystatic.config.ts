@@ -145,6 +145,9 @@ export default config({
         showSearch: fields.checkbox({ label: 'Show Search', description: 'Hide/Show the search in the header', defaultValue: true }),
         showFooter: fields.checkbox({ label: 'Show Footer', description: 'Hide/Show the Footer', defaultValue: true }),
         divider2: fields.empty(),
+
+        showHomeGallery: fields.checkbox({ label: 'Show Home Photo Gallery', description: 'Hide/Show the Photo section on home page', defaultValue: false }),
+
         showFeature: fields.checkbox({ label: 'Show Feature', description: 'Hide/Show the Feature section on home page', defaultValue: true }),
         showBio: fields.checkbox({ label: 'Show Bio', description: 'Hide/Show the Bio section on the home page', defaultValue: true }),
         showPosts: fields.checkbox({ label: 'Show Posts', description: 'Hide/Show the Posts section on the home page', defaultValue: true }),
@@ -259,15 +262,10 @@ export default config({
       label: 'Photo Gallery Settings',
       path: 'src/content/photoSettings/',
       schema: {
-        defaultDirectory: fields.select({
+        defaultDirectory: fields.text({
           label: 'Default Directory',
-          options: [
-            { label: 'All', value: 'all' },
-            { label: 'Favorites', value: 'Favorites' },
-            { label: 'Landscapes', value: 'Landscapes' },
-            { label: 'Portraits', value: 'Portraits' },
-          ],
           defaultValue: 'all',
+          validation: { isRequired: false }
         }),
         showCaptions: fields.checkbox({
           label: 'Show Photo Titles',

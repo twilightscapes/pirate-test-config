@@ -5,15 +5,16 @@ import PageLayout from "@/layouts/Base.astro";
 import Faqs from "@/components/Faqs.astro";
 import Testimonials from '../components/Testimonials.astro';
 import Feature from "@/components/Feature.astro";
-
+import { getEntry } from 'astro:content';
 const siteSettings = await getEntry('siteSettings', 'main');
-const { showFAQ, showTestimonials, showPosts, showBio, showFeature, defaultView, MAX_POSTS } = siteSettings.data;
+const { showFAQ, showTestimonials, showPosts, showBio, showFeature, defaultView, showHomeGallery, MAX_POSTS } = siteSettings.data;
 
+import PhotoSection from "@/pages/photos.astro"
 
 const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 
-import { getEntry } from 'astro:content';
+
 
 const homeContent = await getEntry('homepage', 'index');
 
@@ -29,6 +30,9 @@ const homeContent = await getEntry('homepage', 'index');
   }}
 >
 
+{typeof showHomeGallery !== 'undefined' && showHomeGallery && (
+<PhotoSection />
+)}
 
 
 	{typeof showFeature !== 'undefined' && showFeature && (
