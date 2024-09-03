@@ -77,17 +77,17 @@ PIRATE is built to OPERATE FOR FREE using FREE Cloud Based Services
 
 ## Quick start
 
-[Create a new repo](https://github.com/twilightscapes/astropirate/generate) from this template.
+[Create a new repo](https://github.com/twilightscapes/pirate/generate) from this template.
 
 ```bash
 # npm 7+
-npm create astro@latest -- --template astropirate/astro-pirate
+npm create astro@latest -- --template pirate/astro-pirate
 
 # pnpm
-pnpm dlx create-astro --template astropirate/astro-pirate
+pnpm dlx create-astro --template pirate/astro-pirate
 ```
 
-[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/astropirate/astro-pirate) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftwilightscapes%2Fastropirate&project-name=astro-pirate-theme)
+[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/pirate/astro-pirate) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftwilightscapes%2Fpirate&project-name=astro-pirate-theme)
 
 
 
