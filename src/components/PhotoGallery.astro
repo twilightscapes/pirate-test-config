@@ -59,6 +59,9 @@ const meta = {
         alt=""
         width={800}
         height={600}
+        class="object-contain"
+        // loading="eager"
+        // fetchpriority="high"
       />
       {showCaptions && (
         <div class="image-caption panel">
@@ -91,8 +94,9 @@ const meta = {
 .image-caption {
   margin-top: 8px;
   text-align: center;
-  font-size: 14px;
-  color: #666;
+  /* font-size: 14px; */
+  /* color: #555; */
+  filter:brightness(.75);
 }
 </style>
 
