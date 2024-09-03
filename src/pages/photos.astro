@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import PageLayout from "@/layouts/Base.astro";
 import GalleryLightbox from '../components/GalleryLightbox';
 
-const imageFiles = import.meta.glob('/public/images/**/*.{jpg,jpeg,png,gif,webp,avif}', { eager: true });
+const imageFiles = import.meta.glob('/public/images/photos/**/*.{jpg,jpeg,png,gif,webp,avif}', { eager: true });
 
 const images = Object.entries(imageFiles).map(([path, file]) => ({
   src: path.replace('/public', ''),
@@ -11,7 +11,9 @@ const images = Object.entries(imageFiles).map(([path, file]) => ({
   title: path.split('/').pop()?.split('.')[0],
   directory: path.split('/').slice(-2, -1)[0]
 }));
+
 const directories = [...new Set(images.map(img => img.directory))].sort();
+const defaultDirectory = directories.find(dir => dir.toLowerCase() === 'favorites') || 'all';
 
 const meta = {
   description: "Image Gallery",
@@ -25,21 +27,21 @@ const meta = {
   <select id="directorySelect">
     <option value="all">All Images</option>
     {directories.map((dir) => (
-      <option value={dir}>{dir}</option>
+      <option value={dir} selected={dir === defaultDirectory}>{dir}</option>
     ))}
   </select>
 
-  <div class="contentpanel grid-container panels" style="margin-top:2vh">
+  <div class="contentpanel grid-container panels" style="margin-top:5vh">
     {images.map((image) => (
       <div class="post-card1" data-directory={image.directory}>
         <Image 
           src={image.src} 
-          alt={image.alt}
-          width={300}
-          height={300}
+          alt=""
+          width={800}
+          height={500}
         />
-        <div class="image-caption">
-          {image.title}
+        <div class="image-caption panel">
+          <h2>{image.title}</h2>
         </div>
       </div>
     ))}
@@ -49,6 +51,9 @@ const meta = {
 </PageLayout>
 
 <style>
+
+#directorySelect{position:fixed; top: 70px; left:0; right:0; max-width: 300px; margin:0 auto;}
+
   .post-card1 {
     display: flex;
     flex-direction: column;
@@ -66,8 +71,7 @@ const meta = {
   const directorySelect = document.getElementById('directorySelect');
   const galleryContainer = document.querySelector('.contentpanel');
 
-  directorySelect.addEventListener('change', (event) => {
-    const selectedDir = event.target.value;
+  function filterImages(selectedDir) {
     const images = galleryContainer.querySelectorAll('.post-card1');
     
     images.forEach((image) => {
@@ -78,5 +82,12 @@ const meta = {
         image.style.display = 'none';
       }
     });
+  }
+
+  directorySelect.addEventListener('change', (event) => {
+    filterImages(event.target.value);
   });
+
+  // Filter images based on the default directory on page load
+  filterImages(directorySelect.value);
 </script>
