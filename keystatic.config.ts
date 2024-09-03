@@ -3,7 +3,7 @@ import { config, fields, collection, singleton, type Config } from '@keystatic/c
 
 export default config({
   storage: {
-    kind: 'cloud',
+    kind: 'local',
   },
   cloud: {
     project: 'pirate/pirate',
@@ -106,7 +106,17 @@ export default config({
           }),
           order: fields.number({ label: 'Order' }),
         },
-      })
+      }),
+      menuItems: collection({
+        label: 'Menu Items',
+        path: 'src/content/menu/*',
+        slugField: 'path',
+        schema: {
+          title: fields.text({ label: 'Title' }),
+          path: fields.text({ label: 'Path' }),
+          order: fields.number({ label: 'Order' }),
+        },
+      }),
     },
     singletons: {
       siteSettings: singleton({
@@ -194,7 +204,7 @@ export default config({
         schema: {
 
           siteUrl: fields.text({ label: 'Site Url', description: 'The address to your website' }),
-
+          
           name: fields.text({ label: 'App Name' }),
           shortName: fields.text({ label: 'Short Name' }),
           description: fields.text({ label: 'Description' }),

@@ -29,22 +29,13 @@ export const siteConfig: SiteConfig = {
 	},
 };
 
-// Used to generate links in both the Header & Footer.
-export const menuLinks: { path: string; title: string }[] = [
+import { getMenuItems } from './utils/getMenuItems';
 
-	// {
-	// 	path: "/about/",
-	// 	title: "About",
-	// },
-	{
-		path: "/posts/",
-		title: "Blog",
-	},
-	// {
-	// 	path: "/map/",
-	// 	title: "Map",
-	// },
-];
+// Used to generate links in both the Header & Footer.
+export const getMenuLinks = async () => {
+	const menuItems = await getMenuItems();
+	return menuItems;
+};
 
 // https://expressive-code.com/reference/configuration/
 export const expressiveCodeOptions: AstroExpressiveCodeOptions = {

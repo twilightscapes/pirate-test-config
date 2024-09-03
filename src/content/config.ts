@@ -115,7 +115,6 @@ const siteSettings = defineCollection({
     defaultView: z.enum(['grid', 'swipe']).optional(),
   }),
 });
-
 const pwaSettings = defineCollection({
   type: 'data',
   schema: z.object({
@@ -132,4 +131,21 @@ const pwaSettings = defineCollection({
   })
 });
 
-export const collections = { post, faqs, testimonials, home, siteSettings, pwaSettings };
+const menuItems = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    path: z.string(),
+    order: z.number().optional(),
+  }),
+});
+
+export const collections = { 
+  post, 
+  faqs, 
+  testimonials, 
+  home, 
+  siteSettings, 
+  pwaSettings,
+  menuItems
+};
