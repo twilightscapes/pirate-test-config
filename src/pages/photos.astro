@@ -3,11 +3,21 @@ import { Image } from 'astro:assets';
 import PageLayout from "@/layouts/Base.astro";
 import GalleryLightbox from '../components/GalleryLightbox';
 
-const images = await Astro.glob('/public/images/**/*.{jpg,jpeg,png,gif,webp,avif}');
+// Attempt to glob images from multiple possible locations
+const imageFiles = await Astro.glob([
+  '/src/assets/images/**/*.{jpg,jpeg,png,gif,webp,avif}',
+  '/public/images/**/*.{jpg,jpeg,png,gif,webp,avif}',
+  '/images/**/*.{jpg,jpeg,png,gif,webp,avif}'
+]);
 
-// Extract unique directories from image paths
+const images = imageFiles.map(file => ({
+  src: file.default,
+  alt: file.default.src.split('/').pop().split('.')[0],
+  title: file.default.src.split('/').pop().split('.')[0]
+}));
+
 const directories = [...new Set(images.map(img => {
-  const pathParts = img.default.src.split('/');
+  const pathParts = img.src.src.split('/');
   return pathParts[pathParts.indexOf('images') + 1];
 }))];
 
@@ -18,7 +28,6 @@ const meta = {
   articleDate: ""
 };
 ---
-
 <PageLayout meta={meta}>
   <select id="directorySelect">
     <option value="all">All Images</option>
@@ -29,17 +38,17 @@ const meta = {
 
   <div class="contentpanel grid-container panels" style="margin-top:2vh">
     {images.map((image) => {
-      const directory = image.default.src.split('/')[image.default.src.split('/').indexOf('images') + 1];
+      const directory = image.src.src.split('/')[image.src.src.split('/').indexOf('images') + 1];
       return (
         <div class="post-card1" data-directory={directory}>
           <Image 
-            src={image.default} 
-            alt={image.default.src.split('/').pop().split('.')[0]}
+            src={image.src} 
+            alt={image.alt}
             width={300}
             height={300}
           />
           <div class="image-caption">
-            {image.default.src.split('/').pop().split('.')[0]}
+            {image.title}
           </div>
         </div>
       );
@@ -47,13 +56,11 @@ const meta = {
   </div>
 
   <GalleryLightbox client:only="react" images={images.map(img => ({
-    src: img.default.src,
-    alt: img.default.src.split('/').pop().split('.')[0],
-    title: img.default.src.split('/').pop().split('.')[0]
+    src: img.src.src,
+    alt: img.alt,
+    title: img.title
   }))} />
-</PageLayout>
-
-<style>
+</PageLayout><style>
   .post-card1 {
     display: flex;
     flex-direction: column;
