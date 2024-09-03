@@ -119,6 +119,7 @@ const siteSettings = defineCollection({
 const pwaSettings = defineCollection({
   type: 'data',
   schema: z.object({
+    siteUrl: z.string().optional(),
     name: z.string(),
     shortName: z.string(),
     description: z.string(),

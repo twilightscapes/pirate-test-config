@@ -3,7 +3,7 @@ import { config, fields, collection, singleton, type Config } from '@keystatic/c
 
 export default config({
   storage: {
-    kind: 'cloud',
+    kind: 'local',
   },
   cloud: {
     project: 'pirate/pirate',
@@ -113,6 +113,11 @@ export default config({
         label: 'Site Settings',
         path: 'src/content/siteSettings/main',
         schema: {
+
+        
+
+          // divider0: fields.empty(),
+
           logoImage: fields.image({
             label: 'Logo Image',
             description: 'Image used across the site - can use any format',
@@ -126,6 +131,10 @@ export default config({
           showSwitch: fields.checkbox({ label: 'Show Switch', description: 'Hide/Show the layout selector', defaultValue: true }),
           showSearch: fields.checkbox({ label: 'Show Search', description: 'Hide/Show the search in the header', defaultValue: true }),
           showFooter: fields.checkbox({ label: 'Show Footer', description: 'Hide/Show the Footer', defaultValue: true }),
+
+
+          
+
           divider2: fields.empty(),
         
           showFeature: fields.checkbox({ label: 'Show Feature', description: 'Hide/Show the Feature section on home page', defaultValue: true }),
@@ -183,6 +192,9 @@ export default config({
         label: 'PWA Settings',
         path: 'src/content/pwaSettings/',
         schema: {
+
+          siteUrl: fields.text({ label: 'Site Url', description: 'The address to your website' }),
+          
           name: fields.text({ label: 'App Name' }),
           shortName: fields.text({ label: 'Short Name' }),
           description: fields.text({ label: 'Description' }),

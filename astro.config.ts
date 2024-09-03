@@ -72,7 +72,7 @@ export default defineConfig({
   },
   output: 'hybrid',
   prefetch: true,
-  site: "https://astropirate.netlify.app",
+  site: pwaConfig.siteUrl,
   vite: {
     server: {
       fs: {
@@ -87,7 +87,6 @@ export default defineConfig({
   },
   adapter: netlify()
 });
-
 function rawFonts(ext: string[]) {
   return {
     name: "vite-plugin-raw-fonts",
