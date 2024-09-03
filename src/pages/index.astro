@@ -9,7 +9,7 @@ import { getEntry } from 'astro:content';
 const siteSettings = await getEntry('siteSettings', 'main');
 const { showFAQ, showTestimonials, showPosts, showBio, showFeature, defaultView, showHomeGallery, MAX_POSTS } = siteSettings.data;
 
-import PhotoSection from "@/pages/photos.astro"
+import PhotoSection from "@/components/photoGallery.astro"
 
 const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);

@@ -38,92 +38,74 @@ const meta = {
 };
 ---
 
-<select id="directorySelect">
-  {finalDirectories.map((dir) => (
-    <option value={dir} selected={dir === defaultDirectory}>
-      {dir === 'all' ? 'All Images' : dir}
-    </option>
-  ))}
-</select>
+<PageLayout meta={meta}>
+  <select id="directorySelect">
+    {finalDirectories.map((dir) => (
+      <option value={dir} selected={dir === defaultDirectory}>
+        {dir === 'all' ? 'All Images' : dir}
+      </option>
+    ))}
+  </select>
 
-<div class="contentpanel grid-container panels" style="margin-top: 6vh">
-  <div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }} />
-  {images.map((image) => (
-    <div class="post-card1" data-directory={image.directory}>
-      <Image 
-        src={image.src} 
-        alt=""
-        width={800}
-        height={600}
-      />
-      {showCaptions && (
-        <div class="image-caption panel">
-          <h2>{image.title}</h2>
-        </div>
-      )}
-    </div>
-  ))}
-</div>
+  <div class="contentpanel grid-container panels" style="margin-top:6vh">
+    <div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }} />
+    {images.map((image) => (
+      <div class="post-card1" data-directory={image.directory}>
+        <Image 
+          src={image.src} 
+          alt=""
+          width={800}
+          height={500}
+        />
+        {showCaptions && (
+          <div class="image-caption panel">
+            <h2>{image.title}</h2>
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
 
-<GalleryLightbox client:only="react" images={images} />
+  <GalleryLightbox client:only="react" images={images} />
+</PageLayout>
 
 <style>
-#directorySelect {
-  position: fixed;
-  top: 65px;
-  left: 0;
-  right: 0;
-  max-width: 300px;
-  margin: 0 auto;
-  padding: 1vh 1vw;
-}
 
-.post-card1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+#directorySelect{position:fixed; top: 65px; left:0; right:0; max-width: 300px; margin:0 auto; padding:1vh 1vw;}
 
-.image-caption {
-  margin-top: 8px;
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-}
+  .post-card1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .image-caption {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+  }
 </style>
-
 <script>
-const directorySelect = document.getElementById('directorySelect');
-const galleryContainer = document.querySelector('.contentpanel');
+  const directorySelect = document.getElementById('directorySelect');
+  const galleryContainer = document.querySelector('.contentpanel');
 
-// Function to smooth scroll to the top of the page
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
+  function filterImages(selectedDir) {
+    const images = galleryContainer.querySelectorAll('.post-card1');
+    
+    images.forEach((image) => {
+      const imageDir = image.dataset.directory;
+      if (selectedDir === 'all' || selectedDir === 'Favorites' || imageDir === selectedDir) {
+        image.style.display = 'block';
+      } else {
+        image.style.display = 'none';
+      }
+    });
+  }
+
+  directorySelect.addEventListener('change', (event) => {
+    filterImages(event.target.value);
   });
-}
 
-// Function to filter images based on selected directory
-function filterImages(selectedDir) {
-  const images = galleryContainer.querySelectorAll('.post-card1');
-  
-  images.forEach((image) => {
-    const imageDir = image.dataset.directory;
-    if (selectedDir === 'all' || selectedDir === 'Favorites' || imageDir === selectedDir) {
-      image.style.display = 'block';
-    } else {
-      image.style.display = 'none';
-    }
-  });
-}
-
-// Event listener for select list change
-directorySelect.addEventListener('change', (event) => {
-  filterImages(event.target.value);
-  scrollToTop(); // Smooth scroll to top when select list changes
-});
-
-// Filter images based on the default directory on page load
-filterImages(directorySelect.value);
+  // Filter images based on the default directory on page load
+  filterImages(directorySelect.value);
 </script>

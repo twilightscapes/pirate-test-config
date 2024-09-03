@@ -271,6 +271,10 @@ export default config({
           label: 'Show Photo Titles',
           defaultValue: true,
         }),
+        showGallerySelector: fields.checkbox({
+          label: 'Show Gallery Drop Down Selector',
+          defaultValue: true,
+        }),
       },
     }),
     // photoUpload: singleton({

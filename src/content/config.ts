@@ -141,6 +141,15 @@ const menuItems = defineCollection({
   }),
 });
 
+const photoSettings = defineCollection({
+  type: 'data',
+  schema: z.object({
+    defaultDirectory: z.string().optional(),
+    showCaptions: z.string().optional(),
+    showGallerySelector: z.string().optional()
+  }),
+});
+
 export const collections = { 
   post, 
   faqs, 
