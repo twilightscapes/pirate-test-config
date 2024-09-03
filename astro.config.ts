@@ -14,7 +14,6 @@ import AstroPWA from '@vite-pwa/astro';
 import markdoc from "@astrojs/markdoc";
 import keystatic from '@keystatic/astro';
 import netlify from "@astrojs/netlify";
-import vercel from "@astrojs/vercel/static";
 
 import yaml from 'js-yaml';
 
@@ -72,9 +71,8 @@ export default defineConfig({
     }
   },
   output: 'hybrid',
-  adapter: process.env.VERCEL 
-    ? vercel()
-    : netlify(),
+  prefetch: true,
+  site: pwaConfig.siteUrl,
   vite: {
     server: {
       fs: {
@@ -87,7 +85,9 @@ export default defineConfig({
     },
     plugins: [rawFonts([".ttf", ".woff"])],
   },
-});function rawFonts(ext: string[]) {
+  adapter: netlify()
+});
+function rawFonts(ext: string[]) {
   return {
     name: "vite-plugin-raw-fonts",
     transform(code: string, id: string) {
