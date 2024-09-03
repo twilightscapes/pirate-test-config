@@ -101,6 +101,7 @@ const siteSettings = defineCollection({
     borderRadius: z.string().optional(),
     siteFont: z.string().optional(),
     logoImage: z.string().optional(),
+    backgroundImage: z.string().optional(),
     lightBg: z.string().optional(),
     darkBg: z.string().optional(),
     lightAccent: z.string().optional(),

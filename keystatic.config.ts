@@ -166,6 +166,15 @@ export default config({
         showDates: fields.checkbox({ label: 'Show Dates', description: 'Hide/Show the post dates', defaultValue: true }),
         MAX_POSTS: fields.number({ label: 'Number of posts to display on home page', defaultValue: 3 }),
         divider4: fields.empty(),
+
+
+        backgroundImage: fields.image({
+          label: 'Site Background Image',
+          directory: 'public/images/siteSettings',
+          publicPath: '/images/siteSettings'
+        }),
+
+
         siteFont: fields.text({ label: 'Site Font', defaultValue: 'Bowlby One', description: 'Enter the name of any Google Font' }),
         borderRadius: fields.text({ label: 'Border Radius', description: 'Border Radius of elements on page (0) for square', validation: { isRequired: false }, defaultValue: "0px" }),
         divider5: fields.empty(),

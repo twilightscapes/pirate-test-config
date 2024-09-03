@@ -7,7 +7,7 @@ import { getEntry } from 'astro:content';
 
 const url = new URL(Astro.request.url);
 const siteSettings = await getEntry('siteSettings', 'main');
-const { showHeader, showLogo, showTheme, showSearch, showSwitch, logoImage, defaultView } = siteSettings.data;
+const { showHeader, showLogo, showTheme, showSearch, showSwitch, logoImage, defaultView, backgroundImage } = siteSettings.data;
 const menuLinks = await getMenuLinks();
 ---
 
@@ -80,3 +80,8 @@ const menuLinks = await getMenuLinks();
 )}
   
   
+  {backgroundImage ? (
+    <img type="image/svg+xml" class="backimage" src={backgroundImage} alt="Default Background" style={{}} width="10" height="10" />
+  ) : (
+    ""
+  )}
