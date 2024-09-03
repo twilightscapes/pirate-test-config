@@ -7,6 +7,7 @@ const meta = {
 	description: "Contact Us",
 	title: "Contact Us",
   ogImage: ""
+  
 };
 import "../styles/global1.css";
 ---
@@ -58,9 +59,17 @@ textarea{ height:30vh; padding:.4vh 2vw !important; outline:1px solid var(--them
 <PageLayout meta={meta}>
   <GoBack  />
 
-  <br /><br />
 
-  <div class="" style={{display:'flex', flexDirection:'row', justifyContent:'center', width:'98%' }}>
+  
+
+
+
+<div style="display:grid; place-content: center; margin:2vh 0;">
+  Page content goes here
+</div>
+
+  <div class="" style={{display:'flex', flexDirection:'column', justifyContent:'center', width:'380px', margin:'0 auto' }}>
+    
     <form
       class=""
       name="contact1"
@@ -69,7 +78,7 @@ textarea{ height:30vh; padding:.4vh 2vw !important; outline:1px solid var(--them
       data-netlify-honeypot="bot-field"
       action="/thanks"
       enc-type="multipart/form-data"
-      style="width:90%; max-width:320px;"
+      style="width:100%; max-width:380px;"
     >
       <input type="hidden" name="form-name" value="contact" />
       <p>
@@ -106,5 +115,5 @@ textarea{ height:30vh; padding:.4vh 2vw !important; outline:1px solid var(--them
         </button>
       </div> 
     </form>
-  </div>
+</div>
 </PageLayout>
