@@ -2,18 +2,14 @@
 import { Image } from 'astro:assets';
 import PageLayout from "@/layouts/Base.astro";
 import GalleryLightbox from '../components/GalleryLightbox';
-import fs from 'fs';
-import path from 'path';
-
-function getDirectories(srcpath) {
-  return fs.readdirSync(srcpath)
-    .filter(file => fs.statSync(path.join(srcpath, file)).isDirectory());
-}
-
-const publicDir = path.join(process.cwd(), 'public', 'images');
-const directories = getDirectories(publicDir);
 
 const images = await Astro.glob('/public/images/**/*.{jpg,jpeg,png,gif,webp,avif}');
+
+// Extract unique directories from image paths
+const directories = [...new Set(images.map(img => {
+  const pathParts = img.default.src.split('/');
+  return pathParts[pathParts.indexOf('images') + 1];
+}))];
 
 const meta = {
   description: "Image Gallery",
@@ -22,6 +18,7 @@ const meta = {
   articleDate: ""
 };
 ---
+
 <PageLayout meta={meta}>
   <select id="directorySelect">
     <option value="all">All Images</option>
