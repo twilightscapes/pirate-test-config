@@ -10,7 +10,7 @@ import GoBack from "@/components/GoBack.astro";
 
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const MAX_POSTS_PER_PAGE = 25;
+	const MAX_POSTS_PER_PAGE = 2;
 	const allPosts = await getAllPosts();
 	const allPostsByDate = sortMDByDate(allPosts);
 	const uniqueTags = getUniqueTags(allPosts);
@@ -104,7 +104,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			{
 				descYearKeys.map((yearKey) => (
 					<>
-						{/* <div style="display:grid; place-content:center; align-content:center;"><h2 class="title text-lg">{yearKey}</h2></div> */}
+						<div style="display:grid; place-content:center; align-content:center;"><h2 class="title text-lg">{yearKey}</h2></div>
 				
 							{groupedByYear[yearKey]?.map((p) => (
 								// <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&_q]:col-start-2">
