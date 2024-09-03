@@ -74,7 +74,11 @@ export default defineConfig({
   output: 'hybrid',
   prefetch: true,
   site: pwaConfig.siteUrl,
-  adapter: process.env.VERCEL ? vercel() : netlify(),
+  adapter: process.env.VERCEL 
+    ? vercel()
+    : process.env.NETLIFY
+      ? netlify()
+      : undefined,
   vite: {
     server: {
       fs: {
@@ -86,8 +90,8 @@ export default defineConfig({
       chunkSizeWarningLimit: 50000,
     },
     plugins: [rawFonts([".ttf", ".woff"])],
-  },});
-function rawFonts(ext: string[]) {
+  },
+});function rawFonts(ext: string[]) {
   return {
     name: "vite-plugin-raw-fonts",
     transform(code: string, id: string) {
