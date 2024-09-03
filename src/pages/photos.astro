@@ -69,7 +69,6 @@ const meta = {
     color: #666;
   }
 </style>
-
 <script>
   const directorySelect = document.getElementById('directorySelect');
   const galleryContainer = document.querySelector('.contentpanel');
@@ -79,8 +78,8 @@ const meta = {
     const images = galleryContainer.querySelectorAll('.post-card1');
     
     images.forEach((image) => {
-      const imageDir = image.dataset.directory;
-      if (selectedDir === 'all' || imageDir === selectedDir) {
+      const imagePath = image.dataset.directory;
+      if (selectedDir === 'all' || imagePath.startsWith(selectedDir)) {
         image.style.display = 'block';
       } else {
         image.style.display = 'none';
