@@ -72,13 +72,9 @@ export default defineConfig({
     }
   },
   output: 'hybrid',
-  prefetch: true,
-  site: pwaConfig.siteUrl,
   adapter: process.env.VERCEL 
     ? vercel()
-    : process.env.NETLIFY
-      ? netlify()
-      : undefined,
+    : netlify(),
   vite: {
     server: {
       fs: {
