@@ -8,10 +8,13 @@ import "../styles/global1.css";
 type Props = SiteMeta;
 
 const siteSettings = await getEntry('siteSettings', 'main');
-const { siteFont } = siteSettings.data;
+// const { siteFont } = siteSettings.data;
 
 const pwaSettings = await getEntry('pwaSettings', 'index');
 // const { icon192 } = pwaSettings.data;
+
+const styleapps = await getEntry('styleapps', 'index');
+const { siteFont } = styleapps.data;
 
 
 const { articleDate, description, ogImage, title } = Astro.props;

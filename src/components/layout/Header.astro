@@ -4,10 +4,18 @@ import Search from "../Search.astro";
 import Switch from "@/components/Switch.jsx";
 import { getMenuLinks } from "@/site-config";
 import { getEntry } from 'astro:content';
+const siteSettings = await getEntry('siteSettings', 'main');
+const { showHeader, showLogo, showTheme, showSearch, showSwitch, logoImage, defaultView } = siteSettings.data;
+
+
+
+
+
+const styleAppearance = await getEntry('styleapps', 'index');
+const { backgroundImage } = styleAppearance.data;
+
 
 const url = new URL(Astro.request.url);
-const siteSettings = await getEntry('siteSettings', 'main');
-const { showHeader, showLogo, showTheme, showSearch, showSwitch, logoImage, defaultView, backgroundImage } = siteSettings.data;
 const menuLinks = await getMenuLinks();
 ---
 

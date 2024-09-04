@@ -1,28 +1,10 @@
-title: Hoist Your Flag!
-tagline: YOU... ARE THE CAPTAIN NOW!
-phone: (555) 222-1212
-subheading: BECOME A PIRATE!
-subcontent: The fleet is launching now
-subcta: Get Your Ship Now!
-faqtitle: Questions About Pirate
+faqtitle: Questions About Pirates
 testimonialtitle: Our Happy Pirates
 postsectiontitle: Our Latest Plunders
-description: >-
-  Pirate is your Personal Web App (PWA) and it works on any device - NO App
-  Store needed.
-
-
-  Watch ad-free video, edit your page, profile, and publish content with FULL
-  ownership and copyright.
-
-
-  Pirate is Open-Source and it operates forever, with no contracts, commitments
-  or costs of any kind.
 featureImage:
   src: /images/homepage/featureImage/src.webp
-  alt: This is alternate text
+  alt: Become a Pirate!
 youtube:
   controls: true
-  mute: true
+  mute: false
   loop: false
-  start: 0

@@ -1,0 +1,15 @@
+backgroundImage: /images/styleapps/backgroundImage.webp
+siteFont: Audiowide
+borderRadius: 10px
+lightBg: '#ddd'
+lightAccent: rgba(0, 0, 0, 0.3)
+lightAccent2: '#000'
+darkBg: '#222'
+darkAccent: rgba(0, 0, 0, 0.3)
+darkAccent2: '#222'
+lightHeader: rgba(0, 0, 0, 0.9)
+darkHeader: rgba(0, 0, 0, 0.9)
+lightText: '#555'
+darkText: '#fff'
+lightLink: '#666'
+darkLink: white

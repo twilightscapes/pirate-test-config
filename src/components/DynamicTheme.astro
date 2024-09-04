@@ -1,9 +1,9 @@
 ---
 import { getEntry } from 'astro:content';
-const siteSettings = await getEntry('siteSettings', 'main');
+const styleAppearance = await getEntry('styleapps', 'index');
 ---
 
-<script define:vars={{ lightBg: siteSettings.data.lightBg, darkBg: siteSettings.data.darkBg, lightAccent: siteSettings.data.lightAccent, darkAccent: siteSettings.data.darkAccent, lightAccent2: siteSettings.data.lightAccent2, darkAccent2: siteSettings.data.darkAccent2, lightHeader: siteSettings.data.lightHeader, darkHeader: siteSettings.data.darkHeader, lightLink: siteSettings.data.lightLink, darkLink: siteSettings.data.darkLink, lightText: siteSettings.data.lightText, darkText: siteSettings.data.darkText, borderRadius: siteSettings.data.borderRadius }}>
+<script define:vars={{ lightBg: styleAppearance.data.lightBg, darkBg: styleAppearance.data.darkBg, lightAccent: styleAppearance.data.lightAccent, darkAccent: styleAppearance.data.darkAccent, lightAccent2: styleAppearance.data.lightAccent2, darkAccent2: styleAppearance.data.darkAccent2, lightHeader: styleAppearance.data.lightHeader, darkHeader: styleAppearance.data.darkHeader, lightLink: styleAppearance.data.lightLink, darkLink: styleAppearance.data.darkLink, lightText: styleAppearance.data.lightText, darkText: styleAppearance.data.darkText, borderRadius: styleAppearance.data.borderRadius }}>
 
 
   document.documentElement.style.setProperty('--lightBg', lightBg);

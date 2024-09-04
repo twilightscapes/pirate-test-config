@@ -78,6 +78,18 @@ const home = defineCollection({
     faqtitle: z.string().optional(),
     testimonialtitle: z.string().optional(),
     postsectiontitle: z.string().optional(),
+    featureImage: z.object({
+      src: z.string().optional(),
+      alt: z.string().optional(),
+    }).optional(),
+    youtube: z.object({
+      url: z.string().optional(),
+      controls: z.boolean().optional(),
+      mute: z.boolean().optional(),
+      loop: z.boolean().optional(),
+      start: z.number().optional(),
+      end: z.number().optional(),
+    }).optional(),
   }),
 });
 const siteSettings = defineCollection({
@@ -98,22 +110,7 @@ const siteSettings = defineCollection({
     showDates: z.boolean().optional(),
     showHomeGallery: z.boolean().optional(),
     MAX_POSTS: z.number().optional(),
-    borderRadius: z.string().optional(),
-    siteFont: z.string().optional(),
     logoImage: z.string().optional(),
-    backgroundImage: z.string().optional(),
-    lightBg: z.string().optional(),
-    darkBg: z.string().optional(),
-    lightAccent: z.string().optional(),
-    darkAccent: z.string().optional(),
-    lightAccent2: z.string().optional(),
-    darkAccent2: z.string().optional(),
-    lightHeader: z.string().optional(),
-    darkHeader: z.string().optional(),
-    lightLink: z.string().optional(),
-    darkLink: z.string().optional(),
-    lightText: z.string().optional(),
-    darkText: z.string().optional(),
     defaultView: z.enum(['grid', 'swipe']).optional(),
   }),
 });
@@ -148,6 +145,27 @@ const photoSettings = defineCollection({
     defaultDirectory: z.string().optional(),
     showCaptions: z.string().optional(),
     showGallerySelector: z.string().optional()
+  }),
+});
+
+const styleAppearance = defineCollection({
+  type: 'data',
+  schema: z.object({
+backgroundImage: z.string().optional(),
+    lightBg: z.string().optional(),
+    darkBg: z.string().optional(),
+    lightAccent: z.string().optional(),
+    darkAccent: z.string().optional(),
+    lightAccent2: z.string().optional(),
+    darkAccent2: z.string().optional(),
+    lightHeader: z.string().optional(),
+    darkHeader: z.string().optional(),
+    lightLink: z.string().optional(),
+    darkLink: z.string().optional(),
+    lightText: z.string().optional(),
+    darkText: z.string().optional(),
+    siteFont: z.string().optional(),
+    borderRadius: z.string().optional(),
   }),
 });
 
