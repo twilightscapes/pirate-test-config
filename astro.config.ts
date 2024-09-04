@@ -74,6 +74,9 @@ export default defineConfig({
   output: 'hybrid',
   prefetch: true,
   site: pwaConfig.siteUrl,
+  redirects: {
+    '/admin': '/keystatic'
+  },
   vite: {
     server: {
       fs: {
@@ -87,8 +90,7 @@ export default defineConfig({
     plugins: [rawFonts([".ttf", ".woff"])],
   },
   adapter: netlify()
-});
-function rawFonts(ext: string[]) {
+});function rawFonts(ext: string[]) {
   return {
     name: "vite-plugin-raw-fonts",
     transform(code: string, id: string) {
