@@ -25,17 +25,16 @@ import PhotoSection from "@/components/PhotoGallery.astro"
 </style>
 
 
-
-<PageLayout meta={meta} >
+<PageLayout
+  meta={meta}
+  title={meta.title}
+  description={meta.description}
+  articleDate={new Date().toISOString()}
+  ogImage={meta.ogImage}
+>
   <GoBack  />
-
-
-  
-
-
 
   <PhotoSection style="margin:0 auto;" />
 <div class="booty"></div>
 
-  
 </PageLayout>

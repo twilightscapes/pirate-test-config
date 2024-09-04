@@ -1,6 +1,9 @@
+import React from 'react';
 import { config, fields, collection, singleton } from '@keystatic/core';
 import fs from 'fs';
 import path from 'path';
+import { colorPicker } from './src/components/ColorPicker.tsx';
+
 
 const getDirectories = () => {
   const photosPath = path.join(process.cwd(), 'public/images/photos');
@@ -11,14 +14,12 @@ const getDirectories = () => {
 
 export default config({
   storage: {
-    kind: 'cloud',
+    kind: 'local',
   },
   cloud: {
     project: 'pirate/pirate',
   },
-  ui: {
-    brand: { name: 'Pirate' },
-  },
+  
   collections: {
     posts: collection({
       label: 'Posts',
@@ -71,7 +72,7 @@ export default config({
       },
     }),
     pages: collection({
-      label: 'Pages',
+      label: 'Other Pages',
       path: 'src/content/pages/*',
       slugField: 'title',
       format: { contentField: 'content' },
@@ -256,7 +257,7 @@ export default config({
 
 
         styleAppearance: singleton({
-      label: 'Style & Appearance',
+      label: 'Appearance',
       path: 'src/content/styleapps/',
       schema: {
         backgroundImage: fields.image({
@@ -267,25 +268,60 @@ export default config({
         siteFont: fields.text({ label: 'Site Font', defaultValue: 'Bowlby One', description: 'Enter the name of any Google Font' }),
         borderRadius: fields.text({ label: 'Border Radius', description: 'Border Radius of elements on page (0) for square', validation: { isRequired: false }, defaultValue: "0px" }),
         divider5: fields.empty(),
-        lightBg: fields.text({ label: 'Light Background Color', description: '(light) Page Background - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
-        lightAccent: fields.text({ label: 'Light Accent Color', description: '(light) Accent - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
-        lightAccent2: fields.text({ label: 'Light Accent2 Color', description: '(light) Accent2 - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
+        lightBg: colorPicker({ 
+          label: 'Light Background Color', 
+          description: '(light) Page Background - can use any color value',
+        }),
+        lightAccent: colorPicker({ 
+          label: 'Light Accent Color', 
+          description: '(light) Accent - can use any color value',
+        }),
+        lightAccent2: colorPicker({ 
+          label: 'Light Accent2 Color', 
+          description: '(light) Accent2 - can use any color value',
+        }),
         divider6: fields.empty(),
-        darkBg: fields.text({ label: 'Dark Background Color', description: '(dark) Page Background - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
-        darkAccent: fields.text({ label: 'Dark Accent Color', description: '(dark) Accent Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
-        darkAccent2: fields.text({ label: 'Dark Accent2 Color', description: '(dark) Accent Color2 - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
+        darkBg: colorPicker({ 
+          label: 'Dark Background Color', 
+          description: '(dark) Page Background - can use any color value',
+        }),
+        darkAccent: colorPicker({ 
+          label: 'Dark Accent Color', 
+          description: '(dark) Accent Color - can use any color value',
+        }),
+        darkAccent2: colorPicker({ 
+          label: 'Dark Accent2 Color', 
+          description: '(dark) Accent Color2 - can use any color value',
+        }),
         divider7: fields.empty(),
-        lightHeader: fields.text({ label: 'Light Header Color', description: '(light) Header Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
-        darkHeader: fields.text({ label: 'Dark Quote Color', description: '(dark) Quote Color2 - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
+        lightHeader: colorPicker({ 
+          label: 'Light Header Color', 
+          description: '(light) Header Color - can use any color value',
+        }),
+        darkHeader: colorPicker({ 
+          label: 'Dark Quote Color', 
+          description: '(dark) Quote Color2 - can use any color value',
+        }),
         divider8: fields.empty(),
-        lightText: fields.text({ label: 'Light Text Color', description: '(light) Text Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
-        darkText: fields.text({ label: 'Dark Text Color', description: '(dark) Text Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
+        lightText: colorPicker({ 
+          label: 'Light Text Color', 
+          description: '(light) Text Color - can use any color value',
+        }),
+        darkText: colorPicker({ 
+          label: 'Dark Text Color', 
+          description: '(dark) Text Color - can use any color value',
+        }),
         divider9: fields.empty(),
-        lightLink: fields.text({ label: 'Light Link Color', description: '(light) Link Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
-        darkLink: fields.text({ label: 'Dark Link Color', description: '(dark) Link Color - can use any color value: red, #ff000, hsl, rgba etc ', validation: { isRequired: false } }),
+        lightLink: colorPicker({ 
+          label: 'Light Link Color', 
+          description: '(light) Link Color - can use any color value',
+        }),
+        darkLink: colorPicker({ 
+          label: 'Dark Link Color', 
+          description: '(dark) Link Color - can use any color value',
+        }),
       },
     }),
-
     // photoUpload: singleton({
     //   label: 'Photo Upload',
     //   path: 'src/content/photoUpload/',
@@ -313,6 +349,35 @@ export default config({
     }),
   
   },
-});
 
-
+ui: {
+  brand: {
+    name: 'Pirate',
+    mark: ({ colorScheme }) => {
+      let path = colorScheme === 'dark'
+        ? '/images/logo/logoImage.svg'
+        : '/images/logo/logoImage.svg';
+      return React.createElement('img', { src: path, height: 40, alt: "Pirate Logo" });
+    },
+  },
+  navigation: {
+    'Pages and Posts': [
+      'home',
+      'pages',
+      'posts',
+    ],
+    'Content Modules': [
+      'bio',
+      'faqs',
+      'testimonials',
+      'photoSettings',
+    ],
+    'Settings': [
+      'siteSettings',
+      'pwaSettings',
+      'menuItems',
+      'styleAppearance',
+    ],
+    
+  },
+},});

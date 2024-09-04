@@ -8,7 +8,7 @@ import icon from "astro-icon";
 import fs from "fs";
 import rehypeExternalLinks from "rehype-external-links";
 import remarkUnwrapImages from "remark-unwrap-images";
-import { expressiveCodeOptions } from "./src/site.config";
+// import { expressiveCodeOptions } from "./src/site.config";
 import { remarkReadingTime } from "./src/utils/remark-reading-time";
 import AstroPWA from '@vite-pwa/astro';
 import markdoc from "@astrojs/markdoc";
@@ -27,7 +27,7 @@ export default defineConfig({
   image: {
     domains: ["webmention.io"]
   },
-  integrations: [expressiveCode(expressiveCodeOptions), icon(), tailwind({
+  integrations: [ icon(), tailwind({
     applyBaseStyles: false
   }), sitemap(), mdx(), react(), keystatic(), 
   

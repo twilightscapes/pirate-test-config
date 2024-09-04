@@ -75,7 +75,7 @@ const meta = {
     </div>
   ))}
 </div>
-<GalleryLightbox client:only="react" images={images} />
+<GalleryLightbox client:only="react" images={images} showCaptions={showCaptions} />
 <style>
 #directorySelect {
   position: fixed;
@@ -113,12 +113,12 @@ z-index: 2;
 }
 </style>
 <script>
-const directorySelect = document.getElementById('directorySelect');
-const galleryContainer = document.querySelector('.contentpanel');
+const directorySelect = document.getElementById('directorySelect') as HTMLSelectElement | null;
+const galleryContainer = document.querySelector('.contentpanel') as HTMLElement | null;
 
 function scrollToTop() {
-  const target = document.querySelector('.contentpanel');
-  if (target.classList.contains('horizontal-slider')) {
+  const target = document.querySelector('.contentpanel') as HTMLElement | null;
+  if (target?.classList.contains('horizontal-slider')) {
     target.scrollTo({ left: 0, behavior: 'smooth' });
   } else {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -132,20 +132,27 @@ function scrollToTop() {
   }, 100);
 }
 
-function filterImages(selectedDir) {
+function filterImages(selectedDir: string) {
+  if (!galleryContainer) return;
+  
   const images = galleryContainer.querySelectorAll('.post-card1');
   
   images.forEach((image) => {
-    const imageDir = image.dataset.directory;
-    if (selectedDir === 'all' || imageDir === selectedDir) {
-      image.style.display = 'block';
-    } else {
-      image.style.display = 'none';
+    if (image instanceof HTMLElement) {
+      const imageDir = image.dataset.directory;
+      if (selectedDir === 'all' || imageDir === selectedDir) {
+        image.style.display = 'block';
+      } else {
+        image.style.display = 'none';
+      }
     }
   });
 }
+
 directorySelect?.addEventListener('change', (event) => {
-  filterImages(event.target.value);
-  scrollToTop();
+  if (event.target instanceof HTMLSelectElement) {
+    filterImages(event.target.value);
+    scrollToTop();
+  }
 });
 </script>
