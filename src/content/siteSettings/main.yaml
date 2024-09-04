@@ -5,7 +5,7 @@ showTheme: true
 showSwitch: true
 showSearch: false
 showFooter: false
-showHomeGallery: true
+showHomeGallery: false
 showFeature: false
 showBio: false
 showPosts: true

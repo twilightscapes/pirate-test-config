@@ -4,9 +4,9 @@ import { Image } from 'astro:assets';
 import GalleryLightbox from '../components/GalleryLightbox';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
-
 const reader = createReader(process.cwd(), keystaticConfig);
 const photoSettings = await reader.singletons.photoSettings.read();
+const defaultDirectory = photoSettings?.defaultDirectory || 'all';
 
 const imageFiles = import.meta.glob('/public/images/photos/**/*.{jpg,jpeg,png,gif,webp,avif}', { eager: true });
 
@@ -14,23 +14,19 @@ const images = Object.entries(imageFiles).map(([path, file]) => ({
   src: path.replace('/public', ''),
   alt: path.split('/').pop()?.split('.')[0],
   title: path.split('/').pop()?.split('.')[0],
-  directory: path.split('/').slice(-2, -1)[0]
+  directory: path.split('/').slice(-2, -1)[0],
+  isDefault: defaultDirectory === 'all' || path.split('/').slice(-2, -1)[0] === defaultDirectory
 }));
 
 const directories = [...new Set(images.map(img => img.directory))].sort();
+const finalDirectories = [...directories, 'all'];
 
-// Sort directories alphabetically, excluding 'Favorites' and 'all'
-const sortedDirectories = directories
-  .filter(dir => dir.toLowerCase() !== 'favorites' && dir.toLowerCase() !== 'all')
-  .sort((a, b) => a.localeCompare(b));
-
-// Prepare the final list of directories
-const finalDirectories = ['Favorites', ...sortedDirectories, 'all'];
-
-const defaultDirectory = photoSettings?.defaultDirectory || 'Favorites';
 const showCaptions = photoSettings?.showCaptions ?? true;
 const showGallerySelector = photoSettings?.showGallerySelector ?? true;
 
+const filteredImages = images.filter(image => 
+  defaultDirectory === 'all' || image.directory === defaultDirectory
+);
 const meta = {
   description: "Image Gallery",
   title: "Image Gallery",
@@ -61,7 +57,7 @@ const meta = {
 <div class="contentpanel grid-container panels" style="padding-top:7vh">
   <div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }} />
   {images.map((image) => (
-    <div class="post-card1" data-directory={image.directory}>
+    <div class={`post-card1 ${image.isDefault ? 'visible' : 'hidden'}`} data-directory={image.directory}>
       <Image 
         src={image.src} 
         alt=""
@@ -79,9 +75,7 @@ const meta = {
     </div>
   ))}
 </div>
-
 <GalleryLightbox client:only="react" images={images} />
-
 <style>
 #directorySelect {
   position: fixed;
@@ -107,11 +101,19 @@ z-index: 2;
   /* color: #555; */
   filter:brightness(.75);
 }
-</style>
 
+.post-card1.hidden {
+  display: none;
+}
+
+.post-card1.visible {
+  display: block;
+}
+</style>
 <script>
 const directorySelect = document.getElementById('directorySelect');
 const galleryContainer = document.querySelector('.contentpanel');
+
 function scrollToTop() {
   const target = document.querySelector('.contentpanel');
   if (target.classList.contains('horizontal-slider')) {
@@ -127,25 +129,21 @@ function scrollToTop() {
     document.documentElement.scrollTop = 0;
   }, 100);
 }
+
 function filterImages(selectedDir) {
   const images = galleryContainer.querySelectorAll('.post-card1');
   
   images.forEach((image) => {
     const imageDir = image.dataset.directory;
-    if (selectedDir === 'all' || selectedDir === 'Favorites' || imageDir === selectedDir) {
-      (image as HTMLElement).style.display = 'block';
+    if (selectedDir === 'all' || imageDir === selectedDir) {
+      image.style.display = 'block';
     } else {
-      (image as HTMLElement).style.display = 'none';
+      image.style.display = 'none';
     }
   });
 }
-
 directorySelect?.addEventListener('change', (event) => {
-  filterImages((event.target as HTMLSelectElement).value);
+  filterImages(event.target.value);
   scrollToTop();
-  console.log('Gallery changed, scrolling to top');
 });
-
-// Filter images based on the default directory on page load
-filterImages(directorySelect.value);
 </script>
