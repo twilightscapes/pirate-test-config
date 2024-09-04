@@ -75,14 +75,14 @@ body.install #menu{display: none !important;}
 }
 
 
-/* .backimage{
+.backimage{
   height: 100vh;
   width: 100vw;
   position: fixed;
   z-index:-2;
   top:0;
   object-fit:cover;
-} */
+}
 
 /* .backimage::after{
   content: " ";

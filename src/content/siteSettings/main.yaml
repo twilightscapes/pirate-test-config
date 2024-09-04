@@ -15,6 +15,7 @@ defaultView: grid
 showTitles: true
 showDates: true
 MAX_POSTS: 3
+backgroundImage: /images/siteSettings/backgroundImage.webp
 siteFont: Audiowide
 borderRadius: 10px
 lightBg: '#ddd'

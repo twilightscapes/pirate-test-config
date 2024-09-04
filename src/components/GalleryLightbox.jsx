@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
+
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 
 export default function GalleryLightbox({ images, showCaptions }) {
@@ -30,10 +30,10 @@ export default function GalleryLightbox({ images, showCaptions }) {
       backgroundColor: 'rgba(30,30,36,0.8)',
       iconColor: 'rgba(255, 255, 255, 0.8)',
       iconPadding: '10px',
-      showAutoplayButton: true,
+      showAutoplayButton: false,
       showCloseButton: true,
-      showDownloadButton: true,
-      showFullscreenButton: true,
+      showDownloadButton: false,
+      showFullscreenButton: false,
       showNextButton: true,
       showPrevButton: true,
       showThumbnailsButton: true,
@@ -86,7 +86,7 @@ export default function GalleryLightbox({ images, showCaptions }) {
       close={() => setOpen(false)}
       slides={images}
       index={index}
-      plugins={[Thumbnails, Zoom]}
+      plugins={[Thumbnails]}
       {...options}
       render={{
         slide: ({ slide }) => (
@@ -112,7 +112,7 @@ export default function GalleryLightbox({ images, showCaptions }) {
             )}
           </div>
         ),
-      }}
-    />
+    
+      }}    />
   );
 }
