@@ -289,7 +289,7 @@ body.homepage #gobacker{display:none;}
 
 .grid-container .post-card1 {
   width: 100%;
-  margin: 0 0 1vh 0;
+  margin-bottom: 40px;
   box-sizing: border-box;
   break-inside: avoid;
   border-radius: var(--theme-ui-colors-borderRadius);
@@ -326,7 +326,7 @@ body.homepage #gobacker{display:none;}
 
   .sliderSpacer{display:none;}
   .slider .sliderSpacer{display:block; width:50%; height:50% ; }
-  .slider img{max-height:68vh; object-fit:contain; }
+  .slider img{max-height:68vh; object-fit:contain; width: 100%; }
   .slider {
     display: flex;
     flex-direction: row;
@@ -349,7 +349,7 @@ body.homepage #gobacker{display:none;}
     display: flex;
     flex-direction: row;
     -webkit-overflow-scrolling: touch;
-    gap: 20vw;
+    gap: 10vw;
     scroll-padding: 0 5vw;
     overscroll-behavior: contain;
     scroll-snap-align: center;
@@ -368,13 +368,15 @@ body.homepage #gobacker{display:none;}
 
   .slider .post-card1 {
     scroll-snap-align: center;
-    min-width: 100vw;
+    min-width: 80vw;
   }
 
 
   .post-card1 {
     text-align: center;
     scroll-snap-align: center;
+    display:flex;
+    justify-content: center;;
   }
 
 
