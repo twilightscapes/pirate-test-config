@@ -1,5 +1,5 @@
 galleryMode: directory
-defaultDirectory: Favorites
+defaultDirectory: favorites
 galleryImages:
   - image: /images/galleryImages/0/image.webp
     caption: What a dick
