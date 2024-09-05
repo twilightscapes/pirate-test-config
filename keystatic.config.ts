@@ -16,7 +16,7 @@ const getDirectories = () => {
 
 export default config({
   storage: {
-    kind: 'cloud',
+    kind: 'local',
   },
   cloud: {
     project: 'pirate/pirate',
@@ -244,6 +244,7 @@ export default config({
       schema: {
         galleryMode: fields.select({
           label: 'Gallery Mode',
+          description: '',
           options: [
             { label: 'Directory-based', value: 'directory' },
             { label: 'CMS-managed', value: 'keystatic' }
@@ -251,7 +252,8 @@ export default config({
           defaultValue: 'directory'
         }),
         defaultDirectory: fields.text({
-          label: 'Default Directory (for Directory-based mode)',
+          label: '(Directory-based mode only)',
+          description: 'Directory-based allows you to upload folders of photos and it will automatically use the file names as the image captions allowing you to quickly create entire photo galleries - Enter the Default Directory to be displayed first, below:',
           defaultValue: 'all',
           validation: { isRequired: false }
         }),
@@ -261,6 +263,7 @@ export default config({
         }),
         showGallerySelector: fields.checkbox({
           label: 'Show Gallery Drop Down Selector',
+          description: 'Hiding this will automatically show all the images in all directories',
           defaultValue: true,
         }),
         galleryImages: fields.array(
