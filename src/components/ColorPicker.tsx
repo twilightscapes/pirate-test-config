@@ -65,7 +65,7 @@ export function colorPicker({
             />
             <TextField
               value={hexToRgba(color.hex, color.alpha)}
-              onChange={(value) => setColor(rgbaToHex(value))}
+              onChange={(value: string) => setColor(rgbaToHex(value))}
             />
           </Flex>
           <Flex gap="small" alignItems="center">

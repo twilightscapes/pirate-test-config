@@ -9,7 +9,8 @@
 		"postbuild": "pagefind --site dist",
 		"preview": "astro preview",
 		"format": "prettier -w --cache . && prettier -w --cache **/*.astro",
-		"check": "astro check"
+		"check": "astro check",
+		"clean": "rm -rf .data dist .astro .netlify node_modules"
 	},
 	"dependencies": {
 		"@astrojs/markdoc": "^0.11.4",

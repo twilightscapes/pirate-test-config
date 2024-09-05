@@ -8,44 +8,53 @@ import Header from "@/components/layout/Header.astro";
 import { siteConfig } from "@/site-config";
 import DynamicTheme from '../components/DynamicTheme.astro';
 
-
 interface Props {
-	meta: SiteMeta;
-	title: string;
-	description: string;
-	articleDate: string;
-	ogImage:string;
+  meta?: SiteMeta;
+  title?: string;
+  description?: string;
+  articleDate?: string;
+  ogImage?: string;
 }
 
 import { getEntry } from 'astro:content';
 const siteSettings = await getEntry('siteSettings', 'main');
 const { showFooter } = siteSettings.data;
 
-const { title, description = siteConfig.description, articleDate, ogImage } = Astro.props;
-	---
-		<html lang={siteConfig.lang}>
-			<head>
-				<DynamicTheme />
-				<ThemeProvider />
-				<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
-			</head>
-			<body>
-				<SkipLink />
-				<Header />
+const { meta, title, description, articleDate, ogImage } = Astro.props;
+
+const pageTitle = title || meta?.title;
+const pageDescription = description || meta?.description;
+const pageArticleDate = articleDate || meta?.articleDate;
+const pageOgImage = ogImage || meta?.ogImage;
+---
+<html lang={siteConfig.lang}>
+	<head>
+		<DynamicTheme />
+		<ThemeProvider />
+		<BaseHead 
+			title={pageTitle} 
+			description={pageDescription} 
+			articleDate={pageArticleDate} 
+			ogImage={pageOgImage} 
+		/>
+	</head>
+	<body>
+		<SkipLink />
+		<Header />
+
+			<main id="main">
+				<slot />
+		</main>
+
+		{ showFooter && (
+		<Footer />
+		)}
 	
-					<main id="main">
-						<slot />
-				</main>
-
-				{ showFooter && (
-				<Footer />
-				)}
-			
 
 
 
 
-			</body>
-			
-		</html>
+	</body>
+	
+</html>
 		<script src="../components/scrollListener.js"></script>
