@@ -260,14 +260,14 @@ export default config({
 
         defaultDirectory: fields.text({
           label: '(Directory-based mode only)',
-          description: 'Directory-based allows you to upload folders of photos and it will automatically use the file names as the image captions allowing you to quickly create entire photo galleries - Enter the Default Directory to be displayed first, below:',
+          description: "Directory-based mode allows you to upload multiple folders of photos and it will automatically use the file names as the image captions allowing you to quickly create entire photo galleries - (Note: IT IS case-sensitive and space-sensitive) - Enter the EXACT name of the Default Directory to be displayed, below:",
           defaultValue: 'all',
           validation: { isRequired: false }
         }),
         
         showGallerySelector: fields.checkbox({
           label: 'Show Gallery Drop Down Selector',
-          description: '(Directory-based mode only) Hiding this will automatically show all the images in all directories',
+          description: '(Directory-based mode only) Hiding this or leaving the default directory empty, will automatically show all the images in all directories',
           defaultValue: true,
         }),
 
