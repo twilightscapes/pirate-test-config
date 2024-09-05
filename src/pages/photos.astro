@@ -1,29 +1,22 @@
 ---
 import GoBack from "@/components/GoBack.astro";
-// import { Image } from "astro:assets";
-
+import Bio from "@/components/Bio.astro";
 import PageLayout from "@/layouts/Base.astro";
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
 const meta = {
 	description: "Photos",
 	title: "Photos",
   ogImage: ""
-  
 };
+
 import PhotoSection from "@/components/PhotoGallery.astro"
-// import { getEntry } from 'astro:content';
-// const siteSettings = await getEntry('siteSettings', 'main');
-// const { showHomeGallery } = siteSettings.data;
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const photoSettings = await reader.singletons.photoSettings.read();
+const showBioOnPhotos = photoSettings?.showBioOnPhotos ?? false;
 
 ---
-
-<style>
-
-
-
-
-
-</style>
-
 
 <PageLayout
   meta={meta}
@@ -35,6 +28,8 @@ import PhotoSection from "@/components/PhotoGallery.astro"
   <GoBack  />
 
   <PhotoSection style="margin:0 auto;" />
-<div class="booty"></div>
 
+  {showBioOnPhotos && <Bio />}
+  
+  <div class="booty"></div>
 </PageLayout>

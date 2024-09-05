@@ -256,6 +256,13 @@ export default config({
           defaultValue: true,
         }),
 
+        showBioOnPhotos: fields.checkbox({
+          label: 'Show Bio',
+          defaultValue: false,
+        }),
+
+        
+
         divider: fields.empty(),
 
         defaultDirectory: fields.text({

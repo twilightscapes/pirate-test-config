@@ -1,5 +1,6 @@
 galleryMode: directory
 showCaptions: true
+showBioOnPhotos: true
 defaultDirectory: favorites
 showGallerySelector: true
 galleryImages:
