@@ -1,3 +1,9 @@
-defaultDirectory: favorites
+galleryMode: directory
+defaultDirectory: Favorites
+galleryImages:
+  - image: /images/galleryImages/0/image.webp
+    caption: What a dick
+  - image: /images/galleryImages/1/image.webp
+    caption: Pirate's life for me!
 showCaptions: true
 showGallerySelector: true

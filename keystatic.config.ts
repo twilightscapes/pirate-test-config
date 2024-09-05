@@ -5,6 +5,8 @@ import path from 'path';
 import { colorPicker } from './src/components/ColorPicker.tsx';
 
 
+
+
 const getDirectories = () => {
   const photosPath = path.join(process.cwd(), 'public/images/photos');
   return fs.readdirSync(photosPath, { withFileTypes: true })
@@ -14,7 +16,7 @@ const getDirectories = () => {
 
 export default config({
   storage: {
-    kind: 'cloud',
+    kind: 'local',
   },
   cloud: {
     project: 'pirate/pirate',
@@ -235,15 +237,39 @@ export default config({
           divider: fields.empty(),
         }),
       },
-    }),    photoSettings: singleton({
+    }),
+    photoSettings: singleton({
       label: 'Photo Gallery Settings',
       path: 'src/content/photoSettings/',
       schema: {
+        galleryMode: fields.select({
+          label: 'Gallery Mode',
+          options: [
+            { label: 'Directory-based', value: 'directory' },
+            { label: 'CMS-managed', value: 'keystatic' }
+          ],
+          defaultValue: 'directory'
+        }),
         defaultDirectory: fields.text({
-          label: 'Default Directory',
+          label: 'Default Directory (for Directory-based mode)',
           defaultValue: 'all',
           validation: { isRequired: false }
         }),
+        galleryImages: fields.array(
+          fields.object({
+            image: fields.image({
+              label: 'Gallery Image',
+              directory: 'public/images',
+              publicPath: '/images',
+              validation: { isRequired: false }
+            }),
+            caption: fields.text({
+              label: 'Image Caption',
+              description: 'Enter a caption for this image',
+              validation: { isRequired: false }
+            })
+          })
+        ),
         showCaptions: fields.checkbox({
           label: 'Show Photo Titles',
           defaultValue: true,
@@ -253,10 +279,7 @@ export default config({
           defaultValue: true,
         }),
       },
-    }),
-
-
-        styleAppearance: singleton({
+    }),        styleAppearance: singleton({
       label: 'Appearance',
       path: 'src/content/styleapps/',
       schema: {
@@ -322,17 +345,17 @@ export default config({
         }),
       },
     }),
-    // photoUpload: singleton({
-    //   label: 'Photo Upload',
-    //   path: 'src/content/photoUpload/',
-    //   schema: {
-    //     photo: fields.image({
-    //       label: 'Upload Photo',
-    //       directory: 'public/images/photos',
-    //       publicPath: '/images/photos',
-    //     }),
-    //   },
-    // }),  
+    photoUpload: singleton({
+      label: 'Photo Upload',
+      path: 'src/content/photoUpload/',
+      schema: {
+        photo: fields.image({
+          label: 'Upload Photo',
+          directory: 'public/images/photos',
+          publicPath: '/images/photos',
+        }),
+      },
+    }),  
 
     bio: singleton({
       label: 'Bio',
@@ -365,17 +388,19 @@ ui: {
       'home',
       'pages',
       'posts',
+      'photoUpload'
     ],
     'Content Modules': [
       'bio',
       'faqs',
       'testimonials',
-      'photoSettings',
+      
     ],
     'Settings': [
       'siteSettings',
       'pwaSettings',
       'menuItems',
+      'photoSettings',
       'styleAppearance',
     ],
     

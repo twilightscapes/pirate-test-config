@@ -1,71 +1,61 @@
 ---
 import { Image } from 'astro:assets';
-// import PageLayout from "@/layouts/Base.astro";
-import GalleryLightbox from '../components/GalleryLightbox';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
+import GalleryLightbox from '../components/GalleryLightbox';
+
 const reader = createReader(process.cwd(), keystaticConfig);
 const photoSettings = await reader.singletons.photoSettings.read();
 const defaultDirectory = photoSettings?.defaultDirectory || 'all';
+const galleryMode = photoSettings?.galleryMode || 'directory';
 
 const imageFiles = import.meta.glob('/public/images/photos/**/*.{jpg,jpeg,png,gif,webp,avif}', { eager: true });
+let allImages;
+if (galleryMode === 'keystatic') {
+  allImages = photoSettings?.galleryImages?.map((item) => ({
+    src: item.image,
+    alt: item.caption || '',
+    title: item.caption || '',
+    directory: 'default',
+    isDefault: true
+  })) || [];
+} else {
+  allImages = Object.entries(imageFiles).map(([path, file]) => ({
+    src: path.replace('/public', ''),
+    alt: path.split('/').pop()?.split('.')[0] || '',
+    title: path.split('/').pop()?.split('.')[0] || '',
+    directory: path.split('/').slice(-2, -1)[0],
+    isDefault: path.split('/').slice(-2, -1)[0] === defaultDirectory
+  }));
+}
 
-const images = Object.entries(imageFiles).map(([path, file]) => ({
-  src: path.replace('/public', ''),
-  alt: path.split('/').pop()?.split('.')[0],
-  title: path.split('/').pop()?.split('.')[0],
-  directory: path.split('/').slice(-2, -1)[0],
-  isDefault: defaultDirectory === 'all' || path.split('/').slice(-2, -1)[0] === defaultDirectory
-}));
-
-const directories = [...new Set(images.map(img => img.directory))].sort();
-const finalDirectories = [...directories, 'all'];
-
+const directories = ['all', ...new Set(allImages.map(img => img.directory))].sort();
 const showCaptions = photoSettings?.showCaptions ?? true;
-const showGallerySelector = photoSettings?.showGallerySelector ?? true;
-
-const filteredImages = images.filter(image => 
-  defaultDirectory === 'all' || image.directory === defaultDirectory
-);
-const meta = {
-  description: "Image Gallery",
-  title: "Image Gallery",
-  ogImage: "",
-  articleDate: ""
-};
+const showGallerySelector = photoSettings?.showGallerySelector && galleryMode === 'directory';
 ---
 
-
-
 {showGallerySelector && (
-
-<div class="cattags" style={{ maxWidth: '', margin: '0px auto 0 auto', display: 'flex', placeSelf: 'center', gap: '0', color: '' }}>
-      
-      
-
-        
-<select id="directorySelect" style={{ background: '#222', border: '1px solid #000', borderRadius: '3px', padding: '8px', boxShadow: '0px 0px 0px 1px #000', opacity:'.9', color:'#fff' }}>
-  {finalDirectories.map((dir) => (
-    <option value={dir} selected={dir === defaultDirectory}>
-      {dir === 'all' ? 'All Images' : dir}
-    </option>
-  ))}
-</select>
-
-</div>
+  <div class="cattags" style={{ maxWidth: '', margin: '0px auto 0 auto', display: 'flex', placeSelf: 'center', gap: '0', color: '' }}>
+    <select id="directorySelect" style={{ background: '#222', border: '1px solid #000', borderRadius: '3px', padding: '8px', boxShadow: '0px 0px 0px 1px #000', opacity:'.9', color:'#fff' }}>
+      {directories.map((dir) => (
+        <option value={dir} selected={dir === defaultDirectory}>
+          {dir === 'all' ? 'All Images' : dir}
+        </option>
+      ))}
+    </select>
+  </div>
 )}
+
 <div class="contentpanel grid-container panels" style="padding-top:7vh">
   <div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }} />
-  {images.map((image) => (
-    <div class={`post-card1 ${image.isDefault ? 'visible' : 'hidden'}`} data-directory={image.directory}>
+  {allImages.map((image) => (
+    <div class="post-card1" data-directory={image.directory}>
       <Image 
-        src={image.src} 
-        alt=""
+        src={image.src ?? ''} 
+        alt={image.alt ?? ''}
         width={800}
         height={600}
         class="object-contain"
-        // loading="eager"
-        // fetchpriority="high"
       />
       {showCaptions && (
         <div class="image-caption panel">
@@ -75,9 +65,10 @@ const meta = {
     </div>
   ))}
 </div>
-<GalleryLightbox client:only="react" images={images} showCaptions={showCaptions} />
-<style>
-#directorySelect {
+
+<GalleryLightbox client:only="react" images={allImages} showCaptions={showCaptions} />
+
+<style>#directorySelect {
   position: fixed;
   top: 65px;
   left: 0;
@@ -113,46 +104,51 @@ z-index: 2;
 }
 </style>
 <script>
-const directorySelect = document.getElementById('directorySelect') as HTMLSelectElement | null;
-const galleryContainer = document.querySelector('.contentpanel') as HTMLElement | null;
-
-function scrollToTop() {
-  const target = document.querySelector('.contentpanel') as HTMLElement | null;
-  if (target?.classList.contains('horizontal-slider')) {
-    target.scrollTo({ left: 0, behavior: 'smooth' });
-  } else {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-  
-  // Force scroll to top
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }, 100);
-}
-
-function filterImages(selectedDir: string) {
-  if (!galleryContainer) return;
-  
-  const images = galleryContainer.querySelectorAll('.post-card1');
-  
-  images.forEach((image) => {
-    if (image instanceof HTMLElement) {
-      const imageDir = image.dataset.directory;
-      if (selectedDir === 'all' || imageDir === selectedDir) {
-        image.style.display = 'block';
-      } else {
-        image.style.display = 'none';
+  function filterImages(selectedDir) {
+    const galleryContainer = document.querySelector('.contentpanel');
+    if (!galleryContainer) return;
+    
+    const images = galleryContainer.querySelectorAll('.post-card1');
+    
+    images.forEach((image) => {
+      if (image instanceof HTMLElement) {
+        const imageDir = image.dataset.directory;
+        if (selectedDir === 'all' || imageDir === selectedDir) {
+          image.style.display = 'block';
+        } else {
+          image.style.display = 'none';
+        }
       }
+    });
+  }
+
+  function initializeGallery() {
+    const defaultDir = document.getElementById('directorySelect')?.value || 'all';
+    filterImages(defaultDir);
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeGallery);
+
+  const directorySelect = document.getElementById('directorySelect');
+  directorySelect?.addEventListener('change', (event) => {
+    if (event.target instanceof HTMLSelectElement) {
+      filterImages(event.target.value);
+      scrollToTop();
     }
   });
-}
 
-directorySelect?.addEventListener('change', (event) => {
-  if (event.target instanceof HTMLSelectElement) {
-    filterImages(event.target.value);
-    scrollToTop();
+  function scrollToTop() {
+    const target = document.querySelector('.contentpanel');
+    if (target?.classList.contains('horizontal-slider')) {
+      target.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }, 100);
   }
-});
 </script>
