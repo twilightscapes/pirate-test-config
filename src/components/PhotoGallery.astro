@@ -104,7 +104,7 @@ z-index: 2;
 }
 </style>
 <script>
-  function filterImages(selectedDir) {
+  function filterImages(selectedDir: string) {
     const galleryContainer = document.querySelector('.contentpanel');
     if (!galleryContainer) return;
     
@@ -121,9 +121,8 @@ z-index: 2;
       }
     });
   }
-
   function initializeGallery() {
-    const defaultDir = document.getElementById('directorySelect')?.value || 'all';
+    const defaultDir = (document.getElementById('directorySelect') as HTMLSelectElement)?.value || 'all';
     filterImages(defaultDir);
   }
 

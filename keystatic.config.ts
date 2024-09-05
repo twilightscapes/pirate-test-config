@@ -16,7 +16,7 @@ const getDirectories = () => {
 
 export default config({
   storage: {
-    kind: 'cloud',
+    kind: 'local',
   },
   cloud: {
     project: 'pirate/pirate',
@@ -255,6 +255,14 @@ export default config({
           defaultValue: 'all',
           validation: { isRequired: false }
         }),
+        showCaptions: fields.checkbox({
+          label: 'Show Photo Titles',
+          defaultValue: true,
+        }),
+        showGallerySelector: fields.checkbox({
+          label: 'Show Gallery Drop Down Selector',
+          defaultValue: true,
+        }),
         galleryImages: fields.array(
           fields.object({
             image: fields.image({
@@ -270,16 +278,11 @@ export default config({
             })
           })
         ),
-        showCaptions: fields.checkbox({
-          label: 'Show Photo Titles',
-          defaultValue: true,
-        }),
-        showGallerySelector: fields.checkbox({
-          label: 'Show Gallery Drop Down Selector',
-          defaultValue: true,
-        }),
+
       },
-    }),        styleAppearance: singleton({
+    }),        
+    
+    styleAppearance: singleton({
       label: 'Appearance',
       path: 'src/content/styleapps/',
       schema: {
@@ -345,6 +348,8 @@ export default config({
         }),
       },
     }),
+
+
     photoUpload: singleton({
       label: 'Photo Upload',
       path: 'src/content/photoUpload/',
@@ -370,7 +375,6 @@ export default config({
         subcta: fields.text({ label: 'CTA Text' }),
       },
     }),
-  
   },
 
 ui: {
