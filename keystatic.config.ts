@@ -14,7 +14,7 @@ const getDirectories = () => {
 
 export default config({
   storage: {
-    kind: 'cloud',
+    kind: 'local',
   },
   cloud: {
     project: 'pirate/pirate',

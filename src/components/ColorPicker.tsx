@@ -1,14 +1,27 @@
+import React, { useState, useEffect } from 'react';
 import type { BasicFormField, FormFieldStoredValue } from "@keystatic/core";
-import { FieldPrimitive } from "@keystar/ui/field";
-import { HexColorPicker, HexColorInput } from "react-colorful";
-function parseAsNormalField(value: FormFieldStoredValue) {
-  if (value === undefined) {
-    return "";
+import { TextField } from '@keystar/ui/text-field';
+import { Flex } from '@keystar/ui/layout';
+import { Text } from '@keystar/ui/typography';
+
+function hexToRgba(hex: string, alpha: number = 1): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function rgbaToHex(rgba: string): { hex: string, alpha: number } {
+  const match = rgba.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
+  if (match) {
+    const r = parseInt(match[1]);
+    const g = parseInt(match[2]);
+    const b = parseInt(match[3]);
+    const a = match[4] ? parseFloat(match[4]) : 1;
+    const hex = '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+    return { hex, alpha: a };
   }
-  if (typeof value !== "string") {
-    throw new Error("Must be a string");
-  }
-  return value;
+  return { hex: '#000000', alpha: 1 };
 }
 
 export function colorPicker({
@@ -21,61 +34,78 @@ export function colorPicker({
   description?: string;
 }): BasicFormField<string> {
   return {
-    // not sure what this one does? why is its only value 'form'?
     kind: "form",
-    // not sure what this one does?
     formKind: undefined,
     label,
-    // Input is a React component that includes the props value and onChange.
-    // from what I can tell, value is the value that keystatic loads from the file
-    // and onChange is a function that takes one argument - the new value for the field
     Input(props) {
-      return (
-        <FieldPrimitive description={description} label={label}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignSelf: "flex-start",
-              flexDirection: "column",
-              gap: "1rem",
-            }}
-          >
-            <HexColorPicker color={props.value} onChange={props.onChange} />
-            <HexColorInput
-              color={props.value}
-              name={label + " hex"}
-              onChange={props.onChange}
-            />
-          </div>
+      const [color, setColor] = useState(rgbaToHex(props.value || defaultValue || 'rgba(0,0,0,1)'));
 
-          {/* <input
-            type="color"
-            value={props.value}
-            onChange={(e) => {
-              props.onChange(e.target.value);
-            }}
-          /> */}
-        </FieldPrimitive>
+      useEffect(() => {
+        props.onChange(hexToRgba(color.hex, color.alpha));
+      }, [color]);
+
+      const handleColorChange = (hex: string) => {
+        setColor(prev => ({ ...prev, hex }));
+      };
+
+      const handleOpacityChange = (alpha: number) => {
+        setColor(prev => ({ ...prev, alpha }));
+      };
+
+      return (
+        <Flex direction="column" gap="medium">
+          <Text>{label}</Text>
+          {description && <Text size="small">{description}</Text>}
+          <Flex gap="medium" alignItems="center">
+            <input
+              type="color"
+              value={color.hex}
+              onChange={(e) => handleColorChange(e.target.value)}
+              style={{ width: '50px', height: '50px' }}
+            />
+            <TextField
+              value={hexToRgba(color.hex, color.alpha)}
+              onChange={(value) => setColor(rgbaToHex(value))}
+            />
+          </Flex>
+          <Flex gap="small" alignItems="center">
+            <Text size="small" style={{ flexShrink: 0, width: '60px' }}>Opacity:</Text>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={color.alpha}
+              onChange={(e) => handleOpacityChange(parseFloat(e.target.value))}
+              style={{
+                width: '150px',  // Adjust this value as needed
+                WebkitAppearance: 'none',
+                background: 'linear-gradient(to right, rgba(249, 249, 249, 0.58), black) no-repeat',
+                backgroundSize: 'calc((value - min) / (max - min) * 100%) 100%',
+              }}
+            />
+            <Text size="small" style={{ flexShrink: 0, width: '40px', textAlign: 'right' }}>
+              {Math.round(color.alpha * 100)}%
+            </Text>
+          </Flex>
+        </Flex>
       );
     },
-    // i think this is a function that sets the default value of the field - in this case falls back to blank if no defaultValue is given
     defaultValue() {
       return defaultValue || "";
     },
-    // i think this function decodes the value from a string into its working type
-    parse(value) {
-      return parseAsNormalField(value);
+    parse(value: FormFieldStoredValue) {
+      return typeof value === 'string' ? value : '';
     },
-    // i think this function takes the value from its working type and encodes it into a string?
     serialize(value) {
-      return { value: value === "" ? "" : value };
+      return { value };
     },
     validate(value) {
       return value;
     },
     reader: {
-      parse(value) {
-        return parseAsNormalField(value);
+      parse(value: FormFieldStoredValue) {
+        return typeof value === 'string' ? value : '';
       },
     },
   };
