@@ -259,7 +259,7 @@ export default config({
         divider: fields.empty(),
 
         defaultDirectory: fields.text({
-          label: '(Directory-based mode only)',
+          label: '(Directory-based Mode)',
           description: "Directory-based mode allows you to upload multiple folders of photos and it will automatically use the file names as the image captions allowing you to quickly create entire photo galleries - (Note: IT IS case-sensitive and space-sensitive) - Enter the EXACT name of the Default Directory to be displayed, below:",
           defaultValue: 'all',
           validation: { isRequired: false }
@@ -423,6 +423,5 @@ ui: {
       'photoSettings',
       'styleAppearance',
     ],
-    
   },
 },});
