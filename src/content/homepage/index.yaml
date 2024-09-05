@@ -5,6 +5,9 @@ featureImage:
   src: /images/homepage/featureImage/src.webp
   alt: Become a Pirate!
 youtube:
+  url: https://youtu.be/OtghUljKVhE?si=1d8kib5YLzqs_vmf
   controls: true
-  mute: false
-  loop: false
+  mute: true
+  loop: true
+  start: 13
+  end: 18

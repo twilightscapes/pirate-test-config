@@ -32,7 +32,9 @@ if (end > 0) {
   params.append('end', end.toString());
 }
 
-const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}?${params.toString()}` : '';
+const embedUrl = videoId 
+  ? `https://www.youtube.com/embed/${videoId}?${params.toString()}&playlist=${videoId}${loop ? '&loop=1' : ''}`
+  : '';
 ---
 
 {videoId ? (
