@@ -57,8 +57,8 @@ const homeContent = await getEntry('homepage', 'index');
 {showFAQ && (
 <section class="" style="width:100vw; margin:0 auto; backdrop-filter:blur(20px); padding:5vh 0;">
 	
-		<h2 id="costs" class="letter glow" style={{fontSize:'clamp(1.4rem,2.6vw,3rem)', textAlign:'center', color:'#ddd', fontStyle:'normal', marginBottom:'4vh'}}>{homeContent.data.faqtitle}</h2>
-		<div id="" class="nameblock" style={{margin:'0 auto 0 auto', padding:'0 4% 10vh 0',alignContent:'center', display:'grid', textAlign:'left', justifyContent:'center', verticalAlign:'center', fontSize:'clamp(1rem, 1.8vw, 3.2rem)',}}>
+		<h2 id="costs" class="letter glow" style={{fontSize:'clamp(1.4rem,2.6vw,3rem)', textAlign:'center', color:'#ddd', fontStyle:'normal', marginBottom:'0'}}>{homeContent.data.faqtitle}</h2>
+		<div id="" class="nameblock" style={{margin:'0 auto 0 auto', padding:'0 4% 2vh 0',alignContent:'center', display:'grid', textAlign:'left', justifyContent:'center', verticalAlign:'center', fontSize:'clamp(1rem, 1.8vw, 3.2rem)',}}>
 	<Faqs />
 </div>
 </section>

@@ -1,8 +1,8 @@
 siteFont: Audiowide
 borderRadius: 10px
 lightBg: rgba(192, 185, 185, 0.57)
-lightAccent: rgba(139, 78, 151, 0.6)
-lightAccent2: rgba(131, 64, 140, 1)
+lightAccent: rgba(0, 0, 0, 0.6)
+lightAccent2: rgba(192, 43, 233, 1)
 darkBg: rgba(34, 34, 34, 1)
 darkAccent: rgba(39, 37, 37, 0.3)
 darkAccent2: rgba(192, 43, 233, 1)
@@ -10,5 +10,5 @@ lightHeader: rgba(0, 0, 0, 0.9)
 darkHeader: rgba(0, 0, 0, 0.9)
 lightText: rgba(0, 0, 0, 1)
 darkText: rgba(243, 242, 242, 1)
-lightLink: rgba(224, 16, 217, 1)
-darkLink: rgba(245, 132, 132, 1)
+lightLink: rgba(236, 223, 235, 1)
+darkLink: rgba(233, 196, 238, 1)
