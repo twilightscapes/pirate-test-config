@@ -373,17 +373,18 @@ export default config({
     }),
 
 
-    // photoUpload: singleton({
-    //   label: 'Photo Upload',
-    //   path: 'src/content/photoUpload/',
-    //   schema: {
-    //     photo: fields.image({
-    //       label: 'Upload Photo',
-    //       directory: 'public/images/photos',
-    //       publicPath: '/images/photos',
-    //     }),
-    //   },
-    // }),  
+    socialCard: singleton({
+      label: ' Default Site Image',
+      path: 'src/content/photoUpload/',
+      schema: {
+        socialCard: fields.image({
+          label: 'Upload Photo',
+          description: "This is the site's default image - it is used for link previews on social media, if a custom image isn't uploaded.",
+          directory: 'public/',
+          publicPath: '/',
+        }),
+      },
+    }),  
 
     bio: singleton({
       label: 'Bio',
@@ -415,7 +416,6 @@ ui: {
       'home',
       'pages',
       'posts',
-      // 'photoUpload'
     ],
     'Content Modules': [
       'bio',
@@ -427,6 +427,7 @@ ui: {
       'siteSettings',
       'pwaSettings',
       'menuItems',
+      'socialCard',
       'photoSettings',
       'styleAppearance',
     ],
