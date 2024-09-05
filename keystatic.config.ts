@@ -267,7 +267,7 @@ export default config({
         
         showGallerySelector: fields.checkbox({
           label: 'Show Gallery Drop Down Selector',
-          description: 'Hiding this will automatically show all the images in all directories',
+          description: '(Directory-based mode only) Hiding this will automatically show all the images in all directories',
           defaultValue: true,
         }),
 
@@ -290,7 +290,7 @@ export default config({
             })
           }),
           {
-            label: 'CMS-Based Gallery Images',
+            label: 'CMS-managed Gallery Images',
             itemLabel: (props) => props.fields.caption.value || 'Image',
           }
         ),        divider4: fields.empty(),
