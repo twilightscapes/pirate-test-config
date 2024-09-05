@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths, Page } from "astro";
 import type { CollectionEntry } from "astro:content";
-
+import { getEntry } from 'astro:content';
 import Pagination from "@/components/Paginator.astro";
 import PostPreview from "@/components/blog/PostPreview.astro";
 import { getAllPosts, getUniqueTags, groupPostsByYear, sortMDByDate } from "@/data/post";
@@ -46,6 +46,9 @@ const paginationProps = {
 
 const groupedByYear = groupPostsByYear(page.data);
 const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
+
+const siteSettings = await getEntry('siteSettings', 'main');
+const { defaultView } = siteSettings.data;
 ---
 
 <PageLayout meta={meta}>
@@ -97,7 +100,9 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			</aside>
 		)
 	}
-	<div class="contentpanel grid-container panels">
+
+	
+	<div class={`contentpanel ${defaultView === 'swipe' ? 'slider panels horizontal-slider' : 'grid-container'}`}>
 
 		<div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
 

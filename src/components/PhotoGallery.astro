@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 import GalleryLightbox from '../components/GalleryLightbox';
-
+import { getEntry } from 'astro:content';
 const reader = createReader(process.cwd(), keystaticConfig);
 const photoSettings = await reader.singletons.photoSettings.read();
 const defaultDirectory = photoSettings?.defaultDirectory || 'all';
@@ -32,6 +32,9 @@ if (galleryMode === 'keystatic') {
 const directories = ['all', ...new Set(allImages.map(img => img.directory))].sort();
 const showCaptions = photoSettings?.showCaptions ?? true;
 const showGallerySelector = photoSettings?.showGallerySelector && galleryMode === 'directory';
+
+const siteSettings = await getEntry('siteSettings', 'main');
+const { defaultView } = siteSettings.data;
 ---
 
 {showGallerySelector && (
@@ -46,8 +49,13 @@ const showGallerySelector = photoSettings?.showGallerySelector && galleryMode ==
   </div>
 )}
 
-<div class="contentpanel grid-container panels" style="padding-top:7vh">
+
+
+<div class={`contentpanel ${defaultView === 'swipe' ? 'slider panels horizontal-slider' : 'grid-container'}`} style="padding-top:7vh">
   <div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }} />
+
+
+  
   {allImages.map((image) => (
     <div class="post-card1" data-directory={image.directory}>
       <Image 
