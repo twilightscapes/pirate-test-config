@@ -5,7 +5,7 @@ const styleAppearance = await getEntry('styleapps', 'index');
 
 <script define:vars={{ lightBg: styleAppearance.data.lightBg, darkBg: styleAppearance.data.darkBg, lightAccent: styleAppearance.data.lightAccent, darkAccent: styleAppearance.data.darkAccent, lightAccent2: styleAppearance.data.lightAccent2, darkAccent2: styleAppearance.data.darkAccent2, lightHeader: styleAppearance.data.lightHeader, darkHeader: styleAppearance.data.darkHeader, lightLink: styleAppearance.data.lightLink, darkLink: styleAppearance.data.darkLink, lightText: styleAppearance.data.lightText, darkText: styleAppearance.data.darkText, borderRadius: styleAppearance.data.borderRadius }}>
 
-
+function applyTheme() {
   document.documentElement.style.setProperty('--lightBg', lightBg);
   document.documentElement.style.setProperty('--darkBg', darkBg);
   document.documentElement.style.setProperty('--lightAccent', lightAccent);
@@ -19,7 +19,12 @@ const styleAppearance = await getEntry('styleapps', 'index');
   document.documentElement.style.setProperty('--lightText', lightText);
   document.documentElement.style.setProperty('--darkText', darkText);
   document.documentElement.style.setProperty('--borderRadius', borderRadius);
+}
+
+// Apply theme immediately
+applyTheme();
+
+// Reapply theme after each view transition
+document.addEventListener('astro:page-load', applyTheme);
 </script>
-
-
 

@@ -6,7 +6,7 @@ import ThemeProvider from "@/components/ThemeProvider.astro";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import { siteConfig } from "@/site-config";
-import DynamicTheme from '../components/DynamicTheme.astro';
+import DynamicTheme from '@/components/DynamicTheme.astro';
 import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
@@ -30,15 +30,16 @@ const pageOgImage = ogImage || meta?.ogImage;
 ---
 <html lang={siteConfig.lang}>
 	<head>
+		<ViewTransitions />
 		<DynamicTheme />
 		<ThemeProvider />
+		
 		<BaseHead 
 			title={pageTitle} 
 			description={pageDescription} 
 			articleDate={pageArticleDate} 
 			ogImage={pageOgImage} 
 		/>
-		<ViewTransitions />
 	</head>
 	<body>
 		<SkipLink />
