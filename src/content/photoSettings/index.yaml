@@ -1,6 +1,6 @@
-galleryMode: directory
+galleryMode: keystatic
+showCaptions: true
 defaultDirectory: favorites
-showCaptions: false
 showGallerySelector: true
 galleryImages:
   - image: /images/galleryImages/0/image.webp

@@ -251,21 +251,29 @@ export default config({
           ],
           defaultValue: 'directory'
         }),
+        showCaptions: fields.checkbox({
+          label: 'Show Photo Titles',
+          defaultValue: true,
+        }),
+
+        divider: fields.empty(),
+
         defaultDirectory: fields.text({
           label: '(Directory-based mode only)',
           description: 'Directory-based allows you to upload folders of photos and it will automatically use the file names as the image captions allowing you to quickly create entire photo galleries - Enter the Default Directory to be displayed first, below:',
           defaultValue: 'all',
           validation: { isRequired: false }
         }),
-        showCaptions: fields.checkbox({
-          label: 'Show Photo Titles',
-          defaultValue: true,
-        }),
+        
         showGallerySelector: fields.checkbox({
           label: 'Show Gallery Drop Down Selector',
           description: 'Hiding this will automatically show all the images in all directories',
           defaultValue: true,
         }),
+
+        divider2: fields.empty(),
+        divider3: fields.empty(),
+
         galleryImages: fields.array(
           fields.object({
             image: fields.image({
@@ -274,13 +282,18 @@ export default config({
               publicPath: '/images',
               validation: { isRequired: false }
             }),
+
             caption: fields.text({
               label: 'Image Caption',
               description: 'Enter a caption for this image',
               validation: { isRequired: false }
             })
-          })
-        ),
+          }),
+          {
+            label: 'CMS-Based Gallery Images',
+            itemLabel: (props) => props.fields.caption.value || 'Image',
+          }
+        ),        divider4: fields.empty(),
 
       },
     }),        
