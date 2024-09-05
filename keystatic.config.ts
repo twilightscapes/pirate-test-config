@@ -266,7 +266,7 @@ export default config({
         }),
         
         showGallerySelector: fields.checkbox({
-          label: 'Show Gallery Drop Down Selector',
+          label: 'Show Gallery Drop Down Menu',
           description: '(Directory-based mode only) Hiding this or leaving the default directory empty, will automatically show all the images in all directories',
           defaultValue: true,
         }),
