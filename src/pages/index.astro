@@ -91,34 +91,30 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 
 
 {showPosts && (
-<section class="scroll-container" style={{display:''}}>
-	<div class="nameblock flexcheek headline" style={{width:'100%', padding: '1vh 2vh', margin:'0 auto 4vh auto', maxHeight: '', fontSize:'clamp(1.4rem,3.9vw,4rem)', textAlign:'center', position:'relative', top:'', textShadow: '0 2px 3px #000', background:'var(--theme-accent)', backdropFilter:'blur(12px)', color:'#fff' }}>
-		<h2 class="glow">{homeContent.data.postsectiontitle}</h2>
-	  </div>
-			
-			<div class={`contentpanel ${defaultView === 'swipe' ? 'slider panels horizontal-slider' : 'grid-container'}`} transition:animate="slide">
-				<div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
+	<section class="scroll-container" style={{display:''}}>
+		<div class="nameblock flexcheek headline" style={{width:'100%', padding: '1vh 2vh', margin:'0 auto 4vh auto', maxHeight: '', fontSize:'clamp(1.4rem,3.9vw,4rem)', textAlign:'center', position:'relative', top:'', textShadow: '0 2px 3px #000', background:'var(--theme-accent)', backdropFilter:'blur(12px)', color:'#fff' }}>
+			<h2 class="glow">{homeContent.data.postsectiontitle}</h2>
+		</div>
+		
+		<div class={`contentpanel ${defaultView === 'swipe' ? 'slider panels horizontal-slider' : 'grid-container'}`} transition:animate="slide">
+			<div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
 
-				{allPostsByDate.map((p) => <PostPreview post={p} withDesc />)}
+			{allPostsByDate.map((p) => <PostPreview post={p} withDesc />)}
 
-
-						<a
-							class="button"
-							href="/posts/"
-							style={{
-								textDecoration: "none",
-								color: "#fff",
-								textAlign: "center",
-								display:"block",
-							}}
-						>
-							View More
-						</a>
-			
-				
-			
-			</div>
-		</section>
+			<a
+				class="button"
+				href="/posts/"
+				style={{
+					textDecoration: "none",
+					color: "#fff",
+					textAlign: "center",
+					display: "block",
+				}}
+			>
+				View More
+			</a>
+		</div>
+	</section>
 )}
 
 
