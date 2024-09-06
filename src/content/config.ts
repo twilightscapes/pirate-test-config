@@ -46,17 +46,19 @@ const post = defineCollection({
 });
 
 const faqs = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
-    answer: z.string().optional(),
-    order: z.number().optional(),
-    question: z.string().optional(),
+    faqTitle: z.string().optional(),
+    question: z.string(),
+    order: z.number().default(0),
   }),
 });
+
 
 const testimonials = defineCollection({
   type: 'data',
   schema: z.object({
+    testimonialTitle: z.string().optional(),
     name: z.string().optional(),
     location: z.string().optional(),
     quote: z.string().optional(),

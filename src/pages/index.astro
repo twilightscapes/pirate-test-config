@@ -7,17 +7,27 @@ import Testimonials from '../components/Testimonials.astro';
 import Feature from "@/components/Feature.astro";
 import Bio from "@/components/Bio.astro";
 import { getEntry } from 'astro:content';
+import keystaticConfig from '../../keystatic.config';
+import { createReader } from '@keystatic/core/reader';
 const siteSettings = await getEntry('siteSettings', 'main');
-const { showFAQ, showTestimonials, showPosts, showBio, showFeature, defaultView, showHomeGallery, MAX_POSTS } = siteSettings.data;
+const { defaultView, MAX_POSTS } = siteSettings.data;
+const homeContent = await getEntry('homepage', 'index');
+
 
 import PhotoSection from "@/components/PhotoGallery.astro"
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const homepage = await reader.singletons.home.read();
+const showBioOnHome = homepage?.showBioOnHome ?? false;
+const showFaqOnHome = homepage?.showFaqOnHome ?? false;
+const showTestOnHome = homepage?.showTestOnHome ?? false;
+const showFeature = homepage?.showFeature ?? false;
+const showPosts = homepage?.showPosts ?? false;
+const showHomeGallery = homepage?.showHomeGallery ?? false;
 
 const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 
-
-
-const homeContent = await getEntry('homepage', 'index');
 
 
 
@@ -30,53 +40,57 @@ const homeContent = await getEntry('homepage', 'index');
   articleDate:""
   }}
 >
+{showFeature && <Feature content={homeContent.data} /> }
 
-{typeof showHomeGallery !== 'undefined' && showHomeGallery && (
+{ showHomeGallery && (
 <PhotoSection />
 )}
 
 
-	{typeof showFeature !== 'undefined' && showFeature && (
+	<!-- {typeof showFeature !== 'undefined' && showFeature && (
 <section class="scroll-area1 panel" id="feature" style={{ display: '', height: '', minHeight: '', position: 'relative', overflow: 'hidden', margin: '0 auto 0 auto', padding: '0', width: '100vw', }}>
 
 	<Feature content={homeContent.data} />
 </section>
-)}
+)} -->
 
 
 
 
-{typeof showBio !== 'undefined' && showBio && (
+<!-- {typeof showBio !== 'undefined' && showBio && (
 <Bio />
-)}
+)} -->
 
+{showBioOnHome && <Bio />}
 	  
-	  
 
 
-{showFAQ && (
-<section class="" style="width:100vw; margin:0 auto; backdrop-filter:blur(20px); padding:5vh 0;">
-	
-		<h2 id="costs" class="letter glow" style={{fontSize:'clamp(1.4rem,2.6vw,3rem)', textAlign:'center', color:'#ddd', fontStyle:'normal', marginBottom:'0'}}>{homeContent.data.faqtitle}</h2>
-		<div id="" class="nameblock" style={{margin:'0 auto 0 auto', padding:'0 4% 2vh 0',alignContent:'center', display:'grid', textAlign:'left', justifyContent:'center', verticalAlign:'center', fontSize:'clamp(1rem, 1.8vw, 3.2rem)',}}>
-	<Faqs />
+{showFaqOnHome && (
+<div class="nameblock flexcheek headline" style={{width:'100%', padding: '1vh 2vh', margin:'0 auto 4vh auto', maxHeight: '', fontSize:'clamp(1.4rem,3.9vw,4rem)', textAlign:'center', position:'relative', top:'', textShadow: '0 2px 3px #000', background:'var(--theme-accent)', backdropFilter:'blur(12px)', color:'#fff' }}>
+<h2 class="glow">{homeContent.data.testimonialtitle}</h2>
 </div>
-</section>
+<Faqs />
+
 )}
 
-{typeof showTestimonials !== 'undefined' && showTestimonials && (
-<section class="testimonials-section">
-	<div class="nameblock flexcheek headline" style={{position:'', top:'', marginTop: '', width:'100%', padding: '1vh 2vh', margin:'0 auto 0 auto', maxHeight: '', fontSize: 'clamp(1.3rem, 3.5vw, 3.2rem)', textAlign:'center', textShadow: '0 2px 3px #000', background:'var(--theme-accent)', backdropFilter:'blur(12px)', color:'#fff' }}>
-	  <h2 class="glow">{homeContent.data.testimonialtitle}</h2>
-	</div>
+
+
+
+	
+
+
+
+
+{showTestOnHome && (
+
 	<Testimonials />
-</section>
+
  )}
 
 
 
 
-{typeof showPosts !== 'undefined' && showPosts && (
+{showPosts && (
 <section class="scroll-container" style={{display:''}}>
 	<div class="nameblock flexcheek headline" style={{width:'100%', padding: '1vh 2vh', margin:'0 auto 4vh auto', maxHeight: '', fontSize:'clamp(1.4rem,3.9vw,4rem)', textAlign:'center', position:'relative', top:'', textShadow: '0 2px 3px #000', background:'var(--theme-accent)', backdropFilter:'blur(12px)', color:'#fff' }}>
 		<h2 class="glow">{homeContent.data.postsectiontitle}</h2>

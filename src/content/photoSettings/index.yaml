@@ -1,6 +1,8 @@
-galleryMode: keystatic
+galleryMode: directory
 showCaptions: true
 showBioOnPhotos: true
+showFaqsOnPhotos: false
+showTestimonialsOnPhotos: false
 defaultDirectory: favorites
 showGallerySelector: true
 galleryImages:

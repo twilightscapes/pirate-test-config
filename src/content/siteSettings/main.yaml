@@ -2,15 +2,9 @@ logoImage: /images/logo/logoImage.svg
 showHeader: true
 showLogo: true
 showTheme: true
-showSwitch: false
+showSwitch: true
 showSearch: false
 showFooter: false
-showHomeGallery: false
-showFeature: false
-showBio: true
-showPosts: true
-showTestimonials: true
-showFAQ: true
 defaultView: swipe
 showTitles: true
 showDates: true

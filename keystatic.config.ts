@@ -100,23 +100,50 @@ export default config({
         }),
       },
     }),
+
+    pitches: collection({
+      label: 'Info Block',
+      path: 'src/content/pitches/*',
+      schema: {
+        title: fields.text({ label: 'Title' }),
+        tagline: fields.text({ label: 'Tagline' }),
+        description: fields.text({ label: 'Description', multiline: true }),
+        phone: fields.text({ label: 'Phone' }),
+        subheading: fields.text({ label: 'Subheading' }),
+        subcontent: fields.text({ label: 'Subcontent' }),
+        subcta: fields.text({ label: 'CTA Text' }),
+        image: fields.image({
+          label: 'Image',
+          directory: 'public/images/pitches',
+          publicPath: '/images/pitches',
+        }),
+      },
+      slugField: 'title'
+    }),
+
+    
+
     faqs: collection({
       label: 'FAQs',
       path: 'src/content/faqs/*',
-      slugField: 'id',
+      slugField: 'question',
+      format: { contentField: 'answer' },
       schema: {
-        id: fields.text({ label: 'ID' }),
-        question: fields.text({ label: 'Question' }),
-        answer: fields.text({ label: 'Answer', multiline: true }),
+        question: fields.slug({ name: { label: 'Question' } }),
+        answer: fields.document({
+          label: 'Answer',
+          formatting: true,
+          dividers: true,
+          links: true,
+        }),
         order: fields.number({ label: 'Order' }),
       },
     }),
     testimonials: collection({
       label: 'Testimonials',
       path: 'src/content/testimonials/*',
-      slugField: 'id',
+      slugField: 'name',
       schema: {
-        id: fields.text({ label: 'ID' }),
         name: fields.text({ label: 'Name' }),
         location: fields.text({ label: 'Location' }),
         quote: fields.text({ label: 'Quote', multiline: true }),
@@ -157,15 +184,16 @@ export default config({
         showSwitch: fields.checkbox({ label: 'Show Switch', description: 'Hide/Show the layout selector', defaultValue: true }),
         showSearch: fields.checkbox({ label: 'Show Search', description: 'Hide/Show the search in the header', defaultValue: true }),
         showFooter: fields.checkbox({ label: 'Show Footer', description: 'Hide/Show the Footer', defaultValue: true }),
+        
         divider2: fields.empty(),
 
-        showHomeGallery: fields.checkbox({ label: 'Show Home Photo Gallery', description: 'Hide/Show the Photo section on home page', defaultValue: false }),
+        
 
-        showFeature: fields.checkbox({ label: 'Show Feature', description: 'Hide/Show the Feature section on home page', defaultValue: true }),
-        showBio: fields.checkbox({ label: 'Show Bio', description: 'Hide/Show the Bio section on the home page', defaultValue: true }),
-        showPosts: fields.checkbox({ label: 'Show Posts', description: 'Hide/Show the Posts section on the home page', defaultValue: true }),
-        showTestimonials: fields.checkbox({ label: 'Show Testimonials', description: 'Hide/Show the Testimonials section on the home page', defaultValue: true }),
-        showFAQ: fields.checkbox({ label: 'Show FAQs', description: 'Hide/Show the FAQ section on the home page', defaultValue: true }),
+        // showFeature: fields.checkbox({ label: 'Show Feature', description: 'Hide/Show the Feature section on home page', defaultValue: true }),
+        // showBio: fields.checkbox({ label: 'Show Bio', description: 'Hide/Show the Bio section on the home page', defaultValue: true }),
+        // showPosts: fields.checkbox({ label: 'Show Posts', description: 'Hide/Show the Posts section on the home page', defaultValue: true }),
+        // showTestimonials: fields.checkbox({ label: 'Show Testimonials', description: 'Hide/Show the Testimonials section on the home page', defaultValue: true }),
+        // showFAQ: fields.checkbox({ label: 'Show FAQs', description: 'Hide/Show the FAQ section on the home page', defaultValue: true }),
         divider3: fields.empty(),
         defaultView: fields.select({
           label: 'Default View (sets whether to show grid mode or swipe mode by default',
@@ -221,9 +249,7 @@ export default config({
       label: 'Home Page',
       path: 'src/content/homepage/',
       schema: {
-        faqtitle: fields.text({ label: 'Faq Title' }),
-        testimonialtitle: fields.text({ label: 'Testimonials Title' }),
-        postsectiontitle: fields.text({ label: 'Posts Section Title' }),
+
         featureImage: fields.object({
           src: fields.image({
             label: 'Feature Image',
@@ -234,6 +260,49 @@ export default config({
             label: 'Featured Image Alt Text',
           }),
         }),
+
+        showFeature: fields.checkbox({ label: 'Show Feature', description: 'Hide/Show the Feature section on home page', defaultValue: false }),
+
+        showBioOnHome: fields.checkbox({
+          label: 'Show Bio Module',
+          description: 'Hide/Show the Bio/Info section on the home page',
+          defaultValue: false,
+        }),
+
+        showHomeGallery: fields.checkbox({ label: 'Show Home Photo Gallery', description: 'Hide/Show the Photo section on home page', defaultValue: false }),
+
+        showPosts: fields.checkbox({ label: 'Show Posts', description: 'Hide/Show the Posts section on the home page', defaultValue: false }),
+
+
+        showFaqOnHome: fields.checkbox({
+          label: 'Show FAQ Module',
+          description: 'Hide/Show the FAQ accordian section on the home page',
+          defaultValue: false,
+        }),
+
+        showTestOnHome: fields.checkbox({
+          label: 'Show Testimonials Module',
+          description: 'Hide/Show the Testomonials section on the home page',
+          defaultValue: false,
+        }),
+      
+        
+
+        divider: fields.empty(),
+
+        pitch: fields.relationship({
+          label: 'Select Pitch',
+          collection: 'pitches',
+        }),
+
+        divider1: fields.empty(),
+        
+        testimonialtitle: fields.text({ label: 'Testimonials or Faq Title Header' }),
+        postsectiontitle: fields.text({ label: 'Posts Section Title Header'  }),
+
+        divider2: fields.empty(),
+
+
         youtube: fields.object({
           url: fields.text({ 
             label: 'YouTube Video URL',
@@ -246,9 +315,9 @@ export default config({
           end: fields.number({ label: 'End Time (seconds)' }),
           divider: fields.empty(),
         }),
+      
       },
-    }),
-    photoSettings: singleton({
+    }),    photoSettings: singleton({
       label: 'Photo Gallery Settings',
       path: 'src/content/photoSettings/',
       schema: {
@@ -266,14 +335,26 @@ export default config({
           defaultValue: true,
         }),
 
+        divider: fields.empty(),
+
         showBioOnPhotos: fields.checkbox({
-          label: 'Show Bio',
+          label: 'Show Bio Module',
+          defaultValue: false,
+        }),
+
+        showFaqsOnPhotos: fields.checkbox({
+          label: 'Show FAQ Module',
+          defaultValue: false,
+        }),
+
+        showTestimonialsOnPhotos: fields.checkbox({
+          label: 'Show Testimonials Module',
           defaultValue: false,
         }),
 
         
 
-        divider: fields.empty(),
+        divider5: fields.empty(),
 
         defaultDirectory: fields.text({
           label: '(Directory-based Mode)',
@@ -358,7 +439,7 @@ export default config({
           description: '(light) Header Color - can use any color value',
         }),
         darkHeader: colorPicker({ 
-          label: 'Dark Quote Color', 
+          label: 'Dark Header Color', 
           description: '(dark) Quote Color2 - can use any color value',
         }),
         divider8: fields.empty(),
@@ -384,12 +465,12 @@ export default config({
 
 
     socialCard: singleton({
-      label: ' Default Site Image',
+      label: ' OG Site Image',
       path: 'src/content/photoUpload/',
       schema: {
         socialCard: fields.image({
           label: 'Upload Photo',
-          description: "This is the site's default image - it is used for link previews on social media, if a custom image isn't uploaded.",
+          description: "This is the site's default OG image - it is used for link previews on social media, if a custom image isn't uploaded.",
           directory: 'public/',
           publicPath: '/',
         }),
@@ -431,6 +512,7 @@ ui: {
       'bio',
       'faqs',
       'testimonials',
+      'pitches',
       
     ],
     'Settings': [

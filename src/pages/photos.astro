@@ -2,7 +2,10 @@
 import GoBack from "@/components/GoBack.astro";
 import Bio from "@/components/Bio.astro";
 import PageLayout from "@/layouts/Base.astro";
+import { getEntry } from 'astro:content';
 import { createReader } from '@keystatic/core/reader';
+import Faqs from "@/components/Faqs.astro";
+import Testimonials from '@/components/Testimonials.astro';
 import keystaticConfig from '../../keystatic.config';
 const meta = {
 	description: "Photos",
@@ -11,10 +14,15 @@ const meta = {
 };
 
 import PhotoSection from "@/components/PhotoGallery.astro"
+const siteSettings = await getEntry('siteSettings', 'main');
+const { showFAQ, showPosts, } = siteSettings.data;
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const photoSettings = await reader.singletons.photoSettings.read();
 const showBioOnPhotos = photoSettings?.showBioOnPhotos ?? false;
+const showTestimonialsOnPhotos = photoSettings?.showTestimonialsOnPhotos ?? false;
+const showFaqsOnPhotos = photoSettings?.showFaqsOnPhotos ?? false;
+
 
 ---
 
@@ -30,6 +38,21 @@ const showBioOnPhotos = photoSettings?.showBioOnPhotos ?? false;
   <PhotoSection style="margin:0 auto;" />
 
   {showBioOnPhotos && <Bio />}
+
+  {showFaqsOnPhotos && (
+    <section class="" style="width:100vw; margin:0 auto; backdrop-filter:blur(20px); padding:5vh 0;">
+
+        <div id="" class="nameblock" style={{margin:'0 auto 0 auto', padding:'0 4% 2vh 0',alignContent:'center', display:'grid', textAlign:'left', justifyContent:'center', verticalAlign:'center', fontSize:'clamp(1rem, 1.8vw, 3.2rem)',}}>
+      <Faqs />
+    </div>
+    </section>
+    )}
+
+{typeof showTestimonialsOnPhotos !== 'undefined' && showTestimonialsOnPhotos && (
+<section class="testimonials-section">
+	<Testimonials />
+</section>
+ )}
   
   <div class="booty"></div>
 </PageLayout>

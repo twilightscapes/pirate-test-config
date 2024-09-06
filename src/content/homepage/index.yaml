@@ -1,4 +1,10 @@
-faqtitle: Questions About Pirates
+showFeature: false
+showBioOnHome: true
+showHomeGallery: false
+showPosts: true
+showFaqOnHome: true
+showTestOnHome: false
+pitch: test
 testimonialtitle: Our Happy Pirates
 postsectiontitle: Our Latest Plunders
 featureImage:
