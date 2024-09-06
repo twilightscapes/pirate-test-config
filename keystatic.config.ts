@@ -14,13 +14,23 @@ const getDirectories = () => {
     .map(dirent => ({ label: dirent.name, value: dirent.name }));
 };
 
+
+
+const isProduction: boolean = process.env.NODE_ENV === 'production'
+
 export default config({
-  storage: {
-    kind: 'cloud',
-  },
-  cloud: {
-    project: 'pirate/pirate',
-  },
+  storage: isProduction
+    ? {
+        kind: 'cloud',
+      }
+    : {
+        kind: 'local',
+      },
+  cloud: isProduction
+    ? {
+        project: 'pirate/pirate',
+      }
+    : undefined,
   
   collections: {
     posts: collection({
