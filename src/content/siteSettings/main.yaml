@@ -7,5 +7,5 @@ showSearch: false
 showFooter: true
 defaultView: swipe
 showTitles: true
-showDates: true
+showDates: false
 MAX_POSTS: 3
