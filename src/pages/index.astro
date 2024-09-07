@@ -51,6 +51,8 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 			</div>
 			
 			<div class={`contentpanel ${defaultView === 'swipe' ? 'slider panels horizontal-slider' : 'grid-container'}`} transition:animate="slide">
+				<div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }} />
+
 				{allPostsByDate.map((p) => <PostPreview post={p} withDesc />)}
 
 				<a class="button no-underline text-white text-center block" href="/posts/">
