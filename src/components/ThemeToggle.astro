@@ -56,7 +56,7 @@ class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scal
 </theme-toggle>
 
 <script>
-	// Note that if you fire the theme-change event outside of this component, it will not be reflected in the button's aria-checked attribute
+
 	import { rootInDarkMode } from "@/utils";
 
 	class ThemeToggle extends HTMLElement {
@@ -64,10 +64,8 @@ class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scal
 
 		connectedCallback() {
 			const button = this.querySelector("button")!;
-			// set aria role value
 			button.setAttribute("role", "switch");
 			button.setAttribute("aria-checked", String(rootInDarkMode()));
-			// Abort signal
 			const { signal } = (this.#controller = new AbortController());
 
 			// button event

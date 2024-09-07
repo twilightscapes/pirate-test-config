@@ -4,16 +4,12 @@ import Search from "../Search.astro";
 import Switch from "@/components/Switch.jsx";
 import { getMenuLinks } from "@/site-config";
 import { getEntry } from 'astro:content';
+
 const siteSettings = await getEntry('siteSettings', 'main');
 const { showHeader, showLogo, showTheme, showSearch, showSwitch, logoImage, defaultView } = siteSettings.data;
 
-
-
-
-
 const styleAppearance = await getEntry('styleapps', 'index');
 const { backgroundImage } = styleAppearance.data;
-
 
 const url = new URL(Astro.request.url);
 const menuLinks = await getMenuLinks();
@@ -22,37 +18,20 @@ const menuLinks = await getMenuLinks();
 {showHeader && (
   <div id="menu" class="menu header">
     {showLogo && logoImage && (
-      <a href="/" aria-current={url.pathname === "/" ? "page" : false}>
+      <a href="/" aria-current={url.pathname === "/" ? "page" : false} class="relative top-1 left-2.5 p-0">
         <img 
-          src={`${logoImage}`}
+          src={logoImage}
           alt="Site Logo"
-          class="cornerlogo"
-          style={{
-            position: "relative",
-            top: "1%",
-            left: "10px",
-            padding: "0",
-            maxHeight: "60px",
-            maxWidth: "90px"
-          }}
+          class="max-h-[60px] max-w-[90px] cornerlogo"
           loading="eager"
           fetchpriority="high"
-          width="90px"
-          height="60px"
+          width="90"
+          height="60"
         />
       </a>
     )}
 
-    <ul class="topmenu" style={{ fontSize: "clamp(.6rem, 1.6vw, 1.8rem)",
-      textAlign: "center",
-      display: "flex",
-      justifyContent: "space-around",
-      gap: "4vw",
-      alignItems: "center",
-      margin: "0 auto",
-      padding: "0",
-      height: '60px'
-    }}>
+    <ul class="topmenu flex justify-around items-center gap-4 m-auto p-0 h-15 text-center text-[clamp(0.6rem,1.6vw,1.8rem)]">
       {menuLinks.map((link) => (
         <li>
           <a
@@ -68,28 +47,14 @@ const menuLinks = await getMenuLinks();
       ))}
     </ul>
 
-    <div id="missioncontrol" class="missioncontrol sitecontrols" style={{
-      display: "flex",
-      justifyContent: "space-around",
-      // fontSize: "clamp(.8rem, 2.3vw, 2.5rem)",
-      gap: "3vw",
-      alignItems: "center",
-      padding: "0 10px 0 0",
-    }}>
+    <div id="missioncontrol" class="missioncontrol sitecontrols flex justify-around items-center gap-3 pr-2.5">
       {showSearch && <Search />}
-      {/* {showSwitch && <Switch client:load />} */}
       {showSwitch && <Switch client:load defaultView={defaultView} />}
       {showTheme && <ThemeToggle />}
     </div>
-    
   </div>
-
-
 )}
-  
-  
-  {backgroundImage ? (
-    <img class="backimage" src={backgroundImage} alt="Default Background" style={{}} width="10" height="10" />
-  ) : (
-    ""
-  )}
+
+{backgroundImage && (
+  <img class="backimage w-2.5 h-2.5" src={backgroundImage} alt="Default Background" width="10" height="10" />
+)}

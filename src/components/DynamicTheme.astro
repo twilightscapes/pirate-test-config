@@ -21,10 +21,8 @@ function applyTheme() {
   document.documentElement.style.setProperty('--borderRadius', borderRadius);
 }
 
-// Apply theme immediately
-applyTheme();
 
-// Reapply theme after each view transition
+applyTheme();
 document.addEventListener('astro:page-load', applyTheme);
 </script>
 
