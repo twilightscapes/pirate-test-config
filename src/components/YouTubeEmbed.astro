@@ -11,7 +11,7 @@ interface Props {
 
 const { url = '', title = 'YouTube video', controls = true, mute = false, loop = false, start = 0, end = 0 } = Astro.props;
 
-function getYouTubeId(url: string): string | null {
+function getYouTubeId(url: string) {
   if (!url) return null;
   const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
   const match = url.match(regex);
@@ -19,37 +19,247 @@ function getYouTubeId(url: string): string | null {
 }
 
 const videoId = getYouTubeId(url);
-
-const params = new URLSearchParams({
-  autoplay: '1',
-  controls: controls ? '1' : '0',
-  mute: mute ? '1' : '0',
-  loop: loop ? '1' : '0',
-  start: start.toString(),
-});
-
-if (end > 0) {
-  params.append('end', end.toString());
-}
-
-const embedUrl = videoId 
-  ? `https://www.youtube.com/embed/${videoId}?${params.toString()}&playlist=${videoId}${loop ? '&loop=1' : ''}`
-  : '';
+const playerVars: { [key: string]: number | string } = {
+  autoplay: 1,
+  controls: controls ? 1 : 0,
+  mute: mute ? 1 : 0,
+  loop: loop ? 1 : 0,
+  start: start,
+  end: end > 0 ? end : '',
+  playlist: videoId ?? '',
+};
 ---
-
-{videoId ? (
-  <iframe
-    src={embedUrl}
-    title={title}
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-    width="100%"
-    height="auto"
-    style="aspect-ratio: 16/9;"
-  ></iframe>
-) : (
-  <div>
-    <p>No valid YouTube URL provided.</p>
+<div class="custom-youtube-player" style="display:flex; justify-content:center;">
+  <div id="youtube-player" style="width:100%; max-width:1600px; aspect-ratio:16/9;"></div>
+  <div class="custom-controls">
+    <div class="center-controls">
+      <button id="play-pause" class="play-pause-button">▶</button>
+      <p class="video-title">{title}</p>
+    </div>
+    <div class="bottom-tray">
+      <input type="range" id="progress" min="0" max="100" value="0" class="progress-bar">
+      <button id="mute" class="control-button">Mute</button>
+      <input type="range" id="volume" min="0" max="100" value="100" class="volume-slider">
+    </div>
   </div>
-)}
+</div>
+
+<style>
+  .custom-youtube-player {
+    width: 100vw;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  #youtube-player {
+    min-height: 70vh;
+    aspect-ratio: auto;
+  }
+  .custom-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+  }
+  .custom-controls:hover {
+    opacity: 1;
+  }
+  .custom-controls.paused {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 1); /* Fully opaque when paused */
+  }
+  .center-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .play-pause-button {
+    font-size: 4rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  .video-title {
+    color: white;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .bottom-tray {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    width:100%;
+    justify-content: center;
+    gap:5vw;
+  }
+</style>
+
+<script>
+  declare namespace YT {
+    interface Player {
+      getPlayerState(): number;
+      pauseVideo(): void;
+      playVideo(): void;
+    }
+    enum PlayerState {
+      PLAYING = 1,
+      PAUSED = 2
+    }
+  }
+
+  function onPlayerStateChange(event: { data: number }) {
+    const controls = document.querySelector('.custom-controls');
+    if (event.data === YT.PlayerState.PAUSED) {
+      controls?.classList.add('paused');
+    } else {
+      controls?.classList.remove('paused');
+    }
+  }
+
+
+</script><script define:vars={{ videoId, playerVars, start, end, loop }}>
+  // Load YouTube API
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  if (firstScriptTag.parentNode) {
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  }
+
+  let player;
+
+  window.onYouTubeIframeAPIReady = function() {
+    player = new YT.Player('youtube-player', {
+      height: '100%',
+      width: '100%',
+      videoId: videoId,
+      playerVars: playerVars,
+      events: {
+        'onReady': onPlayerReady,
+      }
+    });
+  }
+
+  function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+      const checkLoop = () => {
+        const currentTime = player.getCurrentTime();
+        if (currentTime >= end) {
+          player.seekTo(start, true);
+        } else {
+          requestAnimationFrame(checkLoop);
+        }
+      };
+      requestAnimationFrame(checkLoop);
+    }
+  }
+  function onPlayerReady(event) {
+    const playerArea = document.querySelector('.custom-youtube-player');
+    playerArea.addEventListener('click', function() {
+      if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+        player.pauseVideo();
+      } else {
+        player.playVideo();
+      }
+    });
+
+    const muteButton = document.getElementById('mute');
+    if (muteButton) {
+      muteButton.textContent = player.isMuted() ? 'Unmute' : 'Mute';
+    }
+    const playPauseButton = document.getElementById('play-pause');
+    const progressBar = document.getElementById('progress');
+
+    if (playPauseButton) {
+      playPauseButton.addEventListener('click', function() {
+        if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+          player.pauseVideo();
+        } else {
+          player.playVideo();
+        }
+      });
+    }
+
+    if (muteButton) {
+      muteButton.addEventListener('click', function() {
+        const currentTime = player.getCurrentTime();
+        if (player.isMuted()) {
+          player.unMute();
+          muteButton.textContent = 'Mute';
+        } else {
+          player.mute();
+          muteButton.textContent = 'Unmute';
+        }
+        player.seekTo(currentTime, true);
+      });
+    }
+
+    if (progressBar) {
+      player.addEventListener('onStateChange', function(event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+          updateProgressBar();
+        }
+      });
+
+      progressBar.addEventListener('input', function() {
+        const time = player.getDuration() * (progressBar.value / 100);
+        player.seekTo(time, true);
+      });
+    }
+
+    const volumeSlider = document.getElementById('volume');
+    if (volumeSlider) {
+      volumeSlider.addEventListener('input', function() {
+        player.setVolume(this.value);
+      });
+    }
+
+    if (loop) {
+      player.addEventListener('onStateChange', function(event) {
+        if (event.data === YT.PlayerState.ENDED) {
+          player.cueVideoById({
+            videoId: videoId,
+            startSeconds: start,
+            endSeconds: end
+          });
+          player.playVideo();
+        }
+      });
+    }
+  }  function updateProgressBar() {
+    const progressBar = document.getElementById('progress');
+    if (progressBar) {
+      const interval = setInterval(function() {
+        const progress = (player.getCurrentTime() / player.getDuration()) * 100;
+        progressBar.value = progress;
+        if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
+  }
+
+  function checkAndLoop() {
+    const checkInterval = setInterval(() => {
+      const currentTime = player.getCurrentTime();
+      if (currentTime >= end) {
+        player.seekTo(start, true);
+        clearInterval(checkInterval);
+        setTimeout(checkAndLoop, 100); // Restart the check after a short delay
+      }
+    }, 100);
+  }
+</script>

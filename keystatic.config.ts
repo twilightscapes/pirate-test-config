@@ -70,13 +70,19 @@ export default config({
               controls: fields.checkbox({ label: 'Show Controls' }),
               mute: fields.checkbox({ label: 'Mute Video' }),
               loop: fields.checkbox({ label: 'Loop Video' }),
-              start: fields.number({ label: 'Start Time (seconds)' }),
-              end: fields.number({ label: 'End Time (seconds)' }),
+              start: fields.number({ 
+                label: 'Start Time (seconds)', 
+                defaultValue: 0,
+                validation: { min: 0 }
+              }),
+              end: fields.number({ 
+                label: 'End Time (seconds)', 
+                validation: { min: 0, isRequired: false }
+              }),
             }),
             false: fields.empty(),
           }
-        ),
-        divider1: fields.empty(),
+        ),        divider1: fields.empty(),
         tags: fields.array(fields.text({ label: 'Tag' }), {
           label: 'Tags',
           itemLabel: (props) => props.value,
