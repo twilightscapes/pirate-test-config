@@ -6,8 +6,9 @@ showBioOnHome: true
 showHomeGallery: false
 showPosts: true
 showFaqOnHome: true
-showTestOnHome: true
+showTestOnHome: false
 pitch: test
+postsectiontitle: Our Latest Plunders
 youtube:
   url: https://youtu.be/OtghUljKVhE?si=1d8kib5YLzqs_vmf
   controls: true
