@@ -25,7 +25,6 @@ const showFaqsOnPhotos = photoSettings?.showFaqsOnPhotos ?? false;
 
 
 ---
-
 <PageLayout
   meta={meta}
   title={meta.title}
@@ -33,26 +32,25 @@ const showFaqsOnPhotos = photoSettings?.showFaqsOnPhotos ?? false;
   articleDate={new Date().toISOString()}
   ogImage={meta.ogImage}
 >
-  <GoBack  />
+  <GoBack />
 
-  <PhotoSection style="margin:0 auto;" />
+  <PhotoSection class="mx-auto" />
 
   {showBioOnPhotos && <Bio />}
 
   {showFaqsOnPhotos && (
-    <section class="" style="width:100vw; margin:0 auto; backdrop-filter:blur(20px); padding:5vh 0;">
-
-        <div id="" class="nameblock" style={{margin:'0 auto 0 auto', padding:'0 4% 2vh 0',alignContent:'center', display:'grid', textAlign:'left', justifyContent:'center', verticalAlign:'center', fontSize:'clamp(1rem, 1.8vw, 3.2rem)',}}>
-      <Faqs />
-    </div>
+    <section class="w-screen mx-auto backdrop-blur-xl py-20">
+      <div class="nameblock mx-auto pb-8 pr-4 content-center grid text-left justify-center items-center text-[clamp(1rem,1.8vw,3.2rem)]">
+        <Faqs />
+      </div>
     </section>
-    )}
+  )}
 
-{typeof showTestimonialsOnPhotos !== 'undefined' && showTestimonialsOnPhotos && (
-<section class="testimonials-section">
-	<Testimonials />
-</section>
- )}
+  {typeof showTestimonialsOnPhotos !== 'undefined' && showTestimonialsOnPhotos && (
+    <section class="testimonials-section">
+      <Testimonials />
+    </section>
+  )}
   
   <div class="booty"></div>
 </PageLayout>

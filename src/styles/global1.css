@@ -32,6 +32,7 @@ body{z-index: 0; overscroll-behavior:none; min-height:100dvh; max-width: 100dvw;
   --theme-text-dark: var(--darkText, #ebf1ed);
   --theme-ui-colors-borderRadius: var(--borderRadius);
   
+  
 }body {
   font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,Ubuntu,roboto,noto,segoe ui,arial,sans-serif;
   --font-family-mono: Menlo,Consolas,Monaco,Liberation Mono,Lucida Console,monospace;
@@ -84,46 +85,6 @@ body.install #menu{display: none !important;}
   object-fit:cover;
 }
 
-/* .backimage::after{
-  content: " ";
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M13 10h-8v-2h8v2zm8.172 14l-7.387-7.387c-1.388.874-3.024 1.387-4.785 1.387-4.971 0-9-4.029-9-9s4.029-9 9-9 9 4.029 9 9c0 1.761-.514 3.398-1.387 4.785l7.387 7.387-2.828 2.828zm-12.172-8c3.859 0 7-3.14 7-7s-3.141-7-7-7-7 3.14-7 7 3.141 7 7 7z'/%3E%3C/svg%3E") !important;
-  width: 50px !important;
-  height: 50px !important;
-  color:#222 !important;
-  pointer-events: none !important;
-  display:block  !important;
-  border:1px solid red  !important;
-} */
-
-/* .themer:before{
-	content:(" Site Options: ");
-	position:absolute;
-	top:2px;
-	right:-10px;
-	height:21px;
-	background-color:#666;
-	color:#fff;
-	display:block;
-	padding:4px 10px 0 10px;
-	width:180px;
-	border-radius: 12px 12px 0 0;
-	border-bottom:1px solid #666;
-} */
-
-
-
-/* .booty{
-  display: block;
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  z-index:-1;
-  top:0;
-  object-fit:cover;
-  background-size: 100%;
-  background: url("data:image/svg+xml; base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCI+CjxmaWx0ZXIgaWQ9Im4iPgo8ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjciIG51bU9jdGF2ZXM9IjEwIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIj48L2ZlVHVyYnVsZW5jZT4KPC9maWx0ZXI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjMDAwIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWx0ZXI9InVybCgjbikiIG9wYWNpdHk9IjAuNCI+PC9yZWN0Pgo8L3N2Zz4=");
-opacity: .9;
-} */
 
 
 

@@ -67,9 +67,7 @@ const sortedFaqs = faqs.sort((a, b) => (((a.data.order as number) ?? 0) - ((b.da
   }
 </style>
 
-<div class="nameblock flexcheek headline" style={{position:'', top:'', marginTop: '', width:'100%', padding: '1vh 2vh', margin:'0 auto 0 auto', maxHeight: '',  backdropFilter:'blur(12px)' }}>
-  <!-- <h2 class="letter glow" style={{fontSize:'clamp(1.4rem,2.6vw,3rem)', textAlign:'center', color:'#ddd', fontStyle:'normal', marginBottom:'0'}}>{(sortedFaqs[0] as CollectionEntry<'faqs'>)?.data?.faqTitle ?? 'Frequently Asked Questions'}</h2> -->
-  
+<div class="nameblock flexcheek headline w-full p-[1vh_2vh] mx-auto backdrop-blur-[12px]">
   <div class="card-wrapper | content-cc" style="width:80%; max-width:800px; margin:0 auto;">
     <div class="faq-card">
       <main class="faq-content">

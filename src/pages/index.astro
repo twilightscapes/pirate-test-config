@@ -9,12 +9,11 @@ import Bio from "@/components/Bio.astro";
 import { getEntry } from 'astro:content';
 import keystaticConfig from '../../keystatic.config';
 import { createReader } from '@keystatic/core/reader';
+import PhotoSection from "@/components/PhotoGallery.astro"
+
 const siteSettings = await getEntry('siteSettings', 'main');
 const { defaultView, MAX_POSTS } = siteSettings.data;
 const homeContent = await getEntry('homepage', 'index');
-
-
-import PhotoSection from "@/components/PhotoGallery.astro"
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const homepage = await reader.singletons.home.read();
@@ -27,111 +26,37 @@ const showHomeGallery = homepage?.showHomeGallery ?? false;
 
 const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
-
-
-
-
 ---
-	<PageLayout
-  meta={{ 
-    title: homeContent.data.title,
-    description: homeContent.data.description,
-	ogImage: "",
-  articleDate:""
-  }}
->
-{showFeature && <Feature content={homeContent.data} /> }
 
-{ showHomeGallery && (
-<PhotoSection />
-)}
+<PageLayout meta={{ title: homeContent.data.title, description: homeContent.data.description }}>
+	{showFeature && <Feature content={homeContent.data} />}
 
+	{showHomeGallery && <PhotoSection />}
 
-	<!-- {typeof showFeature !== 'undefined' && showFeature && (
-<section class="scroll-area1 panel" id="feature" style={{ display: '', height: '', minHeight: '', position: 'relative', overflow: 'hidden', margin: '0 auto 0 auto', padding: '0', width: '100vw', }}>
+	{showBioOnHome && <Bio />}
 
-	<Feature content={homeContent.data} />
-</section>
-)} -->
-
-
-
-
-<!-- {typeof showBio !== 'undefined' && showBio && (
-<Bio />
-)} -->
-
-{showBioOnHome && <Bio />}
-	  
-
-
-{showFaqOnHome && (
-<div class="nameblock flexcheek headline" style={{width:'100%', padding: '1vh 2vh', margin:'0 auto 4vh auto', maxHeight: '', fontSize:'clamp(1.4rem,3.9vw,4rem)', textAlign:'center', position:'relative', top:'', textShadow: '0 2px 3px #000', background:'var(--theme-accent)', backdropFilter:'blur(12px)', color:'#fff' }}>
-<h2 class="glow">{homeContent.data.testimonialtitle}</h2>
-</div>
-<Faqs />
-
-)}
-
-
-
-
-	
-
-
-
-
-{showTestOnHome && (
-
-	<Testimonials />
-
- )}
-
-
-
-
-{showPosts && (
-	<section class="scroll-container" style={{display:''}}>
-		<div class="nameblock flexcheek headline" style={{width:'100%', padding: '1vh 2vh', margin:'0 auto 4vh auto', maxHeight: '', fontSize:'clamp(1.4rem,3.9vw,4rem)', textAlign:'center', position:'relative', top:'', textShadow: '0 2px 3px #000', background:'var(--theme-accent)', backdropFilter:'blur(12px)', color:'#fff' }}>
-			<h2 class="glow">{homeContent.data.postsectiontitle}</h2>
+	{showFaqOnHome && (
+		<div class="w-full py-1 px-2 mb-4 text-center text-white theme-accent backdrop-blur-lg">
+			<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text">{homeContent.data.testimonialtitle}</h2>
 		</div>
-		
-		<div class={`contentpanel ${defaultView === 'swipe' ? 'slider panels horizontal-slider' : 'grid-container'}`} transition:animate="slide">
-			<div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
+		<Faqs />
+	)}
 
-			{allPostsByDate.map((p) => <PostPreview post={p} withDesc />)}
+	{showTestOnHome && <Testimonials />}
 
-			<a
-				class="button"
-				href="/posts/"
-				style={{
-					textDecoration: "none",
-					color: "#fff",
-					textAlign: "center",
-					display: "block",
-				}}
-			>
-				View More
-			</a>
-		</div>
-	</section>
-)}
+	{showPosts && (
+		<section class="scroll-container">
+			<div class="w-full py-1 px-2 mb-4 text-center text-white theme-accent backdrop-blur-lg">
+				<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text">{homeContent.data.postsectiontitle}</h2>
+			</div>
+			
+			<div class={`contentpanel ${defaultView === 'swipe' ? 'slider panels horizontal-slider' : 'grid-container'}`} transition:animate="slide">
+				{allPostsByDate.map((p) => <PostPreview post={p} withDesc />)}
 
-
-
+				<a class="button no-underline text-white text-center block" href="/posts/">
+					View More
+				</a>
+			</div>
+		</section>
+	)}
 </PageLayout>
-
-
-
-  
-  
-  
-  
-
-
-
-
-
-
-
-

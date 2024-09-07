@@ -90,29 +90,19 @@ export default function GalleryLightbox({ images, showCaptions }) {
       {...options}
       render={{
         slide: ({ slide }) => (
-          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+          <div className="relative w-full h-full">
             <img
               src={slide.src}
               alt={slide.alt || ''}
-              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              className="w-full h-full object-contain"
             />
             {showCaptions && slide.title && (
-              <div style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                padding: '10px',
-                background: 'rgba(0, 0, 0, 0.7)',
-                color: 'white',
-                textAlign: 'center'
-              }}>
+              <div className="absolute bottom-0 left-0 right-0 p-2.5 bg-black bg-opacity-70 text-white text-center">
                 {slide.title}
               </div>
             )}
           </div>
         ),
-    
       }}    />
   );
 }

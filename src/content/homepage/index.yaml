@@ -1,15 +1,13 @@
+featureImage:
+  src: /images/homepage/featureImage/src.webp
+  alt: Become a Pirate!
 showFeature: false
 showBioOnHome: true
 showHomeGallery: false
 showPosts: true
 showFaqOnHome: true
-showTestOnHome: false
+showTestOnHome: true
 pitch: test
-testimonialtitle: Our Happy Pirates
-postsectiontitle: Our Latest Plunders
-featureImage:
-  src: /images/homepage/featureImage/src.webp
-  alt: Become a Pirate!
 youtube:
   url: https://youtu.be/OtghUljKVhE?si=1d8kib5YLzqs_vmf
   controls: true
