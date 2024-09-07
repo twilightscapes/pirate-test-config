@@ -5,7 +5,7 @@ showTheme: true
 showSwitch: true
 showSearch: false
 showFooter: true
-defaultView: swipe
+defaultView: grid
 showTitles: true
 showDates: false
 MAX_POSTS: 3
