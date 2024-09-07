@@ -33,13 +33,14 @@ const playerVars: { [key: string]: number | string } = {
   <div id="youtube-player" style="width:100%; max-width:1600px; aspect-ratio:16/9;"></div>
   <div class="custom-controls">
     <div class="center-controls">
-      <button id="play-pause" class="play-pause-button">▶</button>
-      <p class="video-title">{title}</p>
+      <button id="play-pause" class="play-pause-button"></button>
+      <h2 class="video-title title1">{title}</></h2>
     </div>
     <div class="bottom-tray">
       <input type="range" id="progress" min="0" max="100" value="0" class="progress-bar">
-      <button id="mute" class="control-button">Mute</button>
+      
       <input type="range" id="volume" min="0" max="100" value="100" class="volume-slider">
+      <div><button id="mute" class="control-button">Mute</button></div>
     </div>
   </div>
 </div>
@@ -95,6 +96,7 @@ const playerVars: { [key: string]: number | string } = {
     color: white;
     text-align: center;
     margin-top: 1rem;
+    font-size:clamp(1.4rem,3.9vw,4rem);
   }
   .bottom-tray {
     display: flex;
@@ -105,6 +107,7 @@ const playerVars: { [key: string]: number | string } = {
     justify-content: center;
     gap:5vw;
   }
+  #mute{color:white;}
 </style>
 
 <script>
