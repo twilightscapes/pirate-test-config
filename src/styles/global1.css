@@ -33,11 +33,7 @@ body{z-index: 0; overscroll-behavior:none; min-height:100dvh; max-width: 100dvw;
   --theme-ui-colors-borderRadius: var(--borderRadius);
   
   
-}
-
-.theme-accent{background:var(--theme-accent)}
-
-body {
+}body {
   font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,Ubuntu,roboto,noto,segoe ui,arial,sans-serif;
   --font-family-mono: Menlo,Consolas,Monaco,Liberation Mono,Lucida Console,monospace;
   line-height: 1.5;
