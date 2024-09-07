@@ -36,7 +36,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 	{showBioOnHome && <Bio />}
 
 	{showFaqOnHome && (
-		<div class="w-full py-1 px-2 mb-4 text-center text-white theme-accent backdrop-blur-lg">
+		<div class="w-full px-2 mb-4 text-center text-white theme-accent backdrop-blur-lg">
 			<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text">{homeContent.data.testimonialtitle}</h2>
 		</div>
 		<Faqs />
@@ -46,7 +46,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 
 	{showPosts && (
 		<section class="scroll-container">
-			<div class="w-full py-1 px-2 mb-4 text-center text-white theme-accent backdrop-blur-lg">
+			<div class="w-full mb-4 text-center text-white theme-accent backdrop-blur-lg">
 				<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text">{homeContent.data.postsectiontitle}</h2>
 			</div>
 			
