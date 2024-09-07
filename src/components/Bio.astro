@@ -3,33 +3,35 @@ import { getEntry } from 'astro:content';
 const bioContent = await getEntry('bio', 'index');
 ---
 
-<section class="scroll-area1 panel" id="profile" style={{ display: '', height: '', minHeight: '', position: 'relative', overflow: 'hidden', margin: '0 auto 0 auto', padding: '3vh 0 20px 0', width: '100vw', borderRadius: 'var(--theme-ui-colors-borderRadius)', backdropFilter:'blur(20px)' }}>
-    <article style={{ margin: '0 0 0 0' }}>
-        <div id="profiletop" class="flexbutt" style={{ display: '', gap: '10px', justifyContent: 'center', alignItems: "center", margin: '0 0', padding: '0 2% 0 2%', position: 'relative', color: '' }}>
-            <div class="nameblock flexcheek" style={{ position: '', top: '0', marginTop: '', padding: '0 0 0 0', maxHeight: '', fontSize: 'clamp(1rem, 1.4vw, 3.2rem)' }}>
-                <div class="mob print" style={{ position: 'sticky', top: '0', fontSize: 'clamp(1rem, 1.5vw, 3.2rem)', textAlign: '' }}>
-                    <h1 class="title" style={{ fontSize: 'clamp(1.4rem, 2.5vw, 3rem)', fontStyle: 'normal', textWrap: 'balance', textAlign: 'center', lineHeight: '1.2', color: 'inherit' }}>{bioContent.data.title}</h1>
-                    <h2 class="tagline1" style={{ fontSize: 'clamp(1.2rem, 2.3vw, 1.8rem)', textWrap: '', textAlign: 'center', lineHeight: '1', textShadow: 'none' }}>
-                        {bioContent.data.tagline}
-                    </h2>
-                    <div style={{ fontSize: 'clamp(1.2rem, 2vw, 2.8rem)', textAlign: 'left', textWrap: '', padding: '0 1rem 0 1rem' }} class="description">
-                        <p>{bioContent.data.description}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flexcheek mob2 print" style={{ position: '', top: '0', minWidth: '500px', overflow: '', marginBottom: '', paddingTop: '0' }}>
-                <h2 class="title" style={{ textAlign: 'center', fontSize: 'clamp(1.3rem, 2.4vw, 3rem)', fontStyle: 'normal', margin: '0 0 3vh 0', color: 'inherit' }}><a href={"tel:" + bioContent.data.phone}>Call {bioContent.data.phone}</a></h2>
-                <div class="" style={{ position: '', top: '', marginTop: '', width: '100%', margin: '0 auto', maxHeight: '', fontSize: 'clamp(1/2.7rem, 1.3vw, 2rem)', textAlign: 'center', color: '' }}>
-                    <h3 class="font" style={{ textAlign: 'center', fontFamily: '', fontSize: 'clamp(1.2rem, 2vw, 2.4rem)' }}>{bioContent.data.subheading}</h3>
-                </div>
-                <div style={{ background: 'var(--theme-accent)', backdropFilter: 'blur(12px)', marginTop: '2vh', padding: '1vh 5%', color: '#fff', borderRadius: 'var(--theme-ui-colors-borderRadius)', justifyContent: 'center', textAlign: 'center', fontSize: 'clamp(1rem, 1.8vw, 3.2rem)', width: '80%', margin: '0 auto' }}>
-                    <p>{bioContent.data.subcontent}</p>
-                    <button class="special font">
-                        <div class="fancy"></div>
-                        <a class="font" href="contact" title="Contact Us" aria-label="Contact Us" style={{ textDecoration: 'none', border: 'none', boxShadow: 'none' }}><span class="butttext font">{bioContent.data.subcta}</span></a>
-                    </button>
-                </div>
-            </div>
+<section id="profile" class="scroll-area1 panel w-screen  mb-5 overflow-hidden rounded-lg backdrop-blur-lg">
+    <article>
+      <div id="profiletop" class="flex flex-col md:flex-row justify-center items-center gap-4 p-4">
+        <div class="nameblock flex-1 text-center">
+          <h1 class="title2 text-[clamp(1.6rem,3.9vw,4rem)] mb-2">{bioContent.data.title}</h1>
+
+          <h2 class="tagline1 text-[clamp(1.2rem,2vw,3rem)] text-center mb-4">{bioContent.data.tagline}</h2>
+
+          <div class="description text-lg md:text-xl lg:text-2xl px-4 text-left ">
+            <p>{bioContent.data.description}</p>
+          </div>
         </div>
+
+        
+        <div class="flex-1 min-w-[300px] md:min-w-[500px]">
+          <h2 class="title2 text-center text-[clamp(1.2rem,3vw,2rem)] mb-6">
+            <a href={`tel:${bioContent.data.phone}`} class="hover:underline">Call {bioContent.data.phone}</a>
+          </h2>
+          <h3 class="font text-center text-xl md:text-2xl lg:text-3xl mb-4">{bioContent.data.subheading}</h3>
+          <div class="bg-accent backdrop-blur-md mt-4  rounded-lg text-center text-lg md:text-xl lg:text-2xl mx-auto">
+            <p>{bioContent.data.subcontent}</p>
+            <button class="special font mt-4">
+              <div class="fancy"></div>
+              <a href="contact" class="font no-underline border-none shadow-none">
+                <span class="butttext font">{bioContent.data.subcta}</span>
+              </a>
+            </button>
+          </div>
+        </div>
+      </div>
     </article>
 </section>
