@@ -70,7 +70,7 @@ return (
   encType="multipart/form-data"
   onSubmit={handleSubmit}
   style={{width:'100%', minWidth:'300px', maxWidth:'400px', margin:'0 auto 0 auto', display:'flex', flexDirection:'column', justifyContent:'center',
- borderRadius:'var(--theme-ui-colors-borderRadius)', textAlign:'center', alignSelf:'center', overflow:'hidden', color:'var(--theme-ui-colors-headerColorText)', border:'0px solid red'}}
+ borderRadius:'var(--border-radius)', textAlign:'center', alignSelf:'center', overflow:'hidden', color:'var(--theme-ui-colors-headerColorText)', border:'0px solid red'}}
 >
 
 
