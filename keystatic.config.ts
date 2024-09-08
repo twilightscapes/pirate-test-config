@@ -83,18 +83,18 @@ export default config({
                 label: 'End Time (seconds)', 
                 validation: { min: 0, isRequired: false }
               }),
+              videoOnly: fields.checkbox({ label: 'Video Only', defaultValue: false }),
             }),
             false: fields.empty(),
           }
-        ),        divider1: fields.empty(),
+        ),
+        divider1: fields.empty(),        
         tags: fields.array(fields.text({ label: 'Tag' }), {
           label: 'Tags',
           itemLabel: (props) => props.value,
         }),
       },
-    }),
-    pages: collection({
-      label: 'Other Pages',
+    }),    pages: collection({      label: 'Other Pages',
       path: 'src/content/pages/*',
       slugField: 'title',
       format: { contentField: 'content' },

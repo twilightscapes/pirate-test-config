@@ -27,6 +27,7 @@ const postSchema = z.object({
     .optional()
     .transform((str) => (str ? new Date(str) : undefined)),
   ogImage: z.string().optional(),
+  videoOnly: z.boolean().optional(),
   youtube: z.object({
     discriminant: z.boolean(),
     value: z.object({
@@ -36,11 +37,11 @@ const postSchema = z.object({
       loop: z.boolean().optional(),
       start: z.number().optional(),
       end: z.number().optional(),
-      useCustomPlayer: z.boolean().optional()
+      useCustomPlayer: z.boolean().optional(),
+      videoOnly: z.boolean().optional(),
     }).optional()
   }).optional(),
 });
-
 const post = defineCollection({
   schema: postSchema,
   type: "content",

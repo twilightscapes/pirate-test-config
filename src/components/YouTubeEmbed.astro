@@ -43,6 +43,8 @@ const playerVars: { [key: string]: number | string } = {
   <div class="custom-youtube-player" style="display:flex; justify-content:center;">
     <div id="youtube-player" style="width:100%; max-width:1600px; aspect-ratio:16/9;"></div>
     <div class="custom-controls">
+      <div class="topblock"></div>
+      
       <div class="center-controls">
         <button id="play-pause" class="play-pause-button">►</button>
         <h2 class="video-title title1">{title}</h2>
@@ -57,6 +59,7 @@ const playerVars: { [key: string]: number | string } = {
 
         <div><button id="mute" class="control-button">Mute</button></div>
       </div>
+      <div class="botblock"></div>
     </div>
   </div>
 ) : (
@@ -72,6 +75,20 @@ const playerVars: { [key: string]: number | string } = {
   ></iframe>
 )}
 <style>
+
+  .topblock{display:flex; width:100%; justify-content: center; position: absolute; top:0; height:60px; background:#000;}
+  .botblock{display:flex; width:100%; justify-content: center; position: absolute; bottom:0; height:170px; background:#000; z-index: 0;}
+
+@media (max-width: 48rem) {
+
+.topblock{display:flex; width:100%; justify-content: center; position: absolute; top:0; height:0px; background:#000;}
+.botblock{display:flex; width:100%; justify-content: center; position: absolute; bottom:0; height:50px; background:#000; z-index: 0;}
+.youtube-player{margin-top:60px;}
+.custom-youtube-player{margin-top:60px !important;}
+
+}
+
+
   .custom-youtube-player {
     width: 100vw;
     max-width: 100%;
@@ -103,7 +120,7 @@ const playerVars: { [key: string]: number | string } = {
   }
   .custom-controls.paused {
     opacity: 1;
-    background-color: rgba(0, 0, 0, 1); /* Fully opaque when paused */
+    background-color: rgba(0, 0, 0, 1); 
   }
   .center-controls {
     display: flex;
@@ -113,7 +130,7 @@ const playerVars: { [key: string]: number | string } = {
     height: 100%;
   }
   .play-pause-button {
-    font-size: 4rem;
+    font-size: 3rem;
     background: none;
     border: none;
     color: white;
@@ -133,6 +150,7 @@ const playerVars: { [key: string]: number | string } = {
     width:100%;
     justify-content: center;
     gap:5vw;
+    z-index: 11;
   }
   #mute{color:white; width:100%;}
   .bottom-tray label{display:flex; flex-direction: column; font-size: clamp(.8rem,.9vw,1rem); align-items: center;}
@@ -151,17 +169,19 @@ const playerVars: { [key: string]: number | string } = {
     }
   }
 
-  function onPlayerStateChange(event: { data: number }) {
+  {/* function onPlayerStateChange(event: { data: number }) {
     const controls = document.querySelector('.custom-controls');
     if (event.data === YT.PlayerState.PAUSED) {
       controls?.classList.add('paused');
+
     } else {
       controls?.classList.remove('paused');
     }
-  }
+  } */}
 
 
-</script><script define:vars={{ videoId, playerVars, start, end, loop }}>
+</script>
+<script define:vars={{ videoId, playerVars, start, end, loop }}>
   // Load YouTube API
   const tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
@@ -184,19 +204,19 @@ const playerVars: { [key: string]: number | string } = {
     });
   }
 
-  function onPlayerStateChange(event) {
-    if (event.data === YT.PlayerState.PLAYING) {
-      const checkLoop = () => {
-        const currentTime = player.getCurrentTime();
-        if (currentTime >= end) {
-          player.seekTo(start, true);
-        } else {
-          requestAnimationFrame(checkLoop);
-        }
-      };
-      requestAnimationFrame(checkLoop);
-    }
-  }
+  // function onPlayerStateChange(event) {
+  //   if (event.data === YT.PlayerState.PLAYING) {
+  //     const checkLoop = () => {
+  //       const currentTime = player.getCurrentTime();
+  //       if (currentTime >= end) {
+  //         player.seekTo(start, true);
+  //       } else {
+  //         requestAnimationFrame(checkLoop);
+  //       }
+  //     };
+  //     requestAnimationFrame(checkLoop);
+  //   }
+  // }
 
   let controlsTimeout;
 

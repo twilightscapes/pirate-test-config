@@ -125,7 +125,7 @@ html {		@apply scroll-smooth;
 		position: absolute;
 		inset: 0;
 		animation: rotate 3s cubic-bezier(0.42,0,1,1) infinite;
-		border-radius: var(--radius);
+		border-radius: var(--border-radius);
 	  }
 	  
 	  .special:hover .fancy::before {
@@ -143,7 +143,7 @@ html {		@apply scroll-smooth;
 		background: var(--theme-accent2);
 		position: absolute;
 		inset: 2px;
-		border-radius: var(--radius);
+		border-radius: var(--border-radius);
 	  }
 	  
 	  .butttext {
@@ -176,7 +176,7 @@ html {		@apply scroll-smooth;
 		margin-bottom: 40px;
 		box-sizing: border-box;
 		break-inside: avoid;
-		border-radius: var(--border-radius) !important;
+		border-radius: var(--border-radius);
 		transition: transform .2s;
 		
 	  }
@@ -184,7 +184,7 @@ html {		@apply scroll-smooth;
 	  .grid-container .post-card1 img {
 		max-height: 25vh;
 		margin: 0 auto;
-		border-radius: var(--border-radius) !important;
+		border-radius: var(--border-radius);
 	  }
 	  
 	  .slider {
@@ -338,7 +338,7 @@ html {		@apply scroll-smooth;
 	  
 	  .slider .sliderSpacer{display:block; width:50%; height:50% ; }
 	  
-	  .slider img{max-height:68vh; object-fit:contain; width: 100%; }
+	  .slider img{max-height:68vh; object-fit:contain; width: 100%; border-radius: var(--border-radius); }
 	  .slider {
 		display: flex;
 		flex-direction: row;

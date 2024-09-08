@@ -10,7 +10,7 @@ import GoBack from "@/components/GoBack.astro";
 
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const MAX_POSTS_PER_PAGE = 2;
+	const MAX_POSTS_PER_PAGE = 20;
 	const allPosts = await getAllPosts();
 	const allPostsByDate = sortMDByDate(allPosts);
 	const uniqueTags = getUniqueTags(allPosts);
