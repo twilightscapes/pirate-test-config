@@ -35,7 +35,8 @@ const postSchema = z.object({
       mute: z.boolean().optional(),
       loop: z.boolean().optional(),
       start: z.number().optional(),
-      end: z.number().optional()
+      end: z.number().optional(),
+      useCustomPlayer: z.boolean().optional()
     }).optional()
   }).optional(),
 });

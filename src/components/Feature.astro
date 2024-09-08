@@ -38,7 +38,12 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
       loop={content.youtube.loop ?? false}
       start={content.youtube.start ?? 0}
       end={content.youtube.end}
+      useCustomPlayer={true}
     />
+
+
+
+
   ) : content.featureImage && content.featureImage.src ? (
     <div class="" style="display:flex; justify-content:center;">
       <Image

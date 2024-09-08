@@ -68,6 +68,10 @@ export default config({
                 description: 'Enter the full YouTube video URL'
               }),
               controls: fields.checkbox({ label: 'Show Controls' }),
+              useCustomPlayer: fields.checkbox({ 
+                label: 'Use Custom Player', 
+                defaultValue: true 
+              }),
               mute: fields.checkbox({ label: 'Mute Video' }),
               loop: fields.checkbox({ label: 'Loop Video' }),
               start: fields.number({ 
