@@ -10,7 +10,8 @@ showTestOnHome: false
 pitch: test
 postsectiontitle: 'I like big posts '
 youtube:
-  controls: false
+  url: https://youtu.be/MM62wjLrgmA?si=UxmOJN5TJ3zi6wzZ
+  controls: true
   mute: true
   loop: true
   start: 13
