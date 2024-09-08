@@ -352,9 +352,18 @@ const playerVars: { [key: string]: number | string } = {
   function checkAndLoop() {
     const checkInterval = setInterval(() => {
       const currentTime = player.getCurrentTime();
-      if (currentTime >= end || currentTime < start) {
-        player.seekTo(start, true);
-        player.playVideo(); // Ensure the video continues playing
+      if (end > 0) {
+        // Custom loop behavior when end time is specified
+        if (currentTime >= end || currentTime < start) {
+          player.seekTo(start, true);
+          player.playVideo();
+        }
+      } else {
+        // Default loop behavior when no end time is specified
+        if (currentTime >= player.getDuration()) {
+          player.seekTo(start, true);
+          player.playVideo();
+        }
       }
     }, 100);
   }
