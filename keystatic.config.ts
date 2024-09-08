@@ -199,11 +199,7 @@ export default config({
 
         
 
-        // showFeature: fields.checkbox({ label: 'Show Feature', description: 'Hide/Show the Feature section on home page', defaultValue: true }),
-        // showBio: fields.checkbox({ label: 'Show Bio', description: 'Hide/Show the Bio section on the home page', defaultValue: true }),
-        // showPosts: fields.checkbox({ label: 'Show Posts', description: 'Hide/Show the Posts section on the home page', defaultValue: true }),
-        // showTestimonials: fields.checkbox({ label: 'Show Testimonials', description: 'Hide/Show the Testimonials section on the home page', defaultValue: true }),
-        // showFAQ: fields.checkbox({ label: 'Show FAQs', description: 'Hide/Show the FAQ section on the home page', defaultValue: true }),
+
         divider3: fields.empty(),
         defaultView: fields.select({
           label: 'Default View (sets whether to show grid mode or swipe mode by default',
@@ -318,7 +314,12 @@ export default config({
             label: 'YouTube Video URL',
             description: 'Enter the full YouTube video URL'
           }),
-          controls: fields.checkbox({ label: 'Show Controls', defaultValue: true }),
+          // controls: fields.checkbox({ label: 'Show Controls', defaultValue: true }),
+          controls: fields.checkbox({ label: 'Use YouTube Player Controls' }),
+              useCustomPlayer: fields.checkbox({ 
+                label: 'Use Custom Player Controls', 
+                defaultValue: true 
+              }),
           mute: fields.checkbox({ label: 'Mute Video', defaultValue: false }),
           loop: fields.checkbox({ label: 'Loop Video', defaultValue: false }),
           start: fields.number({ label: 'Start Time (seconds)', defaultValue: 0 }),
@@ -504,7 +505,7 @@ export default config({
 
 ui: {
   brand: {
-    name: 'Pirate',
+    name: ' ',
     mark: ({ colorScheme }) => {
       let path = colorScheme === 'dark'
         ? '/images/logo/logoImage.svg'

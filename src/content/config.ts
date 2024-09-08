@@ -87,12 +87,17 @@ const home = defineCollection({
       alt: z.string().optional(),
     }).optional(),
     youtube: z.object({
-      url: z.string().optional(),
-      controls: z.boolean().optional(),
-      mute: z.boolean().optional(),
-      loop: z.boolean().optional(),
-      start: z.number().optional(),
-      end: z.number().optional(),
+      discriminant: z.boolean(),
+      value: z.object({
+        url: z.string().optional(),
+        controls: z.boolean().optional(),
+        mute: z.boolean().optional(),
+        loop: z.boolean().optional(),
+        start: z.number().optional(),
+        end: z.number().optional(),
+        useCustomPlayer: z.boolean().optional(),
+        videoOnly: z.boolean().optional(),
+      }).optional()
     }).optional(),
   }),
 });
