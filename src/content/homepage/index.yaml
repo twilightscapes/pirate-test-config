@@ -12,7 +12,8 @@ postsectiontitle: 'I like big posts '
 youtube:
   url: https://youtu.be/MM62wjLrgmA?si=UxmOJN5TJ3zi6wzZ
   controls: true
+  useCustomPlayer: true
   mute: true
   loop: true
-  start: 13
-  end: 18
+  start: .nan
+  end: .nan
