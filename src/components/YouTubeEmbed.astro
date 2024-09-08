@@ -16,7 +16,7 @@ const {
   controls = true, 
   mute = false, 
   loop = false, 
-  start = 0, 
+  start = typeof Astro.props.start === 'number' ? Astro.props.start : 0,
   end = 0,
   useCustomPlayer = true 
 } = Astro.props;
@@ -352,16 +352,17 @@ const playerVars: { [key: string]: number | string } = {
   function checkAndLoop() {
     const checkInterval = setInterval(() => {
       const currentTime = player.getCurrentTime();
+      const videoStart = start || 0;
       if (end > 0) {
         // Custom loop behavior when end time is specified
-        if (currentTime >= end || currentTime < start) {
-          player.seekTo(start, true);
+        if (currentTime >= end || currentTime < videoStart) {
+          player.seekTo(videoStart, true);
           player.playVideo();
         }
       } else {
         // Default loop behavior when no end time is specified
         if (currentTime >= player.getDuration()) {
-          player.seekTo(start, true);
+          player.seekTo(videoStart, true);
           player.playVideo();
         }
       }
