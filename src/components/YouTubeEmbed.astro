@@ -44,7 +44,7 @@ const playerVars: { [key: string]: number | string } = {
     <div id="youtube-player" style="width:100%; max-width:1600px; aspect-ratio:16/9;"></div>
     <div class="custom-controls">
       <div class="center-controls">
-        <button id="play-pause" class="play-pause-button"></button>
+        <button id="play-pause" class="play-pause-button">►</button>
         <h2 class="video-title title1">{title}</h2>
       </div>
       <div class="bottom-tray">
@@ -196,6 +196,24 @@ const playerVars: { [key: string]: number | string } = {
       requestAnimationFrame(checkLoop);
     }
   }
+
+  let controlsTimeout;
+
+  function showControls() {
+    const controls = document.querySelector('.custom-controls');
+    controls.style.opacity = '1';
+    clearTimeout(controlsTimeout);
+  }
+
+  function hideControls() {
+    const controls = document.querySelector('.custom-controls');
+    controlsTimeout = setTimeout(() => {
+      if (player && player.getPlayerState() == YT.PlayerState.PLAYING) {
+        controls.style.opacity = '0';
+      }
+    }, 1000); // Hide after 3 seconds of inactivity
+  }
+
   function onPlayerReady(event) {
     const playerArea = document.querySelector('.custom-youtube-player');
     playerArea.addEventListener('click', function() {
@@ -269,7 +287,21 @@ const playerVars: { [key: string]: number | string } = {
         }
       });
     }
-  }  function updateProgressBar() {
+
+    const controls = document.querySelector('.custom-controls');
+    controls.addEventListener('touchstart', showControls);
+    controls.addEventListener('touchend', hideControls);
+
+    player.addEventListener('onStateChange', function(event) {
+      if (event.data == YT.PlayerState.PLAYING) {
+        hideControls();
+      } else {
+        showControls();
+      }
+    });
+  }
+
+  function updateProgressBar() {
     const progressBar = document.getElementById('progress');
     if (progressBar) {
       const interval = setInterval(function() {
