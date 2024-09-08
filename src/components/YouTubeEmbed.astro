@@ -313,8 +313,13 @@ const playerVars: { [key: string]: number | string } = {
 
     if (loop) {
       player.addEventListener('onStateChange', function(event) {
-        if (event.data === YT.PlayerState.PLAYING) {
-          checkAndLoop();
+        if (event.data === YT.PlayerState.ENDED) {
+          player.cueVideoById({
+            videoId: videoId,
+            startSeconds: start,
+            endSeconds: end
+          });
+          player.playVideo();
         }
       });
     }
@@ -322,14 +327,15 @@ const playerVars: { [key: string]: number | string } = {
     const controls = document.querySelector('.custom-controls');
     controls.addEventListener('touchstart', showControls);
     controls.addEventListener('touchend', hideControls);
-
     player.addEventListener('onStateChange', function(event) {
-      if (event.data == YT.PlayerState.PLAYING) {
+      if (event.data === YT.PlayerState.PLAYING) {
         hideControls();
-      } else {
+        checkAndLoop();
+      } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
         showControls();
       }
     });
+    
   }
   function updateProgressBar() {
     const progressBar = document.getElementById('progress');
@@ -343,12 +349,13 @@ const playerVars: { [key: string]: number | string } = {
       }, 1000);
     }
   }
-
   function checkAndLoop() {
     const checkInterval = setInterval(() => {
       const currentTime = player.getCurrentTime();
       if (currentTime >= end || currentTime < start) {
         player.seekTo(start, true);
+        player.playVideo(); // Ensure the video continues playing
       }
     }, 100);
-  }</script>
+  }
+  </script>
