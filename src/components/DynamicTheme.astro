@@ -2,6 +2,7 @@
 import { getEntry } from 'astro:content';
 const styleAppearance = await getEntry('styleapps', 'index');
 ---
+
 <script define:vars={{ styleAppearance }}>
 function applyTheme() {
   const root = document.documentElement;
@@ -23,19 +24,25 @@ function applyTheme() {
   root.style.setProperty('--theme-accent2-dark', styleAppearance.data.darkAccent2);
   root.style.setProperty('--theme-header-dark', styleAppearance.data.darkHeader);
 
+  // Common properties
+  root.style.setProperty('--border-radius', styleAppearance.data.borderRadius);
+
   // Update current theme
   updateCurrentTheme(isDarkMode);
 }
 
 function updateCurrentTheme(isDarkMode) {
   const root = document.documentElement;
-  root.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+  const theme = isDarkMode ? 'dark' : 'light';
+  root.style.setProperty('--theme-bg', `var(--theme-bg-${theme})`);
+  root.style.setProperty('--theme-link', `var(--theme-link-${theme})`);
+  root.style.setProperty('--theme-text', `var(--theme-text-${theme})`);
+  root.style.setProperty('--theme-accent', `var(--theme-accent-${theme})`);
+  root.style.setProperty('--theme-accent2', `var(--theme-accent2-${theme})`);
+  root.style.setProperty('--theme-header', `var(--theme-header-${theme})`);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  applyTheme();
-});
-
+applyTheme();
 document.addEventListener('astro:page-load', applyTheme);
 
 // Listen for theme changes

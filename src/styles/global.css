@@ -1,44 +1,35 @@
+/* tailwindcss */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer utilities {
-  .text-accent-2 {
-    color: var(--theme-accent2);
-  }
-
-  .decoration-link {
-    text-decoration: underline;
-    text-decoration-color: var(--theme-link);
-    text-underline-offset: 2px;
-  }
-}
-
-/* Rest of your global styles */
 
 @layer base {
 	:root,
 	:root[data-theme="light"] {
 		color-scheme: light;
-		--theme-bg: var(--theme-bg-light, #c2d9c2);
-		--theme-link: var(--theme-link-light, #4a6e6e);
-		--theme-text: var(--theme-text-light, #383838);
-		--theme-accent: var(--theme-accent-light, #b57a33);
-		--theme-accent2: var(--theme-accent2-light, #4d5a52);
-		--theme-header: var(--theme-header-light, #c25e5e);
+		--theme-bg: var(--lightBg, #c2d9c2);
+		--theme-link: var(--lightLink, #4a6e6e);
+		--theme-text: var(--lightText, #383838);
+		--theme-accent: var(--lightAccent, #b57a33);
+		--theme-accent2: var(--lightAccent2, #4d5a52);
+		--theme-header: var(--lightHeader, #c25e5e);
+		
 	}
 
 	:root[data-theme="dark"] {
 		color-scheme: dark;
-		--theme-bg: var(--theme-bg-dark, #2e5e2e);
-		--theme-link: var(--theme-link-dark, #d292b0);
-		--theme-text: var(--theme-text-dark, #ebf1ed);
-		--theme-accent: var(--theme-accent-dark, #3d8f4a);
-		--theme-accent2: var(--theme-accent2-dark, #ededed);
-		--theme-header: var(--theme-header-dark, #c4ffc4);
+		--theme-bg: var(--darkBg, #2e5e2e);
+		--theme-link: var(--darkLink, #d292b0);
+		--theme-text: var(--darkText, #ebf1ed);
+		--theme-accent: var(--darkAccent, #3d8f4a);
+		--theme-accent2: var(--darkAccent2, #ededed);
+		--theme-header: var(--darkHeader, #c4ffc4);
 	}
-
 }
+
+
+
+
 
 
 /* Rest of your CSS remains the same */
@@ -60,7 +51,6 @@ html {		@apply scroll-smooth;
 		width: 100dvw;
 		max-width: 100dvw;
 		overscroll-behavior: none;
-		color:var(--theme-text);
 	  }
 	  
 	  body {
@@ -419,3 +409,5 @@ html {		@apply scroll-smooth;
 	  .flexcheek{position:inherit;top:inherit;width:100%}
 	  
 	  }
+
+
