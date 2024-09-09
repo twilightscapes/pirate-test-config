@@ -29,9 +29,15 @@ const pageDescription = description || meta?.description;
 const pageArticleDate = articleDate || meta?.articleDate;
 const pageOgImage = ogImage || meta?.ogImage;
 ---
-<html lang={siteConfig.lang}>
+<html lang={siteConfig.lang} data-theme="light">
 	<head>
-		
+		<script is:inline>
+			function getInitialTheme() {
+				const savedTheme = localStorage.getItem('theme');
+				return savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+			}
+			document.documentElement.dataset.theme = getInitialTheme();
+		</script>
 		
 		<ThemeProvider />
 		<BaseHead 
@@ -63,5 +69,3 @@ const pageOgImage = ogImage || meta?.ogImage;
 	
 </html>
 		<script src="../components/scrollListener.js"></script>
-
-

@@ -3,57 +3,47 @@ import { getEntry } from 'astro:content';
 const styleAppearance = await getEntry('styleapps', 'index');
 ---
 
-<script define:vars={{ styleAppearance }}>
-function applyTheme() {
-  const root = document.documentElement;
-  const isDarkMode = root.classList.contains('dark');
+<script is:inline define:vars={{ styleAppearance }}>
+  function getInitialTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
 
-  // Light theme
-  root.style.setProperty('--theme-bg-light', styleAppearance.data.lightBg);
-  root.style.setProperty('--theme-link-light', styleAppearance.data.lightLink);
-  root.style.setProperty('--theme-text-light', styleAppearance.data.lightText);
-  root.style.setProperty('--theme-accent-light', styleAppearance.data.lightAccent);
-  root.style.setProperty('--theme-accent2-light', styleAppearance.data.lightAccent2);
-  root.style.setProperty('--theme-header-light', styleAppearance.data.lightHeader);
+  function applyTheme() {
+    const root = document.documentElement;
+    
+    root.style.setProperty('--theme-bg-light', styleAppearance.data.lightBg);
+    root.style.setProperty('--theme-link-light', styleAppearance.data.lightLink);
+    root.style.setProperty('--theme-text-light', styleAppearance.data.lightText);
+    root.style.setProperty('--theme-accent-light', styleAppearance.data.lightAccent);
+    root.style.setProperty('--theme-accent2-light', styleAppearance.data.lightAccent2);
+    root.style.setProperty('--theme-header-light', styleAppearance.data.lightHeader);
 
-  // Dark theme
-  root.style.setProperty('--theme-bg-dark', styleAppearance.data.darkBg);
-  root.style.setProperty('--theme-link-dark', styleAppearance.data.darkLink);
-  root.style.setProperty('--theme-text-dark', styleAppearance.data.darkText);
-  root.style.setProperty('--theme-accent-dark', styleAppearance.data.darkAccent);
-  root.style.setProperty('--theme-accent2-dark', styleAppearance.data.darkAccent2);
-  root.style.setProperty('--theme-header-dark', styleAppearance.data.darkHeader);
+    root.style.setProperty('--theme-bg-dark', styleAppearance.data.darkBg);
+    root.style.setProperty('--theme-link-dark', styleAppearance.data.darkLink);
+    root.style.setProperty('--theme-text-dark', styleAppearance.data.darkText);
+    root.style.setProperty('--theme-accent-dark', styleAppearance.data.darkAccent);
+    root.style.setProperty('--theme-accent2-dark', styleAppearance.data.darkAccent2);
+    root.style.setProperty('--theme-header-dark', styleAppearance.data.darkHeader);
 
-  // Common properties
-  root.style.setProperty('--border-radius', styleAppearance.data.borderRadius);
+    root.style.setProperty('--border-radius', styleAppearance.data.borderRadius);
 
-  // Update current theme
-  updateCurrentTheme(isDarkMode);
-}
+    updateCurrentTheme(root.dataset.theme);
+  }
 
-function updateCurrentTheme(isDarkMode) {
-  const root = document.documentElement;
-  const theme = isDarkMode ? 'dark' : 'light';
-  root.style.setProperty('--theme-bg', `var(--theme-bg-${theme})`);
-  root.style.setProperty('--theme-link', `var(--theme-link-${theme})`);
-  root.style.setProperty('--theme-text', `var(--theme-text-${theme})`);
-  root.style.setProperty('--theme-accent', `var(--theme-accent-${theme})`);
-  root.style.setProperty('--theme-accent2', `var(--theme-accent2-${theme})`);
-  root.style.setProperty('--theme-header', `var(--theme-header-${theme})`);
-}
+  function updateCurrentTheme(theme) {
+    const root = document.documentElement;
+    root.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+  }
 
-applyTheme();
-document.addEventListener('astro:page-load', applyTheme);
+  document.documentElement.dataset.theme = getInitialTheme();
+  applyTheme();
+  document.addEventListener('astro:page-load', applyTheme);
 
-// Listen for theme changes
-const observer = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
-    if (mutation.attributeName === 'class') {
-      const isDarkMode = document.documentElement.classList.contains('dark');
-      updateCurrentTheme(isDarkMode);
-    }
-  });
-});
-
-observer.observe(document.documentElement, { attributes: true });
+  window.toggleTheme = function() {
+    const currentTheme = document.documentElement.dataset.theme;
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    updateCurrentTheme(newTheme);
+  }
 </script>

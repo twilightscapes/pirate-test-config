@@ -4,42 +4,33 @@
 @tailwind utilities;
 
 @layer base {
-	:root,
-	:root[data-theme="light"] {
-		color-scheme: light;
-		--theme-bg: var(--lightBg, #c2d9c2);
-		--theme-link: var(--lightLink, #4a6e6e);
-		--theme-text: var(--lightText, #383838);
-		--theme-accent: var(--lightAccent, #b57a33);
-		--theme-accent2: var(--lightAccent2, #4d5a52);
-		--theme-header: var(--lightHeader, #c25e5e);
-		
+	:root {
+		--theme-bg: var(--theme-bg-light);
+		--theme-link: var(--theme-link-light);
+		--theme-text: var(--theme-text-light);
+		--theme-accent: var(--theme-accent-light);
+		--theme-accent2: var(--theme-accent2-light);
+		--theme-header: var(--theme-header-light);
 	}
 
-	:root[data-theme="dark"] {
-		color-scheme: dark;
-		--theme-bg: var(--darkBg, #2e5e2e);
-		--theme-link: var(--darkLink, #d292b0);
-		--theme-text: var(--darkText, #ebf1ed);
-		--theme-accent: var(--darkAccent, #3d8f4a);
-		--theme-accent2: var(--darkAccent2, #ededed);
-		--theme-header: var(--darkHeader, #c4ffc4);
+	[data-theme="dark"] {
+		--theme-bg: var(--theme-bg-dark);
+		--theme-link: var(--theme-link-dark);
+		--theme-text: var(--theme-text-dark);
+		--theme-accent: var(--theme-accent-dark);
+		--theme-accent2: var(--theme-accent2-dark);
+		--theme-header: var(--theme-header-dark);
 	}
 }
 
-
-
-
-
-
 /* Rest of your CSS remains the same */
-html {		@apply scroll-smooth;
-	}
+html {
+	@apply scroll-smooth;
+}
 
-	body {
-		@apply mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-8 pt-16  text-textColor antialiased;
-	}
-
+body {
+	@apply mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-8 pt-16 text-textColor antialiased;
+}
 
 	  
 	  html, body {
