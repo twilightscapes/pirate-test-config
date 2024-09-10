@@ -82,7 +82,7 @@ body {
 	  @property --rotate{
 		syntax: "<angle>";
 		initial-value: 5deg;
-		inherits: false;
+		inherits: true;
 	  }
 	  
 	  .special {
