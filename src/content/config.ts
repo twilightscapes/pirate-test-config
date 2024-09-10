@@ -32,6 +32,7 @@ const postSchema = z.object({
     discriminant: z.boolean(),
     value: z.object({
       url: z.string().optional(),
+      title: z.string().optional(),
       controls: z.boolean().optional(),
       mute: z.boolean().optional(),
       loop: z.boolean().optional(),
@@ -90,6 +91,7 @@ const home = defineCollection({
       discriminant: z.boolean(),
       value: z.object({
         url: z.string().optional(),
+        title: z.string().optional(),
         controls: z.boolean().optional(),
         mute: z.boolean().optional(),
         loop: z.boolean().optional(),

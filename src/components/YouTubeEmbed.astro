@@ -1,7 +1,7 @@
 ---
 interface Props {
   url: string;
-  title: string;
+  title?: string;
   controls?: boolean;
   mute?: boolean;
   loop?: boolean;
@@ -38,7 +38,9 @@ const playerVars: { [key: string]: number | string } = {
   end: end > 0 ? end : '',
   playlist: videoId ?? '',
 };
+
 ---
+
 {useCustomPlayer ? (
   <div class="custom-youtube-player" style="display:flex; justify-content:center;">
     <div id="youtube-player" style="width:100%; max-width:1600px; aspect-ratio:16/9;"></div>
@@ -47,7 +49,7 @@ const playerVars: { [key: string]: number | string } = {
       
       <div class="center-controls">
         <button id="play-pause" class="play-pause-button">►</button>
-        <h2 class="video-title title1">{title}</h2>
+        {title && <h2 class="video-title title1">{title}</h2>}
       </div>
       <div class="bottom-tray">
         <label for="progress">Progress
@@ -56,10 +58,11 @@ const playerVars: { [key: string]: number | string } = {
 
         <label for="volume">Volume
         <input type="range" id="volume" min="0" max="100" value="100" class="volume-slider"></label>
-
-        <div><button id="mute" class="control-button">Mute</button></div>
-      </div>
-      <div class="botblock"></div>
+              <div><button id="mute" class="control-button">
+  <svg id="mute-icon" viewBox="0 0 16 16" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6.5 15c-0.13 0-0.258-0.051-0.354-0.146l-3.854-3.854h-1.793c-0.276 0-0.5-0.224-0.5-0.5v-5c0-0.276 0.224-0.5 0.5-0.5h1.793l3.854-3.854c0.143-0.143 0.358-0.186 0.545-0.108s0.309 0.26 0.309 0.462v13c0 0.202-0.122 0.385-0.309 0.462-0.062 0.026-0.127 0.038-0.191 0.038z"></path>
+  </svg>
+</button></div>      </div>      <div class="botblock"></div>
     </div>
   </div>
 ) : (
@@ -74,20 +77,189 @@ const playerVars: { [key: string]: number | string } = {
     style="min-height:70vh;"
   ></iframe>
 )}
-<style>
 
+<script define:vars={{ videoId, playerVars, start, end, loop }}>
+  let player;
+  let controlsTimeout;
+
+  window.onYouTubeIframeAPIReady = function() {
+    player = new YT.Player('youtube-player', {
+      height: '100%',
+      width: '100%',
+      videoId: videoId,
+      playerVars: playerVars,
+      events: {
+        'onReady': onPlayerReady,
+      }
+    });
+  }
+
+  function showControls() {
+    const controls = document.querySelector('.custom-controls');
+    controls.style.opacity = '1';
+    clearTimeout(controlsTimeout);
+  }
+
+  function hideControls() {
+    const controls = document.querySelector('.custom-controls');
+    controlsTimeout = setTimeout(() => {
+      if (player && player.getPlayerState() == YT.PlayerState.PLAYING) {
+        controls.style.opacity = '0';
+      }
+    }, 3000);
+  }
+
+  function onPlayerReady(event) {
+    const muteButton = document.getElementById('mute');
+    const muteIcon = muteButton.querySelector('svg');
+
+    const playerArea = document.querySelector('.custom-youtube-player');
+    playerArea.addEventListener('click', function() {
+      if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+        player.pauseVideo();
+      } else {
+        player.playVideo();
+      }
+    });
+
+    const playPauseButton = document.getElementById('play-pause');
+    const progressBar = document.getElementById('progress');
+    function updatePlayPauseButton() {
+      if (playPauseButton) {
+        playPauseButton.textContent = player.getPlayerState() == YT.PlayerState.PLAYING ? '❚❚' : '▶';
+      }
+    }
+
+    player.addEventListener('onStateChange', updatePlayPauseButton);
+
+    if (playPauseButton) {
+      playPauseButton.addEventListener('click', function() {
+        if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+          player.pauseVideo();
+        } else {
+          player.playVideo();
+        }
+      });
+    }
+    if (muteButton) {
+      const muteIcon = document.getElementById('mute-icon');
+      const unmutedPath = "M6.5 15c-0.13 0-0.258-0.051-0.354-0.146l-3.854-3.854h-1.793c-0.276 0-0.5-0.224-0.5-0.5v-5c0-0.276 0.224-0.5 0.5-0.5h1.793l3.854-3.854c0.143-0.143 0.358-0.186 0.545-0.108s0.309 0.26 0.309 0.462v13c0 0.202-0.122 0.385-0.309 0.462-0.062 0.026-0.127 0.038-0.191 0.038z";
+      const mutedPath = "M15 9.674v1.326h-1.326l-1.674-1.674-1.674 1.674h-1.326v-1.326l1.674-1.674-1.674-1.674v-1.326h1.326l1.674 1.674 1.674-1.674h1.326v1.326l-1.674 1.674 1.674 1.674z M6.5 15c-0.13 0-0.258-0.051-0.354-0.146l-3.854-3.854h-1.793c-0.276 0-0.5-0.224-0.5-0.5v-5c0-0.276 0.224-0.5 0.5-0.5h1.793l3.854-3.854c0.143-0.143 0.358-0.186 0.545-0.108s0.309 0.26 0.309 0.462v13c0 0.202-0.122 0.385-0.309 0.462-0.062 0.026-0.127 0.038-0.191 0.038z";
+
+      function updateMuteButton() {
+        muteIcon.innerHTML = `<path d="${player.isMuted() ? mutedPath : unmutedPath}"></path>`;
+      }
+
+      updateMuteButton(); // Initial state
+
+      muteButton.addEventListener('click', function() {
+        const currentTime = player.getCurrentTime();
+        if (player.isMuted()) {
+          player.unMute();
+        } else {
+          player.mute();
+        }
+        player.seekTo(currentTime, true);
+        updateMuteButton();
+      });
+
+      player.addEventListener('onVolumeChange', updateMuteButton);
+    }
+    if (progressBar) {
+      player.addEventListener('onStateChange', function(event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+          updateProgressBar();
+        }
+      });
+
+      progressBar.addEventListener('input', function() {
+        const time = player.getDuration() * (progressBar.value / 100);
+        player.seekTo(time, true);
+      });
+    }
+
+    const volumeSlider = document.getElementById('volume');
+    if (volumeSlider) {
+      volumeSlider.addEventListener('input', function() {
+        player.setVolume(this.value);
+      });
+    }
+
+    if (loop) {
+      player.addEventListener('onStateChange', function(event) {
+        if (event.data === YT.PlayerState.ENDED) {
+          player.cueVideoById({
+            videoId: videoId,
+            startSeconds: start,
+            endSeconds: end
+          });
+          player.playVideo();
+        }
+      });
+    }
+
+    const controls = document.querySelector('.custom-controls');
+    controls.addEventListener('touchstart', showControls);
+    controls.addEventListener('touchend', hideControls);
+    player.addEventListener('onStateChange', function(event) {
+      if (event.data === YT.PlayerState.PLAYING) {
+        hideControls();
+        checkAndLoop();
+      } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+        showControls();
+      }
+    });
+  }
+
+  function updateProgressBar() {
+    const progressBar = document.getElementById('progress');
+    if (progressBar) {
+      const interval = setInterval(function() {
+        const progress = (player.getCurrentTime() / player.getDuration()) * 100;
+        progressBar.value = progress;
+        if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
+  }
+
+  function checkAndLoop() {
+    const checkInterval = setInterval(() => {
+      const currentTime = player.getCurrentTime();
+      const videoStart = start || 0;
+      if (end > 0) {
+        if (currentTime >= end || currentTime < videoStart) {
+          player.seekTo(videoStart, true);
+          player.playVideo();
+        }
+      } else {
+        if (currentTime >= player.getDuration()) {
+          player.seekTo(videoStart, true);
+          player.playVideo();
+        }
+      }
+    }, 100);
+  }
+
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  if (firstScriptTag.parentNode) {
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  }
+</script>
+
+<style>
   .topblock{display:flex; width:100%; justify-content: center; position: absolute; top:0; height:60px; background:#000;}
   .botblock{display:flex; width:100%; justify-content: center; position: absolute; bottom:0; height:220px; background:#000; z-index: 0;}
 
-@media (max-width: 48rem) {
-
-.topblock{display:flex; width:100%; justify-content: center; position: absolute; top:0; height:0px; background:#000;}
-.botblock{display:flex; width:100%; justify-content: center; position: absolute; bottom:0; height:50px; background:#000; z-index: 0;}
-.youtube-player{margin-top:60px;}
-.custom-youtube-player{margin-top:60px !important;}
-
-}
-
+  @media (max-width: 48rem) {
+    .topblock{display:flex; width:100%; justify-content: center; position: absolute; top:0; height:0px; background:#000;}
+    .botblock{display:flex; width:100%; justify-content: center; position: absolute; bottom:0; height:50px; background:#000; z-index: 0;}
+    .youtube-player{margin-top:60px;}
+    .custom-youtube-player{margin-top:60px !important;}
+  }
 
   .custom-youtube-player {
     width: 100vw;
@@ -154,218 +326,18 @@ const playerVars: { [key: string]: number | string } = {
   }
   #mute{color:white; width:100%;}
   .bottom-tray label{display:flex; flex-direction: column; font-size: clamp(.8rem,.9vw,1rem); align-items: center;}
+  #mute svg .volume-icon { display: block; }
+  #mute svg .muted-icon { display: none; }
+  #mute.muted svg .volume-icon { display: none; }
+  #mute.muted svg .muted-icon { display: block; }
+
+  #mute svg {  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+#mute svg path {
+  fill: currentColor;
+}
 </style>
 
-<script>
-  declare namespace YT {
-    interface Player {
-      getPlayerState(): number;
-      pauseVideo(): void;
-      playVideo(): void;
-    }
-    enum PlayerState {
-      PLAYING = 1,
-      PAUSED = 2
-    }
-  }
-
-  {/* function onPlayerStateChange(event: { data: number }) {
-    const controls = document.querySelector('.custom-controls');
-    if (event.data === YT.PlayerState.PAUSED) {
-      controls?.classList.add('paused');
-
-    } else {
-      controls?.classList.remove('paused');
-    }
-  } */}
-
-
-</script>
-<script define:vars={{ videoId, playerVars, start, end, loop }}>
-  // Load YouTube API
-  const tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/iframe_api";
-  const firstScriptTag = document.getElementsByTagName('script')[0];
-  if (firstScriptTag.parentNode) {
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-  }
-
-  let player;
-
-  window.onYouTubeIframeAPIReady = function() {
-    player = new YT.Player('youtube-player', {
-      height: '100%',
-      width: '100%',
-      videoId: videoId,
-      playerVars: playerVars,
-      events: {
-        'onReady': onPlayerReady,
-      }
-    });
-  }
-
-  // function onPlayerStateChange(event) {
-  //   if (event.data === YT.PlayerState.PLAYING) {
-  //     const checkLoop = () => {
-  //       const currentTime = player.getCurrentTime();
-  //       if (currentTime >= end) {
-  //         player.seekTo(start, true);
-  //       } else {
-  //         requestAnimationFrame(checkLoop);
-  //       }
-  //     };
-  //     requestAnimationFrame(checkLoop);
-  //   }
-  // }
-
-  let controlsTimeout;
-
-  function showControls() {
-    const controls = document.querySelector('.custom-controls');
-    controls.style.opacity = '1';
-    clearTimeout(controlsTimeout);
-  }
-
-  function hideControls() {
-    const controls = document.querySelector('.custom-controls');
-    controlsTimeout = setTimeout(() => {
-      if (player && player.getPlayerState() == YT.PlayerState.PLAYING) {
-        controls.style.opacity = '0';
-      }
-    }, 3000); // Hide after 3 seconds of inactivity
-  }
-  function onPlayerReady(event) {
-    const playerArea = document.querySelector('.custom-youtube-player');
-    playerArea.addEventListener('click', function() {
-      if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-        player.pauseVideo();
-      } else {
-        player.playVideo();
-      }
-    });
-
-    const muteButton = document.getElementById('mute');
-    if (muteButton) {
-      muteButton.textContent = player.isMuted() ? 'Unmute' : 'Mute';
-    }
-    const playPauseButton = document.getElementById('play-pause');
-    const progressBar = document.getElementById('progress');
-
-    function updatePlayPauseButton() {
-      const playPauseButton = document.getElementById('play-pause');
-      if (playPauseButton) {
-        if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-          playPauseButton.textContent = '❚❚'; // Pause symbol
-        } else {
-          playPauseButton.textContent = '►'; // Play symbol
-        }
-      }
-    }
-
-    player.addEventListener('onStateChange', function(event) {
-      updatePlayPauseButton();
-    });
-
-    if (playPauseButton) {
-      playPauseButton.addEventListener('click', function() {
-        if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-          player.pauseVideo();
-        } else {
-          player.playVideo();
-        }
-        updatePlayPauseButton();
-      });
-    }
-
-    if (muteButton) {
-      muteButton.addEventListener('click', function() {
-        const currentTime = player.getCurrentTime();
-        if (player.isMuted()) {
-          player.unMute();
-          muteButton.textContent = 'Mute';
-        } else {
-          player.mute();
-          muteButton.textContent = 'Unmute';
-        }
-        player.seekTo(currentTime, true);
-      });
-    }
-
-    if (progressBar) {
-      player.addEventListener('onStateChange', function(event) {
-        if (event.data == YT.PlayerState.PLAYING) {
-          updateProgressBar();
-        }
-      });
-
-      progressBar.addEventListener('input', function() {
-        const time = player.getDuration() * (progressBar.value / 100);
-        player.seekTo(time, true);
-      });
-    }
-
-    const volumeSlider = document.getElementById('volume');
-    if (volumeSlider) {
-      volumeSlider.addEventListener('input', function() {
-        player.setVolume(this.value);
-      });
-    }
-
-    if (loop) {
-      player.addEventListener('onStateChange', function(event) {
-        if (event.data === YT.PlayerState.ENDED) {
-          player.cueVideoById({
-            videoId: videoId,
-            startSeconds: start,
-            endSeconds: end
-          });
-          player.playVideo();
-        }
-      });
-    }
-
-    const controls = document.querySelector('.custom-controls');
-    controls.addEventListener('touchstart', showControls);
-    controls.addEventListener('touchend', hideControls);
-    player.addEventListener('onStateChange', function(event) {
-      if (event.data === YT.PlayerState.PLAYING) {
-        hideControls();
-        checkAndLoop();
-      } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-        showControls();
-      }
-    });
-    
-  }
-  function updateProgressBar() {
-    const progressBar = document.getElementById('progress');
-    if (progressBar) {
-      const interval = setInterval(function() {
-        const progress = (player.getCurrentTime() / player.getDuration()) * 100;
-        progressBar.value = progress;
-        if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
-          clearInterval(interval);
-        }
-      }, 1000);
-    }
-  }
-  function checkAndLoop() {
-    const checkInterval = setInterval(() => {
-      const currentTime = player.getCurrentTime();
-      const videoStart = start || 0;
-      if (end > 0) {
-        // Custom loop behavior when end time is specified
-        if (currentTime >= end || currentTime < videoStart) {
-          player.seekTo(videoStart, true);
-          player.playVideo();
-        }
-      } else {
-        // Default loop behavior when no end time is specified
-        if (currentTime >= player.getDuration()) {
-          player.seekTo(videoStart, true);
-          player.playVideo();
-        }
-      }
-    }, 100);
-  }
-  </script>

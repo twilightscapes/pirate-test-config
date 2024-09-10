@@ -7,11 +7,13 @@ interface Props {
   content: {
     youtube?: {
       url: string;
+      title?: string;
       controls?: boolean;
       mute?: boolean;
       loop?: boolean;
       start?: number;
       end?: number;
+      useCustomPlayer?: boolean;
     };
     title: string;
     featureImage?: {
@@ -22,28 +24,20 @@ interface Props {
 }
 
 const { content } = Astro.props;
-
-const dateTimeOptions: Intl.DateTimeFormatOptions = {
-  month: "long",
-};
 ---
 
 {
   content.youtube && content.youtube.url ? (
-    <YouTubeEmbed 
-      title={content.title}
+    <YouTubeEmbed
       url={content.youtube.url}
-      controls={content.youtube.controls ?? false}
-      mute={content.youtube.mute ?? false}
-      loop={content.youtube.loop ?? false}
-      start={content.youtube.start ?? 0}
+      title={content.youtube.title}
+      controls={content.youtube.controls}
+      useCustomPlayer={content.youtube.useCustomPlayer}
+      mute={content.youtube.mute}
+      loop={content.youtube.loop}
+      start={content.youtube.start}
       end={content.youtube.end}
-      useCustomPlayer={true}
     />
-
-
-
-
   ) : content.featureImage && content.featureImage.src ? (
     <div class="" style="display:flex; justify-content:center;">
       <Image

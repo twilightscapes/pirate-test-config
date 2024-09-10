@@ -23,14 +23,14 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 {
   (data.youtube && data.youtube.discriminant && data.youtube.value && data.youtube.value.url) ? (
     <YouTubeEmbed 
-      title={data.title}
+      title={data.youtube.value.title}
       url={data.youtube.value.url}
-      controls={data.youtube.value.controls ?? false}
-      mute={data.youtube.value.mute ?? false}
-      loop={data.youtube.value.loop ?? false}
-      start={data.youtube.value.start ?? 0}
-      end={data.youtube.value.end ?? undefined}
-      useCustomPlayer={data.youtube.value.useCustomPlayer ?? false}
+      controls={data.youtube.value.controls}
+      mute={data.youtube.value.mute}
+      loop={data.youtube.value.loop}
+      start={data.youtube.value.start}
+      end={data.youtube.value.end}
+      useCustomPlayer={data.youtube.value.useCustomPlayer}
     />
   ) : data.coverImage && data.coverImage.src ? (
     <div class="aspect-h-9 aspect-w-16 mb-6">

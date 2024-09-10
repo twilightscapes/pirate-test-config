@@ -67,6 +67,11 @@ export default config({
                 label: 'YouTube Video URL',
                 description: 'Enter the full YouTube video URL'
               }),
+              title: fields.text({ 
+                label: 'Video Title',
+                description: 'Enter a title for the video (optional, leave blank for no title)',
+                validation: { isRequired: false }
+              }),
               controls: fields.checkbox({ label: 'Use YouTube Player Controls' }),
               useCustomPlayer: fields.checkbox({ 
                 label: 'Use Custom Player Controls', 
@@ -88,8 +93,7 @@ export default config({
             false: fields.empty(),
           }
         ),
-        divider1: fields.empty(),        
-        tags: fields.array(fields.text({ label: 'Tag' }), {
+        divider1: fields.empty(),        tags: fields.array(fields.text({ label: 'Tag' }), {
           label: 'Tags',
           itemLabel: (props) => props.value,
         }),
@@ -313,6 +317,12 @@ export default config({
           url: fields.text({ 
             label: 'YouTube Video URL',
             description: 'Enter the full YouTube video URL'
+          }),
+
+          title: fields.text({ 
+            label: 'Video Title',
+            description: 'Enter a title for the video (optional, leave blank for no title)',
+            validation: { isRequired: false }
           }),
           // controls: fields.checkbox({ label: 'Show Controls', defaultValue: true }),
           controls: fields.checkbox({ label: 'Use YouTube Player Controls' }),
