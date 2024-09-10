@@ -7,7 +7,8 @@ import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import { siteConfig } from "@/site-config";
 import DynamicTheme from '@/components/DynamicTheme.astro';
-import { getSiteSettings } from '../keystatic-data';
+// import { ViewTransitions } from 'astro:transitions';
+// <ViewTransitions />
 
 interface Props {
   meta?: SiteMeta;
@@ -17,10 +18,9 @@ interface Props {
   ogImage?: string;
 }
 
-const siteSettings = await getSiteSettings();
-const { showFooter } = siteSettings;
-
-
+import { getEntry } from 'astro:content';
+const siteSettings = await getEntry('siteSettings', 'main');
+const { showFooter } = siteSettings.data;
 
 const { meta, title, description, articleDate, ogImage } = Astro.props;
 
@@ -29,7 +29,7 @@ const pageDescription = description || meta?.description;
 const pageArticleDate = articleDate || meta?.articleDate;
 const pageOgImage = ogImage || meta?.ogImage;
 ---
-<html lang={siteConfig.lang}>
+<html lang={siteConfig.lang} data-theme="light">
 	<head>
 		<script is:inline>
 			function getInitialTheme() {
@@ -41,8 +41,8 @@ const pageOgImage = ogImage || meta?.ogImage;
 		
 		<ThemeProvider />
 		<BaseHead 
-			title={siteSettings?.siteName || 'Default Title'}
-			description={siteSettings?.siteDescription || 'Default Description'}
+			title={pageTitle} 
+			description={pageDescription} 
 			articleDate={pageArticleDate} 
 			ogImage={pageOgImage} 
 		/>

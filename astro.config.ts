@@ -13,10 +13,8 @@ import AstroPWA from '@vite-pwa/astro';
 import markdoc from "@astrojs/markdoc";
 import keystatic from '@keystatic/astro';
 import netlify from "@astrojs/netlify";
-import { getSiteSettings } from './src/keystatic-data';
 
 import yaml from 'js-yaml';
-const siteSettings = await getSiteSettings();
 
 const pwaSettingsFile = import.meta.glob('./src/content/pwaSettings/index.yaml', { query: '?raw', import: 'default', eager: true });
 const pwaConfigYaml = Object.values(pwaSettingsFile)[0] as string;
@@ -31,9 +29,7 @@ export default defineConfig({
   },
   integrations: [mdx(), react(), icon(), tailwind({
     applyBaseStyles: false
-  }), sitemap({
-    customPages: [siteSettings?.siteUrl || 'https://example.com'],
-  }), keystatic(), 
+  }), sitemap(), keystatic(), 
   
   AstroPWA({
     registerType: 'autoUpdate',
@@ -79,7 +75,7 @@ export default defineConfig({
   },
   output: 'hybrid',
   prefetch: true,
-  site: siteSettings?.siteUrl || 'https://example.com',
+  site: pwaConfig.siteUrl,
   redirects: {
     '/admin': '/keystatic'
   },
@@ -97,6 +93,7 @@ export default defineConfig({
   },
   adapter: netlify()
 });
+
 function rawFonts(ext: string[]) {
   return {
     name: "vite-plugin-raw-fonts",
