@@ -1,5 +1,5 @@
 ---
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
@@ -78,8 +78,7 @@ const options = {
 ---
 
 <script>
-  import React from 'react';
-  import ReactDOM from 'react-dom/client';
+  import React, { lazy } from 'react';  import ReactDOM from 'react-dom/client';
   import Lightbox from "yet-another-react-lightbox";
 
   class AstroLightbox extends HTMLElement {
@@ -135,7 +134,8 @@ const options = {
 
     openLightbox(index: number) {
       if (this.lightbox) {
-        this.lightbox.render(React.createElement(Lightbox, {
+        const LightboxComponent = lazy(() => import("yet-another-react-lightbox"));
+        this.lightbox.render(React.createElement(LightboxComponent, {
           ...this.lightbox.props,
           open: true,
           index: index
@@ -145,7 +145,8 @@ const options = {
 
     closeLightbox() {
       if (this.lightbox) {
-        this.lightbox.render(React.createElement(Lightbox, {
+        const LightboxComponent = lazy(() => import("yet-another-react-lightbox"));
+        this.lightbox.render(React.createElement(LightboxComponent, {
           ...this.lightbox.props,
           open: false
         }));
