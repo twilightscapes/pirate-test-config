@@ -196,3 +196,5 @@ export const collections = {
   pwaSettings,
   menuItems
 };
+
+

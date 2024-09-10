@@ -1,10 +1,13 @@
+siteName: Poop
+siteDescription: a really poopy website is here
+siteUrl: https://pirateweb.org
 logoImage: /images/logo/logoImage.svg
 showHeader: true
 showLogo: true
 showTheme: true
 showSwitch: true
 showSearch: false
-showFooter: false
+showFooter: true
 defaultView: swipe
 showTitles: true
 showDates: false

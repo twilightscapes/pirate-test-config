@@ -184,7 +184,10 @@ export default config({
     siteSettings: singleton({
       label: 'Site Settings',
       path: 'src/content/siteSettings/main',
-      schema: {
+      schema: {        
+        siteName: fields.text({ label: 'Site Name', description: 'Used as author and default title' }),
+        siteDescription: fields.text({ label: 'Site Description', description: 'Used as default site description' }),
+        siteUrl: fields.text({ label: 'Site URL', description: 'The full URL of your site' }),
         logoImage: fields.image({
           label: 'Logo Image',
           description: 'Image used across the site - can use any format',
@@ -197,11 +200,14 @@ export default config({
         showTheme: fields.checkbox({ label: 'Show Theme', description: 'Hide/Show the theme selector', defaultValue: true }),
         showSwitch: fields.checkbox({ label: 'Show Switch', description: 'Hide/Show the layout selector', defaultValue: true }),
         showSearch: fields.checkbox({ label: 'Show Search', description: 'Hide/Show the search in the header', defaultValue: true }),
-        showFooter: fields.checkbox({ label: 'Show Footer', description: 'Hide/Show the Footer', defaultValue: true }),
+              showFooter: fields.checkbox({ 
+                label: 'Show Footer', 
+                description: 'Toggle footer visibility', 
+                defaultValue: true 
+              }),
         
         divider2: fields.empty(),
 
-        
 
 
         divider3: fields.empty(),
@@ -217,12 +223,8 @@ export default config({
         showDates: fields.checkbox({ label: 'Show Dates', description: 'Hide/Show the post dates', defaultValue: true }),
         MAX_POSTS: fields.number({ label: 'Number of posts to display on home page', defaultValue: 3 }),
         divider4: fields.empty(),
-
-
-        
       },
-    }),
-    pwaSettings: singleton({
+    }),    pwaSettings: singleton({
       label: 'PWA Settings',
       path: 'src/content/pwaSettings/',
       schema: {
