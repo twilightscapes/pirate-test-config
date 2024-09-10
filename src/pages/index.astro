@@ -12,6 +12,7 @@ import { createReader } from '@keystatic/core/reader';
 import PhotoSection from "@/components/PhotoGallery.astro"
 
 const siteSettings = await getEntry('siteSettings', 'main');
+const pwaSettings = await getEntry('pwaSettings', 'index');
 const { defaultView, MAX_POSTS } = siteSettings.data;
 const homeContent = await getEntry('homepage', 'index');
 
@@ -28,7 +29,7 @@ const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 ---
 
-<PageLayout meta={{ title: homeContent.data.title, description: homeContent.data.description }}>
+<PageLayout meta={{ title: homeContent.data.title, description: pwaSettings.data.description }}>
 	{showFeature && <Feature content={homeContent.data} />}
 
 	{showHomeGallery && <PhotoSection />}
