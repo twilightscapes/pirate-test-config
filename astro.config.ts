@@ -1,14 +1,13 @@
-import react from "@astrojs/react";
-import mdx from "@astrojs/mdx";
+import { defineConfig } from 'astro/config';
+import mdx from '@astrojs/mdx';
+import react from '@astrojs/react';
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import fs from "fs";
 import rehypeExternalLinks from "rehype-external-links";
 import remarkUnwrapImages from "remark-unwrap-images";
-// import { expressiveCodeOptions } from "./src/site.config";
 import { remarkReadingTime } from "./src/utils/remark-reading-time";
 import AstroPWA from '@vite-pwa/astro';
 import markdoc from "@astrojs/markdoc";
@@ -18,7 +17,8 @@ import netlify from "@astrojs/netlify";
 import yaml from 'js-yaml';
 
 const pwaSettingsFile = import.meta.glob('./src/content/pwaSettings/index.yaml', { query: '?raw', import: 'default', eager: true });
-const pwaConfigYaml = Object.values(pwaSettingsFile)[0] as string;const pwaConfig = yaml.load(pwaConfigYaml) as Record<string, any>;
+const pwaConfigYaml = Object.values(pwaSettingsFile)[0] as string;
+const pwaConfig = yaml.load(pwaConfigYaml) as Record<string, any>;
 if (typeof pwaConfigYaml !== 'string') {
   throw new Error('pwaConfigYaml must be a string');
 }
@@ -27,9 +27,9 @@ export default defineConfig({
   image: {
     domains: ["webmention.io"]
   },
-  integrations: [ icon(), tailwind({
+  integrations: [mdx(), react(), icon(), tailwind({
     applyBaseStyles: false
-  }), sitemap(), mdx(), react(), keystatic(), 
+  }), sitemap(), keystatic(), 
   
   AstroPWA({
     registerType: 'autoUpdate',
@@ -58,8 +58,7 @@ export default defineConfig({
     }
   }), 
   
-  markdoc()],
-  markdown: {
+  markdoc()],  markdown: {
     rehypePlugins: [[rehypeExternalLinks, {
       rel: ["nofollow", "noopener", "noreferrer"],
       target: "_blank"
@@ -69,7 +68,10 @@ export default defineConfig({
       footnoteLabelProperties: {
         className: [""]
       }
-    }
+    },
+    shikiConfig: {
+      theme: 'dracula',
+    },
   },
   output: 'hybrid',
   prefetch: true,
@@ -90,7 +92,9 @@ export default defineConfig({
     plugins: [rawFonts([".ttf", ".woff"])],
   },
   adapter: netlify()
-});function rawFonts(ext: string[]) {
+});
+
+function rawFonts(ext: string[]) {
   return {
     name: "vite-plugin-raw-fonts",
     transform(code: string, id: string) {

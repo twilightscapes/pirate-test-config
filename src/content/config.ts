@@ -43,8 +43,10 @@ const postSchema = z.object({
     }).optional()
   }).optional(),
 });
-const post = defineCollection({
-  schema: postSchema,
+const postCollection = defineCollection({
+  schema: postSchema.extend({
+    body: z.string(),
+  }),
   type: "content",
 });
 
@@ -180,8 +182,13 @@ backgroundImage: z.string().optional(),
   }),
 });
 
-export const collections = { 
-  post, 
+const post = defineCollection({
+  type: 'content',
+  schema: postSchema
+});
+
+export const collections = {
+  post,
   faqs, 
   testimonials, 
   home, 
