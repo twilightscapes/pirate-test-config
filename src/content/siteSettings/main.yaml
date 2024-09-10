@@ -8,4 +8,4 @@ showFooter: false
 defaultView: swipe
 showTitles: true
 showDates: false
-MAX_POSTS: 6
+MAX_POSTS: 3
