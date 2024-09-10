@@ -1,0 +1,180 @@
+---
+import { useState } from 'react';
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
+
+interface Props {
+  images: Array<{
+    src: string;
+    alt?: string;
+    title?: string;
+  }>;
+  showCaptions: boolean;
+}
+
+const { images, showCaptions } = Astro.props;
+
+const options = {
+  settings: {
+    autoplaySpeed: 3000,
+    boxShadow: 'none',
+    disableKeyboardControls: false,
+    disablePanzoom: false,
+    disableWheelControls: false,
+    hideControlsAfter: false,
+    lightboxTransitionSpeed: 0.3,
+    lightboxTransitionTimingFunction: 'linear',
+    overlayColor: 'rgba(30, 30, 30, 0.9)',
+    slideAnimationType: 'fade',
+    slideSpringValues: [300, 50],
+    slideTransitionSpeed: 0.6,
+    slideTransitionTimingFunction: 'linear',
+    usingPreact: false
+  },
+  buttons: {
+    backgroundColor: 'rgba(30,30,36,0.8)',
+    iconColor: 'rgba(255, 255, 255, 0.8)',
+    iconPadding: '10px',
+    showAutoplayButton: false,
+    showCloseButton: true,
+    showDownloadButton: false,
+    showFullscreenButton: false,
+    showNextButton: true,
+    showPrevButton: true,
+    showThumbnailsButton: true,
+    size: '40px'
+  },
+  caption: {
+    captionAlignment: 'start',
+    captionColor: '#FFFFFF',
+    captionContainerPadding: '0',
+    captionFontFamily: 'inherit',
+    captionFontSize: 'inherit',
+    captionFontStyle: 'inherit',
+    captionFontWeight: 'inherit',
+    captionTextTransform: 'inherit',
+    showCaption: showCaptions
+  },
+  thumbnails: {
+    showThumbnails: true,
+    thumbnailsAlignment: 'center',
+    thumbnailsContainerBackgroundColor: 'transparent',
+    thumbnailsContainerPadding: '0',
+    thumbnailsGap: '0 1px',
+    thumbnailsIconColor: '#ffffff',
+    thumbnailsOpacity: 0.4,
+    thumbnailsPosition: 'bottom',
+    thumbnailsSize: ['100px', '80px']
+  },
+  progressBar: {
+    backgroundColor: '#f2f2f2',
+    fillColor: '#000000',
+    height: '3px',
+    showProgressBar: true
+  }
+};
+---
+
+<script>
+  import React from 'react';
+  import ReactDOM from 'react-dom/client';
+  import Lightbox from "yet-another-react-lightbox";
+
+  class AstroLightbox extends HTMLElement {
+    lightbox: any;
+
+    constructor() {
+      super();
+      this.lightbox = null;
+    }
+
+    connectedCallback() {
+      const images = JSON.parse(this.dataset.images || '[]');
+      const showCaptions = this.dataset.showCaptions === 'true';
+
+      const root = ReactDOM.createRoot(this);
+      
+      const LightboxComponent = React.lazy(() => import('yet-another-react-lightbox'));
+
+      root.render(
+        React.createElement(
+          React.Suspense,
+          { fallback: null },
+          React.createElement(LightboxComponent, {
+            slides: images,
+            open: false,
+            close: () => this.closeLightbox(),
+            index: 0,
+            ...JSON.parse(this.innerHTML),
+            render: {
+              slide: ({ slide }: { slide: any }) => (
+                React.createElement('div', { className: 'relative w-full h-full' },
+                  React.createElement('img', {
+                    src: slide.src,
+                    alt: slide.alt || '',
+                    className: 'w-full h-full object-contain'
+                  }),
+                  showCaptions && slide.title && React.createElement('div', {
+                    className: 'absolute bottom-0 left-0 right-0 p-2.5 bg-black bg-opacity-70 text-white text-center'
+                  }, slide.title)
+                )
+              )
+            }
+          })
+        )
+      );
+
+      this.lightbox = root;
+
+      this.addEventListener('open-lightbox', ((event: CustomEvent) => {
+        this.openLightbox(event.detail.index);
+      }) as EventListener);
+    }
+
+    openLightbox(index: number) {
+      if (this.lightbox) {
+        this.lightbox.render(React.createElement(Lightbox, {
+          ...this.lightbox.props,
+          open: true,
+          index: index
+        }));
+      }
+    }
+
+    closeLightbox() {
+      if (this.lightbox) {
+        this.lightbox.render(React.createElement(Lightbox, {
+          ...this.lightbox.props,
+          open: false
+        }));
+      }
+    }
+  }
+
+  customElements.define('astro-lightbox', AstroLightbox);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const imageElements = document.querySelectorAll('.post-card1 img');
+    imageElements.forEach((img, idx) => {
+      if (img instanceof HTMLElement) {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          const lightbox = document.querySelector('astro-lightbox');
+          if (lightbox) {
+            lightbox.dispatchEvent(new CustomEvent('open-lightbox', { detail: { index: idx } }));
+          }
+        });
+      }
+    });
+  });
+</script>
+
+<astro-lightbox
+  client:load
+  data-images={JSON.stringify(images)}
+  data-show-captions={showCaptions}
+>
+  {JSON.stringify(options)}
+</astro-lightbox>

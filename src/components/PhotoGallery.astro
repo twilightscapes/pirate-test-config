@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
-import GalleryLightbox from '../components/GalleryLightbox';
+import GalleryLightbox from './GalleryLightbox.astro';
 import { getEntry } from 'astro:content';
 const reader = createReader(process.cwd(), keystaticConfig);
 const photoSettings = await reader.singletons.photoSettings.read();
