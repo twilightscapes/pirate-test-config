@@ -3,9 +3,9 @@ showHeader: true
 showLogo: true
 showTheme: true
 showSwitch: true
-showSearch: false
+showSearch: true
 showFooter: true
 defaultView: swipe
 showTitles: true
-showDates: false
+showDates: true
 MAX_POSTS: 3

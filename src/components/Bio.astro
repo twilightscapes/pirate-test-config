@@ -4,7 +4,7 @@ const bioContent = await getEntry('bio', 'index');
 ---
 
 <section id="profile" class="scroll-area1 w-screen  mb-5 overflow-hidden rounded-lg backdrop-blur-lg">
-    <article>
+    <article style="max-width:1600px; margin:0 auto;">
       <div id="profiletop" class="flex flex-col md:flex-row justify-center items-center gap-4 p-4">
         <div class="nameblock flex-1 text-center">
           <h1 class="title2 text-[clamp(1.6rem,3.9vw,4rem)] mb-2">{bioContent.data.title}</h1>
@@ -23,7 +23,7 @@ const bioContent = await getEntry('bio', 'index');
               <a href={`tel:${bioContent.data.phone}`} class="hover:underline">{bioContent.data.phone}</a>
             </h2>
           )}
-          <h3 class="font text-center text-xl md:text-2xl lg:text-3xl mb-4">{bioContent.data.subheading}</h3>
+          <h3 class="font text-center text-xl text-[clamp(1.2rem,2.8vw,1.8rem)] mb-4">{bioContent.data.subheading}</h3>
           <div class="bg-accent backdrop-blur-md mt-4  rounded-lg text-center text-lg md:text-xl lg:text-2xl mx-auto">
             <p>{bioContent.data.subcontent}</p>
             <button class="special font mt-4">
