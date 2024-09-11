@@ -345,7 +345,15 @@ body {
 		z-index: 0;
 		position:relative;
 		top:0;
+		/* background: rgba(17, 17, 17, 0.2); 
+		backdrop-filter: blur(44px);
+		transform-style: var(--theme-accent2);
+		-webkit-transform-style: var(--theme-accent2); */
+		padding-top:2vh;
 	  }
+
+
+
 	  
 	  .slider .post-card1 {
 		scroll-snap-align: center;
@@ -372,6 +380,16 @@ body {
 	  }
 	  
 	  .title1, .title{font-size:clamp(1rem, 1.5vw, 2rem);}
+
+
+	.panel {
+		/* background-color: rgba(255, 255, 255, 0.1); */
+		backdrop-filter: blur(54px);
+		-webkit-backdrop-filter: blur(54px);
+		text-shadow: 0 1px 1px var(--theme-header);
+		/* transform: translateZ(0); */
+	}
+
 	  
 	  #menu{
 		position:sticky;
@@ -394,6 +412,8 @@ body {
 		backdrop-filter:blur(54px) ;
 		-webkit-backdrop-filter: blur(54px);
 	  }
+
+
 	  
 	  @media(max-width:48rem) {
 		.mobilehide{display:none}

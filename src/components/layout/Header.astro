@@ -16,7 +16,7 @@ const menuLinks = await getMenuLinks();
 ---
 
 {showHeader && (
-  <div id="menu" class="menu header">
+  <div id="menu" class="menu header" style="min-height:60px;">
     {showLogo && logoImage && (
       <a href="/" aria-current={url.pathname === "/" ? "page" : false} class="relative top-1 left-2.5 p-0">
         <img 

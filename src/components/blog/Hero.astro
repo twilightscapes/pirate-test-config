@@ -46,10 +46,11 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
     </div>
   ) : null
 }
+<div class="panel" style={{ padding: "0 4%", width:'90%', margin:'0 auto', maxWidth:'1400px', display:'flex' }}>
     {data.draft ? <span class="text-base text-red-500">(Draft)</span> : null}
     
 {typeof showTitles !== 'undefined' && showTitles && (
-    <h1 class="title1 mb-3 sm:mb-1" style="padding-left:5%; margin:10vh auto;">
+    <h1 class="title sm:mb-1" style="margin:1vh auto;">
         {data.title}
     </h1>
 )}
@@ -90,7 +91,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
                 <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116" />
                 <path d="M6 9h-.01" />
             </svg>
-            {data.tags.map((tag, i) => (
+            {data.tags.map((tag: string, i: number) => (
                 <>
                     <a
                         aria-label={`View more blogs with the tag ${tag}`}
@@ -105,4 +106,5 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
             ))}
         </div>
     )}
+</div>
 </div>
