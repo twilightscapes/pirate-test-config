@@ -91,7 +91,7 @@ export default defineConfig({
     },
     plugins: [rawFonts([".ttf", ".woff"])],
   },
-  adapter: netlify()
+  // adapter: netlify()
 });
 
 function rawFonts(ext: string[]) {
