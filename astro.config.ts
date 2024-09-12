@@ -13,6 +13,7 @@ import AstroPWA from '@vite-pwa/astro';
 import markdoc from "@astrojs/markdoc";
 import keystatic from '@keystatic/astro';
 import netlify from "@astrojs/netlify";
+import vercel from "@astrojs/vercel/serverless";
 
 import yaml from 'js-yaml';
 
@@ -22,6 +23,8 @@ const pwaConfig = yaml.load(pwaConfigYaml) as Record<string, any>;
 if (typeof pwaConfigYaml !== 'string') {
   throw new Error('pwaConfigYaml must be a string');
 }
+
+const adapter = process.env.VERCEL ? vercel() : netlify();
 
 export default defineConfig({
   image: {
@@ -73,7 +76,7 @@ export default defineConfig({
       theme: 'dracula',
     },
   },
-  output: 'hybrid',
+  output: 'server',
   prefetch: true,
   site: pwaConfig.siteUrl,
   redirects: {
@@ -91,9 +94,8 @@ export default defineConfig({
     },
     plugins: [rawFonts([".ttf", ".woff"])],
   },
-  adapter: netlify()
+  adapter: adapter
 });
-
 function rawFonts(ext: string[]) {
   return {
     name: "vite-plugin-raw-fonts",

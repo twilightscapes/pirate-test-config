@@ -39,7 +39,8 @@ const menuLinks = await getMenuLinks();
             class="px-4 py-4 sm:py-0 sm:hover:underline"
             aria-current={url.pathname === link.path ? "page" : false}
             rel="prefetch"
-            data-astro-reload
+            data-astro-prefetch="load"
+
           >
             {link.title}
           </a>

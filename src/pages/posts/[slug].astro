@@ -1,8 +1,10 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
-
 import PostLayout from "@/layouts/BlogPost.astro";
 import { getAllPosts } from "@/data/post";
+import type { CollectionEntry } from "astro:content";
+
+export const prerender = true;
 
 export const getStaticPaths = (async () => {
 	const blogEntries = await getAllPosts();
@@ -17,6 +19,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
-	<PostLayout post={entry as any}>
-		<Content />
-	</PostLayout>
+
+<PostLayout post={entry as CollectionEntry<"post">}>
+	<Content />
+</PostLayout>
