@@ -6,5 +6,5 @@
     }
   },
   "installCommand": "pnpm install",
-  "buildCommand": "pnpm astro build"
+  "buildCommand": "pnpm build"
 }

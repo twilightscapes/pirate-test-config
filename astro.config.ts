@@ -78,8 +78,8 @@ export default defineConfig({
       theme: 'dracula',
     },
   },
-  // output: output,
-  output: 'server',
+  output: output,
+  // output: 'server',
   prefetch: true,
   site: pwaConfig.siteUrl,
   redirects: {
@@ -97,7 +97,7 @@ export default defineConfig({
     },
     plugins: [rawFonts([".ttf", ".woff"])],
   },
-  adapter: vercel()
+  adapter: adapter
 });
 
 function rawFonts(ext: string[]) {
