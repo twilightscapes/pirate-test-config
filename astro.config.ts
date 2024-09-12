@@ -23,7 +23,11 @@ if (typeof pwaConfigYaml !== 'string') {
   throw new Error('pwaConfigYaml must be a string');
 }
 
-const adapter = process.env.VERCEL ? vercel() : netlify();
+// Determine the adapter and output based on the environment
+const isVercel = !!process.env.VERCEL;
+const adapter = isVercel ? vercel() : netlify();
+const output = isVercel ? 'server' : 'hybrid';
+
 export default defineConfig({
   image: {
     domains: ["webmention.io"]
@@ -74,7 +78,7 @@ export default defineConfig({
       theme: 'dracula',
     },
   },
-  output: 'server',
+  output: output,
   prefetch: true,
   site: pwaConfig.siteUrl,
   redirects: {
@@ -94,7 +98,6 @@ export default defineConfig({
   },
   adapter: adapter
 });
-
 function rawFonts(ext: string[]) {
   return {
     name: "vite-plugin-raw-fonts",
