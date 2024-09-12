@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
-		"build": "pnpm build",
+		"build": "pnpm astro build",
 		"postbuild": "pagefind --site dist",
 		"preview": "astro preview",
 		"format": "prettier -w --cache . && prettier -w --cache **/*.astro",
