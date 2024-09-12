@@ -32,6 +32,8 @@ body {
 	@apply mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-8 pt-16 text-textColor antialiased;
 }
 
+
+
 	  
 	  html, body {
 		padding: 0;
@@ -299,7 +301,8 @@ body {
 	  /* old */
 	  
 	  header.header {height:0;}
-	  #missioncontrol{line-height: 1;}
+	  #missioncontrol{line-height: 1; position:fixed; top:10px; right:0; z-index: 600; color:#fff; fill:#fff; }
+	  
 	  
 	  .flexbutt{display:flex; }
 	  .flexcheek{
@@ -325,6 +328,10 @@ body {
 		top:0;
 		object-fit:cover;
 	  }
+/* user css */
+	  /* .backimage{max-height: 50vh; margin:0 auto; background-size: center; background-position: center; object-fit: contain;  opacity:.2; margin-top: 20vh; padding:0 2%;} */
+/* user css */
+
 	  
 	  .sliderSpacer{display:none;}
 	  

@@ -47,13 +47,15 @@ const menuLinks = await getMenuLinks();
       ))}
     </ul>
 
-    <div id="missioncontrol" class="missioncontrol sitecontrols flex justify-around items-center gap-3 pr-2.5">
-      {showSearch && <Search />}
-      {showSwitch && <Switch client:load defaultView={defaultView} />}
-      {showTheme && <ThemeToggle />}
-    </div>
+    
   </div>
 )}
+
+<div id="missioncontrol" class="missioncontrol sitecontrols flex justify-around items-center gap-3 pr-2.5">
+  {showSearch && <Search />}
+  {showSwitch && <Switch client:load defaultView={defaultView} />}
+  {showTheme && <ThemeToggle />}
+</div>
 
 {backgroundImage && (
   <img class="backimage w-2.5 h-2.5" src={backgroundImage} alt="Default Background" width="10" height="10" />
