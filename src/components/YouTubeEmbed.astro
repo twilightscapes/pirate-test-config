@@ -315,7 +315,7 @@ const playerVars: { [key: string]: number | string } = {
   }
   .custom-controls.paused {
     opacity: 1;
-    background-color: rgba(0, 0, 0, 1); 
+    background-color: rgba(0, 0, 0, .5); 
   }
   .center-controls {
     display: flex;
@@ -349,7 +349,7 @@ const playerVars: { [key: string]: number | string } = {
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
   }
-  #mute{color:var(--theme-accent2); width:100%; filter: brightness(2.6);}
+  #mute{color:var(--theme-accent2); width:100%; filter: brightness(2.5);}
   .bottom-tray label{display:flex; flex-direction: column; font-size: clamp(.8rem,.9vw,1rem); align-items: center;}
   #mute svg .volume-icon { display: block; }
   #mute svg .muted-icon { display: none; }
@@ -370,7 +370,8 @@ const playerVars: { [key: string]: number | string } = {
 input[type="range"] {
   -webkit-appearance: none;
   width: 100%;
-  background: rgba(255, 255, 255, 0.145);
+  background: rgba(255, 255, 255, 0.6);
+  background: var(--theme-accent2);
   border-radius: 5px;
   background-image: linear-gradient(#fff, var(--theme-accent2)) ;
   background-size: 0% 100%;
@@ -387,7 +388,7 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: ew-resize;
   box-shadow: 0 0 2px 0 #555;
   transition: background .3s ease-in-out;
-  filter: brightness(2);
+  filter: brightness(1.5);
 }
 
 input[type="range"]::-moz-range-thumb {
@@ -399,6 +400,7 @@ input[type="range"]::-moz-range-thumb {
   cursor: ew-resize;
   box-shadow: 0 0 2px 0 #555;
   transition: background .3s ease-in-out;
+  filter: brightness(1.5);
 }
 
 input[type="range"]::-ms-thumb {
@@ -410,5 +412,6 @@ input[type="range"]::-ms-thumb {
   cursor: ew-resize;
   box-shadow: 0 0 2px 0 #555;
   transition: background .3s ease-in-out;
+  filter: brightness(1.5);
 }
 </style>
