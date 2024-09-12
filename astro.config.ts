@@ -14,20 +14,33 @@ import markdoc from "@astrojs/markdoc";
 import keystatic from '@keystatic/astro';
 import netlify from "@astrojs/netlify";
 import vercel from '@astrojs/vercel/serverless';
+import yaml from 'js-yaml';
 
-// Load PWA configuration from environment variables with default values
-const pwaConfig = {
-  siteUrl: process.env.PWA_SITE_URL || 'https://default-site-url.com',
-  name: process.env.PWA_NAME || 'Default Name',
-  shortName: process.env.PWA_SHORT_NAME || 'Default Short Name',
-  description: process.env.PWA_DESCRIPTION || 'Default Description',
-  themeColor: process.env.PWA_THEME_COLOR || '#ffffff',
-  backgroundColor: process.env.PWA_BACKGROUND_COLOR || '#ffffff',
-  startUrl: process.env.PWA_START_URL || '/',
-  display: process.env.PWA_DISPLAY as 'standalone' | 'fullscreen' | 'minimal-ui' | 'browser' || 'standalone',
-  icon192: process.env.PWA_ICON_192 || '/default-icon-192.png',
-  icon512: process.env.PWA_ICON_512 || '/default-icon-512.png',
-};
+let pwaConfig: Record<string, any> = {};
+
+try {
+  const pwaSettingsFile = import.meta.glob('./src/content/pwaSettings/index.yaml', { query: '?raw', import: 'default', eager: true });
+  const pwaConfigYaml = Object.values(pwaSettingsFile)[0] as string;
+  if (typeof pwaConfigYaml !== 'string') {
+    throw new Error('pwaConfigYaml must be a string');
+  }
+  pwaConfig = yaml.load(pwaConfigYaml) as Record<string, any>;
+} catch (error) {
+  console.error('Error loading PWA configuration:', error);
+  // Provide default values if the file cannot be read
+  pwaConfig = {
+    siteUrl: 'https://default-site-url.com',
+    name: 'Default Name',
+    shortName: 'Default Short Name',
+    description: 'Default Description',
+    themeColor: '#ffffff',
+    backgroundColor: '#ffffff',
+    startUrl: '/',
+    display: 'standalone',
+    icon192: '/default-icon-192.png',
+    icon512: '/default-icon-512.png',
+  };
+}
 
 // Determine the adapter and output based on the environment
 const isVercel = !!process.env.VERCEL;
