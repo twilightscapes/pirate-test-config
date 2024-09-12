@@ -36,37 +36,37 @@ export default defineConfig({
     domains: ["webmention.io"]
   },
   integrations: [
-    AstroPWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['robots.txt', 'manifest.webmanifest'],
-      manifest: {
-        id: pwaConfig.startUrl,
-        name: pwaConfig.name,
-        short_name: pwaConfig.shortName,
-        description: pwaConfig.description,
-        theme_color: pwaConfig.themeColor,
-        start_url: pwaConfig.startUrl,
-        background_color: pwaConfig.backgroundColor,
-        display: pwaConfig.display,
-        icons: [{
-          src: pwaConfig.icon192,
-          sizes: '192x192',
-          type: 'image/png'
-        }, {
-          src: pwaConfig.icon512,
-          sizes: '512x512',
-          type: 'image/png'
-        }]
-      },
-      workbox: {
-        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
-      }
-    }),
+    // AstroPWA({
+    //   registerType: 'autoUpdate',
+    //   includeAssets: ['robots.txt', 'manifest.webmanifest'],
+    //   manifest: {
+    //     id: pwaConfig.startUrl,
+    //     name: pwaConfig.name,
+    //     short_name: pwaConfig.shortName,
+    //     description: pwaConfig.description,
+    //     theme_color: pwaConfig.themeColor,
+    //     start_url: pwaConfig.startUrl,
+    //     background_color: pwaConfig.backgroundColor,
+    //     display: pwaConfig.display,
+    //     icons: [{
+    //       src: pwaConfig.icon192,
+    //       sizes: '192x192',
+    //       type: 'image/png'
+    //     }, {
+    //       src: pwaConfig.icon512,
+    //       sizes: '512x512',
+    //       type: 'image/png'
+    //     }]
+    //   },
+    //   workbox: {
+    //     maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
+    //   }
+    // }),
     mdx(),
     react(),
     icon(),
     tailwind({
-      applyBaseStyles: false
+      applyBaseStyles: true
     }),
     sitemap(),
     keystatic(),
