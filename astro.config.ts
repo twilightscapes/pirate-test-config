@@ -16,7 +16,6 @@ import netlify from "@astrojs/netlify";
 import vercel from '@astrojs/vercel/serverless';
 import yaml from 'js-yaml';
 
-
 let pwaConfig: Record<string, any> = {};
 
 try {
@@ -125,15 +124,7 @@ export default defineConfig({
     },
     plugins: [rawFonts([".ttf", ".woff"])],
   },
-
-  adapter: adapter,
-  hooks: {
-    'astro:build:done': async ({ dir }) => {
-      // Log the contents of the dist directory
-      const files = fs.readdirSync(dir);
-      console.log('Build output files:', files);
-    }
-  }
+  adapter: adapter
 });
 
 function rawFonts(ext: string[]) {
