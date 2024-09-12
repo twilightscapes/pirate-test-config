@@ -79,7 +79,6 @@ export default defineConfig({
     },
   },
   output: output,
-  // output: 'server',
   prefetch: true,
   site: pwaConfig.siteUrl,
   redirects: {
