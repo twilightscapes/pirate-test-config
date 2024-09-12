@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import type { BasicFormField, FormFieldStoredValue } from "@keystatic/core";
 import { TextField } from '@keystar/ui/text-field';
 import { Flex } from '@keystar/ui/layout';
