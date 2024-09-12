@@ -11,7 +11,6 @@
 		"format": "prettier -w --cache . && prettier -w --cache **/*.astro",
 		"check": "astro check",
 		"clean": "rm -rf .data dist .astro .netlify node_modules"
-
 	},
 	"dependencies": {
 		"@astrojs/markdoc": "^0.11.4",
@@ -49,6 +48,7 @@
 		"set-function-length": "^1.2.2",
 		"sharp": "^0.33.5",
 		"stripe": "^16.10.0",
+		"vercel": "link:@astrojs/vercel",
 		"yet-another-react-lightbox": "^3.21.4"
 	},
 	"devDependencies": {
