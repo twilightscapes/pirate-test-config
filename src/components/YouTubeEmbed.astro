@@ -58,11 +58,13 @@ const playerVars: { [key: string]: number | string } = {
 
         <label for="volume">Volume
         <input type="range" id="volume" min="0" max="100" value="100" class="volume-slider"></label>
-              <div><button id="mute" class="control-button">
+              
+                <label for="mute-icon">Mute
+                  <button id="mute" class="control-button">
   <svg id="mute-icon" viewBox="0 0 16 16" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
     <path d="M6.5 15c-0.13 0-0.258-0.051-0.354-0.146l-3.854-3.854h-1.793c-0.276 0-0.5-0.224-0.5-0.5v-5c0-0.276 0.224-0.5 0.5-0.5h1.793l3.854-3.854c0.143-0.143 0.358-0.186 0.545-0.108s0.309 0.26 0.309 0.462v13c0 0.202-0.122 0.385-0.309 0.462-0.062 0.026-0.127 0.038-0.191 0.038z"></path>
   </svg>
-</button></div>      </div>      <div class="botblock"></div>
+</button></label>      </div>      <div class="botblock"></div>
     </div>
   </div>
 ) : (
@@ -173,15 +175,34 @@ const playerVars: { [key: string]: number | string } = {
         }
       });
 
+      function updateSliderBackground(slider) {
+        const value = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+        slider.style.background = `linear-gradient(to right, var(--theme-accent2) ${value}%, rgba(0, 0, 0, 0.5) ${value}%)`;
+      }
+
       progressBar.addEventListener('input', function() {
-        const time = player.getDuration() * (progressBar.value / 100);
+        updateSliderBackground(this);
+        const time = player.getDuration() * (this.value / 100);
         player.seekTo(time, true);
       });
+
+      // Update progress bar continuously
+      function updateProgressBar() {
+        if (player && player.getCurrentTime && player.getDuration) {
+          const progress = (player.getCurrentTime() / player.getDuration()) * 100;
+          progressBar.value = progress;
+          updateSliderBackground(progressBar);
+        }
+        requestAnimationFrame(updateProgressBar);
+      }
+
+      updateProgressBar();
     }
 
     const volumeSlider = document.getElementById('volume');
     if (volumeSlider) {
       volumeSlider.addEventListener('input', function() {
+        updateSliderBackground(this);
         player.setVolume(this.value);
       });
     }
@@ -198,7 +219,6 @@ const playerVars: { [key: string]: number | string } = {
         }
       });
     }
-
     const controls = document.querySelector('.custom-controls');
     controls.addEventListener('touchstart', showControls);
     controls.addEventListener('touchend', hideControls);
@@ -252,7 +272,7 @@ const playerVars: { [key: string]: number | string } = {
 </script>
 
 <style>
-  .topblock{display:flex; width:100%; justify-content: center; position: absolute; top:0; height:60px; background:#000;}
+  .topblock{display:flex; width:100%; justify-content: center; position: absolute; top:0; height:60px; background:#000; z-index: 0;}
   .botblock{display:flex; width:100%; justify-content: center; position: absolute; bottom:0; height:220px; background:#000; z-index: 0;}
 
   @media (max-width: 48rem) {
@@ -287,6 +307,8 @@ const playerVars: { [key: string]: number | string } = {
     background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
     transition: opacity 0.3s ease, background-color 0.3s ease;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
   }
   .custom-controls:hover {
     opacity: 1;
@@ -323,9 +345,11 @@ const playerVars: { [key: string]: number | string } = {
     width:100%;
     justify-content: center;
     gap:5vw;
-    z-index: 1;
+    z-index: 2;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
-  #mute{color:white; width:100%;}
+  #mute{color:var(--theme-accent2); width:100%;}
   .bottom-tray label{display:flex; flex-direction: column; font-size: clamp(.8rem,.9vw,1rem); align-items: center;}
   #mute svg .volume-icon { display: block; }
   #mute svg .muted-icon { display: none; }
@@ -340,5 +364,50 @@ const playerVars: { [key: string]: number | string } = {
 #mute svg path {
   fill: currentColor;
 }
-</style>
 
+
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.145);
+  border-radius: 5px;
+  background-image: linear-gradient(#fff, var(--theme-accent2)) ;
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: var(--theme-accent2);
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+  filter: brightness(2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: var(--theme-accent2);
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+}
+
+input[type="range"]::-ms-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: var(--theme-accent2);
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+}
+</style>
