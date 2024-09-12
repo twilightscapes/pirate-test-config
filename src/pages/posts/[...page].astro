@@ -29,7 +29,7 @@ const meta = {
 	title: "Posts",
 };
 
-const paginationProps = page && page.url ? {
+const paginationProps = {
 	...(page.url.prev && {
 		prevUrl: {
 			text: `← Previous Page`,
@@ -42,12 +42,11 @@ const paginationProps = page && page.url ? {
 			url: page.url.next,
 		},
 	}),
-} : {};
+};
 
-export const prerender = true;
-
-const groupedByYear = page && page.data ? groupPostsByYear(page.data) : {};
+const groupedByYear = groupPostsByYear(page.data);
 const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
+
 const siteSettings = await getEntry('siteSettings', 'main');
 const { defaultView } = siteSettings.data;
 ---
