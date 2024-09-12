@@ -3,7 +3,7 @@ import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-// import expressiveCode from "astro-expressive-code";
+import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import fs from "fs";
 import rehypeExternalLinks from "rehype-external-links";
@@ -28,42 +28,51 @@ const isVercel = !!process.env.VERCEL;
 const adapter = isVercel ? vercel() : netlify();
 const output = isVercel ? 'server' : 'hybrid';
 
+console.log(`Using adapter: ${isVercel ? 'Vercel' : 'Netlify'}`);
+console.log(`Output mode: ${output}`);
+
 export default defineConfig({
   image: {
     domains: ["webmention.io"]
   },
-  integrations: [mdx(), react(), icon(), tailwind({
-    applyBaseStyles: false
-  }), sitemap(), keystatic(), 
-  
-  AstroPWA({
-    registerType: 'autoUpdate',
-    includeAssets: ['robots.txt', 'manifest.webmanifest'],
-    manifest: {
-      id: pwaConfig.startUrl,
-      name: pwaConfig.name,
-      short_name: pwaConfig.shortName,
-      description: pwaConfig.description,
-      theme_color: pwaConfig.themeColor,
-      start_url: pwaConfig.startUrl,
-      background_color: pwaConfig.backgroundColor,
-      display: pwaConfig.display,
-      icons: [{
-        src: pwaConfig.icon192,
-        sizes: '192x192',
-        type: 'image/png'
-      }, {
-        src: pwaConfig.icon512,
-        sizes: '512x512',
-        type: 'image/png'
-      }]
-    },
-    workbox: {
-      maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
-    }
-  }), 
-  
-  markdoc()],  markdown: {
+  integrations: [
+    AstroPWA({
+      registerType: 'autoUpdate',
+      includeAssets: ['robots.txt', 'manifest.webmanifest'],
+      manifest: {
+        id: pwaConfig.startUrl,
+        name: pwaConfig.name,
+        short_name: pwaConfig.shortName,
+        description: pwaConfig.description,
+        theme_color: pwaConfig.themeColor,
+        start_url: pwaConfig.startUrl,
+        background_color: pwaConfig.backgroundColor,
+        display: pwaConfig.display,
+        icons: [{
+          src: pwaConfig.icon192,
+          sizes: '192x192',
+          type: 'image/png'
+        }, {
+          src: pwaConfig.icon512,
+          sizes: '512x512',
+          type: 'image/png'
+        }]
+      },
+      workbox: {
+        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
+      }
+    }),
+    mdx(),
+    react(),
+    icon(),
+    tailwind({
+      applyBaseStyles: false
+    }),
+    sitemap(),
+    keystatic(),
+    markdoc()
+  ],
+  markdown: {
     rehypePlugins: [[rehypeExternalLinks, {
       rel: ["nofollow", "noopener", "noreferrer"],
       target: "_blank"
@@ -98,6 +107,7 @@ export default defineConfig({
   },
   adapter: adapter
 });
+
 function rawFonts(ext: string[]) {
   return {
     name: "vite-plugin-raw-fonts",
