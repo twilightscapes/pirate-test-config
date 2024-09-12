@@ -73,7 +73,7 @@ export default defineConfig({
       theme: 'dracula',
     },
   },
-  output: 'hybrid',
+  output: 'server',
   prefetch: true,
   site: pwaConfig.siteUrl,
   redirects: {
