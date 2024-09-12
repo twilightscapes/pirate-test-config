@@ -1,5 +1,5 @@
 [build]
-  command = "./update-theme.sh && pnpm astro build"
+  command = "pnpm build"
   publish = "dist"
   functions = "netlify/functions"
   
