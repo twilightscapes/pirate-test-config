@@ -344,7 +344,7 @@ body {
 		display: flex;
 		flex-direction: row;
 		-webkit-overflow-scrolling: touch;
-		gap: 20vw;
+		gap: 10vw;
 		overscroll-behavior: contain;
 		scroll-snap-type: y mandatory;
 		transition:transform .3s;
@@ -376,6 +376,8 @@ body {
 		display:flex;
 		justify-content: center;;
 	  }
+
+	  .grid-container{padding-top: 5vh;}
 	  
 	  .grid-container .post-card1 {
 		/* min-height:  30vh; */
