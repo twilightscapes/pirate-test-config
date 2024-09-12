@@ -13,7 +13,7 @@ import AstroPWA from '@vite-pwa/astro';
 import markdoc from "@astrojs/markdoc";
 import keystatic from '@keystatic/astro';
 import netlify from "@astrojs/netlify";
-import vercel from '@astrojs/vercel/static';
+import vercel from '@astrojs/vercel/serverless';
 import yaml from 'js-yaml';
 
 const pwaSettingsFile = import.meta.glob('./src/content/pwaSettings/index.yaml', { query: '?raw', import: 'default', eager: true });
