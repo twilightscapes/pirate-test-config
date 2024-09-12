@@ -349,7 +349,7 @@ const playerVars: { [key: string]: number | string } = {
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
   }
-  #mute{color:var(--theme-accent2); width:100%;}
+  #mute{color:var(--theme-accent2); width:100%; filter: brightness(2.6);}
   .bottom-tray label{display:flex; flex-direction: column; font-size: clamp(.8rem,.9vw,1rem); align-items: center;}
   #mute svg .volume-icon { display: block; }
   #mute svg .muted-icon { display: none; }
@@ -375,6 +375,7 @@ input[type="range"] {
   background-image: linear-gradient(#fff, var(--theme-accent2)) ;
   background-size: 0% 100%;
   background-repeat: no-repeat;
+  filter: brightness(1.6);
 }
 
 input[type="range"]::-webkit-slider-thumb {
