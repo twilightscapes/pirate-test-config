@@ -320,7 +320,7 @@ body {
 	  }
 
 
-	  #gobacker{position:fixed; display:flex;  right:20px; z-index:11; top:5vh;}
+	  #gobacker{position:fixed; display:flex;  right:20px; z-index:11; top:6vh;}
 	  
 	  .backimage{
 		height: 100vh;
@@ -358,7 +358,7 @@ body {
 		backdrop-filter: blur(44px);
 		transform-style: var(--theme-accent2);
 		-webkit-transform-style: var(--theme-accent2); */
-		padding-top:2vh;
+		padding-top: 5vh;
 	  }
 
 
