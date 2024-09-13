@@ -315,13 +315,13 @@ body {
 		align-items:center;
 		justify-content: center;
 		padding: .5vh .5vw;
-		background: var(--theme-accent2);
+		background: var(--theme-header);
 		color:#ddd;
 		border-radius:var(--border-radius);
 	  }
 
 
-	  #gobacker{position:fixed; display:flex;  right:20px; z-index:11; top:6.5vh;}
+	  #gobacker{position:fixed; display:flex;  right:10px; z-index:11; top:65px;}
 	  
 	  .backimage{
 		height: 100vh;
