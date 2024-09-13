@@ -43,7 +43,7 @@ const playerVars: { [key: string]: number | string } = {
 
 {useCustomPlayer ? (
   <div class="custom-youtube-player" style="display:flex; justify-content:center;">
-    <div id="youtube-player" style="width:100%; max-width:1600px; aspect-ratio:16/9;"></div>
+  <div id="youtube-player" style="width:100%; max-width:1600px; aspect-ratio:16/9;"></div>
     <div class="custom-controls">
       <div class="topblock"></div>
       
@@ -52,19 +52,23 @@ const playerVars: { [key: string]: number | string } = {
         {title && <h2 class="video-title title1">{title}</h2>}
       </div>
       <div class="bottom-tray">
+
         <label for="progress">Progress
-        <input type="range" id="progress" min="0" max="100" value="0" class="progress-bar">
+          <span style="padding:1.5vh 1rem; background:var(--theme-header); border-radius:var(--border-radius);"><input type="range" id="progress" min="0" max="100" value="0" class="progress-bar"></span>
         </label>
 
         <label for="volume">Volume
-        <input type="range" id="volume" min="0" max="100" value="100" class="volume-slider"></label>
+        <span style="padding:1.5vh 1rem; background:var(--theme-header); border-radius:var(--border-radius);"><input type="range" id="volume" min="0" max="100" value="100" class="volume-slider"></span></label>
               
-                <label for="mute-icon">Mute
-                  <button id="mute" class="control-button">
-  <svg id="mute-icon" viewBox="0 0 16 16" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M6.5 15c-0.13 0-0.258-0.051-0.354-0.146l-3.854-3.854h-1.793c-0.276 0-0.5-0.224-0.5-0.5v-5c0-0.276 0.224-0.5 0.5-0.5h1.793l3.854-3.854c0.143-0.143 0.358-0.186 0.545-0.108s0.309 0.26 0.309 0.462v13c0 0.202-0.122 0.385-0.309 0.462-0.062 0.026-0.127 0.038-0.191 0.038z"></path>
-  </svg>
-</button></label>      </div>      <div class="botblock"></div>
+      <label for="mute-icon" style="padding:;">Mute
+        <span style="padding:1.3vh 1rem; background:var(--theme-header); border-radius:var(--border-radius);">  <button id="mute" class="control-button">
+      <svg id="mute-icon" viewBox="0 0 16 16" height="80px" width="80px" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6.5 15c-0.13 0-0.258-0.051-0.354-0.146l-3.854-3.854h-1.793c-0.276 0-0.5-0.224-0.5-0.5v-5c0-0.276 0.224-0.5 0.5-0.5h1.793l3.854-3.854c0.143-0.143 0.358-0.186 0.545-0.108s0.309 0.26 0.309 0.462v13c0 0.202-0.122 0.385-0.309 0.462-0.062 0.026-0.127 0.038-0.191 0.038z"></path>
+      </svg></button></span></label>
+
+      </div>      
+
+      <div class="botblock"></div>
     </div>
   </div>
 ) : (
@@ -280,6 +284,7 @@ const playerVars: { [key: string]: number | string } = {
     .botblock{display:flex; width:100%; justify-content: center; position: absolute; bottom:0; height:50px; background:#000; z-index: 0;}
     .youtube-player{margin-top:60px;}
     .custom-youtube-player{margin-top:60px !important;}
+    .bottom-tray{padding-bottom: 0 !important;}
   }
 
   .custom-youtube-player {
@@ -349,8 +354,14 @@ const playerVars: { [key: string]: number | string } = {
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
   }
-  #mute{color:var(--theme-accent2); width:100%; filter: brightness(2.5);}
-  .bottom-tray label{display:flex; flex-direction: column; font-size: clamp(.8rem,.9vw,1rem); align-items: center;}
+  
+
+  #mute{color:var(--theme-accent2); width:100%; filter: brightness(1.5);}
+
+  label{display:flex; flex-direction: column; gap:10px; font-size: clamp(.8rem,.9vw,1rem); align-items: center; padding-bottom: 10px; filter:}
+
+  :root[data-theme="dark"] label{filter: brightness(4.5);}
+
   #mute svg .volume-icon { display: block; }
   #mute svg .muted-icon { display: none; }
   #mute.muted svg .volume-icon { display: none; }
@@ -359,6 +370,7 @@ const playerVars: { [key: string]: number | string } = {
   #mute svg {  width: 24px;
   height: 24px;
   fill: currentColor;
+  filter: brightness(2.5);
 }
 
 #mute svg path {
@@ -376,7 +388,7 @@ input[type="range"] {
   background-image: linear-gradient(#fff, var(--theme-accent2)) ;
   background-size: 0% 100%;
   background-repeat: no-repeat;
-  filter: brightness(1.6);
+  height: 10px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -384,17 +396,16 @@ input[type="range"]::-webkit-slider-thumb {
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background: var(--theme-accent2);
+  background-image: linear-gradient(#222, #333);
   cursor: ew-resize;
   box-shadow: 0 0 2px 0 #555;
   transition: background .3s ease-in-out;
-  filter: brightness(1.5);
 }
 
-input[type="range"]::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb, input[type="range"]::-ms-thumb {
   -webkit-appearance: none;
-  height: 20px;
-  width: 20px;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
   background: var(--theme-accent2);
   cursor: ew-resize;
@@ -403,15 +414,8 @@ input[type="range"]::-moz-range-thumb {
   filter: brightness(1.5);
 }
 
-input[type="range"]::-ms-thumb {
-  -webkit-appearance: none;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background: var(--theme-accent2);
-  cursor: ew-resize;
-  box-shadow: 0 0 2px 0 #555;
-  transition: background .3s ease-in-out;
-  filter: brightness(1.5);
-}
+
+
+
+
 </style>
