@@ -16,17 +16,18 @@ const menuLinks = await getMenuLinks();
 ---
 
 {showHeader && (
-  <div id="menu" class="menu header" style="min-height:60px;">
+  <div id="menu" class="menu header" style="min-height:60px; padding: 2px 100px 2px 0;">
     {showLogo && logoImage && (
       <a href="/" aria-current={url.pathname === "/" ? "page" : false} class="relative top-1 left-2.5 p-0">
         <img 
           src={logoImage}
           alt="Site Logo"
-          class="max-h-[60px] max-w-[90px] cornerlogo"
+          class="max-h-[60px] max-w-[140px]"
           loading="eager"
           fetchpriority="high"
-          width="90"
+          width="90px"
           height="60"
+          style="width:100%; max-height:55px; max-width:140px"
         />
       </a>
     )}
