@@ -320,7 +320,7 @@ body {
 	  }
 
 
-	  #gobacker{position:fixed; display:flex;  right:20px; z-index:11; top:6vh;}
+	  #gobacker{position:fixed; display:flex;  right:20px; z-index:11; top:6.5vh;}
 	  
 	  .backimage{
 		height: 100vh;
@@ -358,7 +358,7 @@ body {
 		backdrop-filter: blur(44px);
 		transform-style: var(--theme-accent2);
 		-webkit-transform-style: var(--theme-accent2); */
-		padding-top: 5vh;
+		padding: 7vh 0;
 	  }
 
 
@@ -377,7 +377,7 @@ body {
 		justify-content: center;;
 	  }
 
-	  .grid-container{padding-top: 5vh;}
+	  .grid-container{padding-top: 7vh;}
 	  
 	  .grid-container .post-card1 {
 		/* min-height:  30vh; */
@@ -400,6 +400,19 @@ body {
 		text-shadow: 0 1px 1px var(--theme-header);
 		/* transform: translateZ(0); */
 	}
+
+	#directorySelect {
+		position: fixed;
+		top: 10px;
+		left: 0;
+		right: 0;
+	  z-index: 2;
+		max-width: 300px;
+		margin: 0 auto;
+		padding: 1vh 1vw;
+	  }
+
+	body:has(.header) #directorySelect{top:7.5vh !important;}
 
 	  
 	  #menu{

@@ -76,16 +76,8 @@ const { defaultView } = siteSettings.data;
 
 <GalleryLightbox client:only="react" images={allImages} showCaptions={showCaptions} />
 
-<style>#directorySelect {
-  position: fixed;
-  top: 65px;
-  left: 0;
-  right: 0;
-z-index: 2;
-  max-width: 300px;
-  margin: 0 auto;
-  padding: 1vh 1vw;
-}
+<style>
+
 
 .post-card1 {
   display: flex;
@@ -109,6 +101,10 @@ z-index: 2;
 
 .post-card1.visible {
   display: block;
+}
+
+@media(max-width:48rem) {
+  #directorySelect {right:inherit; left:1rem; width:80%;}
 }
 </style>
 <script>
