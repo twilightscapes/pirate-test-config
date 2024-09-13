@@ -301,7 +301,7 @@ body {
 	  /* old */
 	  
 	  header.header {height:0;}
-	  #missioncontrol{line-height: 1; position:fixed; top:10px; right:0; z-index: 600; color:#fff; fill:#fff; }
+	  #missioncontrol{line-height: 1; position:fixed; top:6px; right:4px; z-index: 600; color:#fff; fill:#fff; background: var(--theme-header); padding:4px 4px 4px 6px; border-radius:var(--border-radius); }
 	  
 	  
 	  .flexbutt{display:flex; }
