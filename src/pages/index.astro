@@ -46,8 +46,8 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 	{showTestOnHome && <Testimonials />}
 
 	{showPosts && (
-		<section class="scroll-container">
-			<div class="w-full py-1 px-2 mb-4 text-center theme-accent backdrop-blur-lg">
+		<section class="scroll-container mb-4 px-2">
+			<div class="w-full py-1 px-6 mb-1 text-center theme-accent backdrop-blur-lg">
 				<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text">{homeContent.data.postsectiontitle}</h2>
 			</div>
 			
@@ -57,9 +57,9 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 
 				{allPostsByDate.map((p) => <PostPreview post={p} withDesc />)}
 
-				{/* <a class="button no-underline text-white text-center block" href="/posts/">
+				<a class="button no-underline text-white text-center block" href="/posts/" style="padding:1vh 1rem; margin:0 50px 50px 50px;">
 					View More
-				</a> */}
+				</a>
 			</div>
 		</section>
 	)}
