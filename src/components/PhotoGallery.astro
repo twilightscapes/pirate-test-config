@@ -63,7 +63,8 @@ const { defaultView } = siteSettings.data;
         alt={image.alt ?? ''}
         width={800}
         height={600}
-        class="object-contain"
+        class="object-contain rounded-image"
+        // style="border-radius: 20px;"
       />
       {showCaptions && (
         <div class="image-caption">
@@ -83,15 +84,13 @@ const { defaultView } = siteSettings.data;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-
+  border-radius: var(--border-radius);
 }
+img{border-radius: var(--border-radius) !important;}
 
 .image-caption {
   margin-top: 8px;
   text-align: center;
-  /* font-size: 14px; */
-  /* color: #555; */
   filter:brightness(.75);
 }
 
@@ -104,7 +103,8 @@ const { defaultView } = siteSettings.data;
 }
 
 @media(max-width:48rem) {
-  #directorySelect {right:inherit; left:1rem; width:80%;}
+  #directorySelect {right:inherit; left:1rem; width:60%;}
+  body:has(.header) #directorySelect{left:0 !important; right:0 !important; }
 }
 </style>
 <script>

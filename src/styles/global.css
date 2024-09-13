@@ -404,7 +404,7 @@ body {
 
 	#directorySelect {
 		position: fixed;
-		top: 10px;
+		top: 8px;
 		left: 0;
 		right: 0;
 	  	z-index: 2;
@@ -414,7 +414,16 @@ body {
 		background: var(--theme-header)
 	  }
 
-	body:has(.header) #directorySelect{top:7.5vh !important;}
+	body:has(.header) #directorySelect{top:72px !important;}
+
+	select {
+		--webkit-appearance: none;
+		appearance: none; 
+	}
+
+	#directorySelect {background: var(--theme-header) !important; color:#ddd !important; outline:1px solid var(--theme-accent2) !important; font-size: clamp(1rem, 1vw, 1.8rem) !important; cursor: pointer; border-radius: var(--border-radius); padding:.6rem 1vw .6rem 1vw;}
+  
+  
 
 	  
 	  #menu{
@@ -449,3 +458,11 @@ body {
 	  }
 
 
+
+img {
+  border-radius: var(--border-radius) !important;
+}
+
+.rounded-image {
+  border-radius: var(--border-radius) !important;
+}
