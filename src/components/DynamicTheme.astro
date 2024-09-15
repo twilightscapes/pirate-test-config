@@ -1,12 +1,13 @@
 ---
 import { getEntry } from 'astro:content';
 const styleAppearance = await getEntry('styleapps', 'index');
-const customCSS = styleAppearance.data.customCSS || '';
+
+// const customCSS = styleAppearance.data.customCSS || '';
 ---
 
+<!-- Rest of your DynamicTheme.astro code -->
 
-
-
+<!-- <style set:html={customCSS}></style> -->
 
 <script is:inline define:vars={{ styleAppearance }}>
   function getInitialTheme() {
@@ -52,4 +53,3 @@ const customCSS = styleAppearance.data.customCSS || '';
     updateCurrentTheme(newTheme);
   }
 </script>
-<style set:html={customCSS}></style>
