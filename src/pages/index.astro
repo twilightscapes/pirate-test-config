@@ -27,6 +27,7 @@ const showHomeGallery = homepage?.showHomeGallery ?? false;
 
 const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
+const language = await getEntry('language', 'index');
 ---
 
 <PageLayout meta={{ title: homeContent.data.title, description: pwaSettings.data.description }}>
@@ -58,7 +59,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 				{allPostsByDate.map((p) => <PostPreview post={p} withDesc />)}
 
 				<a class="button no-underline text-white text-center block" href="/posts/" style="padding:1vh 1rem; margin:0 50px 50px 50px;">
-					View More
+					{language.data.viewmore}
 				</a>
 			</div>
 		</section>

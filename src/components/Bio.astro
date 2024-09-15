@@ -1,6 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 const bioContent = await getEntry('bio', 'index');
+import { Image } from 'astro:assets';
 ---
 
 <section id="profile" class="scroll-area1 w-screen  mb-5 overflow-hidden rounded-lg backdrop-blur-lg">
@@ -18,6 +19,18 @@ const bioContent = await getEntry('bio', 'index');
         </div>
 
         <div class="flex-1 min-w-[300px] md:min-w-[500px] ">
+
+          {bioContent.data.image && (
+            <Image
+              src={bioContent.data.image}
+              loading="lazy"
+              alt={`${bioContent.data.name ?? 'User Photo'} Image`}
+              width={250}
+              height={250}
+              class="max-h-[30vh] relative object-contain mx-auto"
+            />
+          )}
+
           {bioContent.data.phone && (
             <h2 class="title2 text-center text-[clamp(1.2rem,3vw,2rem)] mb-6">
               <a href={`tel:${bioContent.data.phone}`} class="hover:underline">{bioContent.data.phone}</a>

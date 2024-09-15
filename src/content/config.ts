@@ -110,6 +110,7 @@ const siteSettings = defineCollection({
   schema: z.object({
     showHeader: z.boolean().optional(),
     showLogo: z.boolean().optional(),
+    showHome: z.boolean().optional(),
     showTheme: z.boolean().optional(),
     showSwitch: z.boolean().optional(),
     showSearch: z.boolean().optional(),
@@ -179,6 +180,22 @@ backgroundImage: z.string().optional(),
     darkText: z.string().optional(),
     siteFont: z.string().optional(),
     borderRadius: z.string().optional(),
+  }),
+});
+
+const language = defineCollection({
+  type: 'data',
+  schema: z.object({
+    copyright: z.string().optional(),
+    homelink: z.string().optional(),
+    viewmore: z.string().optional(),
+    allimages: z.string().optional(),
+    close: z.string().optional(),
+    search: z.string().optional(),
+    mute: z.string().optional(),
+    progress: z.string().optional(),
+    volume: z.string().optional(),
+    goback: z.string().optional()
   }),
 });
 

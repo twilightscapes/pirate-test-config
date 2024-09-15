@@ -194,6 +194,7 @@ export default config({
         divider: fields.empty(),
         showHeader: fields.checkbox({ label: 'Show Header', description: 'Hide/Show the main site header', defaultValue: true }),
         showLogo: fields.checkbox({ label: 'Show Logo', description: 'Hide/Show the logo in the header', defaultValue: true }),
+        showHome: fields.checkbox({ label: 'Show Home Link', description: 'Hide/Show the Home Link', defaultValue: true }),
         showTheme: fields.checkbox({ label: 'Show Theme', description: 'Hide/Show the theme selector', defaultValue: true }),
         showSwitch: fields.checkbox({ label: 'Show Switch', description: 'Hide/Show the layout selector', defaultValue: true }),
         showSearch: fields.checkbox({ label: 'Show Search', description: 'Hide/Show the search in the header', defaultValue: true }),
@@ -502,6 +503,26 @@ export default config({
       },
     }),  
 
+    language: singleton({
+      label: 'Language',
+      path: 'src/content/language/',
+      schema: {
+        homelink: fields.text({ label: 'Home' }),
+        copyright: fields.text({ label: 'Copyright' }),
+        goback: fields.text({ label: 'Back' }),
+        viewmore: fields.text({ label: 'View More' }),
+        allimages: fields.text({ label: 'All Images' }),
+        close: fields.text({ label: 'Close' }),
+        search: fields.text({ label: 'Search' }),
+        mute: fields.text({ label: 'Mute' }),
+        volume: fields.text({ label: 'Volume' }),
+        progress: fields.text({ label: 'Progress' }),
+        
+        // temp: fields.text({ label: 'temp', multiline: true }),
+      },
+    }),
+  
+
     bio: singleton({
       label: 'Bio',
       path: 'src/content/bio/',
@@ -509,13 +530,22 @@ export default config({
         title: fields.text({ label: 'Title' }),
         tagline: fields.text({ label: 'Tagline' }),
         description: fields.text({ label: 'Description', multiline: true }),
+        image: fields.image({
+          label: 'Image',
+          directory: 'public/images/bio',
+          publicPath: '/images/bio',
+        }),
         phone: fields.text({ label: 'Phone' }),
         subheading: fields.text({ label: 'Sub Heading' }),
         subcontent: fields.text({ label: 'Sub Content', multiline: true }),
         subcta: fields.text({ label: 'CTA Text' }),
       },
     }),
+    
   },
+
+
+
 
 ui: {
   brand: {
@@ -547,6 +577,7 @@ ui: {
       'socialCard',
       'photoSettings',
       'styleAppearance',
+      'language',
     ],
   },
 },});

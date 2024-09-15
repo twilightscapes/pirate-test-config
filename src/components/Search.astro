@@ -2,6 +2,8 @@
 // Heavy inspiration taken from Astro Starlight -> https://github.com/withastro/starlight/blob/main/packages/starlight/components/Search.astro
 
 import "@pagefind/default-ui/css/ui.css";
+import { getEntry } from 'astro:content';
+const language = await getEntry('language', 'index');
 ---
 
 <site-search class="ms-auto" id="search">
@@ -35,7 +37,7 @@ import "@pagefind/default-ui/css/ui.css";
 		<div class="dialog-frame flex flex-col gap-4 p-6 pt-12 sm:pt-6" >
 			<button
 				class="ms-auto cursor-pointer rounded-md bg-zinc-200 p-2 font-semibold dark:bg-zinc-700"
-				data-close-modal>Close</button
+				data-close-modal>{language.data.close}</button
 			>
 			{
 				import.meta.env.DEV ? (

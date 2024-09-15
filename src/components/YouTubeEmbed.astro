@@ -1,4 +1,9 @@
 ---
+import { getEntry } from 'astro:content';
+
+const language = await getEntry('language', 'index');
+
+
 interface Props {
   url: string;
   title?: string;
@@ -9,6 +14,7 @@ interface Props {
   end?: number;
   useCustomPlayer?: boolean;
 }
+
 
 const { 
   url = '', 
@@ -56,14 +62,14 @@ const playerVars: { [key: string]: number | string } = {
       </div>
       <div class="bottom-tray" style="">
 
-        <label for="progress" style="width:100%;">Progress
+        <label for="progress" style="width:100%;">{language.data.progress}
           <span style="width:100%; padding:1.5vh 1rem; background:#111; border-radius:var(--border-radius);"><input type="range" id="progress" min="0" max="100" value="0" class="progress-bar"></span>
         </label>
 
-        <label for="volume">Volume
+        <label for="volume">{language.data.volume}
         <span style="padding:1.5vh 1rem; background:#111; border-radius:var(--border-radius);"><input type="range" id="volume" min="0" max="100" value="100" class="volume-slider"></span></label>
               
-      <label for="mute-icon" style="padding:;">Mute
+      <label for="mute-icon" style="padding:;">{language.data.mute}
         <span style="padding:10px 8px 0 8px ; background:#111; border-radius:var(--border-radius);">
           <button id="mute" class="control-button">
       <svg id="mute-icon" viewBox="0 0 16 16" height="60px" width="60px" xmlns="http://www.w3.org/2000/svg">

@@ -4,6 +4,7 @@ import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 import GalleryLightbox from './GalleryLightbox.jsx';
 import { getEntry } from 'astro:content';
+const language = await getEntry('language', 'index');
 const reader = createReader(process.cwd(), keystaticConfig);
 const photoSettings = await reader.singletons.photoSettings.read();
 const defaultDirectory = photoSettings?.defaultDirectory || 'all';
@@ -42,7 +43,7 @@ const { defaultView } = siteSettings.data;
     <select id="directorySelect" style={{ background: '', border: '1px solid #000', borderRadius: 'var(--border-radius)', padding: '8px', boxShadow: '0px 0px 0px 1px #000', opacity:'.9', color:'#fff' }}>
       {directories.map((dir) => (
         <option value={dir} selected={dir === defaultDirectory}>
-          {dir === 'all' ? 'All Images' : dir}
+          {dir === 'all' ? language.data.allimages : dir}
         </option>
       ))}
     </select>

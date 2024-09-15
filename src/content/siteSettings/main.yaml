@@ -1,6 +1,7 @@
 logoImage: /images/logo/logoImage.svg
 showHeader: false
 showLogo: true
+showHome: true
 showTheme: true
 showSwitch: true
 showSearch: true
