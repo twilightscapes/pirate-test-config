@@ -1,7 +1,12 @@
 ---
 import { getEntry } from 'astro:content';
 const styleAppearance = await getEntry('styleapps', 'index');
+const customCSS = styleAppearance.data.customCSS || '';
 ---
+
+
+
+<style set:html={customCSS}></style>
 
 <script is:inline define:vars={{ styleAppearance }}>
   function getInitialTheme() {

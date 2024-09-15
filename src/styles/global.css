@@ -29,7 +29,7 @@ html {
 }
 
 body {
-	@apply mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-8 pt-16 text-textColor antialiased;
+	@apply mx-auto flex min-h-screen max-w-3xl flex-col  px-8 pt-16 text-textColor antialiased;
 }
 
 
@@ -332,7 +332,7 @@ body {
 		object-fit:cover;
 	  }
 /* user css */
-	  /* .backimage{max-height: 50vh; margin:0 auto; background-size: center; background-position: center; object-fit: contain;  opacity:.2; margin-top: 20vh; padding:0 2%;} */
+	  
 /* user css */
 
 	  
