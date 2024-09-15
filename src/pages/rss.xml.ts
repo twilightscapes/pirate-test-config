@@ -1,19 +1,20 @@
-import rss from "@astrojs/rss";
-import { siteConfig } from "@/site-config";
-import { getAllPosts } from "@/data/post";
+			import rss from '@astrojs/rss';
+			import { getCollection } from 'astro:content';
+			import type { CollectionEntry } from 'astro:content';
+			import type { AstroGlobal } from 'astro';
 
-export const GET = async () => {
-	const posts = await getAllPosts();
+			type Post = CollectionEntry<'posts'>;
 
-	return rss({
-		title: siteConfig.title,
-		description: siteConfig.description,
-		site: import.meta.env.SITE,
-		items: posts.map((post) => ({
-			title: post.data.title,
-			description: post.data.description,
-			pubDate: post.data.publishDate,
-			link: `posts/${post.slug}`,
-		})),
-	});
-};
+			export async function GET(context: AstroGlobal) {				const posts = await getCollection('posts');
+				return rss({
+					title: 'PIRATE Blog',
+					description: 'A blog about PIRATE',
+					site: context.site ?? 'https://default-site-url.com',
+					items: posts.map((post: Post) => ({
+						title: post.data.title,
+						pubDate: post.data.pubDate,
+						description: post.data.description,
+						link: `/posts/${post.slug}/`,
+					})),
+				});
+			}

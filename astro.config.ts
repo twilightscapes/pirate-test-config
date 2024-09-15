@@ -14,18 +14,27 @@ import markdoc from "@astrojs/markdoc";
 import keystatic from '@keystatic/astro';
 import netlify from "@astrojs/netlify";
 import vercel from '@astrojs/vercel/serverless';
-import yaml from 'js-yaml';
+import { reader } from './src/keystatic-data';
 
-const pwaSettingsFile = import.meta.glob('./src/content/pwaSettings/index.yaml', { query: '?raw', import: 'default', eager: true });
-const pwaConfigYaml = Object.values(pwaSettingsFile)[0] as string;
-const pwaConfig = yaml.load(pwaConfigYaml) as Record<string, any>;
-if (typeof pwaConfigYaml !== 'string') {
-  throw new Error('pwaConfigYaml must be a string');
-}
+
 
 // Determine the adapter and output based on the environment
 const isVercel = !!process.env.VERCEL;
 const adapter = isVercel ? vercel() : netlify();
+const pwaConfig = (await reader.singletons.pwaSettings.read()) || {
+  startUrl: '/',
+  name: 'PIRATE',
+  shortName: 'PIRATE',
+  description: '',
+  themeColor: '#ffffff',
+  backgroundColor: '#ffffff',
+  display: 'standalone',
+  icon192: '/icon-192x192.png',
+  icon512: '/icon-512x512.png',
+  siteUrl: 'https://example.com'
+};
+
+// Then use pwaConfig in your configuration as before
 const output = isVercel ? 'server' : 'hybrid';
 
 export default defineConfig({
@@ -40,23 +49,26 @@ export default defineConfig({
     registerType: 'autoUpdate',
     includeAssets: ['robots.txt', 'manifest.webmanifest'],
     manifest: {
-      id: pwaConfig.startUrl,
-      name: pwaConfig.name,
-      short_name: pwaConfig.shortName,
-      description: pwaConfig.description,
-      theme_color: pwaConfig.themeColor,
-      start_url: pwaConfig.startUrl,
-      background_color: pwaConfig.backgroundColor,
-      display: pwaConfig.display,
-      icons: [{
-        src: pwaConfig.icon192,
-        sizes: '192x192',
-        type: 'image/png'
-      }, {
-        src: pwaConfig.icon512,
-        sizes: '512x512',
-        type: 'image/png'
-      }]
+      id: pwaConfig.startUrl ?? '/',
+      name: pwaConfig.name ?? 'PIRATE',
+      short_name: pwaConfig.shortName ?? 'PIRATE',
+      description: pwaConfig.description ?? '',
+      theme_color: pwaConfig.themeColor ?? '#ffffff',
+      start_url: pwaConfig.startUrl ?? '/',
+      background_color: pwaConfig.backgroundColor ?? '#ffffff',
+      display: (pwaConfig.display as 'standalone' | 'fullscreen' | 'minimal-ui' | 'browser') ?? 'standalone',
+      icons: [
+        {
+          src: pwaConfig.icon192 ?? '/icon-192x192.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: pwaConfig.icon512 ?? '/icon-512x512.png',
+          sizes: '512x512',
+          type: 'image/png'
+        }
+      ]
     },
     workbox: {
       maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
@@ -80,8 +92,7 @@ export default defineConfig({
   },
   output: output,
   prefetch: true,
-  site: pwaConfig.siteUrl,
-  redirects: {
+  site: pwaConfig.siteUrl ?? 'https://example.com',  redirects: {
     '/admin': '/keystatic'
   },
   vite: {

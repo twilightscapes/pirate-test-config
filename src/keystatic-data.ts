@@ -1,7 +1,7 @@
 import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../keystatic.config';
+import config from '../keystatic.config';
 
-const reader = createReader(process.cwd(), keystaticConfig);
+export const reader = createReader('src/content', config);
 
 export const getSiteSettings = async () => {
   return await reader.singletons.siteSettings.read();
