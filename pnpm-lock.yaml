@@ -156,6 +156,9 @@ importers:
       astro-eslint-parser:
         specifier: ^1.0.2
         version: 1.0.3(typescript@5.6.2)
+      autoprefixer:
+        specifier: ^10.4.20
+        version: 10.4.20(postcss@8.4.47)
       eslint:
         specifier: ^9.10.0
         version: 9.10.0(jiti@1.21.6)
