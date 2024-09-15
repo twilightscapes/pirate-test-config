@@ -39,6 +39,9 @@ const playerVars: { [key: string]: number | string } = {
   playlist: videoId ?? '',
 };
 
+
+
+
 ---
 
 {useCustomPlayer ? (
@@ -88,6 +91,7 @@ const playerVars: { [key: string]: number | string } = {
 )}
 
 <script define:vars={{ videoId, playerVars, start, end, loop }}>
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   let player;
   let controlsTimeout;
 
@@ -105,25 +109,51 @@ const playerVars: { [key: string]: number | string } = {
 
   function showControls() {
     const controls = document.querySelector('.custom-controls');
+    const centerControls = document.querySelector('.center-controls');
     controls.style.opacity = '1';
+    centerControls.style.opacity = '1';
     clearTimeout(controlsTimeout);
   }
-
   function hideControls() {
     const controls = document.querySelector('.custom-controls');
-    controlsTimeout = setTimeout(() => {
+    const centerControls = document.querySelector('.center-controls');
+  
+    clearTimeout(controlsTimeout);
+
+    if (isTouchDevice) {
+      controlsTimeout = setTimeout(() => {
+        if (player && player.getPlayerState() == YT.PlayerState.PLAYING) {
+          centerControls.style.opacity = '0';
+          setTimeout(() => {
+            controls.style.opacity = '0';
+          }, 800);
+        }
+      }, 1200);
+    } else {
+      // For non-touch devices, hide immediately when playing
       if (player && player.getPlayerState() == YT.PlayerState.PLAYING) {
+        centerControls.style.opacity = '0';
         controls.style.opacity = '0';
       }
-    }, 3000);
+    }
   }
-
-  function onPlayerReady(event) {
+    function onPlayerReady(event) {
+    const centerControls = document.querySelector('.center-controls');
     const muteButton = document.getElementById('mute');
+    const volumeSlider = document.getElementById('volume');
     const muteIcon = muteButton.querySelector('svg');
 
     const playerArea = document.querySelector('.custom-youtube-player');
     playerArea.addEventListener('click', function() {
+      if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+        player.pauseVideo();
+      } else {
+        player.playVideo();
+      }
+    });
+
+    centerControls.addEventListener('click', function(e) {
+      e.stopPropagation();
       if (player.getPlayerState() == YT.PlayerState.PLAYING) {
         player.pauseVideo();
       } else {
@@ -161,7 +191,8 @@ const playerVars: { [key: string]: number | string } = {
 
       updateMuteButton(); // Initial state
 
-      muteButton.addEventListener('click', function() {
+      muteButton.addEventListener('click', function(e) {
+        e.stopPropagation();
         const currentTime = player.getCurrentTime();
         if (player.isMuted()) {
           player.unMute();
@@ -204,9 +235,9 @@ const playerVars: { [key: string]: number | string } = {
 
       updateProgressBar();
     }
-    const volumeSlider = document.getElementById('volume');
     if (volumeSlider) {
-      volumeSlider.addEventListener('input', function() {
+      volumeSlider.addEventListener('input', function(e) {
+        e.stopPropagation();
         updateSliderBackground(this);
         player.setVolume(this.value);
       });
@@ -236,8 +267,13 @@ const playerVars: { [key: string]: number | string } = {
       });
     }
     const controls = document.querySelector('.custom-controls');
-    controls.addEventListener('touchstart', showControls);
-    controls.addEventListener('touchend', hideControls);
+    if (isTouchDevice) {
+      controls.addEventListener('touchstart', showControls);
+      controls.addEventListener('touchend', hideControls);
+    } else {
+      controls.addEventListener('mouseenter', showControls);
+      controls.addEventListener('mouseleave', hideControls);
+    }
     player.addEventListener('onStateChange', function(event) {
       if (event.data === YT.PlayerState.PLAYING) {
         hideControls();
@@ -306,6 +342,7 @@ const playerVars: { [key: string]: number | string } = {
     padding: 0;
     position: relative;
     color:#fff;
+    background:#222;
   }
   #youtube-player {
 
@@ -340,6 +377,9 @@ const playerVars: { [key: string]: number | string } = {
     align-items: center;
     justify-content: center;
     height: 100%;
+    transition: opacity 0.1s ease;
+    transition: opacity 0.1s ease;
+    background:#000;
   }
   .play-pause-button {
     font-size: 3rem;
@@ -361,7 +401,7 @@ const playerVars: { [key: string]: number | string } = {
     width:100%;
     justify-content: center;
     gap:1vw;
-    z-index: 2;
+    z-index: 10;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     max-width: 600px;
@@ -369,6 +409,11 @@ const playerVars: { [key: string]: number | string } = {
     padding:0 3% 50px 3%;
   }
   
+
+  #mute, #volume {
+    z-index: 11;
+    position: relative;
+  }
 
   #mute{color:var(--theme-accent2);}
 
