@@ -3,18 +3,19 @@
 			import type { CollectionEntry } from 'astro:content';
 			import type { AstroGlobal } from 'astro';
 
-			type Post = CollectionEntry<'posts'>;
+			type Post = CollectionEntry<'post'>;
 
-			export async function GET(context: AstroGlobal) {				const posts = await getCollection('posts');
+			export async function GET(context: AstroGlobal) {
+				const posts = await getCollection('post');
 				return rss({
 					title: 'PIRATE Blog',
 					description: 'A blog about PIRATE',
 					site: context.site ?? 'https://default-site-url.com',
 					items: posts.map((post: Post) => ({
 						title: post.data.title,
-						pubDate: post.data.pubDate,
+						pubDate: post.data.publishDate,
 						description: post.data.description,
-						link: `/posts/${post.slug}/`,
+						link: `/post/${post.slug}/`,
 					})),
 				});
 			}
