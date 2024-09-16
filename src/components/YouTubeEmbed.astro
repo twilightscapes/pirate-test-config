@@ -436,11 +436,12 @@ const playerVars: { [key: string]: number | string } = {
   width: 32px;
   height: 32px;
   fill: currentColor;
-  filter: drop-shadow(0px 2px 2px #f6f3f3);
+  filter: drop-shadow(0px 0px 2px #f6f3f3) !important;
   transition: background .3s ease-in-out;
-  filter: brightness(1.4); stroke:1px;
+  filter: brightness(1.4);
+  stroke:1px;
 }
-#mute svg path {fill: currentColor;}
+#mute svg {fill: currentColor;  }
 
 
 
