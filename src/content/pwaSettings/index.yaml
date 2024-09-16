@@ -3,9 +3,9 @@ siteUrl: https://pirateweb.org
 name: PIRATE
 shortName: PIRATE
 description: This ia my PWA app for pirate
-themeColor: '#000'
-backgroundColor: '#000'
-startUrl: whoopy
+themeColor: rgba(0, 0, 0, 1)
+backgroundColor: rgba(0, 0, 0, 1)
 display: standalone
 icon192: /images/pwa/icon192.png
 icon512: /images/pwa/icon512.png
+startUrl: /
