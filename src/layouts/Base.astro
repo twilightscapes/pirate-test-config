@@ -48,18 +48,24 @@ const pageOgImage = ogImage || meta?.ogImage;
 		/>
 		<DynamicTheme />
 	</head>
-			<body>
-				<SkipLink />
-				<Header transition:persist />
+	
+	<body>
+		<SkipLink />
+		<Header transition:persist />
 
-				<main id="main" transition:animate="slide">
-					<slot />
-				</main>
+			<main id="main" transition:animate="slide">
+				<slot />
+		</main>
 
-				{ showFooter && (
-				<Footer />
-				)}
+		{ showFooter && (
+		<Footer />
+		)}
+	
 
-				<script src="../components/scrollListener.js" defer></script>
-			</body>
-		</html>
+
+	<script src="../components/scrollListener.js"></script>
+
+	</body>
+	
+</html>
+		
