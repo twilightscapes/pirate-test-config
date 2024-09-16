@@ -42,7 +42,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.
 
 {/*<meta http-equiv="Content-Security-Policy" content={`default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src 'self' 'unsafe-inline' *; img-src 'self' * data:; media-src 'self' *; font-src 'self' *; connect-src 'self' *; object-src 'self' *; frame-src 'self' *;`}/>*/}
 
-<meta name="robots" content="noindex, nofollow" />
+{/*<meta name="robots" content="noindex, nofollow" />*/}
+<meta name="robots" content="index, follow" />
+
 {/* Theme Colour */}
 <meta content={pwaSettings.data.themeColor} name="theme-color" />
 
