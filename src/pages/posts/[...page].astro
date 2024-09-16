@@ -9,6 +9,9 @@ import PageLayout from "@/layouts/Base.astro";
 import GoBack from "@/components/GoBack.astro";
 
 
+
+const language = await getEntry('language', 'index');
+
 export const getStaticPaths = (async ({ paginate }) => {
 	const MAX_POSTS_PER_PAGE = 20;
 	const allPosts = await getAllPosts();
@@ -95,7 +98,7 @@ const { defaultView } = siteSettings.data;
 						<path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116" />
 						<path d="M6 9h-.01" />
 					</svg>
-					Tags
+					{language.data.tags}
 				</h2>
 				<ul class="flex flex-wrap gap-2 text-bgColor button" style="">
 					{uniqueTags.map((tag) => (
@@ -112,7 +115,7 @@ const { defaultView } = siteSettings.data;
 				</ul>
 				<span class="mt-4 block sm:text-start" style="width:170px; text-align: right; display:flex; justify-content: end;">
 					<a aria-label="View all blog categories" class="sm:hover:text-accent" href="/tags/">
-						View all →
+						{language.data.viewall} →
 					</a>
 				</span>
 			</aside>

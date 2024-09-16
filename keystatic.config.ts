@@ -517,6 +517,8 @@ export default config({
         mute: fields.text({ label: 'Mute' }),
         volume: fields.text({ label: 'Volume' }),
         progress: fields.text({ label: 'Progress' }),
+        tags: fields.text({ label: 'Tags' }),
+        viewall: fields.text({ label: 'View All' }),
         
         // temp: fields.text({ label: 'temp', multiline: true }),
       },

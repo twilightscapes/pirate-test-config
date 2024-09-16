@@ -6,7 +6,9 @@ import Pagination from "@/components/Paginator.astro";
 import PostPreview from "@/components/blog/PostPreview.astro";
 import { getAllPosts, getUniqueTags, sortMDByDate } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
+import { getEntry } from 'astro:content';
 
+const language = await getEntry('language', 'index');
 import GoBack from "@/components/GoBack.astro";
 
 
@@ -57,7 +59,7 @@ const paginationProps = {
 <div class="container" style="padding:0 4%">
 
 	<h1 class="title flex items-center my-4" style="">
-		<a class=" sm:hover:underline" href="/tags/">Tags</a>
+		<a class=" sm:hover:underline" href="/tags/">{language.data.tags}</a>
 		<span class="me-3 ms-2">→</span>
 		<span class="text-xl">#{tag}</span>
 	</h1>

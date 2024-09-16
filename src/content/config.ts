@@ -195,6 +195,8 @@ const language = defineCollection({
     mute: z.string().optional(),
     progress: z.string().optional(),
     volume: z.string().optional(),
+    tags: z.string().optional(),
+    viewall: z.string().optional(),
     goback: z.string().optional()
   }),
 });
