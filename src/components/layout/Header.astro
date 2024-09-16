@@ -64,8 +64,8 @@ const menuLinks = await getMenuLinks();
   )}
 
   {showSearch && <Search />}
-  {showSwitch && <Switch client:load defaultView={defaultView} />}
   {showTheme && <ThemeToggle />}
+  {showSwitch && <Switch client:load defaultView={defaultView} />}
 </div>
 
 {backgroundImage && (
