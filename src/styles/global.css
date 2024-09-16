@@ -234,7 +234,7 @@ body {
 		border: 0px solid;
 		color: #fff;
 		padding: 2vh 2vw;
-		border-radius: var(--border-radius) !important;
+		border-radius: var(--border-radius);
 	  }
 	  
 	  blockquote {
@@ -459,10 +459,4 @@ body {
 
 
 
-img {
-  border-radius: var(--border-radius) !important;
-}
 
-.rounded-image {
-  border-radius: var(--border-radius) !important;
-}
