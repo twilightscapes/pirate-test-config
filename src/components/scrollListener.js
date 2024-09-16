@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   const horizontalScrollClassName = 'horizontal-slider';
-  const scrollMultiplier = 2; // Increase this value for faster scrolling
+  const scrollMultiplier = 2;
+
+  // Check if the browser is Safari
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
   document.addEventListener('wheel', (event) => {
     let target = event.target;
@@ -11,7 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (target && target.classList.contains(horizontalScrollClassName)) {
       event.preventDefault();
 
-      const scrollAmount = event.deltaY * scrollMultiplier;
+      let scrollAmount;
+      if (isSafari) {
+        // For Safari, use deltaX for horizontal scrolling
+        scrollAmount = event.deltaX * scrollMultiplier;
+      } else {
+        // For other browsers, use deltaY as before
+        scrollAmount = event.deltaY * scrollMultiplier;
+      }
+
       target.scrollLeft += scrollAmount;
     }
   }, { passive: false });
