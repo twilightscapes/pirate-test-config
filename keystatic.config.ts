@@ -227,6 +227,11 @@ export default config({
       label: 'PWA Settings',
       path: 'src/content/pwaSettings/',
       schema: {
+        showRobots: fields.checkbox({
+          label: 'Show Robots',
+          description: 'Include robots meta tag',
+          defaultValue: false,
+        }),
         siteUrl: fields.text({ label: 'Site Url', description: 'The address to your website' }),
         name: fields.text({ label: 'App Name' }),
         shortName: fields.text({ label: 'Short Name' }),
@@ -255,8 +260,7 @@ export default config({
           publicPath: '/images/pwa'
         })
       }
-    }),
-    home: singleton({
+    }),    home: singleton({
       label: 'Home Page',
       path: 'src/content/homepage/',
       schema: {

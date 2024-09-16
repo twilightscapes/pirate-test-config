@@ -131,6 +131,7 @@ const siteSettings = defineCollection({
 const pwaSettings = defineCollection({
   type: 'data',
   schema: z.object({
+    showRobots: z.boolean().optional(),
     siteUrl: z.string().optional(),
     name: z.string(),
     shortName: z.string(),

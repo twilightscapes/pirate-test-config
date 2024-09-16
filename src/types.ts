@@ -86,3 +86,17 @@ export interface Summary {
 
 
 
+
+export interface PwaSettings {
+  showRobots: boolean;
+  description: string;
+  name: string;
+  shortName: string;
+  themeColor: string;
+  backgroundColor: string;
+  startUrl: string;
+  display: "standalone" | "fullscreen" | "minimal-ui" | "browser";
+  icon192: string;
+  icon512: string;
+  siteUrl?: string;
+}
