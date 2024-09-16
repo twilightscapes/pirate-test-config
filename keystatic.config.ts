@@ -236,10 +236,20 @@ export default config({
         name: fields.text({ label: 'App Name' }),
         shortName: fields.text({ label: 'Short Name' }),
         description: fields.text({ label: 'Description' }),
-        themeColor: fields.text({ label: 'Theme Color' }),
-        backgroundColor: fields.text({ label: 'Background Color' }),
-        startUrl: fields.text({ label: 'Start URL' }),
-        display: fields.select({
+        themeColor: colorPicker({ 
+          label: 'Theme Color', 
+        }),
+        backgroundColor: colorPicker({ 
+          label: 'Background Color', 
+        }),
+
+    startUrl: fields.text({
+      label: 'Start URL',
+      defaultValue: '/',
+      validation: { length: { min: 1 } },
+    }),
+             
+                   display: fields.select({
           label: 'Display Mode',
           options: [
             { label: 'Standalone', value: 'standalone' },

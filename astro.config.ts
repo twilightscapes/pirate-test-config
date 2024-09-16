@@ -53,14 +53,14 @@ export default defineConfig({
     registerType: 'autoUpdate',
     includeAssets: ['robots.txt', 'manifest.webmanifest'],
     manifest: {
-      id: pwaConfig.startUrl ?? '/',
-      name: pwaConfig.name ?? 'PIRATE',
-      short_name: pwaConfig.shortName ?? 'PIRATE',
-      description: pwaConfig.description ?? '',
-      theme_color: pwaConfig.themeColor ?? '#ffffff',
-      start_url: pwaConfig.startUrl ?? '/',
-      background_color: pwaConfig.backgroundColor ?? '#ffffff',
-      display: (pwaConfig.display as 'standalone' | 'fullscreen' | 'minimal-ui' | 'browser') ?? 'standalone',
+      id: pwaConfig.startUrl || '/',
+      name: pwaConfig.name || 'PIRATE',
+      short_name: pwaConfig.shortName || 'PIRATE',
+      description: pwaConfig.description || '',
+      theme_color: pwaConfig.themeColor || '#ffffff',
+      start_url: pwaConfig.startUrl || '/',
+      background_color: pwaConfig.backgroundColor || '#ffffff',
+      display: (pwaConfig.display as 'standalone' | 'fullscreen' | 'minimal-ui' | 'browser') || 'standalone',
       icons: [
         {
           src: pwaConfig.icon192 ?? '/icon-192x192.png',
