@@ -1,18 +1,10 @@
 import React from 'react';
 import { config, fields, collection, singleton } from '@keystatic/core';
-import fs from 'fs';
-import path from 'path';
 import { colorPicker } from './src/components/ColorPicker.tsx';
 
 
 
 
-const getDirectories = () => {
-  const photosPath = path.join(process.cwd(), 'public/images/photos');
-  return fs.readdirSync(photosPath, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => ({ label: dirent.name, value: dirent.name }));
-};
 
 
 

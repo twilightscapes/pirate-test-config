@@ -46,9 +46,8 @@ export default defineConfig({
     domains: ["webmention.io"]
   },
   integrations: [mdx(), react(), icon(), tailwind({
-    applyBaseStyles: false
+    applyBaseStyles: true
   }), sitemap(), keystatic(), 
-  
   AstroPWA({
     registerType: 'autoUpdate',
     includeAssets: ['robots.txt', 'manifest.webmanifest'],
