@@ -17,7 +17,7 @@ const { showTitles } = siteSettings.data;
 
 ---
 
-<div class="post-card1">
+<div class="post-card1" style="">
     <a transition:animate="slide" href={`/posts/${post.slug}/`} class="pirate-link" rel="prefetch">
         {post.data.coverImage && typeof post.data.coverImage === "object" && post.data.coverImage.src ? (
             <Image

@@ -209,7 +209,11 @@ export default config({
         showTitles: fields.checkbox({ label: 'Show Post Titles', description: 'Hide/Show the post titles', defaultValue: false }),
         showDates: fields.checkbox({ label: 'Show Dates', description: 'Hide/Show the post dates', defaultValue: true }),
         MAX_POSTS: fields.number({ label: 'Number of posts to display on home page', defaultValue: 3 }),
+        MAX_POSTS_PER_PAGE: fields.number({ label: 'Number of posts to display on other pages', defaultValue: 3 }),
+
+        
         divider4: fields.empty(),
+        showShare: fields.checkbox({ label: 'Show Share section on posts', description: 'Hide/Show the share this copy button on posts', defaultValue: false }),
 
 
         
@@ -220,28 +224,41 @@ export default config({
       path: 'src/content/pwaSettings/',
       schema: {
         showRobots: fields.checkbox({
-          label: 'Show Robots',
-          description: 'Include robots meta tag',
+          label: 'SEO VISIBILITY',
+          description: 'Set robots meta tag to index site and follow links - checking this box will make your site appear in search engines',
           defaultValue: false,
         }),
         siteUrl: fields.text({ label: 'Site Url', description: 'The address to your website' }),
         name: fields.text({ label: 'App Name' }),
         shortName: fields.text({ label: 'Short Name' }),
-        description: fields.text({ label: 'Description' }),
+
+        divider: fields.empty(),
+
+        screenshot: fields.image({
+          label: 'Screenshot',
+          description: 'This image is used on Android in the PWA install dialogue window (Image should be in JPG or PNG format and sized at 320x640)',
+          directory: 'public/images/pwa',
+          publicPath: '/images/pwa',
+        }),
+        description: fields.text({ label: 'Description', description: 'The description, is used on Android in the PWA install dialogue window', }),
+
+        divider2: fields.empty(),
+
         themeColor: colorPicker({ 
           label: 'Theme Color', 
+          showOpacity: false
         }),
         backgroundColor: colorPicker({ 
           label: 'Background Color', 
+          showOpacity: false
         }),
-
-    startUrl: fields.text({
-      label: 'Start URL',
-      defaultValue: '/',
-      validation: { length: { min: 1 } },
-    }),
-             
-                   display: fields.select({
+        startUrl: fields.text({
+          label: 'PWA Start URL',
+          description: 'This sets the start page when your app is installed',
+          defaultValue: '/',
+          validation: { length: { min: 1 } },
+        }),
+        display: fields.select({
           label: 'Display Mode',
           options: [
             { label: 'Standalone', value: 'standalone' },
@@ -249,6 +266,7 @@ export default config({
             { label: 'Minimal UI', value: 'minimal-ui' },
             { label: 'Browser', value: 'browser' }
           ],
+          description: 'This sets the browser chrome to be used. - Standalone is default and removes all browser controls and chrome',
           defaultValue: 'standalone'
         }),
         icon192: fields.image({
@@ -289,6 +307,8 @@ export default config({
         showHomeGallery: fields.checkbox({ label: 'Show Home Photo Gallery', description: 'Hide/Show the Photo section on home page', defaultValue: false }),
 
         showPosts: fields.checkbox({ label: 'Show Posts', description: 'Hide/Show the Posts section on the home page', defaultValue: false }),
+
+        showMore: fields.checkbox({ label: 'Show More Button', description: 'Hide/Show the Show More Button (for the posts section above)', defaultValue: false }),
 
 
         showFaqOnHome: fields.checkbox({
@@ -489,7 +509,7 @@ export default config({
           description: '(dark) Link Color - can use any color value',
         }),
 
-        customCSS: fields.text({ label: 'Custom CSS', multiline: true }),
+        customCSS: fields.text({ label: 'Custom CSS', description:'Additional CSS can be written here, overwriting the sites default styles.', multiline: true }),
 
         
       },
@@ -525,6 +545,8 @@ export default config({
         progress: fields.text({ label: 'Progress' }),
         tags: fields.text({ label: 'Tags' }),
         viewall: fields.text({ label: 'View All' }),
+        shareText: fields.text({ label: 'Share This' }),
+        copyButton: fields.text({ label: 'Copy' }),
         
         // temp: fields.text({ label: 'temp', multiline: true }),
       },

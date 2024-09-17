@@ -2,10 +2,11 @@ showRobots: false
 siteUrl: https://pirateweb.org
 name: PIRATE
 shortName: PIRATE
+screenshot: /images/pwa/screenshot.png
 description: This ia my PWA app for pirate
 themeColor: rgba(0, 0, 0, 1)
 backgroundColor: rgba(0, 0, 0, 1)
+startUrl: /
 display: standalone
 icon192: /images/pwa/icon192.png
 icon512: /images/pwa/icon512.png
-startUrl: /

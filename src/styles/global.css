@@ -218,7 +218,21 @@ body {
 	  .slider .post-card1 {
 		scroll-snap-align: center;
 		min-width: 80vw;
+		min-height:70vh;
 	  }
+
+	  .home .slider .post-card1 {
+		min-width: 50vw !important;
+		max-height:auto !important;
+	  }
+
+	  @media (max-width: 48rem) {
+		.home .slider .post-card1 {
+			min-width: 50vw !important;
+			min-height:100% !important;
+		  }
+	  }
+
 	  
 	  .post-card1 {
 		text-align: center;
@@ -367,7 +381,6 @@ body {
 	  
 	  .slider .post-card1 {
 		scroll-snap-align: center;
-		min-width: 80vw;
 	  }
 	  
 	  

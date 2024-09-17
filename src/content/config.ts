@@ -83,6 +83,7 @@ const home = defineCollection({
     subcontent: z.string().optional(),
     subcta: z.string().optional(),
     faqtitle: z.string().optional(),
+    showMore: z.string().optional(),
     testimonialtitle: z.string().optional(),
     postsectiontitle: z.string().optional(),
     featureImage: z.object({
@@ -124,6 +125,8 @@ const siteSettings = defineCollection({
     showDates: z.boolean().optional(),
     showHomeGallery: z.boolean().optional(),
     MAX_POSTS: z.number().optional(),
+    MAX_POSTS_PER_PAGE: z.number().optional(),
+    showShare: z.boolean().optional(),
     logoImage: z.string().optional(),
     defaultView: z.enum(['grid', 'swipe']).optional(),
   }),
@@ -141,7 +144,8 @@ const pwaSettings = defineCollection({
     startUrl: z.string(),
     display: z.enum(['standalone', 'fullscreen', 'minimal-ui', 'browser']),
     icon192: z.string(),
-    icon512: z.string()
+    icon512: z.string(),
+    screenshot: z.string().optional(),
   })
 });
 
@@ -198,7 +202,9 @@ const language = defineCollection({
     volume: z.string().optional(),
     tags: z.string().optional(),
     viewall: z.string().optional(),
-    goback: z.string().optional()
+    goback: z.string().optional(),
+    shareText: z.string().optional(),
+    copyButton: z.string().optional()
   }),
 });
 
@@ -216,3 +222,5 @@ export const collections = {
   pwaSettings,
   menuItems
 };
+
+

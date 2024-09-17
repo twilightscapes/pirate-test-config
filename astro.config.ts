@@ -30,23 +30,22 @@ const pwaConfig = pwaSettings || {
   startUrl: '/',
   name: 'PIRATE',
   shortName: 'PIRATE',
-  description: '',
+  description: 'Your app description here',
   themeColor: '#ffffff',
   backgroundColor: '#ffffff',
   display: 'standalone',
   icon192: '/icon-192x192.png',
   icon512: '/icon-512x512.png',
-  siteUrl: 'https://example.com'
+  siteUrl: 'https://example.com',
+  screenshot: '/socialCard.webp', 
 };
-
-
 
 export default defineConfig({
   image: {
     domains: ["webmention.io"]
   },
   integrations: [mdx(), react(), icon(), tailwind({
-    applyBaseStyles: true
+    applyBaseStyles: false
   }), sitemap(), keystatic(), 
   AstroPWA({
     registerType: 'autoUpdate',
@@ -71,12 +70,19 @@ export default defineConfig({
           sizes: '512x512',
           type: 'image/png'
         }
-      ]
-    },    workbox: {
+      ],
+      screenshots: pwaConfig.screenshot ? [
+        {
+          src: pwaConfig.screenshot,
+          sizes: '320x640',
+          type: 'image/png'
+        }
+      ] : [],
+    },
+    workbox: {
       maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
     }
-  }), 
-  
+  }),  
   markdoc()],  markdown: {
     rehypePlugins: [[rehypeExternalLinks, {
       rel: ["nofollow", "noopener", "noreferrer"],

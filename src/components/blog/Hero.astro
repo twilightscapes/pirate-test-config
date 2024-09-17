@@ -3,10 +3,11 @@ import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import FormattedDate from "../FormattedDate.astro";
 import YouTubeEmbed from '../YouTubeEmbed.astro';
-
+import Share from "@/components/Share.astro"
 import { getEntry } from 'astro:content';
 const siteSettings = await getEntry('siteSettings', 'main');
-const { showTitles, showDates } = siteSettings.data;
+const { showTitles, showDates, showShare } = siteSettings.data;
+
 
 interface Props {
     content: CollectionEntry<"post">;
@@ -46,10 +47,11 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
     </div>
   ) : null
 }
-
+{showShare && <Share />}
 
 <div class="panel" style={{ padding: "4%", width:'90%', margin:'0 auto', maxWidth:'1400px', display:'' }}>
     {data.draft ? <span class="text-base text-red-500">(Draft)</span> : null}
+    
     
 
     {typeof showTitles !== 'undefined' && showTitles && (

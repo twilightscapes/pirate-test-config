@@ -10,19 +10,25 @@ import { getEntry } from 'astro:content';
 import keystaticConfig from '../../keystatic.config';
 import { createReader } from '@keystatic/core/reader';
 import PhotoSection from "@/components/PhotoGallery.astro"
-
 const siteSettings = await getEntry('siteSettings', 'main');
 const pwaSettings = await getEntry('pwaSettings', 'index');
 const { defaultView, MAX_POSTS } = siteSettings.data;
 const homeContent = await getEntry('homepage', 'index');
 
 const reader = createReader(process.cwd(), keystaticConfig);
+
+
 const homepage = await reader.singletons.home.read();
+
+
 const showBioOnHome = homepage?.showBioOnHome ?? false;
 const showFaqOnHome = homepage?.showFaqOnHome ?? false;
 const showTestOnHome = homepage?.showTestOnHome ?? false;
 const showFeature = homepage?.showFeature ?? false;
 const showPosts = homepage?.showPosts ?? false;
+const ShowMore = homepage?.showMore ?? false;
+
+
 const showHomeGallery = homepage?.showHomeGallery ?? false;
 
 const allPosts = await getAllPosts();
@@ -32,6 +38,9 @@ const language = await getEntry('language', 'index');
 
 <PageLayout meta={{ title: homeContent.data.title, description: pwaSettings.data.description }}>
 	{showFeature && <Feature content={homeContent.data} />}
+
+
+
 
 	{showHomeGallery && <PhotoSection />}
 
@@ -47,21 +56,27 @@ const language = await getEntry('language', 'index');
 	{showTestOnHome && <Testimonials />}
 
 	{showPosts && (
-		<section class="scroll-container mb-4 px-2">
+		<section class="scroll-container mb-4 px-2 home">
 			<div class="w-full py-1 px-6 mb-1 text-center theme-accent backdrop-blur-lg">
 				<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text">{homeContent.data.postsectiontitle}</h2>
 			</div>
 			
-			<div class={`contentpanel ${defaultView === 'swipe' ? 'slider panels horizontal-slider' : 'grid-container'}`} transition:animate="slide">
+			<div class={`contentpanel ${defaultView === 'swipe' ? 'slider panels horizontal-slider' : 'grid-container'}`} transition:animate="slide" style="max-height: 50vh;">
 				
 <div class="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }} />
 
 				{allPostsByDate.map((p) => <PostPreview post={p} withDesc />)}
 
-				<a class="button no-underline text-white text-center block" href="/posts/" style="padding:1vh 1rem; margin:0 50px 50px 50px;">
+				{ShowMore && <a class="button no-underline text-white text-center block" href="/posts/" style="padding:1vh 1rem; margin:0 50px 50px 50px;">
 					{language.data.viewmore}
 				</a>
+				}
 			</div>
 		</section>
 	)}
+
+
+
+
+
 </PageLayout>

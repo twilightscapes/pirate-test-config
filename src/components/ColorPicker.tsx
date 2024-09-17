@@ -28,10 +28,12 @@ export function colorPicker({
   label,
   defaultValue,
   description,
+  showOpacity = true,
 }: {
   label: string;
   defaultValue?: string;
   description?: string;
+  showOpacity?: boolean;
 }): BasicFormField<string> {
   return {
     kind: "form",
@@ -68,26 +70,28 @@ export function colorPicker({
               onChange={(value: string) => setColor(rgbaToHex(value))}
             />
           </Flex>
-          <Flex gap="small" alignItems="center">
-            <Text size="small" style={{ flexShrink: 0, width: '60px' }}>Opacity:</Text>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={color.alpha}
-              onChange={(e) => handleOpacityChange(parseFloat(e.target.value))}
-              style={{
-                width: '150px',  // Adjust this value as needed
-                WebkitAppearance: 'none',
-                background: 'linear-gradient(to right, rgba(249, 249, 249, 0.58), black) no-repeat',
-                backgroundSize: 'calc((value - min) / (max - min) * 100%) 100%',
-              }}
-            />
-            <Text size="small" style={{ flexShrink: 0, width: '40px', textAlign: 'right' }}>
-              {Math.round(color.alpha * 100)}%
-            </Text>
-          </Flex>
+          {showOpacity && (
+  <Flex gap="small" alignItems="center">
+    <Text size="small" style={{ flexShrink: 0, width: '60px' }}>Opacity:</Text>
+    <input
+      type="range"
+      min="0"
+      max="1"
+      step="0.01"
+      value={color.alpha}
+      onChange={(e) => handleOpacityChange(parseFloat(e.target.value))}
+      style={{
+        width: '150px',
+        WebkitAppearance: 'none',
+        background: 'linear-gradient(to right, rgba(249, 249, 249, 0.58), black) no-repeat',
+        backgroundSize: 'calc((value - min) / (max - min) * 100%) 100%',
+      }}
+    />
+    <Text size="small" style={{ flexShrink: 0, width: '40px', textAlign: 'right' }}>
+      {Math.round(color.alpha * 100)}%
+    </Text>
+  </Flex>
+)}
         </Flex>
       );
     },

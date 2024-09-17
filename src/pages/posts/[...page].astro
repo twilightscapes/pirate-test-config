@@ -10,10 +10,13 @@ import GoBack from "@/components/GoBack.astro";
 
 
 
+
 const language = await getEntry('language', 'index');
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const MAX_POSTS_PER_PAGE = 20;
+	const siteSettings = await getEntry('siteSettings', 'main');
+const { MAX_POSTS_PER_PAGE } = siteSettings.data;
+
 	const allPosts = await getAllPosts();
 	const allPostsByDate = sortMDByDate(allPosts);
 	const uniqueTags = getUniqueTags(allPosts);
@@ -68,7 +71,7 @@ const { defaultView } = siteSettings.data;
 						<h2 class="title text-lg">{yearKey}</h2>
 					</div>
 					{groupedByYear[yearKey]?.map((p) => (
-						<PostPreview post={p} />
+						<PostPreview post={p}  />
 					))}
 				</>
 			))}

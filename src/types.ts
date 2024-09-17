@@ -99,4 +99,5 @@ export interface PwaSettings {
   icon192: string;
   icon512: string;
   siteUrl?: string;
+  screenshot?: string;
 }

@@ -5,9 +5,10 @@ showFeature: true
 showBioOnHome: true
 showHomeGallery: false
 showPosts: true
+showMore: true
 showFaqOnHome: true
 showTestOnHome: false
-pitch: test
+pitch: Whoop Ass
 postsectiontitle: 'I like big posts '
 youtube:
   controls: false
