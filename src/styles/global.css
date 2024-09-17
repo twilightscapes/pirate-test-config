@@ -217,7 +217,7 @@ body {
 	  
 	  .slider .post-card1 {
 		scroll-snap-align: center;
-		min-width: 80vw;
+		min-width: 100vw;
 		min-height:70vh;
 	  }
 
