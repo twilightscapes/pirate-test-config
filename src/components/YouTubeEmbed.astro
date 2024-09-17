@@ -69,14 +69,13 @@ const playerVars: { [key: string]: number | string } = {
         <label for="volume">{language.data.volume}
         <span style="padding:1.5vh 1rem; background:#111; border-radius:var(--border-radius);"><input type="range" id="volume" min="0" max="100" value="100" class="volume-slider"></span></label>
               
-      <label for="mute-icon" style="padding:;">{language.data.mute}
+      <label for="mute-icon" style="padding:;" class="mute-label">{language.data.mute}
         <span style="padding:10px 8px 0 8px ; background:#111; border-radius:var(--border-radius);">
           <button id="mute" class="control-button">
       <svg id="mute-icon" viewBox="0 0 16 16" height="60px" width="60px" xmlns="http://www.w3.org/2000/svg">
       <path d="M6.5 15c-0.13 0-0.258-0.051-0.354-0.146l-3.854-3.854h-1.793c-0.276 0-0.5-0.224-0.5-0.5v-5c0-0.276 0.224-0.5 0.5-0.5h1.793l3.854-3.854c0.143-0.143 0.358-0.186 0.545-0.108s0.309 0.26 0.309 0.462v13c0 0.202-0.122 0.385-0.309 0.462-0.062 0.026-0.127 0.038-0.191 0.038z"></path>
       </svg></button></span>
     </label>
-
       </div>      
 
       <div class="botblock"></div>
@@ -141,7 +140,7 @@ const playerVars: { [key: string]: number | string } = {
         setTimeout(() => {
           centerControls.style.opacity = '0';
           controls.style.opacity = '0';
-        }, 400);
+        }, 800);
       }
     }
   }
@@ -195,9 +194,13 @@ const playerVars: { [key: string]: number | string } = {
 
       function updateMuteButton() {
         muteIcon.innerHTML = `<path d="${player.isMuted() ? mutedPath : unmutedPath}"></path>`;
+        const muteLabel = document.querySelector('.mute-label');
+        if (muteLabel) {
+          muteLabel.classList.toggle('muted', player.isMuted());
+        }
       }
 
-      updateMuteButton(); // Initial state
+      updateMuteButton(); 
 
       muteButton.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -330,7 +333,6 @@ const playerVars: { [key: string]: number | string } = {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   }
 </script>
-
 <style>
   .topblock{display:flex; width:100%; justify-content: center; position: absolute; top:0; height:60px; background:#000; z-index: 0;}
   .botblock{display:flex; width:100%; justify-content: center; position: absolute; bottom:0; height:220px; background:#000; z-index: 0;}
@@ -425,13 +427,14 @@ const playerVars: { [key: string]: number | string } = {
 
   #mute{color:var(--theme-accent2);}
 
+
   label{display:flex; flex-direction: column; gap:5px; font-size: clamp(.8rem,.9vw,1rem); align-items: center; }
 
   label span{filter: brightness(1.4);}
   :root[data-theme="dark"] label span{filter: brightness(.9);}
 
   #mute svg .volume-icon { display: block; }
-  #mute svg .muted-icon { display: none; }
+  #mute svg .muted-icon { display: none;  }
   #mute.muted svg .volume-icon { display: none; }
   #mute.muted svg .muted-icon { display: block; }
   #mute svg {  
@@ -488,7 +491,14 @@ input[type="range"]::-webkit-slider-thumb {
   z-index: 1;
 }
 
+  .mute-label {
+    transition: color 0.3s ease;
+  }
 
+  .mute-label.muted {
+    color: red;
+  }
+</style>
 
 
 
