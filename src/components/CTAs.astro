@@ -1,0 +1,20 @@
+---
+interface Props {
+  cta: string;
+  description: string;
+  showFancy: boolean;
+}
+
+const { cta, description, showFancy } = Astro.props;
+console.log('CTA data received:', cta, description, showFancy);
+---
+
+{description && <p>{description}</p>}
+{cta && (
+  <button class="special font mt-4">
+    {showFancy && <div class="fancy"></div>}
+    <a href="/contact" class="font no-underline border-none shadow-none" style="color:white;">
+      <span class="butttext font">{cta}</span>
+    </a>
+  </button>
+)}

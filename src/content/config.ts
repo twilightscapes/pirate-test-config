@@ -234,6 +234,16 @@ const pitches = defineCollection({
   }),
 });
 
+const CTAs = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    ctaUrl: z.string(),
+    description: z.string().optional(),
+    showFancy: z.boolean().optional(),
+  }),
+});
+
 export const collections = {
   post,
   faqs, 
@@ -242,7 +252,8 @@ export const collections = {
   siteSettings, 
   pwaSettings,
   menuItems,
-  pitches
+  pitches,
+  CTAs: CTAs,
 };
 
 
