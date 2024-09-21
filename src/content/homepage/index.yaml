@@ -1,19 +1,16 @@
 showFeature: true
 featureImage:
   src: /images/homepage/featureImage/src.webp
-  alt: We pick up the poop!
+  alt: Become A PIRATE!
 youtube:
   discriminant: false
 showBioOnHome: true
 showApp: false
 showHomeGallery: false
-showPosts: true
+showPosts: false
 showMore: false
-showFaqOnHome: true
-showTestOnHome: true
-pitch: How It Works
-pitch2: Part 2
-pitch3: part 3
+showFaqOnHome: false
+showTestOnHome: false
 featureOrder: 1
 bioOrder: 2
 appOrder: .nan
