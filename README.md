@@ -109,9 +109,9 @@ Replace pnpm with your choice of npm / yarn
 
 - With Pirate, there is no need to open code files to configure and setup.
 - All set up and control is done through the built-in CMS. 
-- Create an account [KeyStatic] https://keystatic.com
+- Create an account @ [KeyStatic](https://keystatic.com)
 - Connect your Keystatic account to your Github repo
-- Copy/paste the Keystatic project settings into your Netlify Enviromental Variables
+- Copy/paste the Keystatic project settings into your Netlify Env Variables
 - Rebuild the site and login to Keystatic and configure the rest of the your site.
 
 ## Adding posts
