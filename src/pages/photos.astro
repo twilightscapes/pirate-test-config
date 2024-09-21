@@ -39,7 +39,7 @@ if (photoSettings?.pitch) {
 <div style="position:relative">
   <PhotoSection class="mx-auto" />
 
-  {selectedPitch && photoSettings && <InfoBlock pitch={{...selectedPitch, slug: photoSettings.pitch}} />}
+  {selectedPitch && photoSettings && <InfoBlock pitch={{...selectedPitch, slug: photoSettings.pitch ?? ''}} />}
   
   {showBioOnPhotos && <Bio />}
 
