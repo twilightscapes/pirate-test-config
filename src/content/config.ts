@@ -246,3 +246,24 @@ export const collections = {
 };
 
 
+
+export type PitchData = {
+  slug: string;
+  showTitle: boolean | null;
+  tagline: string;
+  text1: string;
+  text2: string;
+  text3: string;
+  phone: string;
+  subheading1: string;
+  subheading2: string;
+  subheading3: string;
+  subcontent: string;
+  subcta: string;
+  image: string | null;
+  imageAlt: string;
+  description: string;
+  title: string | null;
+  divider: string | null;
+  divider2: string | null;
+};

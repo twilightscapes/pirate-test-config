@@ -24,7 +24,7 @@ const reader = createReader(process.cwd(), keystaticConfig);
 
 
 const homepage = await reader.singletons.home.read();
-// import type { CollectionEntry } from 'astro:content';
+
 
 type PitchData = {
   slug: string;
@@ -227,19 +227,21 @@ flex-direction: column;
 											case 'infoblock':
 												return (
 													<>
-														{selectedPitch && <InfoBlock pitch={selectedPitch} />}
+														{selectedPitch && <InfoBlock pitch={{...selectedPitch, slug: selectedPitch.slug}} />}
+														{selectedPitch2 && <InfoBlock pitch={{...selectedPitch2, slug: selectedPitch2.slug}} />}
+														{selectedPitch3 && <InfoBlock pitch={{...selectedPitch3, slug: selectedPitch3.slug}} />}
 													</>
 												);
 											case 'infoblock2':
 												return (
 													<>
-														{selectedPitch2 && <InfoBlock pitch={selectedPitch2} />}
+														{selectedPitch2 && <InfoBlock pitch={{...selectedPitch2, slug: selectedPitch2.slug}} />}
 													</>
 												);
 											case 'infoblock3':
 												return (
 													<>
-														{selectedPitch3 && <InfoBlock pitch={selectedPitch3} />}
+														{selectedPitch3 && <InfoBlock pitch={{...selectedPitch3, slug: selectedPitch3.slug}} />}
 													</>
 												);											case 'posts':
 							return (

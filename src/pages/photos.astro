@@ -2,20 +2,17 @@
 import GoBack from "@/components/GoBack.astro";
 import Bio from "@/components/Bio.astro";
 import PageLayout from "@/layouts/Base.astro";
-import { getEntry } from 'astro:content';
 import { createReader } from '@keystatic/core/reader';
-import Faqs from "@/components/Faqs.astro";
-import Testimonials from '@/components/Testimonials.astro';
 import keystaticConfig from '../../keystatic.config';
+import Testimonials from '@/components/Testimonials.astro';
+import InfoBlock from "@/components/InfoBlock.astro";
+import Faqs from "@/components/Faqs.astro";
+import PhotoSection from "@/components/PhotoGallery.astro"
 const meta = {
 	description: "Photos",
 	title: "Photos",
   ogImage: ""
 };
-
-import PhotoSection from "@/components/PhotoGallery.astro"
-const siteSettings = await getEntry('siteSettings', 'main');
-const { showFAQ, showPosts, } = siteSettings.data;
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const photoSettings = await reader.singletons.photoSettings.read();
@@ -23,6 +20,10 @@ const showBioOnPhotos = photoSettings?.showBioOnPhotos ?? false;
 const showTestimonialsOnPhotos = photoSettings?.showTestimonialsOnPhotos ?? false;
 const showFaqsOnPhotos = photoSettings?.showFaqsOnPhotos ?? false;
 
+let selectedPitch;
+if (photoSettings?.pitch) {
+  selectedPitch = await reader.collections.pitches.read(photoSettings.pitch);
+}
 
 ---
 
@@ -38,6 +39,8 @@ const showFaqsOnPhotos = photoSettings?.showFaqsOnPhotos ?? false;
 <div style="position:relative">
   <PhotoSection class="mx-auto" />
 
+  {selectedPitch && photoSettings && <InfoBlock pitch={{...selectedPitch, slug: photoSettings.pitch}} />}
+  
   {showBioOnPhotos && <Bio />}
 
   {showFaqsOnPhotos && (
@@ -54,6 +57,18 @@ const showFaqsOnPhotos = photoSettings?.showFaqsOnPhotos ?? false;
     </section>
   )}
   
-  <div class="booty"></div>
+
+  
+
+
 </div>
 </PageLayout>
+</PageLayout>
+
+
+
+
+
+
+
+

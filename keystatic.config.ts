@@ -448,6 +448,10 @@ export default config({
           defaultValue: false,
         }),
 
+        pitch: fields.relationship({
+          label: 'Content Block 1',
+          collection: 'pitches',
+        }),
         
 
         divider5: fields.empty(),
