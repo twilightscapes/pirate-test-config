@@ -3,7 +3,7 @@
   PIRATE
 </h1>
 
-PIRATE is built with the Astro framework. Use it to create an easy-to-use blogs or websites.
+PIRATE is built with the Astro framework. Use it to create an easy-to-use blog or website.
 
 
 
