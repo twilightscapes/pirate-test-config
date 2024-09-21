@@ -1,9 +1,9 @@
 
 <h1 align="center">
-  Pirate
+  PIRATE
 </h1>
 
-Pirate is built with the Astro framework. Use it to create an easy-to-use blogs or websites.
+PIRATE is built with the Astro framework. Use it to create an easy-to-use blogs or websites.
 
 
 
@@ -107,7 +107,7 @@ Replace pnpm with your choice of npm / yarn
 
 ## Setup
 
-- With Pirate, there is no need to open code files to configure and setup.
+- With PIRATE, there is no need to open code files to configure and setup.
 - All set up and control is done through the built-in CMS. 
 - Create an account @ [KeyStatic](https://keystatic.com)
 - Connect your Keystatic account to your Github repo
@@ -118,7 +118,7 @@ Replace pnpm with your choice of npm / yarn
 
 Adding posts(and everything else) is done through KeyStatic. You can work both locally(if you install on your computer) or through the cloud with the Keystatic CMS. 
 
-More details on configuration and setup of Pirate through Keystatic is coming soon.
+More details on configuration and setup of PIRATE through Keystatic is coming soon.
 
 
 
