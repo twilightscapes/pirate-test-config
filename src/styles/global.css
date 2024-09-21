@@ -422,14 +422,14 @@ body {
 	  	z-index: 2;
 		max-width: 300px;
 		margin: 0 auto;
-		margin-top:-60px;
+		margin-top:5px;
 		padding: 1vh 1vw;
 		background: var(--theme-header)
 	  }
 
 	  body:has(#homemap) {overflow-y:auto !important;}
 
-	body:has(.header) #directorySelect{top:72px !important;}
+	  body:has(.header) #directorySelect{top:5px !important;}
 
 	select {
 		--webkit-appearance: none;

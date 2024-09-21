@@ -7,7 +7,7 @@ youtube:
 showBioOnHome: true
 showApp: false
 showHomeGallery: false
-showPosts: false
+showPosts: true
 showMore: false
 showFaqOnHome: false
 showTestOnHome: false
