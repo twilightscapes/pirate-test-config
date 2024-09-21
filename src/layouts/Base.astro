@@ -51,9 +51,10 @@ const pageOgImage = ogImage || meta?.ogImage;
 	
 	<body>
 		<SkipLink />
+		
 		<Header transition:persist />
 
-			<main id="main" transition:animate="slide">
+		<main id="main" transition:animate="slide">
 				<slot />
 		</main>
 

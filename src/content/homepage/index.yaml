@@ -1,19 +1,30 @@
+showFeature: true
 featureImage:
   src: /images/homepage/featureImage/src.webp
-  alt: Become a Pirate!
-showFeature: true
+  alt: We pick up the poop!
+youtube:
+  discriminant: false
 showBioOnHome: true
+showApp: false
 showHomeGallery: false
 showPosts: true
-showMore: true
+showMore: false
 showFaqOnHome: true
-showTestOnHome: false
-pitch: Whoop Ass
-postsectiontitle: 'I like big posts '
-youtube:
-  controls: false
-  useCustomPlayer: true
-  mute: true
-  loop: false
-  start: .nan
-  end: .nan
+showTestOnHome: true
+pitch: How It Works
+pitch2: Part 2
+pitch3: part 3
+featureOrder: 1
+bioOrder: 2
+appOrder: .nan
+galleryOrder: .nan
+postsOrder: 7
+faqOrder: 6
+testimonialsOrder: 9
+infoblockOrder: 3
+infoblock2Order: 4
+infoblock3Order: 5
+photosectiontitle: Photo Gallery
+faqsectiontitle: FAQs
+testimonialtitle: What the dogs are sayin'
+postsectiontitle: Our Latest News

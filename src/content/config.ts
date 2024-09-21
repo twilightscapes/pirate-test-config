@@ -84,6 +84,7 @@ const home = defineCollection({
     subcta: z.string().optional(),
     faqtitle: z.string().optional(),
     showMore: z.string().optional(),
+    showApp: z.string().optional(),
     testimonialtitle: z.string().optional(),
     postsectiontitle: z.string().optional(),
     featureImage: z.object({
@@ -96,17 +97,16 @@ const home = defineCollection({
         url: z.string().optional(),
         title: z.string().optional(),
         controls: z.boolean().optional(),
+        useCustomPlayer: z.boolean().optional(),
         mute: z.boolean().optional(),
         loop: z.boolean().optional(),
         start: z.number().optional(),
         end: z.number().optional(),
-        useCustomPlayer: z.boolean().optional(),
         videoOnly: z.boolean().optional(),
       }).optional()
     }).optional(),
   }),
-});
-const siteSettings = defineCollection({
+});const siteSettings = defineCollection({
   type: 'data',
   schema: z.object({
     showHeader: z.boolean().optional(),
@@ -213,6 +213,27 @@ const post = defineCollection({
   schema: postSchema
 });
 
+const pitches = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string().optional(),
+    showTitle: z.boolean().optional(),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
+    description: z.string().optional(),
+    tagline: z.string().optional(),
+    subheading1: z.string().optional(),
+    text1: z.string().optional(),
+    subheading2: z.string().optional(),
+    subheading3: z.string().optional(),
+    text2: z.string().optional(),
+    text3: z.string().optional(),
+    phone: z.string().optional(),
+    subcontent: z.string().optional(),
+    subcta: z.string().optional(),
+  }),
+});
+
 export const collections = {
   post,
   faqs, 
@@ -220,7 +241,8 @@ export const collections = {
   home, 
   siteSettings, 
   pwaSettings,
-  menuItems
+  menuItems,
+  pitches
 };
 
 

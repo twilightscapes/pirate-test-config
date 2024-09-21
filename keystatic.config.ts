@@ -7,23 +7,22 @@ import { colorPicker } from './src/components/ColorPicker.tsx';
 
 
 
+const isProduction: boolean = import.meta.env.PROD;
 
-const isProduction: boolean = process.env.NODE_ENV === 'production'
 
 export default config({
   storage: isProduction
-    ? {
-        kind: 'cloud',
-      }
-    : {
-        kind: 'local',
-      },
-  cloud: isProduction
-    ? {
-        project: 'tool/toolpirate',
-      }
-    : undefined,
-  
+  ? {
+      kind: 'cloud',
+    }
+  : {
+      kind: 'local',
+    },
+cloud: isProduction
+  ? {
+      project: import.meta.env.KEYSTATIC_PROJECT || 'tool/toolpirate',
+    }
+  : undefined,
   collections: {
     posts: collection({
       label: 'Posts',
@@ -108,26 +107,37 @@ export default config({
     }),
 
     pitches: collection({
-      label: 'Info Block',
+      label: 'Content Modules',
       path: 'src/content/pitches/*',
       schema: {
         title: fields.text({ label: 'Title' }),
-        tagline: fields.text({ label: 'Tagline' }),
-        description: fields.text({ label: 'Description', multiline: true }),
-        phone: fields.text({ label: 'Phone' }),
-        subheading: fields.text({ label: 'Subheading' }),
-        subcontent: fields.text({ label: 'Subcontent' }),
-        subcta: fields.text({ label: 'CTA Text' }),
+        showTitle: fields.checkbox({ label: 'Show Title', description: 'Hide/Show the section title', defaultValue: true }),
         image: fields.image({
           label: 'Image',
           directory: 'public/images/pitches',
           publicPath: '/images/pitches',
         }),
+        imageAlt: fields.text({ label: 'Image Alt Text' }),
+        description: fields.text({ label: 'Image description/caption' }),
+
+        divider: fields.empty(),
+        divider2: fields.empty(),
+
+        tagline: fields.text({ label: 'Tagline' }),
+        subheading1: fields.text({ label: 'Subheading1' }),
+        text1: fields.text({ label: 'Text 1', multiline: true }),
+        subheading2: fields.text({ label: 'Subheading2' }),
+        text2: fields.text({ label: 'Text 2', multiline: true }),
+        subheading3: fields.text({ label: 'Subheading3' }),
+        text3: fields.text({ label: 'Text 3', multiline: true }),
+
+        phone: fields.text({ label: 'Phone' }),
+        subcontent: fields.text({ label: 'Subcontent' }),
+        subcta: fields.text({ label: 'CTA Text' }),
+        
       },
       slugField: 'title'
-    }),
-
-    
+    }),    
 
     faqs: collection({
       label: 'FAQs',
@@ -280,11 +290,12 @@ export default config({
           publicPath: '/images/pwa'
         })
       }
-    }),    home: singleton({
+    }),
+    home: singleton({
       label: 'Home Page',
       path: 'src/content/homepage/',
       schema: {
-
+        showFeature: fields.checkbox({ label: 'Show Feature', description: 'Hide/Show the Feature section on home page', defaultValue: false }),
         featureImage: fields.object({
           src: fields.image({
             label: 'Feature Image',
@@ -295,21 +306,62 @@ export default config({
             label: 'Featured Image Alt Text',
           }),
         }),
+        youtube: fields.conditional(
+          fields.checkbox({ label: 'Include YouTube Video' }),
+          {
+            true: fields.object({
+              url: fields.text({ 
+                label: 'YouTube Video URL',
+                description: 'Enter the full YouTube video URL'
+              }),
+              title: fields.text({ 
+                label: 'Video Title',
+                description: 'Enter a title for the video (optional, leave blank for no title)',
+                validation: { isRequired: false }
+              }),
+              controls: fields.checkbox({ label: 'Use YouTube Player Controls' }),
+              useCustomPlayer: fields.checkbox({ 
+                label: 'Use Custom Player Controls', 
+                defaultValue: true 
+              }),
+              mute: fields.checkbox({ label: 'Mute Video' }),
+              loop: fields.checkbox({ label: 'Loop Video' }),
+              start: fields.number({ 
+                label: 'Start Time (seconds)', 
+                defaultValue: 0,
+                validation: { min: 0 }
+              }),
+              end: fields.number({ 
+                label: 'End Time (seconds)', 
+                validation: { min: 0, isRequired: false }
+              }),
+              videoOnly: fields.checkbox({ label: 'Video Only', defaultValue: false }),
+            }),
+            false: fields.empty(),
+          }
+        ),
 
-        showFeature: fields.checkbox({ label: 'Show Feature', description: 'Hide/Show the Feature section on home page', defaultValue: false }),
-
+        divider9: fields.empty(),
+        divider7: fields.empty(),
         showBioOnHome: fields.checkbox({
           label: 'Show Bio Module',
           description: 'Hide/Show the Bio/Info section on the home page',
           defaultValue: false,
         }),
 
+        showApp: fields.checkbox({
+          label: 'Show App Module',
+          description: 'Hide/Show custom App section on the home page',
+          defaultValue: false,
+        }),
+
         showHomeGallery: fields.checkbox({ label: 'Show Home Photo Gallery', description: 'Hide/Show the Photo section on home page', defaultValue: false }),
+
+
 
         showPosts: fields.checkbox({ label: 'Show Posts', description: 'Hide/Show the Posts section on the home page', defaultValue: false }),
 
         showMore: fields.checkbox({ label: 'Show More Button', description: 'Hide/Show the Show More Button (for the posts section above)', defaultValue: false }),
-
 
         showFaqOnHome: fields.checkbox({
           label: 'Show FAQ Module',
@@ -322,50 +374,53 @@ export default config({
           description: 'Hide/Show the Testomonials section on the home page',
           defaultValue: false,
         }),
-      
-        
 
         divider: fields.empty(),
 
         pitch: fields.relationship({
-          label: 'Select Pitch',
+          label: 'Content Block 1',
+          collection: 'pitches',
+        }),
+
+        pitch2: fields.relationship({
+          label: 'Content Module 2',
+          collection: 'pitches',
+        }),
+
+        pitch3: fields.relationship({
+          label: 'Content Module 3',
           collection: 'pitches',
         }),
 
         divider1: fields.empty(),
+        divider6: fields.empty(),
         
-        testimonialtitle: fields.text({ label: 'Testimonials or Faq Title Header' }),
-        postsectiontitle: fields.text({ label: 'Posts Section Title Header'  }),
+        featureOrder: fields.number({ label: 'Feature Section Order', defaultValue: 1 }),
+        bioOrder: fields.number({ label: 'Bio Section Order', defaultValue: 2 }),
+        appOrder: fields.number({ label: 'App Section Order', defaultValue: 3 }),
+        galleryOrder: fields.number({ label: 'Gallery Section Order', defaultValue: 4 }),
+        postsOrder: fields.number({ label: 'Posts Section Order', defaultValue: 5 }),
+        faqOrder: fields.number({ label: 'FAQ Section Order', defaultValue: 6 }),
+        testimonialsOrder: fields.number({ label: 'Testimonials Section Order', defaultValue: 7 }),
+        infoblockOrder: fields.number({ label: 'Content Block 1 Order', defaultValue: 8 }),
+        infoblock2Order: fields.number({ label: 'Content Block 2 Order', defaultValue: 9 }),
+        infoblock3Order: fields.number({ label: 'Content Block 3 Order', defaultValue: 10 }),
+
+        
+        divider5: fields.empty(),        
+        
+        
+        photosectiontitle: fields.text({ label: 'Photo Section Title Header'  }),
+        faqsectiontitle: fields.text({ label: 'FAQ Title Header'  }),
+        testimonialtitle: fields.text({ label: 'Testimonials Title Header' }),
+        postsectiontitle: fields.text({ label: 'Posts Title Header'  }),
 
         divider2: fields.empty(),
 
-
-        youtube: fields.object({
-          url: fields.text({ 
-            label: 'YouTube Video URL',
-            description: 'Enter the full YouTube video URL'
-          }),
-
-          title: fields.text({ 
-            label: 'Video Title',
-            description: 'Enter a title for the video (optional, leave blank for no title)',
-            validation: { isRequired: false }
-          }),
-          // controls: fields.checkbox({ label: 'Show Controls', defaultValue: true }),
-          controls: fields.checkbox({ label: 'Use YouTube Player Controls' }),
-              useCustomPlayer: fields.checkbox({ 
-                label: 'Use Custom Player Controls', 
-                defaultValue: true 
-              }),
-          mute: fields.checkbox({ label: 'Mute Video', defaultValue: false }),
-          loop: fields.checkbox({ label: 'Loop Video', defaultValue: false }),
-          start: fields.number({ label: 'Start Time (seconds)', defaultValue: 0 }),
-          end: fields.number({ label: 'End Time (seconds)' }),
-          divider: fields.empty(),
-        }),
-      
+        
       },
-    }),    photoSettings: singleton({
+    }),    
+    photoSettings: singleton({
       label: 'Photo Gallery Settings',
       path: 'src/content/photoSettings/',
       schema: {
@@ -582,8 +637,8 @@ ui: {
     name: ' ',
     mark: ({ colorScheme }) => {
       let path = colorScheme === 'dark'
-        ? '/images/logo/logoImage.svg'
-        : '/images/logo/logoImage.svg';
+        ? '/images/logo/logoImage.webp'
+        : '/images/logo/logoImage.webp';
       return React.createElement('img', { src: path, height: 40, alt: "Pirate Logo" });
     },
   },
