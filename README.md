@@ -1,9 +1,9 @@
 
 <h1 align="center">
-  Astro Pirate
+  Pirate
 </h1>
 
-Astro Pirate is built with the Astro framework. Use it to create an easy-to-use blogs or websites.
+Pirate is built with the Astro framework. Use it to create an easy-to-use blogs or websites.
 
 
 
