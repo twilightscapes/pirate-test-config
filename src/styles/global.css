@@ -62,10 +62,11 @@ body {
 
 	  
 	  
-	  ::-webkit-scrollbar, ::-webkit-scrollbar-button {
+	  /* ::-webkit-scrollbar, ::-webkit-scrollbar-button {
 		height: 0px;
 		width: 0px;
-	  }
+	  } */
+	  ::-webkit-scrollbar,::-webkit-scrollbar-button{height:1px;width:1px}
 	  
 	  .button {
 		background-color: var(--theme-accent2);
