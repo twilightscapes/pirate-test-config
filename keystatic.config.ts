@@ -14,7 +14,7 @@ export default config({
     ? { kind: 'cloud' }
     : { kind: 'local' },
   cloud: isProduction
-    ? { project: process.env.KEYSTATIC_PROJECT || 'pirate/pirate' }
+    ? { project: process.env.KEYSTATIC_PROJECT || 'your/project' }
     : undefined,
   collections: {
     posts: collection({
@@ -79,8 +79,7 @@ export default config({
         ),
         divider1: fields.empty(),        tags: fields.array(fields.text({ label: 'Tag' }), {
           label: 'Tags',
-          itemLabel: (props) => props.value,
-        }),
+          itemLabel: (props: any) => props.value,        }),
       },
     }),    pages: collection({      label: 'Other Pages',
       path: 'src/content/pages/*',
@@ -171,8 +170,8 @@ export default config({
         }),
         order: fields.number({ label: 'Order' }),
       },
-    }),
-    menuItems: collection({
+  
+    }),    menuItems: collection({
       label: 'Menu Items',
       path: 'src/content/menu/*',
       slugField: 'path',
@@ -497,8 +496,7 @@ export default config({
           }),
           {
             label: 'CMS-managed Gallery Images',
-            itemLabel: (props) => props.fields.caption.value || 'Image',
-          }
+            itemLabel: (props: { fields: { caption: { value: string } } }) => props.fields.caption.value || 'Image',          }
         ),        divider4: fields.empty(),
 
       },
@@ -642,7 +640,7 @@ export default config({
 ui: {
   brand: {
     name: ' ',
-    mark: ({ colorScheme }) => {
+    mark: ({ colorScheme }: { colorScheme: string }) => {
       let path = colorScheme === 'dark'
         ? '/images/logo/logoImage.svg'
         : '/images/logo/logoImage.svg';

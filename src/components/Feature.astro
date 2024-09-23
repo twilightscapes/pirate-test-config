@@ -1,9 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import featureImage from '/images/homepage/featureImage/src.webp';
+
 
 import YouTubeEmbed from '@/components/YouTubeEmbed.astro';
 import { getImage } from "astro:assets";
+
 
 interface Props {
   content: {
@@ -27,7 +28,7 @@ interface Props {
 
 const { content } = Astro.props;
 
-const optimizedImage = await getImage({src: content.featureImage?.src || '/default-image.jpg', format: 'webp'});
+const optimizedImage = await getImage({src: content.featureImage?.src || '/social-card.webp', format: 'webp'});
 ---
 
 {
