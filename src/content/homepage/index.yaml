@@ -8,9 +8,12 @@ showBioOnHome: true
 showApp: false
 showHomeGallery: false
 showPosts: true
-showMore: false
+showMore: true
 showFaqOnHome: false
 showTestOnHome: false
+pitch: How It Works
+pitch2: Part 2
+pitch3: part 3
 featureOrder: 1
 bioOrder: 2
 appOrder: .nan

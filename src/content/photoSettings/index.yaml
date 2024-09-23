@@ -1,9 +1,8 @@
 galleryMode: directory
 showCaptions: true
-showBioOnPhotos: false
+showBioOnPhotos: true
 showFaqsOnPhotos: false
 showTestimonialsOnPhotos: false
-pitch: How It Works
 defaultDirectory: favorites
 showGallerySelector: true
 galleryImages:

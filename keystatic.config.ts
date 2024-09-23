@@ -99,20 +99,17 @@ export default config({
       },
     }),
 
-
     CTAs: collection({
-      label: 'Call-To-Actons',
+      label: 'Call-To-Actions',
       path: 'src/content/ctas/*',
       schema: {
         title: fields.text({ label: 'CTA Title', description: 'The text on the CTA Button' }),
-        ctaUrl: fields.text({ label: 'CTA Url', description: 'The location of your CTA', defaultValue: '/', validation: { length: { min: 1 } }, }),
-        description: fields.text({ label: 'CTA description/caption' }),
+        ctaUrl: fields.text({ label: 'CTA Url', description: 'The location of your CTA', defaultValue: '/', validation: { length: { min: 1 } } }),
+        description: fields.text({ label: 'Description', description: 'The description for the CTA', multiline: true }),
         showFancy: fields.checkbox({ label: 'Show Fancy Button', description: 'Use the Fancy style with animated button', defaultValue: true }),
       },
-      slugField: 'title'
+      slugField: 'description'
     }),
-
-
 
     pitches: collection({
       label: 'Content Blocks',
@@ -138,10 +135,6 @@ export default config({
         text2: fields.text({ label: 'Text 2', multiline: true }),
         subheading3: fields.text({ label: 'Subheading3' }),
         text3: fields.text({ label: 'Text 3', multiline: true }),
-
-        phone: fields.text({ label: 'Phone' }),
-        subcontent: fields.text({ label: 'Subcontent' }),
-        subcta: fields.text({ label: 'CTA Text' }),
         
       },
       slugField: 'title'

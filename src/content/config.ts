@@ -80,8 +80,6 @@ const home = defineCollection({
     description: z.string(),
     phone: z.string().optional(),
     subheading: z.string().optional(),
-    subcontent: z.string().optional(),
-    subcta: z.string().optional(),
     faqtitle: z.string().optional(),
     showMore: z.string().optional(),
     showApp: z.string().optional(),
@@ -228,9 +226,6 @@ const pitches = defineCollection({
     subheading3: z.string().optional(),
     text2: z.string().optional(),
     text3: z.string().optional(),
-    phone: z.string().optional(),
-    subcontent: z.string().optional(),
-    subcta: z.string().optional(),
   }),
 });
 
@@ -265,12 +260,9 @@ export type PitchData = {
   text1: string;
   text2: string;
   text3: string;
-  phone: string;
   subheading1: string;
   subheading2: string;
   subheading3: string;
-  subcontent: string;
-  subcta: string;
   image: string | null;
   imageAlt: string;
   description: string;

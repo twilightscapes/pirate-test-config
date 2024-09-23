@@ -1,10 +1,13 @@
 ---
-import { getEntry } from 'astro:content';
+
+import { getEntry, getCollection } from 'astro:content';
 const bioContent = await getEntry('bio', 'index');
 import { Image } from 'astro:assets';
 import CTAs from '@/components/CTAs.astro';
 
-console.log('Full CTA data in Bio:', bioContent.data.cta);
+const cta = bioContent.data.cta ? await getEntry('ctas', bioContent.data.cta) : null
+
+
 ---
 <section id="profile" class="scroll-area1 w-screen  mb-5 overflow-hidden rounded-lg backdrop-blur-lg">
     <article>
@@ -43,12 +46,19 @@ console.log('Full CTA data in Bio:', bioContent.data.cta);
           <div class="bg-accent backdrop-blur-md mt-4 rounded-lg text-center text-lg md:text-xl lg:text-2xl mx-auto">
             <p>{bioContent.data.subcontent}</p>
           </div>
-  {bioContent.data.cta && (
-    <CTAs 
-      cta={bioContent.data.cta}
-      description={bioContent.data.cta.description || ''}
-      showFancy={bioContent.data.cta.showFancy || false}
-    />
-  )}
-</div>      </div>    </article>
-</section>
+
+
+
+
+              {cta && (
+                <CTAs 
+                  title={cta.data.title}
+                  description={cta.data.description || ''}
+                  ctaUrl={cta.data.ctaUrl}
+                  showFancy={cta.data.showFancy}
+                />
+              )}
+        </div>
+      </div>
+    </article>
+</sectio>

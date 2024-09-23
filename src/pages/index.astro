@@ -32,12 +32,9 @@ type PitchData = {
   text1: string;
   text2: string;
   text3: string;
-  phone: string;
   subheading1: string;
   subheading2: string;
   subheading3: string;
-  subcontent: string;
-  subcta: string;
   image: string | null;
   imageAlt: string;
   description: string;
@@ -64,12 +61,9 @@ if (selectedPitchSlug) {
           text1: pitchData.text1 ?? '',
           text2: pitchData.text2 ?? '',
           text3: pitchData.text3 ?? '',
-          phone: pitchData.phone ?? '',
           subheading1: pitchData.subheading1 ?? '',
           subheading2: pitchData.subheading2 ?? '',
           subheading3: pitchData.subheading3 ?? '',
-          subcontent: pitchData.subcontent ?? '',
-          subcta: pitchData.subcta ?? '',
           image: pitchData.image ?? null,
           imageAlt: pitchData.imageAlt ?? '',
           description: pitchData.description ?? '',
@@ -90,12 +84,9 @@ if (selectedPitchSlug2) {
           text1: pitchData2.text1 ?? '',
           text2: pitchData2.text2 ?? '',
           text3: pitchData2.text3 ?? '',
-          phone: pitchData2.phone ?? '',
           subheading1: pitchData2.subheading1 ?? '',
           subheading2: pitchData2.subheading2 ?? '',
           subheading3: pitchData2.subheading3 ?? '',
-          subcontent: pitchData2.subcontent ?? '',
-          subcta: pitchData2.subcta ?? '',
           image: pitchData2.image ?? null,
           imageAlt: pitchData2.imageAlt ?? '',
           description: pitchData2.description ?? '',
@@ -116,12 +107,9 @@ if (selectedPitchSlug3) {
           text1: pitchData3.text1 ?? '',
           text2: pitchData3.text2 ?? '',
           text3: pitchData3.text3 ?? '',
-          phone: pitchData3.phone ?? '',
           subheading1: pitchData3.subheading1 ?? '',
           subheading2: pitchData3.subheading2 ?? '',
           subheading3: pitchData3.subheading3 ?? '',
-          subcontent: pitchData3.subcontent ?? '',
-          subcta: pitchData3.subcta ?? '',
           image: pitchData3.image ?? null,
           imageAlt: pitchData3.imageAlt ?? '',
           description: pitchData3.description ?? '',
@@ -141,12 +129,9 @@ if (selectedPitchSlug2) {
       text1: pitchData2.text1 ?? '',
       text2: pitchData2.text2 ?? '',
 	  text3: pitchData2.text3 ?? '',
-      phone: pitchData2.phone ?? '',
       subheading1: pitchData2.subheading1 ?? '',
       subheading2: pitchData2.subheading2 ?? '',
 	  subheading3: pitchData2.subheading3 ?? '',
-      subcontent: pitchData2.subcontent ?? '',
-      subcta: pitchData2.subcta ?? '',
       image: pitchData2.image ?? null,
       imageAlt: pitchData2.imageAlt ?? '',
       description: pitchData2.description ?? '',
@@ -167,12 +152,9 @@ if (selectedPitchSlug3) {
       text1: pitchData3.text1 ?? '',
       text2: pitchData3.text2 ?? '',
 	  text3: pitchData3.text3 ?? '',
-      phone: pitchData3.phone ?? '',
       subheading1: pitchData3.subheading1 ?? '',
       subheading2: pitchData3.subheading2 ?? '',
 	  subheading3: pitchData3.subheading3 ?? '',
-      subcontent: pitchData3.subcontent ?? '',
-      subcta: pitchData3.subcta ?? '',
       image: pitchData3.image ?? null,
       imageAlt: pitchData3.imageAlt ?? '',
       description: pitchData3.description ?? '',
@@ -323,6 +305,9 @@ flex-direction: column;
 					}
 				})()}
 			</section>
+
+      
 		))}
+    
 	</div>
 </PageLayout>
