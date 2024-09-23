@@ -257,14 +257,8 @@ flex-direction: column;
 							return <App />;
 						case 'gallery':
 							return (<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center theme-accent backdrop-blur-lg">{homeContent.data.photosectiontitle}</h2><PhotoSection />);
-											case 'infoblock':
-												return (
-													<>
-														{selectedPitch && <InfoBlock pitch={{...selectedPitch, slug: selectedPitch.slug}} />}
-														{selectedPitch2 && <InfoBlock pitch={{...selectedPitch2, slug: selectedPitch2.slug}} />}
-														{selectedPitch3 && <InfoBlock pitch={{...selectedPitch3, slug: selectedPitch3.slug}} />}
-													</>
-												);
+	case 'infoblock':
+		return selectedPitch && <InfoBlock pitch={{...selectedPitch, slug: selectedPitch.slug}} />;
 											case 'infoblock2':
 												return (
 													<>
