@@ -10,7 +10,7 @@ showHomeGallery: false
 showPosts: true
 showMore: true
 showFaqOnHome: false
-showTestOnHome: true
+showTestOnHome: false
 pitch: How It Works
 pitch2: Part 2
 pitch3: part 3
