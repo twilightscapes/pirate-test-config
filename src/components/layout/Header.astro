@@ -18,6 +18,9 @@ const url = new URL(Astro.request.url);
 const menuLinks = await getMenuLinks();
 ---
 
+
+
+
 {showHeader && (
   <div id="menu" class="menu header" style="min-height:60px; padding: 2px 100px 2px 0;">
     {showLogo && logoImage && (
