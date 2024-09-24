@@ -1,0 +1,40 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+const meta = {
+	description: "Contact",
+	title: "Contact",
+};
+
+import GoBack from "@/components/GoBack.astro"
+
+
+
+---
+
+<style>
+
+.backer{
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center bottom;
+  display:grid;
+  place-content: center;
+  height:100vh;
+  align-content: center;
+}
+
+</style>
+<GoBack />
+<PageLayout meta={meta}>
+
+
+<div class="backer">
+
+  
+  <div style="text-align: center; padding: 50px 20px; background:var(--theme-header); color:#fff; border-radius: 10px;">
+    <h1>Thank you for contacting us</h1>
+
+  </div>
+        
+	</div>
+</PageLayout>
