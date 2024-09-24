@@ -4,7 +4,7 @@ showLogo: true
 showHome: true
 showTheme: true
 showSwitch: true
-showSearch: false
+showSearch: true
 showFooter: true
 defaultView: swipe
 showTitles: true
