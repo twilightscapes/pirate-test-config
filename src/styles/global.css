@@ -254,7 +254,7 @@ body {
 	  
 	  header.header {height:0;}
 
-	  #missioncontrol{line-height: 1; position:fixed; top:8px; right:4px; z-index: 5; color:#fff; fill:#fff; background: var(--theme-header); padding:4px 6px; border-radius:var(--border-radius); opacity:.95; }
+	  #missioncontrol{line-height: 1; position:fixed; top:8px; right:4px; z-index:10; color:#fff; fill:#fff; background: var(--theme-header); padding:4px 6px; border-radius:var(--border-radius); opacity:.95; }
 	  
 	  
 	  .flexbutt{display:flex; }
@@ -302,8 +302,9 @@ body {
 	position:absolute;
 	display:grid;
 	place-self: center;
-	bottom:2vh;
+	bottom:15vh;
 	left:0; right:0;
+	z-index: 10;
 }
 
 	  .grid-container {
