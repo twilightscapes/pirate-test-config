@@ -69,13 +69,14 @@ const playerVars: { [key: string]: number | string } = {
         <label for="volume">{language.data.volume}
         <span style="padding:1.5vh 1rem; background:#111; border-radius:var(--border-radius);"><input type="range" id="volume" min="0" max="100" value="100" class="volume-slider"></span></label>
               
-      <label for="mute-icon" style="padding:0 0 0 0;" class="mute-label">
+      <label for="mute-icon" style="" class="mute-label">
         {language.data.mute}
-        <span style="padding:4px 1vw 0 1vw; background:#111; border-radius:var(--border-radius);">
-          <button id="mute" class="control-button" style="height:30px; margin-top:2px">
-      <svg id="mute-icon" viewBox="0 0 16 16" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
+        <span style="padding:.3vh .5rem; background:#111; border-radius:var(--border-radius);">
+        <button id="mute" class="control-button" style="padding-top:3px;">
+      <svg id="mute-icon" viewBox="0 0 16 16" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg">
       <path d="M6.5 15c-0.13 0-0.258-0.051-0.354-0.146l-3.854-3.854h-1.793c-0.276 0-0.5-0.224-0.5-0.5v-5c0-0.276 0.224-0.5 0.5-0.5h1.793l3.854-3.854c0.143-0.143 0.358-0.186 0.545-0.108s0.309 0.26 0.309 0.462v13c0 0.202-0.122 0.385-0.309 0.462-0.062 0.026-0.127 0.038-0.191 0.038z"></path>
-      </svg></button>
+      </svg>
+      </button>
       </span>
     </label>
       </div>      
@@ -142,7 +143,7 @@ const playerVars: { [key: string]: number | string } = {
         setTimeout(() => {
           centerControls.style.opacity = '0';
           controls.style.opacity = '0';
-        }, 800);
+        }, 1100);
       }
     }
   }
@@ -413,7 +414,7 @@ const playerVars: { [key: string]: number | string } = {
     width:100%;
     justify-content: center;
     gap:1vw;
-    z-index: 10;
+    z-index: 2;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     max-width: 600px;
@@ -423,7 +424,7 @@ const playerVars: { [key: string]: number | string } = {
   
 
   #mute, #volume {
-    z-index: 11;
+    z-index: 2;
     position: relative;
   }
 
@@ -440,8 +441,8 @@ const playerVars: { [key: string]: number | string } = {
   #mute.muted svg .volume-icon { display: none; }
   #mute.muted svg .muted-icon { display: block; }
   #mute svg {  
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   fill: currentColor;
   filter: drop-shadow(0px 0px 1px #f6f3f3) !important;
   transition: background .3s ease-in-out;
@@ -490,14 +491,14 @@ input[type="range"]::-webkit-slider-thumb {
   transition: background .3s ease-in-out;
   border:1px solid #444;
   filter: brightness(1.4);
-  z-index: 1;
+  z-index: 2;
 }
 
   .mute-label {
     transition: color 0.3s ease;
     display:flex;
     flex-direction: column;
-    gap:0px;
+    gap:2px;
     align-content: center;
     align-self: center;
     justify-content: center;

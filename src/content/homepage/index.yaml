@@ -12,6 +12,7 @@ youtube:
     loop: false
     start: 0
     videoOnly: false
+cta: front link
 homeCTA: front link
 showBioOnHome: true
 showApp: false
