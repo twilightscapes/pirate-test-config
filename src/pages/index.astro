@@ -237,7 +237,7 @@ flex-direction: column;
 .scroll-snap-container > * {
   scroll-snap-align: start;
 }
-footer{display: none !important;}
+
 </style>
 <PageLayout meta={{ title: homeContent.data.title, description: pwaSettings.data.description }}>
 	<div class="scroll-snap-container flex flex-col home">
@@ -255,18 +255,20 @@ footer{display: none !important;}
 							return (<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center theme-accent backdrop-blur-lg">{homeContent.data.photosectiontitle}</h2><PhotoSection />);
 	case 'infoblock':
 		return selectedPitch && <InfoBlock pitch={{...selectedPitch, slug: selectedPitch.slug}} />;
-											case 'infoblock2':
-												return (
+		
+    case 'infoblock2':
+								return (
 													<>
 														{selectedPitch2 && <InfoBlock pitch={{...selectedPitch2, slug: selectedPitch2.slug}} />}
 													</>
 												);
-											case 'infoblock3':
-												return (
+		case 'infoblock3':
+								return (
 													<>
 														{selectedPitch3 && <InfoBlock pitch={{...selectedPitch3, slug: selectedPitch3.slug}} />}
 													</>
-												);											case 'posts':
+												);
+    case 'posts':
 							return (
 								<>
 									<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center theme-accent">{homeContent.data.postsectiontitle}</h2>

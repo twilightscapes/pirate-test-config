@@ -426,6 +426,8 @@ body {
 
 	  body:has(.header) #directorySelect{top:5px !important;}
 
+	  body:has(.home) #footer{display: none;}
+
 	select {
 		--webkit-appearance: none;
 		appearance: none; 
