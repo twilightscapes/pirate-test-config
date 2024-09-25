@@ -410,8 +410,8 @@ body {
 
 
 	.panel {
-		/* backdrop-filter: blur(54px);
-		-webkit-backdrop-filter: blur(54px); */
+		backdrop-filter: blur(54px);
+		-webkit-backdrop-filter: blur(54px);
 		text-shadow: 0 1px 1px var(--theme-header);
 	}
 
