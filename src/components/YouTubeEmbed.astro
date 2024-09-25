@@ -69,9 +69,10 @@ const playerVars: { [key: string]: number | string } = {
         <label for="volume">{language.data.volume}
         <span style="padding:1.5vh 1rem; background:#111; border-radius:var(--border-radius);"><input type="range" id="volume" min="0" max="100" value="100" class="volume-slider"></span></label>
               
-      <label for="mute-icon" style="padding:;" class="mute-label">{language.data.mute}
-        <span style="padding:4px 1.5vw 0 1.5vw; background:#111; border-radius:var(--border-radius);">
-          <button id="mute" class="control-button" style="">
+      <label for="mute-icon" style="padding:0 0 0 0;" class="mute-label">
+        {language.data.mute}
+        <span style="padding:0 1vw 0 1vw; background:#111; border-radius:var(--border-radius);">
+          <button id="mute" class="control-button" style="margin-top:5px;">
       <svg id="mute-icon" viewBox="0 0 16 16" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
       <path d="M6.5 15c-0.13 0-0.258-0.051-0.354-0.146l-3.854-3.854h-1.793c-0.276 0-0.5-0.224-0.5-0.5v-5c0-0.276 0.224-0.5 0.5-0.5h1.793l3.854-3.854c0.143-0.143 0.358-0.186 0.545-0.108s0.309 0.26 0.309 0.462v13c0 0.202-0.122 0.385-0.309 0.462-0.062 0.026-0.127 0.038-0.191 0.038z"></path>
       </svg></button>
