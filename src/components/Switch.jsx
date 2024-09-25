@@ -28,8 +28,6 @@ const SwipeIcon = () => (
   </svg>
 );
 
-
-
 function Switch({ defaultView }) {
   const [isSliderVisible, setIsSliderVisible] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -42,33 +40,6 @@ function Switch({ defaultView }) {
     }
     return defaultView === 'swipe';
   });
-
-  const [showIcon, setShowIcon] = useState(false);
-
-  useEffect(() => {
-    setShowIcon(true);
-  }, []);
-
-  const toggleSlider = () => {
-    setIsSliderVisible((prev) => {
-      const newValue = !prev;
-      if (typeof window !== 'undefined') {
-        localStorage.setItem("isSliderVisible", JSON.stringify(newValue));
-        window.dispatchEvent(new StorageEvent("storage", { key: "isSliderVisible" }));
-        const elements = document.querySelectorAll('.contentpanel', '.slider');
-        elements.forEach((el) => {
-          if (newValue) {
-            el.classList.remove('grid-container');
-            el.classList.add('slider', 'panels');
-          } else {
-            el.classList.add('grid-container');
-            el.classList.remove('slider', 'panels');
-          }
-        });
-      }
-      return newValue;
-    });
-  };
 
   useEffect(() => {
     const handleStorageChange = (event) => {
@@ -100,6 +71,17 @@ function Switch({ defaultView }) {
     });
   }, [isSliderVisible]);
 
+  const toggleSlider = () => {
+    setIsSliderVisible((prev) => {
+      const newValue = !prev;
+      if (typeof window !== 'undefined') {
+        localStorage.setItem("isSliderVisible", JSON.stringify(newValue));
+        window.dispatchEvent(new StorageEvent("storage", { key: "isSliderVisible" }));
+      }
+      return newValue;
+    });
+  };
+
   return (
     <div>
       <button
@@ -108,7 +90,7 @@ function Switch({ defaultView }) {
         className="flex items-center justify-center rounded-md ring-zinc-400 transition-all hover:ring-2"
       >
         <div className="themer">
-          {showIcon && (isSliderVisible ? <GridIcon /> : <SwipeIcon />)}
+          {isSliderVisible ? <GridIcon /> : <SwipeIcon />}
         </div>
       </button>
     </div>
@@ -116,4 +98,3 @@ function Switch({ defaultView }) {
 }
 
 export default Switch;
-
