@@ -101,6 +101,8 @@ const home = defineCollection({
         start: z.number().optional(),
         end: z.number().optional(),
         videoOnly: z.boolean().optional(),
+        cta: z.string().optional(),
+
       }).optional()
     }).optional(),
   }),

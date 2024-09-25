@@ -1,10 +1,11 @@
 ---
-import { Image } from "astro:assets";
-
-
+import { getEntry, getCollection } from 'astro:content';
 import YouTubeEmbed from '@/components/YouTubeEmbed.astro';
 import { getImage } from "astro:assets";
-
+import { Image } from "astro:assets";
+import CTAs from '@/components/CTAs.astro';
+const home = await getEntry('homepage', 'index');
+const cta = home.data.cta ? await getEntry('CTAs', home.data.cta) : null;
 
 interface Props {
   content: {
@@ -23,6 +24,12 @@ interface Props {
       src: string;
       alt: string;
     };
+    cta?: {
+      title: string;
+      description: string;
+      ctaUrl: string;
+      showFancy: boolean;
+    };
   };
 }
 
@@ -30,7 +37,18 @@ const { content } = Astro.props;
 
 const optimizedImage = await getImage({src: content.featureImage?.src || '/social-card.webp', format: 'webp'});
 ---
+<div id="feature" style="position:relative; display:grid; place-content:center;">
 
+  {content.cta && (
+    <CTAs 
+      title={content.cta.title}
+      description={content.cta.description}
+      ctaUrl={content.cta.ctaUrl}
+      showFancy={content.cta.showFancy}
+    />
+  )}
+
+  
 {
   content.youtube && content.youtube.url ? (
     <YouTubeEmbed
@@ -57,3 +75,5 @@ const optimizedImage = await getImage({src: content.featureImage?.src || '/socia
     </div>
   ) : null
 }
+
+</div>

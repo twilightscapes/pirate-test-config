@@ -9,7 +9,7 @@ import Bio from "@/components/Bio.astro";
 import { getEntry } from 'astro:content';
 import keystaticConfig from '../../keystatic.config';
 import { createReader } from '@keystatic/core/reader';
-
+import CTAs from '@/components/CTAs.astro';
 
 import InfoBlock from "@/components/InfoBlock.astro";
 
@@ -24,7 +24,9 @@ const reader = createReader(process.cwd(), keystaticConfig);
 
 
 const homepage = await reader.singletons.home.read();
+const cta = homeContent.data.cta ? await getEntry('ctas', homeContent.data.cta) : null;
 
+const homeCTA = homeContent.data.cta ? await getEntry('ctas', homeContent.data.cta) : null;
 
 type PitchData = {
   slug: string;
@@ -245,8 +247,17 @@ flex-direction: column;
 			<section>
 				{(() => {
 					switch (section.name) {
-						case 'feature':
-							return <Feature content={homeContent.data} />;
+											case 'feature':
+												return <Feature content={{
+													...homeContent.data,
+													youtube: homeContent.data.youtube?.value,
+													cta: cta ? {
+														title: cta.data.title,
+														description: cta.data.description || '',
+														ctaUrl: cta.data.ctaUrl,
+														showFancy: cta.data.showFancy
+													} : undefined
+												}} />;
 						case 'bio':
 							return <Bio />;
 						case 'app':
@@ -296,10 +307,23 @@ flex-direction: column;
 							return null;
 					}
 				})()}
+  
 			</section>
-
-      
 		))}
     
+    {homeCTA && (
+      <section style="display:grid; place-content:center; padding:10vh 0">
+        <CTAs 
+          title={homeCTA.data.title}
+          description={homeCTA.data.description || ''}
+          ctaUrl={homeCTA.data.ctaUrl}
+          showFancy={homeCTA.data.showFancy}
+        />
+      </section>
+    )}
 	</div>
 </PageLayout>
+
+
+
+

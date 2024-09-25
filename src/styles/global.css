@@ -254,7 +254,7 @@ body {
 	  
 	  header.header {height:0;}
 
-	  #missioncontrol{line-height: 1; position:fixed; top:6px; right:4px; z-index: 600; color:#fff; fill:#fff; background: var(--theme-header); padding:4px 6px; border-radius:var(--border-radius); opacity:.95; }
+	  #missioncontrol{line-height: 1; position:fixed; top:8px; right:4px; z-index: 600; color:#fff; fill:#fff; background: var(--theme-header); padding:4px 6px; border-radius:var(--border-radius); opacity:.95; }
 	  
 	  
 	  .flexbutt{display:flex; }
@@ -298,7 +298,13 @@ body {
 	  .slider .sliderSpacer{display:block; width:50%; height:50% ; }
 	  
 
+#feature button{
 
+	position:absolute;
+	display:grid;
+	place-self: center;
+	bottom:2vh;
+}
 
 	  .grid-container {
 		display: grid;
@@ -322,7 +328,7 @@ body {
 	  .grid-container .post-card1 img {
 		max-height: 25vh;
 		margin: 0 auto;
-		border-radius: var(--border-radius) !important;
+		border-radius: var(--border-radius);
 	  }
 	  
 	  .slider {

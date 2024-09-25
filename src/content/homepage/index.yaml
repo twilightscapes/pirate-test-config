@@ -1,16 +1,26 @@
 showFeature: true
 featureImage:
-  src: /images/homepage/featureImage/src.webp
   alt: Become A PIRATE!
 youtube:
-  discriminant: false
+  discriminant: true
+  value:
+    url: https://youtu.be/nspxAG12Cpc?si=BHBec4st1VugjojI
+    title: Welcome to Pirate
+    controls: false
+    useCustomPlayer: true
+    mute: false
+    loop: true
+    start: 0
+    videoOnly: false
+cta: front link
+homeCTA: front link
 showBioOnHome: true
 showApp: false
 showHomeGallery: false
 showPosts: true
 showMore: true
 showFaqOnHome: true
-showTestOnHome: false
+showTestOnHome: true
 pitch: How It Works
 pitch2: Part 2
 pitch3: part 3
