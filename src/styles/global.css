@@ -298,8 +298,7 @@ body {
 	  .slider .sliderSpacer{display:block; width:50%; height:50% ; }
 	  
 
-#feature button{
-
+#feature .homeCTA{
 	position:absolute;
 	display:grid;
 	place-self: center;
