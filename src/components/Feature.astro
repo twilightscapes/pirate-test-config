@@ -51,7 +51,7 @@ const optimizedImage = await getImage({src: content.featureImage?.src || '/socia
   
 {
   content.youtube && content.youtube.url ? (
-    <YouTubeEmbed
+  <div class="featured"><YouTubeEmbed
       url={content.youtube.url}
       title={content.youtube.title}
       controls={content.youtube.controls}
@@ -60,7 +60,7 @@ const optimizedImage = await getImage({src: content.featureImage?.src || '/socia
       loop={content.youtube.loop}
       start={content.youtube.start}
       end={content.youtube.end}
-    />
+    /></div>
   ) : content.featureImage && content.featureImage.src ? (
     <div class="featured">
       <Image
