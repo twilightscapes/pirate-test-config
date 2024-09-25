@@ -2,16 +2,7 @@ showFeature: true
 featureImage:
   alt: Become A PIRATE!
 youtube:
-  discriminant: true
-  value:
-    url: https://youtu.be/nspxAG12Cpc?si=BHBec4st1VugjojI
-    title: Welcome to Pirate
-    controls: false
-    useCustomPlayer: true
-    mute: false
-    loop: true
-    start: 0
-    videoOnly: false
+  discriminant: false
 cta: front link
 homeCTA: front link
 showBioOnHome: true
