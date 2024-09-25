@@ -4,12 +4,12 @@ featureImage:
   alt: Become A PIRATE!
 youtube:
   discriminant: false
-showBioOnHome: false
+showBioOnHome: true
 showApp: false
 showHomeGallery: false
 showPosts: true
 showMore: true
-showFaqOnHome: false
+showFaqOnHome: true
 showTestOnHome: false
 pitch: How It Works
 pitch2: Part 2

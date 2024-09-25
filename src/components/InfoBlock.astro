@@ -24,10 +24,10 @@ const { pitch } = Astro.props;
 
 
 
-<section id="SecondaryInfo4" class="nameblock" style="margin: 0 auto; padding: 0 0 0 0; align-content: center; display: grid; text-align: left; justify-content: center; vertical-align: center; font-size: clamp(1rem, 1.8vw, 3.2rem); backdrop-filter: blur(8px); border-radius: 10px; max-width: 95%;">
+<section id="SecondaryInfo4" class="nameblock" style="margin: 0 auto; padding: 0 4%; align-content: center; display: grid; text-align: left; justify-content: center; vertical-align: center; font-size: clamp(1rem, 1.8vw, 3.2rem); backdrop-filter: blur(8px); border-radius: 10px;">
 
   {pitch?.showTitle && (
-    <h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center backdrop-blur-lg" style="margin:2vh auto; width:100vw;">
+    <h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center backdrop-blur-lg" style="margin:2vh auto;">
       {pitch?.slug || 'Default Title'}
     </h2>
   )}
