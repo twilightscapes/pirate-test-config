@@ -1,5 +1,6 @@
 showFeature: true
 featureImage:
+  src: /images/homepage/featureImage/src.webp
   alt: Become A PIRATE!
 youtube:
   discriminant: false

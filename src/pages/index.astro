@@ -242,7 +242,7 @@ flex-direction: column;
 
 </style>
 <PageLayout meta={{ title: homeContent.data.title, description: pwaSettings.data.description }}>
-	<div class="scroll-snap-container flex flex-col home">
+	<div class="scroll-snap-container flex flex-col home" style="overflow-x: hidden;">
 		{sortedSections.map(section => (
 			<section>
 				{(() => {

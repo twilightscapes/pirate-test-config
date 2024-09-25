@@ -303,6 +303,7 @@ body {
 	display:grid;
 	place-self: center;
 	bottom:2vh;
+	left:0; right:0;
 }
 
 	  .grid-container {
