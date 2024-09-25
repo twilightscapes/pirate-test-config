@@ -3,31 +3,6 @@
   PIRATE
 </h1>
 
-PIRATE is built with the Astro framework. Use it to create an easy-to-use blog or website.
-
-
-
-## Key Features
-
-- Astro v4 🚀
-- TailwindCSS Utility classes
-- Accessible, semantic HTML markup
-- Responsive & SEO-friendly
-- Dark / Light mode, using Tailwind and CSS variables
-- [Astro Assets Integration](https://docs.astro.build/en/guides/assets/) for optimised images
-- MD & [MDX](https://docs.astro.build/en/guides/markdown-content/#mdx-only-features) posts
-- Pagination
-- [Automatic RSS feed](https://docs.astro.build/en/guides/rss)
-- Auto-generated [sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
-- [Pagefind](https://pagefind.app/) static search library integration
-- [Astro Icon](https://github.com/natemoo-re/astro-icon) svg icon component
-
-
-## Demo 💻
-
-Check out the [Demo](https:/pirateweb.org/), hosted on Netlify
-
-> **Update** PIRATE is now built with the latest version of Astro and Keystatic!
 
 ---
 
@@ -63,28 +38,33 @@ PIRATE is built to OPERATE FOR FREE using FREE Cloud Based Services
 - State-of-the-art multimdedia/animation layering
 - FULL animated SVG support
 - User-installable PWA (Progressive Web Apps)
-- Responsive Web Design
-- Dark / Light Mode
-- Customize Resume, Profile, Cover Letter, Skills, Interview Notes and Contact page.
 - Add / Modify / Delete posts - no limitations.
-- Edit website settings, seo settings, logos, etc all from  within the CMS.
+- Edit website settings, seo settings, logos, etc all from within the CMS.
 - SEO Optimized (Scores 100 on PageSpeed)
 - Social media icons
 - OpenGraph structured data
 - Twitter Cards meta
 - XML Sitemaps
+- Astro v4 🚀
+- TailwindCSS Utility classes
+- Accessible, semantic HTML markup
+- Responsive & SEO-friendly
+- Dark / Light mode, using Tailwind and CSS variables
+- [Astro Assets Integration](https://docs.astro.build/en/guides/assets/) for optimised images
+- MD & [MDX](https://docs.astro.build/en/guides/markdown-content/#mdx-only-features) posts
+- Pagination
+- [Automatic RSS feed](https://docs.astro.build/en/guides/rss)
+- Auto-generated [sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
+- [Pagefind](https://pagefind.app/) static search library integration
+- [Astro Icon](https://github.com/natemoo-re/astro-icon) svg icon component
+
+## Demo 💻
+
+Check out the [Demo](https:/pirateweb.org/), hosted on Netlify
+
+> **Update** PIRATE is now built with the latest version of Astro and Keystatic!
 
 ## Quick start
-
-[Create a new repo](https://github.com/twilightscapes/pirate/generate) from this template.
-
-```bash
-# npm 7+
-npm create astro@latest -- --template pirate/astro-pirate
-
-# pnpm
-pnpm dlx create-astro --template pirate/astro-pirate
-```
 
 [![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/twilightscapes/pirate) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftwilightscapes%2Fpirate&project-name=astro-pirate-theme)
 
@@ -93,12 +73,13 @@ pnpm dlx create-astro --template pirate/astro-pirate
 
 ## Commands
 
-Replace pnpm with your choice of npm / yarn
+Requires pnpm and netlify command line for use in local dev enviroment
 
 | Command          | Action                                                         |
 | :--------------- | :------------------------------------------------------------- |
 | `pnpm install`   | Installs dependencies                                          |
 | `pnpm dev`       | Starts local dev server at `localhost:3000`                    |
+| `ntl dev`        | Starts netlify dev server at `localhost:8888`                    |
 | `pnpm build`     | Build your production site to `./dist/`                        |
 | `pnpm postbuild` | Pagefind script to build the static search of your blog posts  |
 | `pnpm preview`   | Preview your build locally, before deploying                   |
@@ -119,26 +100,6 @@ Replace pnpm with your choice of npm / yarn
 Adding posts(and everything else) is done through KeyStatic. You can work both locally(if you install on your computer) or through the cloud with the Keystatic CMS. 
 
 More details on configuration and setup of PIRATE through Keystatic is coming soon.
-
-
-
-
-## Pagefind search
-
-This integration brings a static search feature for searching blog posts. In its current form, pagefind only works once the site has been built. This theme adds a postbuild script that should be run after Astro has built the site. You can preview locally by running both build && postbuild.
-
-Search results only includes blog posts. If you would like to include other/all your pages, remove/re-locate the attribute `data-pagefind-body` to the article tag found in `src/layouts/BlogPost.astro`.
-
-It also allows you to filter posts by tags added in the frontmatter of blog posts. If you would rather remove this, remove the data attribute `data-pagefind-filter="tag"` from the link in `src/components/blog/Hero.astro`.
-
-If you would rather not include this integration, simply remove the component `src/components/Search.astro`, and uninstall both `@pagefind/default-ui` & `pagefind` from package.json. You will also need to remove the postbuild script from here as well.
-
-
-## Deploy
-
-[Astro docs](https://docs.astro.build/en/guides/deploy/) has a great section and breakdown of how to deploy your own Astro site on various platforms and their idiosyncrasies.
-
-By default the site will be built (see [Commands](#commands) section above) to a `/dist` directory.
 
 ## Acknowledgment
 
