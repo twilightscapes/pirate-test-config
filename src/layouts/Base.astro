@@ -39,13 +39,14 @@ const pageOgImage = ogImage || meta?.ogImage;
 			document.documentElement.dataset.theme = getInitialTheme();
 		</script>
 		
-		<ThemeProvider />
+		
 		<BaseHead 
 			title={pageTitle} 
 			description={pageDescription} 
 			articleDate={pageArticleDate} 
 			ogImage={pageOgImage} 
 		/>
+		<ThemeProvider />
 		<DynamicTheme />
 		
 	</head>
@@ -65,9 +66,9 @@ const pageOgImage = ogImage || meta?.ogImage;
 	
 
 
-	<script src="../components/scrollListener.js"></script>
+	
 
 	</body>
-	
+	<script src="../components/scrollListener.js"></script>
 </html>
 		
