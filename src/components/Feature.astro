@@ -37,7 +37,7 @@ const { content } = Astro.props;
 
 const optimizedImage = await getImage({src: content.featureImage?.src || '/social-card.webp', format: 'webp'});
 ---
-<div id="feature" style="position:relative;">
+<div id="feature" style="position:relative; max-width: 100vw; overflow:hidden;">
 
   {content.cta && (
     <div class="homeCTA"><CTAs 
