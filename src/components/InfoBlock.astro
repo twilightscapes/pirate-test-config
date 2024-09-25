@@ -23,7 +23,7 @@ const { pitch } = Astro.props;
 
 
 {pitch?.showTitle && (
-  <h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center theme-accent backdrop-blur-lg" style="margin:2vh auto;">
+  <h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center backdrop-blur-lg" style="margin:2vh auto; width:100vw;">
     {pitch?.slug || 'Default Title'}
   </h2>
 )}
