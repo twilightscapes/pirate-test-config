@@ -3,7 +3,15 @@ featureImage:
   src: /images/homepage/featureImage/src.webp
   alt: Become A PIRATE!
 youtube:
-  discriminant: false
+  discriminant: true
+  value:
+    url: https://youtu.be/CehYA3omb5o?si=WTyew61zfvdl2Ff-
+    controls: false
+    useCustomPlayer: true
+    mute: false
+    loop: false
+    start: 0
+    videoOnly: false
 cta: front link
 homeCTA: front link
 showBioOnHome: true
