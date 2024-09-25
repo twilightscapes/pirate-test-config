@@ -12,18 +12,14 @@ youtube:
     loop: false
     start: 0
     videoOnly: false
-cta: front link
 homeCTA: front link
 showBioOnHome: true
 showApp: false
 showHomeGallery: false
 showPosts: true
 showMore: true
-showFaqOnHome: true
-showTestOnHome: true
-pitch: How It Works
-pitch2: Part 2
-pitch3: part 3
+showFaqOnHome: false
+showTestOnHome: false
 featureOrder: 1
 bioOrder: 2
 appOrder: .nan
