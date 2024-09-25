@@ -31,7 +31,7 @@ const pageOgImage = ogImage || meta?.ogImage;
 ---
 <html lang={siteConfig.lang} data-theme="light">
 	<head>
-		<script is:inline>
+		<script>
 			function getInitialTheme() {
 				const savedTheme = localStorage.getItem('theme');
 				return savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -54,7 +54,7 @@ const pageOgImage = ogImage || meta?.ogImage;
 		
 		<Header transition:persist />
 
-		<main id="main" transition:animate="slide">
+		<main id="main">
 				<slot />
 		</main>
 

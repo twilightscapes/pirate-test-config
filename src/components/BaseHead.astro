@@ -23,7 +23,7 @@ const siteTitle = `${description} ${titleSeparator} ${siteConfig.title}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.com'); const socialImageURL = new URL(ogImage ? ogImage : "/socialCard.webp", Astro.url).href;
 ---
 
-<meta charset="utf-8" />
+<meta charSet="utf-8" />
 <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
 <meta content="IE=edge" http-equiv="X-UA-Compatible" />
 <title>{siteTitle}</title>
@@ -32,7 +32,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.
 <link href={siteSettings.data.logoImage} rel="icon" type="image/svg+xml" />
 <link href={pwaSettings.data.icon192} rel="apple-touch-icon" />
 <link href="/manifest.webmanifest" rel="manifest" />
-<link href={canonicalURL} rel="canonical" />
+<link href={canonicalURL.toString()} rel="canonical" />
 
 {/* Primary Meta Tags */}
 <meta content={siteTitle} name="title" />
@@ -79,6 +79,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.
 <meta content={title} property="twitter:title" />
 <meta content={description} property="twitter:description" />
 <meta content={socialImageURL} property="twitter:image" />
+<meta content={canonicalURL.toString()} property="twitter:url" />
 
 {/* Sitemap */}
 <link href="/sitemap-index.xml" rel="sitemap" />
@@ -112,9 +113,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.
   #menu,.menu,.font,.full-width-image:after,.h1,.h2,.h3,.h4,.header .menu-icon:before,.slider:before,.intro:after,.intro:before,.scrolldown,h1,h2,h3,h4,input.special{font-family: ${siteFont}, sans-serif;}
 `}>
 </style>
-
 <meta content={Astro.generator} name="generator" />
-
+<meta content={canonicalURL.toString()} property="og:url" />
 <meta name="mobile-web-app-capable" content="yes">
 
 <link rel="apple-touch-startup-image" href="/images/siteimages/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />

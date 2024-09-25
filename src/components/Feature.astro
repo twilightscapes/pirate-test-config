@@ -1,11 +1,11 @@
 ---
-import { getEntry, getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
 import YouTubeEmbed from '@/components/YouTubeEmbed.astro';
 import { getImage } from "astro:assets";
 import { Image } from "astro:assets";
 import CTAs from '@/components/CTAs.astro';
 const home = await getEntry('homepage', 'index');
-const cta = home.data.cta ? await getEntry('CTAs', home.data.cta) : null;
+// const cta = home.data.cta ? await getEntry('CTAs', home.data.cta) : null;
 
 interface Props {
   content: {
@@ -24,7 +24,7 @@ interface Props {
       src: string;
       alt: string;
     };
-    cta?: {
+    CTAs?: {
       title: string;
       description: string;
       ctaUrl: string;
@@ -37,21 +37,21 @@ const { content } = Astro.props;
 
 const optimizedImage = await getImage({src: content.featureImage?.src || '/social-card.webp', format: 'webp'});
 ---
-<div id="feature" style="position:relative; max-width: 100vw; overflow:hidden;">
+<div id="feature">
 
-  {content.cta && (
+  {content.CTAs && (
     <div class="homeCTA"><CTAs 
-      title={content.cta.title}
-      description={content.cta.description}
-      ctaUrl={content.cta.ctaUrl}
-      showFancy={content.cta.showFancy}
+      title={content.CTAs.title}
+      description={content.CTAs.description}
+      ctaUrl={content.CTAs.ctaUrl}
+      showFancy={content.CTAs.showFancy}
     /></div>
   )}
 
   
 {
   content.youtube && content.youtube.url ? (
-  <div class="featured" style="max-width: 100vw; overflow:hidden;"><YouTubeEmbed
+  <div class="featured"><YouTubeEmbed
       url={content.youtube.url}
       title={content.youtube.title}
       controls={content.youtube.controls}
@@ -66,8 +66,8 @@ const optimizedImage = await getImage({src: content.featureImage?.src || '/socia
       <Image
         src={optimizedImage.src}
         alt={content.featureImage.alt || ""}
-        width={optimizedImage.attributes.width}
-        height={optimizedImage.attributes.height}
+        width='800'
+        height='600'
         class="max-w-full h-auto border-transparent"
         loading="eager"
         fetchpriority="high"
