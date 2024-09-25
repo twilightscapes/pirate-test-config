@@ -7,7 +7,6 @@ import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import { siteConfig } from "@/site-config";
 import DynamicTheme from '@/components/DynamicTheme.astro';
-import ScrollListener from "@/components/scrollListener.js"
 // import { ViewTransitions } from 'astro:transitions';
 // <ViewTransitions />
 
@@ -48,6 +47,7 @@ const pageOgImage = ogImage || meta?.ogImage;
 			ogImage={pageOgImage} 
 		/>
 		<DynamicTheme />
+		
 	</head>
 	
 	<body>
@@ -65,8 +65,7 @@ const pageOgImage = ogImage || meta?.ogImage;
 	
 
 
-	<ScrollListener client:only />
-	
+	<script src="../components/scrollListener.js"></script>
 
 	</body>
 	

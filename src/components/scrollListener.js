@@ -1,41 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
   const horizontalScrollClassName = 'horizontal-slider';
-  const scrollMultiplier = 2; // Increase this value for faster scrolling
+  const scrollMultiplier = 2;
 
-  document.addEventListener('wheel', (event) => {
-    let target = event.target;
-    while (target && !target.classList.contains(horizontalScrollClassName)) {
-      target = target.parentElement;
-    }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target;
+        
+        const handleWheel = (event) => {
+          event.preventDefault();
+          const scrollAmount = (event.deltaX || event.deltaY) * scrollMultiplier;
+          target.scrollLeft += scrollAmount;
+        };
 
-    if (target && target.classList.contains(horizontalScrollClassName)) {
-      event.preventDefault();
+        target.addEventListener('wheel', handleWheel, { passive: false });
 
-      // Use deltaX for horizontal scroll wheels, fallback to deltaY for vertical
-      const scrollAmount = (event.deltaX || event.deltaY) * scrollMultiplier;
-      target.scrollLeft += scrollAmount;
-    }
-  }, { passive: false });
+        // Touch events for mobile
+        let touchStartX;
+        target.addEventListener('touchstart', (event) => {
+          touchStartX = event.touches[0].clientX;
+        }, { passive: true });
 
-  // Add touch event listeners for mobile devices
-  let touchStartX;
-  document.addEventListener('touchstart', (event) => {
-    touchStartX = event.touches[0].clientX;
-  }, { passive: true });
+        target.addEventListener('touchmove', (event) => {
+          if (!touchStartX) return;
+          const touchEndX = event.touches[0].clientX;
+          const diff = touchStartX - touchEndX;
+          target.scrollLeft += diff;
+          touchStartX = touchEndX;
+        }, { passive: true });
+      }
+    });
+  }, { threshold: 0.1 });
 
-  document.addEventListener('touchmove', (event) => {
-    if (!touchStartX) return;
-
-    let target = event.target;
-    while (target && !target.classList.contains(horizontalScrollClassName)) {
-      target = target.parentElement;
-    }
-
-    if (target && target.classList.contains(horizontalScrollClassName)) {
-      const touchEndX = event.touches[0].clientX;
-      const diff = touchStartX - touchEndX;
-      target.scrollLeft += diff;
-      touchStartX = touchEndX;
-    }
-  }, { passive: true });
+  document.querySelectorAll(`.${horizontalScrollClassName}`).forEach(el => {
+    observer.observe(el);
+  });
 });
