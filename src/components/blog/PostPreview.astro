@@ -179,19 +179,16 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 
 /* .slider .video-container, .slider .post-card1, .slider .custom-youtube-player{ min-width: 80vw !important;} */
 .grid-container .custom-youtube-player {margin-bottom: 0;}
-
-    .iframe-container.inactive::after {
+    .iframe-container.inactive::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(193, 191, 191, 0.2);
+        background-color: rgba(128, 128, 128, 0.5);
         z-index: 1;
-        cursor: pointer;
     }
-    
 </style>
 <script>
   document.querySelectorAll('.video-container').forEach(container => {
@@ -215,30 +212,15 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
     document.addEventListener('DOMContentLoaded', () => {
         const iframeContainers = document.querySelectorAll('.iframe-container');
         
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('inactive');
-                    entry.target.setAttribute('data-active', 'false');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        iframeContainers.forEach(container => {
-            observer.observe(container);
+        iframeContainers.forEach((container, index) => {
             container.classList.add('inactive');
-            container.setAttribute('data-active', 'false');
-
-            const activateContainer = (e: Event) => {
-                e.preventDefault();
-                if (container.classList.contains('inactive')) {
-                    container.classList.remove('inactive');
-                    container.setAttribute('data-active', 'true');
-                }
+            
+            const activateContainer = () => {
+                container.classList.remove('inactive');
             };
 
-            container.addEventListener('touchend', activateContainer, { passive: false });
             container.addEventListener('click', activateContainer);
+            container.addEventListener('touchend', activateContainer);
         });
     });
 </script>
