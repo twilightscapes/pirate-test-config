@@ -331,6 +331,8 @@ body {
 		margin: 0 auto;
 		border-radius: var(--border-radius);
 	  }
+
+	  .grid-container .custom-youtube-player {margin-bottom: 0;}
 	  
 	  .slider {
 		display: flex;
@@ -374,7 +376,7 @@ body {
 
 
 
-	
+	  .slider .custom-youtube-player{ min-width: 80vw !important;}
 
 	  .slider img{
 		object-fit:contain; 
