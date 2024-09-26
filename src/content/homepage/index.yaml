@@ -4,8 +4,6 @@ featureImage:
   alt: Become A PIRATE!
 youtube:
   discriminant: false
-cta: become a pirate
-homeCTA: front link
 showBioOnHome: true
 showApp: false
 showHomeGallery: false
