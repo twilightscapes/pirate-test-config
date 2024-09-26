@@ -217,7 +217,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
         
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (!entry.isIntersecting && entry.target.getAttribute('data-active') === 'true') {
+                if (entry.isIntersecting) {
                     entry.target.classList.add('inactive');
                     entry.target.setAttribute('data-active', 'false');
                 }
@@ -226,13 +226,19 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 
         iframeContainers.forEach(container => {
             observer.observe(container);
+            container.classList.add('inactive');
+            container.setAttribute('data-active', 'false');
 
-            container.addEventListener('click', () => {
+            const activateContainer = (e: Event) => {
+                e.preventDefault();
                 if (container.classList.contains('inactive')) {
                     container.classList.remove('inactive');
                     container.setAttribute('data-active', 'true');
                 }
-            });
+            };
+
+            container.addEventListener('touchend', activateContainer, { passive: false });
+            container.addEventListener('click', activateContainer);
         });
     });
 </script>
