@@ -40,7 +40,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 ---
 
 <div class="post-card1">
-    <a href={`/posts/${post.slug}/`} class="pirate-link" rel="prefetch">
+    <div>
     {post.data.youtube?.discriminant && post.data.youtube.value?.videoOnly && thumbnailUrl ? (
         <div class="video-container" data-video-id={videoId} data-use-custom-player={useCustomPlayer}>
             <img
@@ -67,7 +67,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
             </div>
         </div>
     ) : (
-        <>
+    <a href={`/posts/${post.slug}/`} class="pirate-link" rel="prefetch">
             {post.data.coverImage && typeof post.data.coverImage === "object" && post.data.coverImage.src ? (
                 <Image
                     src={post.data.coverImage.src}
@@ -89,7 +89,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
                     height={defaultImageHeight}
                 />
             )}
-        </>
+        </a>
     )}
     
     {typeof showTitles !== 'undefined' && showTitles && (
@@ -118,7 +118,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
             )}
         </div>
     )}
-    </a>
+    </div>
 </div>
 
 <style>
