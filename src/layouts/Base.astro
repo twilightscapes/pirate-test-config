@@ -18,19 +18,20 @@ interface Props {
   meta?: {
     title?: string;
     description?: string;
+    articleDate?: string;
+    ogImage?: string;
   };
   title?: string;
   description?: string;
   articleDate?: string;
   ogImage?: string;
 }
-
 import { getEntry } from 'astro:content';
 const siteSettings = await getEntry('siteSettings', 'main');
 const { showFooter } = siteSettings.data;
 
 
-const { meta, title, description, articleDate, ogImage, children } = Astro.props;
+const { meta, title, description, articleDate, ogImage} = Astro.props;
 
 const pageTitle = title || meta?.title;
 const pageDescription = description || meta?.description;
@@ -62,7 +63,7 @@ const pageOgImage = ogImage || meta?.ogImage;
 		
 		<Header transition:persist />
 				<main id="main">
-					<slot>{children}</slot>
+					<slot />
 				</main>
 		{ showFooter && (
 		<Footer />
