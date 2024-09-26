@@ -3,7 +3,6 @@ import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-// import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import fs from "fs";
 import rehypeExternalLinks from "rehype-external-links";
@@ -46,7 +45,7 @@ export default defineConfig({
   },
   integrations: [mdx(), react(), icon(), tailwind({
     applyBaseStyles: false
-  }), sitemap(), keystatic(), 
+  }), sitemap(), keystatic(),
   AstroPWA({
     registerType: 'autoUpdate',
     includeAssets: ['robots.txt', 'manifest.webmanifest'],

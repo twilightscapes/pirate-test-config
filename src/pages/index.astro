@@ -242,7 +242,7 @@ flex-direction: column;
 
 </style>
 <PageLayout meta={{ title: homeContent.data.title, description: pwaSettings.data.description }}>
-	<div class="scroll-snap-container flex flex-col home" style="overflow-x: hidden;">
+	<div class="scroll-snap-container flex flex-col home">
 		{sortedSections.map(section => (
 			<section>
 				{(() => {
@@ -263,7 +263,7 @@ flex-direction: column;
 						case 'app':
 							return <App />;
 						case 'gallery':
-							return (<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center theme-accent">{homeContent.data.photosectiontitle}</h2><PhotoSection />);
+							return (<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center theme-accent backdrop-blur-lg">{homeContent.data.photosectiontitle}</h2><PhotoSection />);
 	case 'infoblock':
 		return selectedPitch && <InfoBlock pitch={{...selectedPitch, slug: selectedPitch.slug}} />;
 		
@@ -296,13 +296,13 @@ flex-direction: column;
 						case 'faq':
 							return (
 								<>
-									<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center theme-accent">{homeContent.data.faqsectiontitle}</h2>
+									<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center theme-accent backdrop-blur-lg">{homeContent.data.faqsectiontitle}</h2>
 									<Faqs />
 								</>
 							);
 						case 'testimonials':
 							return <div class="testi" style="padding:30px;">
-								<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center theme-accent">{homeContent.data.testimonialtitle}</h2><Testimonials /></div>;
+								<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center theme-accent backdrop-blur-lg">{homeContent.data.testimonialtitle}</h2><Testimonials /></div>;
 						default:
 							return null;
 					}

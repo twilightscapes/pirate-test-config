@@ -6,6 +6,7 @@ youtube:
   discriminant: true
   value:
     url: https://youtu.be/CehYA3omb5o?si=WTyew61zfvdl2Ff-
+    title: Woot
     controls: false
     useCustomPlayer: true
     mute: false
