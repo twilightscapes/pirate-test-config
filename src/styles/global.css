@@ -375,8 +375,10 @@ body {
 	  }
 
 
+	  .grid-container .topblock, .grid-container .botblock{height:0 !important;}
+	  .grid-container .video-title{font-size: 80%;}
 
-	  .slider .custom-youtube-player{ min-width: 80vw !important;}
+	  .slider .video-container, .slider .post-card1, .slider .custom-youtube-player{ min-width: 80vw !important;}
 
 	  .slider img{
 		object-fit:contain; 
