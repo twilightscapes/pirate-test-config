@@ -74,6 +74,11 @@ const pageOgImage = ogImage || meta?.ogImage;
 	
 
 	</body>
-	<script src="../components/scrollListener.js"></script>
+	<script>
+		import { initializeScrollListener } from '../components/scrollListener.js';
+
+		document.addEventListener('DOMContentLoaded', initializeScrollListener);
+		document.addEventListener('astro:page-load', initializeScrollListener);
+	</script>
 </html>
 		

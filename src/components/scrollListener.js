@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+export function initializeScrollListener() {
   const horizontalScrollClassName = 'horizontal-slider';
   const scrollMultiplier = 2;
 
@@ -35,4 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll(`.${horizontalScrollClassName}`).forEach(el => {
     observer.observe(el);
   });
-});
+}
+
+// Call the function immediately for the initial page load
+initializeScrollListener();
