@@ -230,12 +230,12 @@ export default config({
       },
     }),
     pwaSettings: singleton({
-      label: 'PWA Settings',
+      label: 'PWA/SEO Settings',
       path: 'src/content/pwaSettings/',
       schema: {
         showRobots: fields.checkbox({
           label: 'SEO VISIBILITY',
-          description: 'Set robots meta tag to index site and follow links - checking this box will make your site appear in search engines',
+          description: 'Set the robots meta tag to index site and follow links - checking this box will make your site appear in search engines',
           defaultValue: false,
         }),
         siteUrl: fields.text({ label: 'Site Url', description: 'The address to your website' }),
@@ -250,7 +250,7 @@ export default config({
           directory: 'public/images/pwa',
           publicPath: '/images/pwa',
         }),
-        description: fields.text({ label: 'Description', description: 'The description, is used on Android in the PWA install dialogue window', }),
+        description: fields.text({ label: 'SEO/App Description', description: 'The description is used as the title of the homepage for SEO, and on Android in the PWA install dialogue window', }),
 
         divider2: fields.empty(),
 
@@ -643,7 +643,20 @@ export default config({
         }),
       },
     }),    
+
+
+    pirateSocial: singleton({
+      label: 'Profile',
+      path: 'src/content/social/',
+      schema: {
+        profile: fields.text({ label: 'Profile' }),
+      },
+    }),
+
   },
+
+
+
 
 
 
@@ -670,7 +683,6 @@ ui: {
       'testimonials',
       'pitches',
       'CTAs',
-      
     ],
     'Settings': [
       'siteSettings',
@@ -680,6 +692,9 @@ ui: {
       'photoSettings',
       'styleAppearance',
       'language',
+    ],
+    'Pirate Social': [
+      'pirateSocial',
     ],
   },
 },});

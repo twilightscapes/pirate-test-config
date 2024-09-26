@@ -208,6 +208,14 @@ const language = defineCollection({
   }),
 });
 
+const social = defineCollection({
+  type: 'data',
+  schema: z.object({
+    profile: z.string().optional(),
+  }),
+});
+
+
 const post = defineCollection({
   type: 'content',
   schema: postSchema
