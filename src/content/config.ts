@@ -28,6 +28,7 @@ const postSchema = z.object({
     .transform((str) => (str ? new Date(str) : undefined)),
   ogImage: z.string().optional(),
   videoOnly: z.boolean().optional(),
+  externalUrl: z.string().optional(),
   youtube: z.object({
     discriminant: z.boolean(),
     value: z.object({

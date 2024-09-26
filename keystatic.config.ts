@@ -42,6 +42,9 @@ export default config({
             label: 'Alt Text',
           }),
         }),
+
+        externalUrl: fields.text({ label: 'External Url', description: 'A url of an external site will be loaded into an iframe', defaultValue: 'http://', validation: { length: { min: 7 } } }),
+
         divider2: fields.empty(),
         youtube: fields.conditional(
           fields.checkbox({ label: 'Include YouTube Video' }),

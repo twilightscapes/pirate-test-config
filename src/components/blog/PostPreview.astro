@@ -38,10 +38,20 @@ const videoId = post.data.youtube?.value?.url ? getYouTubeId(post.data.youtube.v
 const thumbnailUrl = videoId ? getYouTubeThumbnail(videoId) : null;
 const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 ---
-
 <div class="post-card1">
     <div>
-    {post.data.youtube?.discriminant && post.data.youtube.value?.videoOnly && thumbnailUrl ? (
+    {post.data.externalUrl ? (
+        <div class="iframe-container">
+            <iframe
+                src={post.data.externalUrl}
+                title={post.data.title}
+                width="100%"
+                height="400"
+                frameborder="0"
+                allowfullscreen
+            ></iframe>
+        </div>
+    ) : post.data.youtube?.discriminant && post.data.youtube.value?.videoOnly && thumbnailUrl ? (
         <div class="video-container" data-video-id={videoId} data-use-custom-player={useCustomPlayer}>
             <img
                 src={thumbnailUrl}
@@ -122,6 +132,23 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 </div>
 
 <style>
+    .iframe-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+    }
+
+    .iframe-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<style>
     .video-container {
         position: relative;
         /* width: 100%;
@@ -151,7 +178,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 
 
 
-.slider .video-container, .slider .post-card1, .slider .custom-youtube-player{ min-width: 80vw !important;}
+/* .slider .video-container, .slider .post-card1, .slider .custom-youtube-player{ min-width: 80vw !important;} */
 .grid-container .custom-youtube-player {margin-bottom: 0;}
     
 </style>
