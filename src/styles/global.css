@@ -386,7 +386,11 @@ body {
 
 	  .slider .iframe-container{ min-width: 80vw !important;}
 
-
+	  .grid-container .iframe-container {
+        position: relative;
+        min-width: 25vw !important;
+		height:24vh; 
+    }
 
 
 
