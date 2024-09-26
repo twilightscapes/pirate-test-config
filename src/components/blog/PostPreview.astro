@@ -49,6 +49,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
                 height="400"
                 frameborder="0"
                 allowfullscreen
+                loading="lazy"
             ></iframe>
         </div>
     ) : post.data.youtube?.discriminant && post.data.youtube.value?.videoOnly && thumbnailUrl ? (
