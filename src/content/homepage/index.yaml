@@ -3,16 +3,7 @@ featureImage:
   src: /images/homepage/featureImage/src.webp
   alt: Become A PIRATE!
 youtube:
-  discriminant: true
-  value:
-    url: https://youtu.be/CehYA3omb5o?si=WTyew61zfvdl2Ff-
-    title: Woot
-    controls: false
-    useCustomPlayer: true
-    mute: true
-    loop: false
-    start: 0
-    videoOnly: false
+  discriminant: false
 cta: become a pirate
 homeCTA: front link
 showBioOnHome: true
