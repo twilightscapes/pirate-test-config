@@ -90,6 +90,8 @@ function Switch({ defaultView }) {
       if (typeof window !== 'undefined') {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
         window.dispatchEvent(new StorageEvent("storage", { key: STORAGE_KEY }));
+        // Dispatch a custom event
+        window.dispatchEvent(new CustomEvent('viewModeChanged'));
       }
       return newValue;
     });

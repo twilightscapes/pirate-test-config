@@ -68,17 +68,55 @@ const pageOgImage = ogImage || meta?.ogImage;
 		<Footer />
 		)}
 	
+						</body>
+						<script>
+							function initializeScrollListener() {
+								const horizontalScrollClassName = 'horizontal-slider';
+								const scrollMultiplier = 2;
 
+								function applyScrollBehavior(element) {
+									const handleWheel = (event) => {
+										if (element.scrollWidth > element.clientWidth) {
+											event.preventDefault();
+											const scrollAmount = (event.deltaX || event.deltaY) * scrollMultiplier;
+											element.scrollLeft += scrollAmount;
+										}
+									};
 
-	
+									element.addEventListener('wheel', handleWheel, { passive: false });
 
-	</body>
-	<script>
-		import { initializeScrollListener } from '../components/scrollListener.js';
+									let touchStartX;
+									element.addEventListener('touchstart', (event) => {
+										touchStartX = event.touches[0].clientX;
+									}, { passive: true });
 
-		document.addEventListener('DOMContentLoaded', initializeScrollListener);
-		document.addEventListener('astro:page-load', initializeScrollListener);
-	</script>
+									element.addEventListener('touchmove', (event) => {
+										if (!touchStartX) return;
+										const touchEndX = event.touches[0].clientX;
+										const diff = touchStartX - touchEndX;
+										element.scrollLeft += diff;
+										touchStartX = touchEndX;
+									}, { passive: true });
+								}
+
+								function checkAndApplyScroll() {
+									document.querySelectorAll(`.${horizontalScrollClassName}`).forEach(applyScrollBehavior);
+								}
+
+								// Initial application
+								checkAndApplyScroll();
+
+								// Set up a MutationObserver to watch for changes in the DOM
+								const observer = new MutationObserver(checkAndApplyScroll);
+								observer.observe(document.body, { childList: true, subtree: true });
+
+								// Also check when the custom event is fired
+								window.addEventListener('viewModeChanged', checkAndApplyScroll);
+							}
+
+							document.addEventListener('DOMContentLoaded', initializeScrollListener);
+							document.addEventListener('astro:page-load', initializeScrollListener);
+						</script>
 	<script is:inline define:vars={{ enableImageBlur }}>
 		function initializeImageLoader() {
 			const blurEnabled = typeof enableImageBlur !== 'undefined' ? enableImageBlur : true;
@@ -102,7 +140,54 @@ const pageOgImage = ogImage || meta?.ogImage;
 			});
 		}
 
-		document.addEventListener('DOMContentLoaded', initializeImageLoader);
-		document.addEventListener('astro:page-load', initializeImageLoader);
+		function initializeScrollListener() {
+			const horizontalScrollClassName = 'horizontal-slider';
+			const scrollMultiplier = 2;
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const target = entry.target;
+						
+						const handleWheel = (event) => {
+							if (target.scrollWidth > target.clientWidth) {
+								event.preventDefault();
+								const scrollAmount = (event.deltaX || event.deltaY) * scrollMultiplier;
+								target.scrollLeft += scrollAmount;
+							}
+						};
+
+						target.addEventListener('wheel', handleWheel, { passive: false });
+
+						let touchStartX;
+						target.addEventListener('touchstart', (event) => {
+							touchStartX = event.touches[0].clientX;
+						}, { passive: true });
+
+						target.addEventListener('touchmove', (event) => {
+							if (!touchStartX) return;
+							const touchEndX = event.touches[0].clientX;
+							const diff = touchStartX - touchEndX;
+							target.scrollLeft += diff;
+							touchStartX = touchEndX;
+						}, { passive: true });
+					}
+				});
+			}, { threshold: 0.1 });
+
+			document.querySelectorAll(`.${horizontalScrollClassName}`).forEach(el => {
+				observer.observe(el);
+			});
+		}
+
+		document.addEventListener('DOMContentLoaded', () => {
+			initializeImageLoader();
+			initializeScrollListener();
+		});
+		document.addEventListener('astro:page-load', () => {
+			initializeImageLoader();
+			initializeScrollListener();
+		});
+		window.addEventListener('viewModeChanged', initializeScrollListener);
 	</script>
 </html>		
