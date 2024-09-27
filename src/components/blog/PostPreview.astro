@@ -150,7 +150,10 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
     }
 
     @media(hover:none) {
-        .iframe-container iframe {z-index: 1;}
+        .iframe-container iframe {z-index: 1; min-width: 100%;}
+    }
+    @media(max-width:48rem) {
+        
     }
     
     .video-container {

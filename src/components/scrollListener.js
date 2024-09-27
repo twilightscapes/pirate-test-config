@@ -8,9 +8,12 @@ export function initializeScrollListener() {
         const target = entry.target;
         
         const handleWheel = (event) => {
-          event.preventDefault();
-          const scrollAmount = (event.deltaX || event.deltaY) * scrollMultiplier;
-          target.scrollLeft += scrollAmount;
+          // Check if the element is actually in a horizontal layout
+          if (target.scrollWidth > target.clientWidth) {
+            event.preventDefault();
+            const scrollAmount = (event.deltaX || event.deltaY) * scrollMultiplier;
+            target.scrollLeft += scrollAmount;
+          }
         };
 
         target.addEventListener('wheel', handleWheel, { passive: false });
@@ -38,4 +41,4 @@ export function initializeScrollListener() {
 }
 
 // Call the function immediately for the initial page load
-initializeScrollListener();
+initializeScrollListener();initializeScrollListener();
