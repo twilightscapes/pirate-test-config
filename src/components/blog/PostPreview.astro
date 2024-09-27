@@ -156,21 +156,23 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
     }
     .play-button {
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);
         background: rgba(0, 0, 0, 0.7);
         color: white;
-        border: none;
+        border: 1px solid white;
         border-radius: 50%;
-        width: 60px;
-        height: 60px;
+        width: 40px;
+        height: 40px;
         font-size: 24px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         z-index: 10;
+        filter: drop-shadow(0px 0px 1px #f6f3f3) !important;
+        box-shadow: 0 0 0 3px #111;
     }
 
 /* .grid-container .video-container{max-height: 200px !important;} */
@@ -180,13 +182,13 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 /* .slider .video-container, .slider .post-card1, .slider .custom-youtube-player{ min-width: 80vw !important;} */
 .grid-container .custom-youtube-player {margin-bottom: 0;}
     .iframe-container.inactive::before {
-        content: 'View Site';
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(128, 128, 128, 0.5);
+        /* background-color: rgba(128, 128, 128, 0.5); */
         z-index: 1;
         display:grid;
         place-content: center;
@@ -214,9 +216,11 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const iframeContainers = document.querySelectorAll('.iframe-container');
-        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         
-        if (!isTouch) {
+        // Detect desktop environment
+        const isDesktop = window.matchMedia('(pointer: fine)').matches;
+
+        if (isDesktop) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (!entry.isIntersecting) {
@@ -239,7 +243,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
                 container.addEventListener('click', toggleContainer);
             });
         } else {
-            // For touch devices, remove all inactive classes and event listeners
+            // For non-desktop devices
             iframeContainers.forEach((container) => {
                 container.classList.remove('inactive');
                 container.removeAttribute('data-active');
