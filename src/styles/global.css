@@ -110,7 +110,7 @@ body {
 	  img.loaded {
 		filter: blur(0px);
 	  } */
-	  .yarl__root img{filter:none;}
+	  /* .yarl__root img{filter:none;} */
 	 
 	  
 	  @property --rotate{

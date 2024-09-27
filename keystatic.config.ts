@@ -221,6 +221,10 @@ export default config({
         }),
         showTitles: fields.checkbox({ label: 'Show Post Titles', description: 'Hide/Show the post titles', defaultValue: false }),
         showDates: fields.checkbox({ label: 'Show Dates', description: 'Hide/Show the post dates', defaultValue: true }),
+        enableImageBlur: fields.checkbox({ 
+          label: 'Enable Image Blur Effect', 
+          defaultValue: true 
+        }),
         MAX_POSTS: fields.number({ label: 'Number of posts to display on home page', defaultValue: 3 }),
         MAX_POSTS_PER_PAGE: fields.number({ label: 'Number of posts to display on other pages', defaultValue: 3 }),
 

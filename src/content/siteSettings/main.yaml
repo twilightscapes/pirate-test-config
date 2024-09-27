@@ -9,6 +9,7 @@ showFooter: true
 defaultView: swipe
 showTitles: true
 showDates: true
+enableImageBlur: true
 MAX_POSTS: 6
 MAX_POSTS_PER_PAGE: 20
 showShare: true
