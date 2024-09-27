@@ -227,28 +227,7 @@ body {
 		text-align: right;
 	  }
 	  
-	  @media (max-width: 48rem) {
-		.mobilehide { display: none; }
-		.flexbutt { flex-direction: column; }
-		.flexcheek { position: inherit; top: inherit; width: 100%; }
-		.quotecard { flex-direction: column; }
-	  }
-	  
-	  @media (min-width: 320px) and (max-width: 759.5px) {
-		.grid-container { column-count: 2; }
-	  }
-	  
-	  @media (min-width: 760px) and (max-width: 979.5px) {
-		.grid-container { column-count: 3; }
-	  }
-	  
-	  @media (min-width: 980px) and (max-width: 1023.5px) {
-		.grid-container { column-count: 4; }
-	  }
-	  
-	  @media (min-width: 1024px) {
-		.grid-container { column-count: 5; }
-	  }
+
 	  
 	  
 
@@ -382,17 +361,9 @@ body {
 
 
 
+	  .slider .video-container, .slider .post-card1, .slider .custom-youtube-player{ min-width: 80vw ;}
 
-
-	  .slider .video-container, .slider .post-card1, .slider .custom-youtube-player{ min-width: 80vw !important;}
-
-	  .slider .iframe-container{ min-width: 80vw !important;}
-
-	  .grid-container .iframe-container, .grid-container .iframe-container iframe {
-        position: relative;
-		min-width: 24vw !important;
-		min-height: 30vh;
-    }
+	  .slider .iframe-container{ min-width: 80vw;}
 
 
 
@@ -406,10 +377,39 @@ body {
 		max-height:68vh; 
 	 }
 	 .testi .slider img{
-		object-fit:contain !important; 
-		width: 100% !important; 
+		object-fit:contain ; 
+		width: 100% ; 
 		border-radius: var(--border-radius);
-		min-width: 20vw !important;
+		min-width: 20vw ;
+	 }
+
+
+
+	 .grid-container .iframe-container, .grid-container .iframe-container iframe {
+        position: relative;
+		min-width: 30vw !important;
+		width:100%;
+		min-height: 30vh;
+    }
+
+	.grid-container .video-container iframe  {
+		min-height: 30vh;
+	}
+
+
+	 @media (min-width: 1500px) {
+
+	 .grid-container .iframe-container, .grid-container .iframe-container iframe {
+        position: relative;
+		min-width: 10vw !important;
+		width:100%;
+		min-height: 30vh;
+    }
+
+	.grid-container .video-container iframe  {
+		min-height: 30vh;
+	}
+
 	 }
 
 
@@ -426,6 +426,30 @@ body {
 		}
 	
 
+	  }
+
+
+	  @media (max-width: 48rem) {
+		.mobilehide { display: none; }
+		.flexbutt { flex-direction: column; }
+		.flexcheek { position: inherit; top: inherit; width: 100%; }
+		.quotecard { flex-direction: column; }
+	  }
+	  
+	  @media (min-width: 320px) and (max-width: 759.5px) {
+		.grid-container { column-count: 2; }
+	  }
+	  
+	  @media (min-width: 760px) and (max-width: 979.5px) {
+		.grid-container { column-count: 3; }
+	  }
+	  
+	  @media (min-width: 980px) and (max-width: 1023.5px) {
+		.grid-container { column-count: 4; }
+	  }
+	  
+	  @media (min-width: 1024px) {
+		.grid-container { column-count: 5; }
 	  }
 
 

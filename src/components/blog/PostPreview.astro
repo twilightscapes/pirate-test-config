@@ -118,7 +118,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
             }}
         >
             {showTitles && (
-            <h2 class="title" style={{ color: "", fontSize: "" }}>
+            <h2 class="title" style={{ color: "", fontSize: "clamp(1.3rem, 2.4vw, 1rem)" }}>
                 {post.data.title}
             </h2>
             )}
@@ -153,7 +153,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
         .iframe-container iframe {z-index: 1; min-width: 100%;}
     }
     @media(max-width:48rem) {
-        
+
     }
     
     .video-container {
