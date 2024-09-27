@@ -180,7 +180,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 /* .slider .video-container, .slider .post-card1, .slider .custom-youtube-player{ min-width: 80vw !important;} */
 .grid-container .custom-youtube-player {margin-bottom: 0;}
     .iframe-container.inactive::before {
-        content: '';
+        content: 'View Site';
         position: absolute;
         top: 0;
         left: 0;
@@ -188,6 +188,9 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
         bottom: 0;
         background-color: rgba(128, 128, 128, 0.5);
         z-index: 1;
+        display:grid;
+        place-content: center;
+        color:white;
     }
 </style>
 <script>
@@ -211,39 +214,36 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const iframeContainers = document.querySelectorAll('.iframe-container');
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    if (isMobile) {
-                        entry.target.classList.remove('inactive');
-                        entry.target.setAttribute('data-active', 'true');
+        if (!isTouch) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        entry.target.classList.add('inactive');
+                        entry.target.setAttribute('data-active', 'false');
                     }
-                } else {
-                    entry.target.classList.add('inactive');
-                    entry.target.setAttribute('data-active', 'false');
-                }
-            });
-        }, { threshold: 0.1 });
+                });
+            }, { threshold: 0.1 });
 
-        iframeContainers.forEach((container) => {
-            if (!isMobile) {
+            iframeContainers.forEach((container) => {
                 container.classList.add('inactive');
                 container.setAttribute('data-active', 'false');
-            }
-            observer.observe(container);
-            
-            const toggleContainer = (e) => {
-                e.preventDefault();
-                const isActive = container.getAttribute('data-active') === 'true';
-                if (!isActive) {
-                    container.classList.remove('inactive');
-                    container.setAttribute('data-active', 'true');
-                }
-            };
-            container.addEventListener('click', toggleContainer);
-            container.addEventListener('touchend', toggleContainer);
-        });
+                observer.observe(container);
+                
+                const toggleContainer = (e: Event) => {
+                    e.preventDefault();
+                    container.classList.toggle('inactive');
+                    container.setAttribute('data-active', container.classList.contains('inactive') ? 'false' : 'true');
+                };
+                container.addEventListener('click', toggleContainer);
+            });
+        } else {
+            // For touch devices, remove all inactive classes and event listeners
+            iframeContainers.forEach((container) => {
+                container.classList.remove('inactive');
+                container.removeAttribute('data-active');
+            });
+        }
     });
 </script>
