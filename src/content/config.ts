@@ -123,6 +123,8 @@ const home = defineCollection({
     showFAQ: z.boolean().optional(),
     showFooter: z.boolean().optional(),
     showTitles: z.boolean().optional(),
+    showTags: z.boolean().optional(),
+    enableImageBlur: z.boolean().optional(),
     showDates: z.boolean().optional(),
     showHomeGallery: z.boolean().optional(),
     MAX_POSTS: z.number().optional(),

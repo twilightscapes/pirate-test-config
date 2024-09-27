@@ -225,6 +225,7 @@ export default config({
           label: 'Enable Image Blur Effect', 
           defaultValue: true 
         }),
+        showTags: fields.checkbox({ label: 'Show Post Tags', description: 'Hide/Show the post tags', defaultValue: false }),
         MAX_POSTS: fields.number({ label: 'Number of posts to display on home page', defaultValue: 3 }),
         MAX_POSTS_PER_PAGE: fields.number({ label: 'Number of posts to display on other pages', defaultValue: 3 }),
 
