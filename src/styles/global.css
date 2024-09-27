@@ -421,11 +421,11 @@ body {
 
 		  .grid-container .iframe-container, .grid-container .iframe-container iframe {
 			position: relative;
-			min-width: 98vw !important;
+			min-width: 96vw !important;
 			min-height: 40vh !important;
 		}
-	
-
+		
+		.grid-container .video-container, .grid-container .video-container .youtube-embed iframe,  .slider .video-container .youtube-embed iframe {min-height: 30vh !important; max-height: 30vh !important;}
 	  }
 
 
