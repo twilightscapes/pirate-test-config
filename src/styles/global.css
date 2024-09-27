@@ -388,8 +388,7 @@ body {
 
 	  .grid-container .iframe-container {
         position: relative;
-        min-width: 25vw !important;
-		height:24vh; 
+        min-width: 100%!important;
     }
 
 
