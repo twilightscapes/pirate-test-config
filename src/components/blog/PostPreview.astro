@@ -217,37 +217,23 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
     document.addEventListener('DOMContentLoaded', () => {
         const iframeContainers = document.querySelectorAll('.iframe-container');
         
-        // Detect desktop environment
-        const isDesktop = window.matchMedia('(pointer: fine)').matches;
-
-        if (isDesktop) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        entry.target.classList.add('inactive');
-                        entry.target.setAttribute('data-active', 'false');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            iframeContainers.forEach((container) => {
-                container.classList.add('inactive');
-                container.setAttribute('data-active', 'false');
-                observer.observe(container);
-                
-                const toggleContainer = (e: Event) => {
-                    e.preventDefault();
-                    container.classList.toggle('inactive');
-                    container.setAttribute('data-active', container.classList.contains('inactive') ? 'false' : 'true');
-                };
-                container.addEventListener('click', toggleContainer);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const container = entry.target;
+                    container.classList.add('inactive');
+                    container.setAttribute('data-active', 'false');
+                    
+                    setTimeout(() => {
+                        container.classList.remove('inactive');
+                        container.setAttribute('data-active', 'true');
+                    }, 3000); // 3 seconds timeout
+                }
             });
-        } else {
-            // For non-desktop devices
-            iframeContainers.forEach((container) => {
-                container.classList.remove('inactive');
-                container.removeAttribute('data-active');
-            });
-        }
+        }, { threshold: 0.1 });
+
+        iframeContainers.forEach((container) => {
+            observer.observe(container);
+        });
     });
 </script>
