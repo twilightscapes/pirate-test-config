@@ -386,7 +386,7 @@ body {
 
 	  .slider .iframe-container{ min-width: 80vw !important;}
 
-	  .grid-container .iframe-container {
+	  .grid-container .iframe-container, .grid-container .iframe-container iframe {
         position: relative;
         min-width: 100%!important;
     }
