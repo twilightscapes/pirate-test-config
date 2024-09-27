@@ -67,56 +67,59 @@ const pageOgImage = ogImage || meta?.ogImage;
 		{ showFooter && (
 		<Footer />
 		)}
-	
-						</body>
-						<script>
-							function initializeScrollListener() {
-								const horizontalScrollClassName = 'horizontal-slider';
-								const scrollMultiplier = 2;
+								</body>
+								<script>
+									function initializeScrollListener() {
+										const horizontalScrollClassName = 'horizontal-slider';
+										const scrollMultiplier = 2;
 
-								function applyScrollBehavior(element) {
-									const handleWheel = (event) => {
-										if (element.scrollWidth > element.clientWidth) {
-											event.preventDefault();
-											const scrollAmount = (event.deltaX || event.deltaY) * scrollMultiplier;
-											element.scrollLeft += scrollAmount;
+										function applyScrollBehavior(element: HTMLElement) {
+											const handleWheel = (event: WheelEvent) => {
+												if (element.scrollWidth > element.clientWidth) {
+													event.preventDefault();
+													const scrollAmount = (event.deltaX || event.deltaY) * scrollMultiplier;
+													element.scrollLeft += scrollAmount;
+												}
+											};
+
+											element.addEventListener('wheel', handleWheel, { passive: false });
+
+											let touchStartX: number | null = null;
+											element.addEventListener('touchstart', (event: TouchEvent) => {
+												touchStartX = event.touches[0].clientX;
+											}, { passive: true });
+
+											element.addEventListener('touchmove', (event: TouchEvent) => {
+												if (touchStartX === null) return;
+												const touchEndX = event.touches[0].clientX;
+												const diff = touchStartX - touchEndX;
+												element.scrollLeft += diff;
+												touchStartX = touchEndX;
+											}, { passive: true });
 										}
-									};
 
-									element.addEventListener('wheel', handleWheel, { passive: false });
+										function checkAndApplyScroll() {
+											document.querySelectorAll(`.${horizontalScrollClassName}`).forEach((el) => {
+												if (el instanceof HTMLElement) {
+													applyScrollBehavior(el);
+												}
+											});
+										}
 
-									let touchStartX;
-									element.addEventListener('touchstart', (event) => {
-										touchStartX = event.touches[0].clientX;
-									}, { passive: true });
+										// Initial application
+										checkAndApplyScroll();
 
-									element.addEventListener('touchmove', (event) => {
-										if (!touchStartX) return;
-										const touchEndX = event.touches[0].clientX;
-										const diff = touchStartX - touchEndX;
-										element.scrollLeft += diff;
-										touchStartX = touchEndX;
-									}, { passive: true });
-								}
+										// Set up a MutationObserver to watch for changes in the DOM
+										const observer = new MutationObserver(checkAndApplyScroll);
+										observer.observe(document.body, { childList: true, subtree: true });
 
-								function checkAndApplyScroll() {
-									document.querySelectorAll(`.${horizontalScrollClassName}`).forEach(applyScrollBehavior);
-								}
+										// Also check when the custom event is fired
+										window.addEventListener('viewModeChanged', checkAndApplyScroll);
+									}
 
-								// Initial application
-								checkAndApplyScroll();
-
-								// Set up a MutationObserver to watch for changes in the DOM
-								const observer = new MutationObserver(checkAndApplyScroll);
-								observer.observe(document.body, { childList: true, subtree: true });
-
-								// Also check when the custom event is fired
-								window.addEventListener('viewModeChanged', checkAndApplyScroll);
-							}
-
-							document.addEventListener('DOMContentLoaded', initializeScrollListener);
-							document.addEventListener('astro:page-load', initializeScrollListener);
-						</script>
+									document.addEventListener('DOMContentLoaded', initializeScrollListener);
+									document.addEventListener('astro:page-load', initializeScrollListener);
+								</script>
 	<script is:inline define:vars={{ enableImageBlur }}>
 		function initializeImageLoader() {
 			const blurEnabled = typeof enableImageBlur !== 'undefined' ? enableImageBlur : true;
