@@ -212,15 +212,31 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
     document.addEventListener('DOMContentLoaded', () => {
         const iframeContainers = document.querySelectorAll('.iframe-container');
         
-        iframeContainers.forEach((container, index) => {
-            container.classList.add('inactive');
-            
-            const activateContainer = () => {
-                container.classList.remove('inactive');
-            };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('inactive');
+                    entry.target.setAttribute('data-active', 'true');
+                } else {
+                    entry.target.classList.add('inactive');
+                    entry.target.setAttribute('data-active', 'false');
+                }
+            });
+        }, { threshold: 0.1 });
 
-            container.addEventListener('click', activateContainer);
-            container.addEventListener('touchend', activateContainer);
+        iframeContainers.forEach((container) => {
+            observer.observe(container);
+            
+            const toggleContainer = (e) => {
+                e.preventDefault();
+                const isActive = container.getAttribute('data-active') === 'true';
+                if (!isActive) {
+                    container.classList.remove('inactive');
+                    container.setAttribute('data-active', 'true');
+                }
+            };
+            container.addEventListener('click', toggleContainer);
+            container.addEventListener('touchend', toggleContainer);
         });
     });
 </script>
