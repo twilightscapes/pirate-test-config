@@ -106,12 +106,12 @@ body {
 		filter: blur(20px);
 		transition: filter 0.5s ease-in-out;
 	  }
-	  
+	  .yarl__root img{filter:none;}
 	  img.loaded {
 		filter: blur(0px);
 	  }
 	  
-	  
+	 
 	  
 	  @property --rotate{
 		syntax: "<angle>";

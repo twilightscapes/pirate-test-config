@@ -79,24 +79,26 @@ const pageOgImage = ogImage || meta?.ogImage;
 
 		document.addEventListener('DOMContentLoaded', initializeScrollListener);
 		document.addEventListener('astro:page-load', initializeScrollListener);
-
-
-		document.addEventListener('DOMContentLoaded', (event) => {
-	const images = document.querySelectorAll('img');
-	images.forEach(img => {
-	  if (img.complete) {
-		img.classList.add('loaded');
-	  } else {
-		img.addEventListener('load', function() {
-		  this.classList.add('loaded');
-		});
-	  }
-	});
-  });
-  
 	</script>
 
-
+<script is:inline>
+	function initializeImageLoader() {
+	  const images = document.querySelectorAll('img');
+	  images.forEach(img => {
+		if (img.complete) {
+		  img.classList.add('loaded');
+		} else {
+		  img.addEventListener('load', function() {
+			this.classList.add('loaded');
+		  });
+		}
+	  });
+	}
+  
+	document.addEventListener('DOMContentLoaded', initializeImageLoader);
+	document.addEventListener('astro:page-load', initializeImageLoader);
+  </script>
+  
   
 </html>
 		
