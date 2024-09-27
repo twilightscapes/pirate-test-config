@@ -216,24 +216,21 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const iframeContainers = document.querySelectorAll('.iframe-container');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const container = entry.target;
-                    container.classList.add('inactive');
-                    container.setAttribute('data-active', 'false');
-                    
-                    setTimeout(() => {
-                        container.classList.remove('inactive');
-                        container.setAttribute('data-active', 'true');
-                    }, 3000); // 3 seconds timeout
-                }
-            });
-        }, { threshold: 0.1 });
+        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        iframeContainers.forEach((container) => {
-            observer.observe(container);
-        });
+        if (!isTouch) {
+            // Desktop behavior
+            iframeContainers.forEach((container) => {
+                container.classList.add('inactive');
+                container.addEventListener('click', () => {
+                    container.classList.remove('inactive');
+                });
+            });
+        } else {
+            // Touch device behavior
+            iframeContainers.forEach((container) => {
+                container.classList.remove('inactive');
+            });
+        }
     });
 </script>
