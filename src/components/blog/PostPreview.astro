@@ -211,12 +211,15 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const iframeContainers = document.querySelectorAll('.iframe-container');
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.remove('inactive');
-                    entry.target.setAttribute('data-active', 'true');
+                    if (isMobile) {
+                        entry.target.classList.remove('inactive');
+                        entry.target.setAttribute('data-active', 'true');
+                    }
                 } else {
                     entry.target.classList.add('inactive');
                     entry.target.setAttribute('data-active', 'false');
@@ -225,6 +228,10 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
         }, { threshold: 0.1 });
 
         iframeContainers.forEach((container) => {
+            if (!isMobile) {
+                container.classList.add('inactive');
+                container.setAttribute('data-active', 'false');
+            }
             observer.observe(container);
             
             const toggleContainer = (e) => {
