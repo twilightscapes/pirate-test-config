@@ -14,7 +14,7 @@ export default config({
     ? { kind: 'cloud' }
     : { kind: 'local' },
   cloud: isProduction
-    ? { project: process.env.KEYSTATIC_PROJECT || 'goto/keystatic-dot-cloud/' }
+    ? { project: process.env.KEYSTATIC_PROJECT || '' }
     : undefined,
   collections: {
     posts: collection({
